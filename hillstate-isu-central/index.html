@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- Title and Meta Tags -->
     <title>힐스테이트 이수역 센트럴 | 인터랙티브 브로슈어</title>
     <meta property="og:title" content="힐스테이트 이수역 센트럴 | 인터랙티브 브로슈어">
     <meta property="og:description" content="강남 생활권의 중심, 힐스테이트 이수역 센트럴의 모든 것을 확인해보세요.">
     <meta property="og:image" content="img_og_banner.png">
     <link rel="icon" href="img_favicon.png" type="image/png">
 
+    <!-- External Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    
+    <!-- Internal CSS -->
     <style>
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #f0f2f5; font-family: 'Noto Sans KR', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         .hidden { display: none !important; }
@@ -60,7 +64,7 @@ const siteData = {
         img_logo_landing: "boonyangcok(c).png",
         img_logo_brochure: "boonyangcok.png",
         img_logo_apart: "img_logo_apt.png",
-        img_cover_video_thumb: "img_cover_video_thumb.jpg",
+        img_cover_video_thumb: "img_cover_video_thumb.png",
         img_location_map: "img_location_map.webp",
         img_unit_A: "img_unit_A.webp",
         img_unit_B: "img_unit_B.webp",
@@ -76,7 +80,7 @@ const siteData = {
 
     // --- 3. 외부 링크 정보 ---
     links: {
-        youtube: "",
+        youtube: "https://www.youtube.com/shorts/U62GkKSiq-0",
         modelHouseMap: "https://www.google.com/maps/search/?api=1&query=서울시+동작구+사당동+155-4",
         modelHouseMapEmbed: "https://maps.google.com/maps?q=서울시%20동작구%20사당동%20155-4&t=&z=15&ie=UTF8&iwloc=&output=embed",
     },
@@ -95,7 +99,7 @@ const siteData = {
 
     // --- 5. 페이지별 콘텐츠 ---
     pageContents: {
-        cover: { title: "표지", description: "강남을 더 가깝게 누리는 브랜드 타운의 중심" },
+        cover: { title: "표지" }, // Description is now in the HTML directly
         location: { title: "트리플 역세권", subtitle: "강남과 도심을 잇는 교통의 요지", coreLocation: "4, 7호선 이수역, 7호선 남성역 트리플 역세권" },
         premium: { title: "힐스테이트 프리미엄", subtitle: "차이가 클래스를 만드는 브랜드 가치", features: [
             { icon: "fa-train-subway", title: "트리플 역세권", desc: "4/7호선 이수역, 7호선 남성역 인접" },
@@ -129,6 +133,7 @@ const siteData = {
 };
 </script>
 
+<!-- HTML & JS Logic -->
 <div id="landing-page" class="app-container">
     <div class="content-viewer p-6 md:p-8 flex flex-col">
         <div class="text-center mb-6"><img data-src="img_logo_landing" alt="로고" class="h-12 mx-auto mb-4 rounded-lg"></div>
@@ -156,11 +161,26 @@ const siteData = {
         </div>
         
         <div id="page-container">
+            <!-- ========== MODIFIED COVER PAGE ========== -->
             <div class="page flex flex-col justify-center items-center" data-page-name="cover">
-                <img data-src="img_cover_video_thumb" alt="현장 전경" class="w-full max-w-md rounded-lg shadow-lg mb-4">
-                <img data-src="img_logo_apart" alt="아파트 로고" class="h-8 my-2">
-                <p class="font-semibold text-gray-800 text-lg md:text-xl text-center" data-content="cover.description"></p>
+                <!-- Clickable link wrapping the image -->
+                <a href="https://www.youtube.com/shorts/U62GkKSiq-0" target="_blank" class="block w-full max-w-sm rounded-lg overflow-hidden shadow-lg mb-4 group relative">
+                    <img data-src="img_cover_video_thumb" alt="힐스테이트 이수역 센트럴 영상 썸네일" class="w-full h-auto">
+                    <!-- Play icon overlay for PC hover -->
+                    <div class="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <i class="fa-solid fa-play text-white text-5xl"></i>
+                    </div>
+                </a>
+                <!-- Text area -->
+                <div class="text-center px-4">
+                    <p class="font-semibold text-gray-800 text-base md:text-lg whitespace-pre-wrap leading-relaxed">👀 로또 분양 눈치게임,
+힐스테이트 이수역 센트럴이 시작입니다.✨
+
+핵심만 콕콕! 꿀팁은 [인스타리드] 로 콕✔
+#분양콕 #인스타리드 #브로슈어전자책</p>
+                </div>
             </div>
+            <!-- ======================================= -->
 
             <div class="page" data-page-name="location"><h2 class="section-title" data-content="location.title"></h2><p class="section-subtitle" data-content="location.subtitle"></p><img data-src="img_location_map" alt="입지" class="w-full h-auto rounded-lg shadow-md mb-4"><div class="space-y-2"><div class="text-center bg-gray-50 p-3 rounded-lg shadow-sm"><p class="font-bold text-gray-800 text-sm md:text-base">사업지 주소</p><p class="text-xs md:text-sm text-gray-600" data-content="contact.siteAddress"></p></div><div class="text-center bg-indigo-50 p-3 rounded-lg shadow-sm"><p class="font-bold text-indigo-800 text-sm md:text-base">핵심 입지</p><p class="text-xs md:text-sm text-indigo-600" data-content="location.coreLocation"></p></div></div></div>
             
@@ -302,7 +322,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const visiblePages = pages.filter(page => {
             const pageName = page.dataset.pageName;
             const data = getNestedValue(`pageContents.${pageName}`);
-            return data && data.title;
+            // The cover page might not have data in siteData anymore, so we check for its existence in the DOM directly.
+            return (data && data.title) || page.dataset.pageName === 'cover';
         });
 
         pages.forEach(p => { 
