@@ -1,7 +1,161 @@
-<h1>Welcome to MOMENT!</h1>
-<p>'분양콕'</p>
-<ul>
-  <li><a href="/icheon-bubal-efete/">이천 부발 에피트</a></li>
-  <li><a href="/hillstate-isu-central/">힐스테이트 이수 센트럴</a></li>
-  <li><a href="/wolgye-s-class/">월계 중흥 S-클래스</a></li>
-</ul>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOMENT 분양콕</title>
+
+    <link rel="icon" type="image/png" href="img_favicon.png">
+    <link rel="apple-touch-icon" href="img_favicon.png">
+
+    <meta property="og:title" content="MOMENT 분양콕">
+    <meta property="og:description" content="당신을 위한 맞춤 분양 정보를 확인해보세요.">
+    <meta property="og:image" content="img_og_banner.png">
+    <meta property="og:url" content="https://YOUR_WEBSITE_URL">
+    <meta property="og:type" content="website">
+
+    <style>
+        /* 웹폰트 로드 */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+        /* 전체 페이지 스타일 */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* 메인 컨테이너 */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* 헤더 섹션 */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        /* 분양 정보 카드 목록 */
+        .property-list {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* 개별 분양 카드 */
+        .property-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            overflow: hidden;
+            width: 320px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        .property-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h3 {
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .card-content p {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            height: 45px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <h1>Welcome to MOMENT!</h1>
+            <p>'분양콕'</p>
+        </header>
+        
+        <div class="property-list">
+            <div class="property-card">
+                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80" alt="이천 부발 에피트 분양 이미지">
+                <div class="card-content">
+                    <h3>이천 부발 에피트</h3>
+                    <p>도심 속에서 누리는 여유로운 주거 공간, 당신의 삶을 위한 최고의 선택.</p>
+                    <a href="/icheon-bubal-efete/" class="cta-button">자세히 보기</a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" alt="힐스테이트 이수 센트럴 분양 이미지">
+                <div class="card-content">
+                    <h3>힐스테이트 이수 센트럴</h3>
+                    <p>교통의 중심에서 시작되는 프리미엄 라이프를 경험하세요.</p>
+                    <a href="/hillstate-isu-central/" class="cta-button">자세히 보기</a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <img src="https://images.unsplash.com/photo-1598300188926-2d46a1b9b6a3?w=800&q=80" alt="월계 중흥 S-클래스 분양 이미지">
+                <div class="card-content">
+                    <h3>월계 중흥 S-클래스</h3>
+                    <p>자연과 도시가 완벽하게 어우러진 명품 주거단지입니다.</p>
+                    <a href="/wolgye-s-class/" class="cta-button">자세히 보기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
