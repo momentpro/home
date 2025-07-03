@@ -3,207 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>분양콕 | 신뢰의 분양 정보 플랫폼</title>
+    <title>분양콕 | 믿을 수 있는 분양 정보 플랫폼</title>
 
+    <!-- Favicon and OG Info -->
     <link rel="icon" type="image/png" href="img_favicon.png">
     <link rel="apple-touch-icon" href="img_favicon.png">
     <meta property="og:title" content="분양콕">
-    <meta property="og:description" content="신뢰의 분양 정보 플랫폼, 분양콕">
+    <meta property="og:description" content="믿을 수 있는 분양 정보 플랫폼, 분양콕">
     <meta property="og:image" content="img_og_banner.png">
     <meta property="og:url" content="https://YOUR_WEBSITE_URL">
     <meta property="og:type" content="website">
 
+    <!-- Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --navy-blue: #2C3E50;
-            --light-blue: #3498DB;
-            --background-grey: #f5f7fa;
-            --text-dark: #34495E;
-            --text-light: #7f8c8d;
-            --border-color: #ecf0f1;
-            --white: #ffffff;
+            --color-primary: #00c7ae; /* Soomgo-like mint color */
+            --color-navy: #2c3e50;
+            --color-background: #f8f9fa;
+            --color-white: #ffffff;
+            --color-text-primary: #212529;
+            --color-text-secondary: #868e96;
+            --color-border: #dee2e6;
         }
 
         body {
             font-family: 'Noto Sans KR', sans-serif;
             margin: 0;
-            background-color: var(--background-grey);
-            color: var(--text-dark);
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+        a { text-decoration: none; color: inherit; }
 
-        /* === 상단 헤더 === */
-        .main-header {
-            width: 100%;
-            padding: 20px 0;
-            background-color: var(--white);
-            border-bottom: 1px solid var(--border-color);
-            box-sizing: border-box;
-        }
-
-        .header-content {
+        .container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 40px;
+        }
+
+        /* Header */
+        .main-header {
+            background-color: var(--color-white);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .header-content {
             display: flex;
             align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            width: 36px;
-            height: 36px;
-            margin-right: 12px;
-        }
-
-        .logo span {
-            font-size: 22px;
-            color: var(--navy-blue);
-            font-weight: 700;
-        }
-        
-        /* === 메인 콘텐츠 영역 === */
-        .content-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 60px 40px;
-        }
-
-        .section-title {
-            font-size: 2.8em;
-            font-weight: 900;
-            color: var(--navy-blue);
-            margin-bottom: 10px;
-        }
-        
-        .section-subtitle {
-            font-size: 1.2em;
-            color: var(--text-light);
-            margin-bottom: 50px;
-        }
-        
-        /* === 분양 정보 리스트 === */
-        .property-list {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-        
-        /* === 개별 카드 아이템 === */
-        .property-card {
-            display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 30px;
-            background-color: var(--white);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            height: 70px;
         }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo img { width: 32px; height: 32px; }
+        .logo span { font-size: 22px; font-weight: 900; color: var(--color-navy); }
 
-        .property-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(44, 62, 80, 0.1);
+        /* Hero Section */
+        .hero-section {
+            background-color: var(--color-white);
+            text-align: center;
+            padding: 80px 0;
         }
-
-        .property-info h3 {
-            margin: 0 0 8px 0;
-            font-size: 1.5em;
+        .hero-section h1 {
+            font-size: 42px;
+            font-weight: 900;
+            margin: 0 0 24px 0;
+        }
+        .search-bar {
+            display: flex;
+            max-width: 680px;
+            margin: 0 auto 40px auto;
+            border: 2px solid var(--color-primary);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        .search-bar input {
+            flex-grow: 1;
+            border: none;
+            padding: 18px 24px;
+            font-size: 16px;
+            outline: none;
+        }
+        .search-bar button {
+            border: none;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            font-size: 16px;
             font-weight: 700;
-            color: var(--navy-blue);
+            padding: 0 32px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
+        .search-bar button:hover { background-color: #00a38d; }
         
-        .property-info p {
-            margin: 0;
-            color: var(--text-light);
-            font-size: 1em;
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+        .stat-item { text-align: center; }
+        .stat-item .label { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 4px; }
+        .stat-item .value { font-size: 20px; font-weight: 700; color: var(--color-navy); }
+
+        /* Main Content Section */
+        .content-section { padding: 80px 0; }
+        .section-title {
+            font-size: 28px;
+            font-weight: 900;
+            margin: 0 0 32px 0;
         }
 
-        .cta-button {
-            padding: 10px 20px;
-            border-radius: 5px;
-            background-color: var(--white);
-            border: 1px solid var(--border-color);
-            color: var(--text-dark);
+        /* Property List */
+        .property-list {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+        }
+        .property-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px;
+            border-bottom: 1px solid var(--color-border);
+            transition: background-color 0.2s;
+        }
+        .property-item:last-child { border-bottom: none; }
+        .property-item:hover { background-color: #fcfdff; }
+
+        .item-info h3 { font-size: 20px; font-weight: 700; margin: 0 0 8px 0; }
+        .item-info p { font-size: 15px; color: var(--color-text-secondary); margin: 0 0 12px 0; }
+        .item-tags { display: flex; gap: 8px; }
+        .tag {
+            background-color: var(--color-background);
+            color: var(--color-text-secondary);
+            font-size: 12px;
             font-weight: 500;
-            font-size: 0.9em;
-            white-space: nowrap; /* 버튼 텍스트가 줄바꿈되지 않도록 */
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--color-border);
+        }
+
+        .item-action .cta-button {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-primary);
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 8px;
             transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .property-item:hover .cta-button {
+            background-color: var(--color-navy);
+            color: var(--color-white);
+            border-color: var(--color-navy);
         }
 
-        .property-card:hover .cta-button {
-            background-color: var(--navy-blue);
-            color: var(--white);
-            border-color: var(--navy-blue);
+        /* SNS Section */
+        .sns-section {
+            background-color: var(--color-white);
+            padding: 80px 0;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
         }
+        .sns-card-container { display: flex; gap: 30px; justify-content: center; }
+        .sns-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background-color: var(--color-background);
+            padding: 24px;
+            border-radius: 12px;
+            width: 320px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .sns-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .sns-card svg { width: 40px; height: 40px; flex-shrink: 0; }
+        .sns-card h3 { font-size: 18px; margin: 0 0 4px 0; }
+        .sns-card p { font-size: 14px; margin: 0; color: var(--color-text-secondary); }
 
-        /* 반응형 디자인 */
+        /* Footer */
+        .main-footer { text-align: center; padding: 60px 0; }
+        .footer-copyright { font-size: 13px; color: var(--color-text-secondary); }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .header-content, .content-container { padding: 0 20px; }
-            .content-container { padding-top: 40px; padding-bottom: 40px; }
-            .section-title { font-size: 2.2em; }
-            .property-card { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .container { padding: 0 20px; }
+            .hero-section h1 { font-size: 32px; }
+            .property-item { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .item-action { width: 100%; }
+            .cta-button { width: 100%; text-align: center; box-sizing: border-box; }
+            .sns-card-container { flex-direction: column; align-items: center; }
         }
-
     </style>
 </head>
 <body>
 
     <header class="main-header">
-        <div class="header-content">
+        <div class="container header-content">
             <a href="/" class="logo">
                 <img src="img_favicon.png" alt="분양콕 로고">
                 <span>분양콕</span>
             </a>
+            <!-- <nav>메뉴가 필요하면 여기에</nav> -->
         </div>
     </header>
 
-    <main class="content-container">
-        <section>
-            <h1 class="section-title">분양 정보</h1>
-            <p class="section-subtitle">현재 진행중인 주요 분양 정보를 확인하세요.</p>
-            
-            <div class="property-list">
-                
-                <a href="/icheon-bubal-efete/" class="property-card">
-                    <div class="property-info">
-                        <h3>이천 부발 에피트</h3>
-                        <p>도심 속에서 누리는 여유로운 주거 공간</p>
-                    </div>
-                    <span class="cta-button">자세히 보기</span>
-                </a>
-
-                <a href="/hillstate-isu-central/" class="property-card">
-                    <div class="property-info">
-                        <h3>힐스테이트 이수 센트럴</h3>
-                        <p>교통의 중심에서 시작되는 프리미엄 라이프</p>
-                    </div>
-                    <span class="cta-button">자세히 보기</span>
-                </a>
-
-                <a href="/wolgye-s-class/" class="property-card">
-                    <div class="property-info">
-                        <h3>월계 중흥 S-클래스</h3>
-                        <p>자연과 도시가 어우러진 명품 주거단지</p>
-                    </div>
-                    <span class="cta-button">자세히 보기</span>
-                </a>
-
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <h1>어떤 분양 정보를 찾고 계세요?</h1>
+                <div class="search-bar">
+                    <input type="text" placeholder="아파트, 오피스텔, 지역명 등으로 검색해보세요.">
+                    <button>검색</button>
                 </div>
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <div class="label">누적 분양 정보</div>
+                        <div class="value">5,120 건</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="label">월 평균 방문자</div>
+                        <div class="value">12만 명</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="label">등록 파트너사</div>
+                        <div class="value">320 곳</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2 class="section-title">주요 분양 정보</h2>
+                <div class="property-list">
+                    
+                    <a href="/icheon-bubal-efete/" class="property-item">
+                        <div class="item-info">
+                            <h3>이천 부발 에피트</h3>
+                            <p>도심 속에서 누리는 여유로운 주거 공간</p>
+                            <div class="item-tags">
+                                <span class="tag">아파트</span>
+                                <span class="tag">경기도 이천</span>
+                            </div>
+                        </div>
+                        <div class="item-action">
+                            <span class="cta-button">상세보기</span>
+                        </div>
+                    </a>
+
+                    <a href="/hillstate-isu-central/" class="property-item">
+                        <div class="item-info">
+                            <h3>힐스테이트 이수 센트럴</h3>
+                            <p>교통의 중심에서 시작되는 프리미엄 라이프</p>
+                            <div class="item-tags">
+                                <span class="tag">아파트</span>
+                                <span class="tag">서울 동작구</span>
+                                <span class="tag">초역세권</span>
+                            </div>
+                        </div>
+                        <div class="item-action">
+                            <span class="cta-button">상세보기</span>
+                        </div>
+                    </a>
+
+                    <a href="/wolgye-s-class/" class="property-item">
+                        <div class="item-info">
+                            <h3>월계 중흥 S-클래스</h3>
+                            <p>자연과 도시가 어우러진 명품 주거단지</p>
+                            <div class="item-tags">
+                                <span class="tag">아파트</span>
+                                <span class="tag">서울 노원구</span>
+                                <span class="tag">대단지</span>
+                            </div>
+                        </div>
+                        <div class="item-action">
+                            <span class="cta-button">상세보기</span>
+                        </div>
+                    </a>
+                    
+                    <!-- 앞으로 이렇게 추가하세요 -->
+                    <!-- 
+                    <a href="/new-property/" class="property-item">
+                        <div class="item-info">
+                            <h3>새로운 아파트</h3>
+                            <p>간단한 설명 문구</p>
+                            <div class="item-tags">
+                                <span class="tag">오피스텔</span>
+                                <span class="tag">지역명</span>
+                                <span class="tag">특징 태그</span>
+                            </div>
+                        </div>
+                        <div class="item-action">
+                            <span class="cta-button">상세보기</span>
+                        </div>
+                    </a>
+                    -->
+                </div>
+            </div>
+        </section>
+
+        <section class="sns-section">
+            <div class="container">
+                 <h2 class="section-title" style="text-align: center;">더 많은 소식 보기</h2>
+                 <div class="sns-card-container">
+                    <a href="https://www.youtube.com/@%EB%B6%84%EC%96%91%EC%BD%95TV" target="_blank" class="sns-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FF0000"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg>
+                        <div>
+                            <h3>분양콕TV</h3>
+                            <p>생생한 현장 정보는 영상으로!</p>
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/boonyang_cok/" target="_blank" class="sns-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#insta-gradient)"><defs><radialGradient id="insta-gradient" cx="0.3" cy="1" r="1"><stop offset="0" stop-color="#FDCB52"/><stop offset="0.5" stop-color="#FD8D32"/><stop offset="1" stop-color="#D12A7B"/></radialGradient></defs><path d="M12,2.163c3.204,0,3.584,0.012,4.85,0.07,3.252,0.148,4.771,1.691,4.919,4.919,0.058,1.265,0.069,1.645,0.069,4.85s-0.012,3.584-0.069,4.85c-0.149,3.225-1.664,4.771-4.919,4.919-1.266,0.058-1.644,0.069-4.85,0.069s-3.585-0.012-4.85-0.069c-3.252-0.149-4.771-1.664-4.919-4.919-0.058-1.265-0.069-1.645-0.069-4.85,0-3.204,0.012-3.584,0.069-4.85,0.149-3.225,1.664-4.771,4.919-4.919,1.266-0.057,1.645-0.069,4.85-0.069M12,0C8.741,0,8.333,0.014,7.053,0.072c-4.356,0.2-6.784,2.634-6.98,6.98C0.014,8.333,0,8.741,0,12c0,3.259,0.014,3.668,0.072,4.948,0.2,4.356,2.624,6.783,6.98,6.98,1.27,0.058,1.688,0.072,4.948,0.072s3.681-0.014,4.948-0.072c4.354-0.2,6.782-2.624,6.979-6.98,0.058-1.28,0.073-1.689,0.073-4.948s-0.015-3.668-0.073-4.948c-0.197-4.354-2.624-6.782-6.979-6.98C15.668,0.014,15.259,0,12,0L12,0z M12,5.838c-3.403,0-6.162,2.759-6.162,6.162s2.759,6.162,6.162,6.162,6.162-2.759,6.162-6.162S15.403,5.838,12,5.838z M12,16.225c-2.328,0-4.225-1.897-4.225-4.225s1.897-4.225,4.225-4.225,4.225,1.897,4.225,4.225S14.328,16.225,12,16.225z M18.402,4.158c-1.036,0-1.875,0.84-1.875,1.875s0.84,1.875,1.875,1.875,1.875-0.84,1.875-1.875S19.438,4.158,18.402,4.158z"/></svg>
+                        <div>
+                            <h3>공식 인스타그램</h3>
+                            <p>가장 빠른 소식과 이벤트를 만나요!</p>
+                        </div>
+                    </a>
+                 </div>
+            </div>
         </section>
     </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p class="footer-copyright">Copyright © 2025 분양콕. All rights reserved.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
