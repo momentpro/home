@@ -3,159 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOMENT 분양콕</title>
+    <title>분양콕 | 당신을 위한 프리미엄 분양 정보</title>
 
     <link rel="icon" type="image/png" href="img_favicon.png">
     <link rel="apple-touch-icon" href="img_favicon.png">
-
     <meta property="og:title" content="MOMENT 분양콕">
     <meta property="og:description" content="당신을 위한 맞춤 분양 정보를 확인해보세요.">
     <meta property="og:image" content="img_og_banner.png">
     <meta property="og:url" content="https://YOUR_WEBSITE_URL">
     <meta property="og:type" content="website">
 
-    <style>
-        /* 웹폰트 로드 */
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
-        /* 전체 페이지 스타일 */
+    <style>
+        :root {
+            --primary-color: #20B2AA; /* 로고의 민트색 */
+            --dark-color: #2c3e50;
+            --gold-color: #D4AF37;
+            --light-grey: #f8f9fa;
+            --dark-grey: #555;
+        }
+
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f8f9fa;
             margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            background-color: #fdfdfd;
+            color: var(--dark-grey);
         }
 
-        /* 메인 컨테이너 */
-        .container {
+        /* === 헤더 === */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 1200px;
-        }
-
-        /* 헤더 섹션 */
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .header h1 {
-            font-size: 2.8em;
-            color: #2c3e50;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .header p {
-            font-size: 1.3em;
-            color: #555;
-            font-weight: 500;
-        }
-
-        /* 분양 정보 카드 목록 */
-        .property-list {
             display: flex;
-            justify-content: center;
+            align-items: center;
+            padding: 15px 40px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+        }
+
+        .logo span {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* === 메인 콘텐츠 === */
+        .main-container {
+            padding: 120px 40px 40px 40px; /* 헤더 높이만큼 패딩 */
+        }
+        
+        .intro-text {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .intro-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            color: var(--dark-color);
+            margin: 0;
+        }
+
+        .intro-text p {
+            font-size: 1.2em;
+            color: var(--dark-grey);
+            margin-top: 10px;
+        }
+
+        /* === 메이서너리 그리드 레이아웃 === */
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-auto-rows: 10px;
             gap: 30px;
-            flex-wrap: wrap;
         }
 
-        /* 개별 분양 카드 */
+        /* 개별 카드 */
         .property-card {
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            position: relative;
             overflow: hidden;
-            width: 320px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            cursor: pointer;
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
         }
 
-        .property-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-        }
+        /* 카드 높이 설정 (앞으로 추가될 페이지들을 위해 클래스로 관리) */
+        .card-short { grid-row-end: span 30; }
+        .card-medium { grid-row-end: span 38; }
+        .card-tall { grid-row-end: span 46; }
 
         .property-card img {
             width: 100%;
-            height: 200px;
+            height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
-        .card-content {
-            padding: 25px;
+        /* 카드 호버 효과 */
+        .property-card:hover img {
+            transform: scale(1.1);
         }
 
-        .card-content h3 {
-            font-size: 1.4em;
-            margin-top: 0;
-            margin-bottom: 10px;
-            color: #2c3e50;
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 25px;
+            box-sizing: border-box;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.4s ease-out;
+        }
+        
+        .property-card:hover .card-overlay {
+            transform: translateY(0);
         }
 
-        .card-content p {
-            color: #7f8c8d;
+        .card-overlay h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            margin: 0 0 5px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .card-overlay p {
             font-size: 0.95em;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            height: 45px;
+            margin: 0 0 15px 0;
+            opacity: 0.8;
         }
 
         .cta-button {
             display: inline-block;
-            background: linear-gradient(45deg, #3498db, #2980b9);
+            background-color: var(--gold-color);
             color: white;
-            padding: 12px 25px;
-            border-radius: 25px;
+            padding: 10px 20px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: 700;
+            font-size: 0.9em;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: background-color 0.3s, transform 0.3s;
         }
-        
+
         .cta-button:hover {
-            transform: scale(1.05);
+            background-color: #EAC14D;
+            transform: translateY(-2px);
+        }
+
+        /* 스크롤 애니메이션 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header class="header">
-            <h1>Welcome to MOMENT!</h1>
-            <p>'분양콕'</p>
-        </header>
-        
-        <div class="property-list">
-            <div class="property-card">
-                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80" alt="이천 부발 에피트 분양 이미지">
-                <div class="card-content">
-                    <h3>이천 부발 에피트</h3>
-                    <p>도심 속에서 누리는 여유로운 주거 공간, 당신의 삶을 위한 최고의 선택.</p>
-                    <a href="/icheon-bubal-efete/" class="cta-button">자세히 보기</a>
-                </div>
-            </div>
+    <header class="main-header">
+        <a href="/" class="logo">
+            <img src="img_favicon.png" alt="분양콕 로고">
+            <span>분양콕</span>
+        </a>
+    </header>
 
-            <div class="property-card">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" alt="힐스테이트 이수 센트럴 분양 이미지">
-                <div class="card-content">
-                    <h3>힐스테이트 이수 센트럴</h3>
-                    <p>교통의 중심에서 시작되는 프리미엄 라이프를 경험하세요.</p>
-                    <a href="/hillstate-isu-central/" class="cta-button">자세히 보기</a>
-                </div>
-            </div>
-
-            <div class="property-card">
-                <img src="https://images.unsplash.com/photo-1598300188926-2d46a1b9b6a3?w=800&q=80" alt="월계 중흥 S-클래스 분양 이미지">
-                <div class="card-content">
-                    <h3>월계 중흥 S-클래스</h3>
-                    <p>자연과 도시가 완벽하게 어우러진 명품 주거단지입니다.</p>
-                    <a href="/wolgye-s-class/" class="cta-button">자세히 보기</a>
-                </div>
-            </div>
+    <main class="main-container">
+        <div class="intro-text">
+            <h1>Premium Selections</h1>
+            <p>당신이 꿈꾸던 공간, 분양콕이 찾아드립니다.</p>
         </div>
-    </div>
+
+        <div class="property-grid">
+            <a href="/icheon-bubal-efete/" class="property-card card-tall" style="animation-delay: 0.1s;">
+                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80" alt="이천 부발 에피트 이미지">
+                <div class="card-overlay">
+                    <h3>이천 부발 에피트</h3>
+                    <p>도심 속 여유로운 주거 공간</p>
+                    <span class="cta-button">자세히 보기 &rarr;</span>
+                </div>
+            </a>
+
+            <a href="/hillstate-isu-central/" class="property-card card-medium" style="animation-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1613553424170-1a203392a353?w=800&q=80" alt="힐스테이트 이수 센트럴 이미지">
+                <div class="card-overlay">
+                    <h3>힐스테이트 이수 센트럴</h3>
+                    <p>교통의 중심, 프리미엄 라이프</p>
+                    <span class="cta-button">자세히 보기 &rarr;</span>
+                </div>
+            </a>
+
+            <a href="/wolgye-s-class/" class="property-card card-short" style="animation-delay: 0.3s;">
+                <img src="https://images.unsplash.com/photo-1556912173-3e73628e9f58?w=800&q=80" alt="월계 중흥 S-클래스 이미지">
+                <div class="card-overlay">
+                    <h3>월계 중흥 S-클래스</h3>
+                    <p>자연과 어우러진 명품 주거단지</p>
+                    <span class="cta-button">자세히 보기 &rarr;</span>
+                </div>
+            </a>
+            
+            <a href="/new-property-1/" class="property-card card-medium" style="animation-delay: 0.1s;">
+                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80" alt="새 분양정보 1">
+                <div class="card-overlay">
+                    <h3>강남 더 팰리스</h3>
+                    <p>성공의 상징, 비교 불가능한 가치</p>
+                    <span class="cta-button">자세히 보기 &rarr;</span>
+                </div>
+            </a>
+
+             <a href="/new-property-2/" class="property-card card-tall" style="animation-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1600585152225-358ea60cda08?w=800&q=80" alt="새 분양정보 2">
+                <div class="card-overlay">
+                    <h3>제주 오션빌</h3>
+                    <p>바다를 품은 나만의 휴식처</p>
+                    <span class="cta-button">자세히 보기 &rarr;</span>
+                </div>
+            </a>
+            
+        </div>
+    </main>
 
 </body>
 </html>
