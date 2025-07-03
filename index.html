@@ -67,184 +67,106 @@
             padding: 80px 0;
             border-bottom: 1px solid var(--color-border);
         }
-        .hero-section h1 {
-            font-size: 42px;
-            font-weight: 900;
-            margin: 0 0 24px 0;
-        }
+        .hero-section h1 { font-size: 42px; font-weight: 900; margin: 0 0 24px 0; }
         .search-bar {
-            display: flex;
-            max-width: 680px;
-            margin: 0 auto 40px auto;
-            border: 2px solid var(--color-primary);
-            border-radius: 50px;
-            overflow: hidden;
+            display: flex; max-width: 680px; margin: 0 auto 40px auto;
+            border: 2px solid var(--color-primary); border-radius: 50px; overflow: hidden;
         }
-        .search-bar input {
-            flex-grow: 1;
-            border: none;
-            padding: 18px 24px;
-            font-size: 16px;
-            outline: none;
-        }
+        .search-bar input { flex-grow: 1; border: none; padding: 18px 24px; font-size: 16px; outline: none; }
         .search-bar button {
-            border: none;
-            background-color: var(--color-primary);
-            color: var(--color-white);
-            font-size: 16px;
-            font-weight: 700;
-            padding: 0 32px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            border: none; background-color: var(--color-primary); color: var(--color-white);
+            font-size: 16px; font-weight: 700; padding: 0 32px; cursor: pointer; transition: background-color 0.3s;
         }
         .search-bar button:hover { background-color: #00a38d; }
-        
-        .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-        }
+        .stats-bar { display: flex; justify-content: center; gap: 40px; }
         .stat-item { text-align: center; }
         .stat-item .label { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 4px; }
         .stat-item .value { font-size: 20px; font-weight: 700; color: var(--color-navy); }
 
-        /* === NEW: Ad Banner Section === */
+        /* Ad Banner Section */
         .ad-banner-section {
-            padding: 80px 0;
-        }
-        .ad-banner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #fffaf0; /* Light beige color */
-            border: 1px solid #faeeda;
-            border-radius: 12px;
-            padding: 32px 40px;
-            position: relative;
+            padding: 60px 0;
             overflow: hidden;
+        }
+        .ad-slider { display: flex; }
+        .ad-banner {
+            display: flex; justify-content: space-between; align-items: center;
+            background-color: #fffaf0; border: 1px solid #faeeda; border-radius: 12px;
+            padding: 32px 40px; position: relative; overflow: hidden;
+            flex: 0 0 100%; box-sizing: border-box; margin-right: 20px;
         }
         .ad-text { flex: 1; }
         .ad-tag {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            font-size: 12px;
-            padding: 4px 8px;
-            border: 1px solid var(--color-border);
-            border-radius: 4px;
-            color: var(--color-text-secondary);
-            background-color: rgba(255,255,255,0.5);
+            position: absolute; top: 16px; right: 16px; font-size: 12px;
+            padding: 4px 8px; border: 1px solid var(--color-border); border-radius: 4px;
+            color: var(--color-text-secondary); background-color: rgba(255,255,255,0.5);
         }
-        .ad-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--color-text-secondary);
-            margin: 0 0 8px 0;
-        }
-        .ad-headline {
-            font-size: 28px;
-            font-weight: 900;
-            color: var(--color-text-primary);
-            margin: 0 0 8px 0;
-        }
-        .ad-description {
-            font-size: 15px;
-            color: var(--color-text-secondary);
-            margin: 0;
-        }
-        .ad-image {
-            width: 220px;
-            margin-left: 40px;
-        }
-        .ad-image img {
-            width: 100%;
-            border-radius: 8px;
-        }
+        .ad-title { font-size: 14px; font-weight: 700; color: var(--color-text-secondary); margin: 0 0 8px 0; }
+        .ad-headline { font-size: 28px; font-weight: 900; color: var(--color-text-primary); margin: 0 0 8px 0; }
+        .ad-description { font-size: 15px; color: var(--color-text-secondary); margin: 0; }
+        .ad-image { width: 220px; margin-left: 40px; }
+        .ad-image img { width: 100%; border-radius: 8px; }
 
         /* Main Content Section */
         .content-section { padding-bottom: 80px; }
-        .section-title {
-            font-size: 28px;
-            font-weight: 900;
-            margin: 0 0 32px 0;
-        }
+        .section-title { font-size: 28px; font-weight: 900; margin: 0 0 32px 0; }
 
         /* Property List */
-        .property-list {
-            background-color: var(--color-white);
-            border: 1px solid var(--color-border);
-            border-radius: 12px;
-        }
+        .property-list { background-color: var(--color-white); border: 1px solid var(--color-border); border-radius: 12px; }
         .property-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 24px;
-            border-bottom: 1px solid var(--color-border);
-            transition: background-color 0.2s;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 24px; border-bottom: 1px solid var(--color-border); transition: background-color 0.2s;
         }
         .property-item:last-child { border-bottom: none; }
         .property-item:hover { background-color: #fcfdff; }
 
+        .item-info { flex-grow: 1; }
         .item-info h3 { font-size: 20px; font-weight: 700; margin: 0 0 8px 0; }
         .item-info p { font-size: 15px; color: var(--color-text-secondary); margin: 0 0 12px 0; }
         .item-tags { display: flex; gap: 8px; flex-wrap: wrap; }
         .tag {
-            background-color: var(--color-background);
-            color: var(--color-text-secondary);
-            font-size: 12px;
-            font-weight: 500;
-            padding: 4px 10px;
-            border-radius: 20px;
-            border: 1px solid var(--color-border);
+            background-color: var(--color-background); color: var(--color-text-secondary);
+            font-size: 12px; font-weight: 500; padding: 4px 10px;
+            border-radius: 20px; border: 1px solid var(--color-border);
         }
 
-        .item-action .cta-button {
-            background-color: var(--color-white);
+        /* === MODIFIED: Item Action Area === */
+        .item-action {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .recommended-by {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            text-align: right;
+        }
+        .recommended-by img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             border: 1px solid var(--color-border);
-            color: var(--color-text-primary);
+        }
+        .recommended-by strong {
             font-weight: 700;
-            padding: 12px 24px;
-            border-radius: 8px;
-            transition: all 0.3s;
-            white-space: nowrap;
+            color: var(--color-text-primary);
         }
-        .property-item:hover .cta-button {
-            background-color: var(--color-navy);
-            color: var(--color-white);
-            border-color: var(--color-navy);
+        .cta-button {
+            background-color: var(--color-white); border: 1px solid var(--color-border); color: var(--color-text-primary);
+            font-weight: 700; padding: 12px 24px; border-radius: 8px; transition: all 0.3s; white-space: nowrap;
         }
+        .property-item:hover .cta-button { background-color: var(--color-navy); color: var(--color-white); border-color: var(--color-navy); }
         
         /* Consultant Slider Section */
-        .consultant-section {
-            padding-bottom: 80px;
-        }
-        .consultant-slider {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            padding: 10px 10px 20px 10px;
-            margin: 0 -10px;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-        }
-        .consultant-slider::-webkit-scrollbar { height: 8px; }
-        .consultant-slider::-webkit-scrollbar-track { background: transparent; }
-        .consultant-slider::-webkit-scrollbar-thumb { background-color: var(--color-border); border-radius: 10px; }
-
+        .consultant-section { padding-bottom: 80px; overflow: hidden; }
+        .consultant-slider { display: flex; gap: 20px; }
         .consultant-card {
-            flex: 0 0 280px;
-            scroll-snap-align: start;
-            background-color: var(--color-white);
-            border: 1px solid var(--color-border);
-            border-radius: 12px;
-            padding: 24px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .consultant-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.07);
+            flex: 0 0 280px; background-color: var(--color-white); border: 1px solid var(--color-border);
+            border-radius: 12px; padding: 24px; text-align: center;
         }
         .consultant-photo {
             width: 80px; height: 80px; border-radius: 50%;
@@ -261,11 +183,7 @@
         .consultant-card .consult-button:hover { background-color: #495a6c; }
 
         /* SNS Section */
-        .sns-section {
-            background-color: var(--color-white);
-            padding: 80px 0;
-            border-top: 1px solid var(--color-border);
-        }
+        .sns-section { background-color: var(--color-white); padding: 80px 0; border-top: 1px solid var(--color-border); }
         .sns-card-container { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
         .sns-card {
             display: flex; align-items: center; gap: 20px;
@@ -282,16 +200,22 @@
         .footer-copyright { font-size: 13px; color: var(--color-text-secondary); }
 
         /* Responsive */
+        @media (max-width: 992px) {
+            .property-item { flex-wrap: wrap; gap: 16px; }
+            .item-info { width: 100%; }
+            .item-action { width: 100%; justify-content: space-between; }
+        }
         @media (max-width: 768px) {
             .container { padding: 0 20px; }
             .hero-section h1 { font-size: 32px; }
             .ad-banner { flex-direction: column-reverse; text-align: center; padding: 32px 24px; }
             .ad-image { margin: 0 0 24px 0; width: 150px; }
-            .property-item { flex-direction: column; align-items: flex-start; gap: 16px; }
-            .item-action { width: 100%; }
-            .item-action .cta-button { width: 100%; text-align: center; box-sizing: border-box; }
             .sns-card-container { flex-direction: column; align-items: center; }
             .consultant-card { flex: 0 0 250px; }
+            .recommended-by {
+                flex-grow: 1;
+                justify-content: flex-start;
+            }
         }
     </style>
 </head>
@@ -333,15 +257,42 @@
 
         <section class="ad-banner-section">
             <div class="container">
-                <div class="ad-banner">
-                    <div class="ad-text">
-                        <span class="ad-tag">AD</span>
-                        <p class="ad-title">분양콕 파트너스</p>
-                        <h2 class="ad-headline">가장 확실한 선택, 김분양 전문가</h2>
-                        <p class="ad-description">최고의 전문가가 당신의 내 집 마련을 돕습니다.</p>
+                <div class="ad-slider">
+                    <!-- Ad Banner 1 -->
+                    <div class="ad-banner">
+                        <div class="ad-text">
+                            <span class="ad-tag">AD</span>
+                            <p class="ad-title">분양콕 파트너스</p>
+                            <h2 class="ad-headline">가장 확실한 선택, 김분양 전문가</h2>
+                            <p class="ad-description">최고의 전문가가 당신의 내 집 마련을 돕습니다.</p>
+                        </div>
+                        <div class="ad-image">
+                            <img src="https://placehold.co/400x400/2c3e50/FFFFFF?text=Expert" alt="광고 배너 이미지 1">
+                        </div>
                     </div>
-                    <div class="ad-image">
-                        <img src="https://placehold.co/400x400/2c3e50/FFFFFF?text=Expert" alt="광고 배너 이미지">
+                    <!-- Ad Banner 2 -->
+                    <div class="ad-banner" style="background-color: #f0f5ff; border-color: #d6e4ff;">
+                        <div class="ad-text">
+                            <span class="ad-tag">AD</span>
+                            <p class="ad-title">특별 프로모션</p>
+                            <h2 class="ad-headline">내 집 마련, 지금이 기회!</h2>
+                            <p class="ad-description">선착순 계약자 대상 특별 혜택을 놓치지 마세요.</p>
+                        </div>
+                        <div class="ad-image">
+                            <img src="https://placehold.co/400x400/3498db/FFFFFF?text=Event" alt="광고 배너 이미지 2">
+                        </div>
+                    </div>
+                    <!-- Ad Banner 3 -->
+                     <div class="ad-banner" style="background-color: #f1f8f1; border-color: #d3e9d3;">
+                        <div class="ad-text">
+                            <span class="ad-tag">AD</span>
+                            <p class="ad-title">프리미엄 컨설팅</p>
+                            <h2 class="ad-headline">1:1 맞춤 분양 컨설팅</h2>
+                            <p class="ad-description">자산 가치를 높이는 최고의 투자 전략을 제시합니다.</p>
+                        </div>
+                        <div class="ad-image">
+                            <img src="https://placehold.co/400x400/27ae60/FFFFFF?text=Premium" alt="광고 배너 이미지 3">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -356,12 +307,13 @@
                         <div class="item-info">
                             <h3>이천 부발 에피트</h3>
                             <p>도심 속에서 누리는 여유로운 주거 공간</p>
-                            <div class="item-tags">
-                                <span class="tag">아파트</span>
-                                <span class="tag">경기도 이천</span>
-                            </div>
+                            <div class="item-tags"><span class="tag">아파트</span><span class="tag">경기도 이천</span></div>
                         </div>
                         <div class="item-action">
+                            <div class="recommended-by">
+                                <img src="https://placehold.co/40x40/EFEFEF/AAAAAA?text=User" alt="김현수 상담사">
+                                <div><strong>김현수</strong> 상담사 추천</div>
+                            </div>
                             <span class="cta-button">상세보기</span>
                         </div>
                     </a>
@@ -370,13 +322,13 @@
                         <div class="item-info">
                             <h3>힐스테이트 이수 센트럴</h3>
                             <p>교통의 중심에서 시작되는 프리미엄 라이프</p>
-                            <div class="item-tags">
-                                <span class="tag">아파트</span>
-                                <span class="tag">서울 동작구</span>
-                                <span class="tag">초역세권</span>
-                            </div>
+                            <div class="item-tags"><span class="tag">아파트</span><span class="tag">서울 동작구</span><span class="tag">초역세권</span></div>
                         </div>
                         <div class="item-action">
+                             <div class="recommended-by">
+                                <img src="https://placehold.co/40x40/EFEFEF/AAAAAA?text=User" alt="이민아 상담사">
+                                <div><strong>이민아</strong> 상담사 추천</div>
+                            </div>
                             <span class="cta-button">상세보기</span>
                         </div>
                     </a>
@@ -385,13 +337,13 @@
                         <div class="item-info">
                             <h3>월계 중흥 S-클래스</h3>
                             <p>자연과 도시가 어우러진 명품 주거단지</p>
-                            <div class="item-tags">
-                                <span class="tag">아파트</span>
-                                <span class="tag">서울 노원구</span>
-                                <span class="tag">대단지</span>
-                            </div>
+                            <div class="item-tags"><span class="tag">아파트</span><span class="tag">서울 노원구</span><span class="tag">대단지</span></div>
                         </div>
                         <div class="item-action">
+                             <div class="recommended-by">
+                                <img src="https://placehold.co/40x40/EFEFEF/AAAAAA?text=User" alt="박서준 상담사">
+                                <div><strong>박서준</strong> 상담사 추천</div>
+                            </div>
                             <span class="cta-button">상세보기</span>
                         </div>
                     </a>
@@ -404,51 +356,38 @@
                 <h2 class="section-title">바로 상담 가능한 전문 상담사</h2>
                 <div class="consultant-slider">
                     <div class="consultant-card">
-                        <div class="consultant-photo">
-                            <img src="https://placehold.co/160x160/EFEFEF/AAAAAA?text=User" alt="김현수 상담사 프로필 사진">
-                        </div>
+                        <div class="consultant-photo"><img src="https://placehold.co/160x160/EFEFEF/AAAAAA?text=User" alt="김현수 상담사 프로필 사진"></div>
                         <h3>김현수 상담사</h3>
                         <p class="affiliation">분양콕 전문 파트너</p>
-                        <div class="item-tags" style="justify-content: center; margin-bottom: 20px;">
-                            <span class="tag">#강남권 전문</span>
-                            <span class="tag">#재건축</span>
-                        </div>
+                        <div class="item-tags" style="justify-content: center; margin-bottom: 20px;"><span class="tag">#강남권 전문</span><span class="tag">#재건축</span></div>
                         <button class="consult-button">상담 신청</button>
                     </div>
                     <div class="consultant-card">
-                        <div class="consultant-photo">
-                             <img src="https://placehold.co/160x160/EFEFEF/AAAAAA?text=User" alt="이민아 상담사 프로필 사진">
-                        </div>
+                        <div class="consultant-photo"><img src="https://placehold.co/160x160/EFEFEF/AAAAAA?text=User" alt="이민아 상담사 프로필 사진"></div>
                         <h3>이민아 상담사</h3>
                         <p class="affiliation">분양콕 인증 파트너</p>
-                        <div class="item-tags" style="justify-content: center; margin-bottom: 20px;">
-                            <span class="tag">#신혼부부 특공</span>
-                            <span class="tag">#역세권</span>
-                        </div>
+                        <div class="item-tags" style="justify-content: center; margin-bottom: 20px;"><span class="tag">#신혼부부 특공</span><span class="tag">#역세권</span></div>
                         <button class="consult-button">상담 신청</button>
                     </div>
                     <div class="consultant-card">
-                        <div class="consultant-photo">
-                             <img src="https://placehold.co/160x160/EFEFEF/AAAAAA?text=User" alt="박서준 상담사 프로필 사진">
-                        </div>
+                        <div class="consultant-photo"><img src="https://placehold.co/160x160/EFEFEF/AAAAAA?text=User" alt="박서준 상담사 프로필 사진"></div>
                         <h3>박서준 상담사</h3>
                         <p class="affiliation">분양콕 전문 파트너</p>
-                        <div class="item-tags" style="justify-content: center; margin-bottom: 20px;">
-                            <span class="tag">#오피스텔</span>
-                            <span class="tag">#수익형</span>
-                        </div>
+                        <div class="item-tags" style="justify-content: center; margin-bottom: 20px;"><span class="tag">#오피스텔</span><span class="tag">#수익형</span></div>
                         <button class="consult-button">상담 신청</button>
                     </div>
                     <div class="consultant-card">
-                        <div class="consultant-photo">
-                             <img src="https://placehold.co/160x160/EFEFEF/AAAAAA?text=User" alt="최유리 상담사 프로필 사진">
-                        </div>
+                        <div class="consultant-photo"><img src="https://placehold.co/160x160/EFEFEF/AAAAAA?text=User" alt="최유리 상담사 프로필 사진"></div>
                         <h3>최유리 상담사</h3>
                         <p class="affiliation">분양콕 전문 파트너</p>
-                        <div class="item-tags" style="justify-content: center; margin-bottom: 20px;">
-                            <span class="tag">#경기 남부</span>
-                            <span class="tag">#GTX</span>
-                        </div>
+                        <div class="item-tags" style="justify-content: center; margin-bottom: 20px;"><span class="tag">#경기 남부</span><span class="tag">#GTX</span></div>
+                        <button class="consult-button">상담 신청</button>
+                    </div>
+                     <div class="consultant-card">
+                        <div class="consultant-photo"><img src="https://placehold.co/160x160/EFEFEF/AAAAAA?text=User" alt="정재민 상담사 프로필 사진"></div>
+                        <h3>정재민 상담사</h3>
+                        <p class="affiliation">분양콕 인증 파트너</p>
+                        <div class="item-tags" style="justify-content: center; margin-bottom: 20px;"><span class="tag">#상가 전문</span><span class="tag">#수익형</span></div>
                         <button class="consult-button">상담 신청</button>
                     </div>
                 </div>
@@ -461,17 +400,11 @@
                  <div class="sns-card-container">
                     <a href="https://www.youtube.com/@%EB%B6%84%EC%96%91%EC%BD%95TV" target="_blank" class="sns-card">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FF0000"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg>
-                        <div>
-                            <h3>분양콕TV</h3>
-                            <p>생생한 현장 정보는 영상으로!</p>
-                        </div>
+                        <div><h3>분양콕TV</h3><p>생생한 현장 정보는 영상으로!</p></div>
                     </a>
                     <a href="https://www.instagram.com/boonyang_cok/" target="_blank" class="sns-card">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#insta-gradient)"><defs><radialGradient id="insta-gradient" cx="0.3" cy="1" r="1"><stop offset="0" stop-color="#FDCB52"/><stop offset="0.5" stop-color="#FD8D32"/><stop offset="1" stop-color="#D12A7B"/></radialGradient></defs><path d="M12,2.163c3.204,0,3.584,0.012,4.85,0.07,3.252,0.148,4.771,1.691,4.919,4.919,0.058,1.265,0.069,1.645,0.069,4.85s-0.012,3.584-0.069,4.85c-0.149,3.225-1.664,4.771-4.919,4.919-1.266,0.058-1.644,0.069-4.85,0.069s-3.585-0.012-4.85-0.069c-3.252-0.149-4.771-1.664-4.919-4.919-0.058-1.265-0.069-1.645-0.069-4.85,0-3.204,0.012-3.584,0.069-4.85,0.149-3.225,1.664-4.771,4.919-4.919,1.266-0.057,1.645-0.069,4.85-0.069M12,0C8.741,0,8.333,0.014,7.053,0.072c-4.356,0.2-6.784,2.634-6.98,6.98C0.014,8.333,0,8.741,0,12c0,3.259,0.014,3.668,0.072,4.948,0.2,4.356,2.624,6.783,6.98,6.98,1.27,0.058,1.688,0.072,4.948,0.072s3.681-0.014,4.948-0.072c4.354-0.2,6.782-2.624,6.979-6.98,0.058-1.28,0.073-1.689,0.073-4.948s-0.015-3.668-0.073-4.948c-0.197-4.354-2.624-6.782-6.979-6.98C15.668,0.014,15.259,0,12,0L12,0z M12,5.838c-3.403,0-6.162,2.759-6.162,6.162s2.759,6.162,6.162,6.162,6.162-2.759,6.162-6.162S15.403,5.838,12,5.838z M12,16.225c-2.328,0-4.225-1.897-4.225-4.225s1.897-4.225,4.225-4.225,4.225,1.897,4.225,4.225S14.328,16.225,12,16.225z M18.402,4.158c-1.036,0-1.875,0.84-1.875,1.875s0.84,1.875,1.875,1.875,1.875-0.84,1.875-1.875S19.438,4.158,18.402,4.158z"/></svg>
-                        <div>
-                            <h3>공식 인스타그램</h3>
-                            <p>가장 빠른 소식과 이벤트를 만나요!</p>
-                        </div>
+                        <div><h3>공식 인스타그램</h3><p>가장 빠른 소식과 이벤트를 만나요!</p></div>
                     </a>
                  </div>
             </div>
@@ -483,6 +416,133 @@
             <p class="footer-copyright">Copyright © 2025 분양콕. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function initializeAutoSlider(sliderContainerSelector, intervalTime) {
+                const slider = document.querySelector(sliderContainerSelector);
+                if (!slider) return;
+
+                const originalItems = Array.from(slider.children);
+                if (originalItems.length === 0) return;
+
+                // Clone items for infinite loop effect
+                originalItems.forEach(item => {
+                    const clone = item.cloneNode(true);
+                    slider.appendChild(clone);
+                });
+
+                let currentIndex = 0;
+                let sliderInterval;
+
+                function moveToNextSlide() {
+                    const items = slider.children;
+                    const totalItems = items.length;
+                    const originalItemCount = totalItems / 2;
+                    
+                    currentIndex++;
+                    
+                    const itemWidth = items[0].offsetWidth + parseInt(window.getComputedStyle(items[0]).marginRight || '0');
+                    slider.style.transition = 'transform 0.5s ease-in-out';
+                    slider.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+
+                    // When it reaches the end of the cloned part, reset to the beginning
+                    if (currentIndex === originalItemCount) {
+                        setTimeout(() => {
+                            slider.style.transition = 'none';
+                            slider.style.transform = `translateX(0px)`;
+                            currentIndex = 0;
+                        }, 500);
+                    }
+                }
+                
+                function startSlider() {
+                     sliderInterval = setInterval(moveToNextSlide, intervalTime);
+                }
+
+                function stopSlider() {
+                    clearInterval(sliderInterval);
+                }
+
+                // For consultant slider, we use a different logic for continuous scroll
+                if(sliderContainerSelector === '.consultant-slider') {
+                    let animation;
+                    const startConsultantSlider = () => {
+                        const items = slider.children;
+                        const totalWidth = Array.from(items).reduce((acc, item) => acc + item.offsetWidth + 20, 0);
+                        slider.style.width = `${totalWidth}px`;
+                        
+                        const animate = () => {
+                            slider.scrollLeft += 1;
+                            if (slider.scrollLeft >= totalWidth / 2) {
+                                slider.scrollLeft = 0;
+                            }
+                            animation = requestAnimationFrame(animate);
+                        };
+                        animation = requestAnimationFrame(animate);
+                    };
+                    const stopConsultantSlider = () => {
+                        cancelAnimationFrame(animation);
+                    };
+
+                    slider.addEventListener('mouseenter', stopConsultantSlider);
+                    slider.addEventListener('mouseleave', startConsultantSlider);
+                    slider.addEventListener('touchstart', stopConsultantSlider);
+                    slider.addEventListener('touchend', startConsultantSlider);
+                    startConsultantSlider();
+
+                } else { // For Ad banner
+                    // Need to wrap the slider for this logic
+                    const sliderWrapper = slider.parentElement;
+                    slider.style.width = `${originalItems.length * 2 * 100}%`; // Adjust width for clones
+                    
+                    slider.addEventListener('mouseenter', stopSlider);
+                    slider.addEventListener('mouseleave', startSlider);
+                    slider.addEventListener('touchstart', stopSlider);
+                    slider.addEventListener('touchend', startSlider);
+                    startSlider();
+                }
+            }
+
+            // The Ad banner slider needs a wrapper to work correctly with the transform logic.
+            // Let's modify the JS logic to be simpler and more robust, using scrollLeft for both.
+
+            function setupAutoScroll(containerSelector, speed = 1) {
+                const container = document.querySelector(containerSelector);
+                if (!container) return;
+
+                const originalItems = Array.from(container.children);
+                originalItems.forEach(item => {
+                    const clone = item.cloneNode(true);
+                    container.appendChild(clone);
+                });
+
+                let animationFrameId;
+                let isPaused = false;
+
+                function scroll() {
+                    if (!isPaused) {
+                        container.scrollLeft += speed;
+                        if (container.scrollLeft >= container.scrollWidth / 2) {
+                            container.scrollLeft = 0;
+                        }
+                    }
+                    animationFrameId = requestAnimationFrame(scroll);
+                }
+
+                container.addEventListener('mouseenter', () => isPaused = true);
+                container.addEventListener('mouseleave', () => isPaused = false);
+                container.addEventListener('touchstart', () => isPaused = true, { passive: true });
+                container.addEventListener('touchend', () => isPaused = false);
+
+                scroll();
+            }
+            
+            setupAutoScroll('.ad-slider', 2); // Faster speed for ad banner
+            setupAutoScroll('.consultant-slider', 1); // Slower speed for consultants
+
+        });
+    </script>
 
 </body>
 </html>
