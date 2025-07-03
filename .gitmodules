@@ -1,3 +1,9 @@
 [submodule "icheon"]
 	path = icheon
 	url = https://github.com/momentpro/icheon-bubal-efete.git
+[submodule "hillstate"]
+	path = hillstate
+	url = https://github.com/mometpro/hillstate-isu-central.git
+[submodule "wolgye"]
+	path = wolgye
+	url = https://github.com/mometpro/wolgye-s-class.git
