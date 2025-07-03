@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>월계 중흥S클래스 | 인터랙티브 브로슈어</title>
+    <meta property="og:title" content="월계 중흥S클래스 | 인터랙티브 브로슈어">
+    <meta property="og:description" content="더블 역세권의 중심, 월계 중흥S클래스의 모든 것을 확인해보세요.">
+    <meta property="og:image" content="img_og_banner.png">
+    <link rel="icon" href="img_favicon.png" type="image/png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #f0f2f5; font-family: 'Noto Sans KR', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .hidden { display: none !important; }
+        .app-container { display: flex; flex-direction: column; align-items: center; width: 100%; min-height: 100vh; padding: 1rem; box-sizing: border-box; }
+        #brochure-app { justify-content: center; height: 100vh; }
+        .content-viewer { width: 100%; max-width: 480px; background-color: white; border-radius: 1.5rem; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); display: flex; flex-direction: column; overflow: hidden; transition: all 0.3s ease-in-out; position: relative; }
+        #landing-page .content-viewer { margin: auto 0; }
+        #brochure-app .content-viewer { height: 100%; max-height: 850px; }
+        #page-header { background-color: #4a5568; padding: 0.75rem 1.5rem; flex-shrink: 0; z-index: 10;}
+        .logo-container { padding-bottom: 0.75rem; }
+        #progress-bar-container { width: 100%; background-color: #718096; border-radius: 9999px; height: 6px; }
+        #progress-bar { height: 100%; background: linear-gradient(to right, #a3bffa, #f6e05e); border-radius: 9999px; transition: width 0.4s ease-in-out; }
+        #page-container { flex-grow: 1; position: relative; overflow: hidden; background-color: #f8fafc; }
+        .page { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 1.5rem; overflow-y: auto; opacity: 0; visibility: hidden; transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out; transform: translateX(20px); box-sizing: border-box; }
+        .page.active { opacity: 1; visibility: visible; transform: translateX(0); }
+        .page.exiting { transform: translateX(-20px); }
+        .nav-button { background-color: #4f46e5; color: white; border: none; padding: 0.75rem 1rem; border-radius: 9999px; cursor: pointer; font-size: 1rem; font-weight: 700; transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+        .nav-button:hover { background-color: #4338ca; transform: translateY(-2px); }
+        .nav-button:disabled { background-color: #a5b4fc; cursor: not-allowed; transform: none; box-shadow: none; }
+        .section-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 900; font-size: clamp(1.75rem, 5vw, 2.25rem); text-align: center; margin-bottom: 0.5rem; color: #111827; }
+        .section-subtitle { font-family: 'Gowun Dodum', sans-serif; font-size: clamp(0.8rem, 3vw, 1.1rem); text-align: center; color: #4b5563; margin-bottom: 2rem; white-space: pre-wrap; }
+        .form-input { width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; transition: border-color 0.2s, box-shadow 0.2s; }
+        .form-input:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); }
+        .form-label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151; }
+        .radio-group label { display: flex; align-items: center; justify-content: center; padding: 0.5rem; font-size: 0.875rem; border: 1px solid #d1d5db; border-radius: 0.5rem; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; }
+        .radio-group input:checked + label { border-color: #4f46e5; background-color: #eef2ff; font-weight: 600; }
+        #counselor-popup { position: absolute; bottom: 0; left: 0; right: 0; background-color: white; border-top: 1px solid #e5e7eb; box-shadow: 0 -10px 15px -3px rgb(0 0 0 / 0.1); padding: 1.5rem; transform: translateY(100%); transition: transform 0.3s ease-in-out; z-index: 100; }
+        #counselor-popup.open { transform: translateY(0); }
+    </style>
+</head>
+<body>
+<script>
+// ===================================================================================
+// ============================= PLATFORM CONFIGURATION ==============================
+// ===================================================================================
+const siteData = {
+    // --- 1. 기본 정보 ---
+    projectName: "월계 중흥S클래스", 
+    projectDescription: "더블 역세권의 중심, 월계 중흥S클래스의 모든 것을 확인해보세요.",
+    googleSheetUrl: "https://script.google.com/macros/s/AKfycbwhlggC31OP9TUCD3Bq0Hr4wtELbfMyRey2ugXoWXEILDCE-MTlbhXUHsA2qUw2GH8nyw/exec",
+
+    // --- 2. 이미지 정보 ---
+    images: {
+        img_logo_landing: "boonyangcok(c).png",
+        img_logo_brochure: "boonyangcok.png",
+        img_logo_apart: "img_logo_apt.jpg",
+        img_cover_video_thumb: "img_cover_video_thumb.png",
+        img_location_map: "img_location_map.jpg",
+        img_unit_A: "img_unit_A.jpg",
+        img_unit_B: "img_unit_B.jpg",
+        img_unit_C: "img_unit_C.jpg",
+        img_unit_D: "",
+        img_unit_E: "",
+        img_unit_F: "",
+        img_unit_G: "",
+        img_unit_H: "",
+        img_counselor_1: "man1.jpeg",
+        img_counselor_2: "man2.jpeg",
+    },
+
+    // --- 3. 외부 링크 정보 ---
+    links: {
+        youtube: "",
+        modelHouseMap: "https://www.google.com/maps/search/?api=1&query=서울특별시+성북구+장위동+25-55",
+        modelHouseMapEmbed: "https://maps.google.com/maps?q=서울특별시%20성북구%20장위동%2025-55&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    },
+    
+    // --- 4. 연락처 및 주소 정보 ---
+    contact: {
+        siteAddress: "서울특별시 성북구 장위동 25-55",
+        modelHouseAddress: "서울특별시 성북구 장위동 25-55",
+        mainPhoneNumber: "1555-2624",
+        royalPhoneNumber: "1555-2624",
+        counselors: [
+            { name: '김분양 상담사', phone: '010-5930-3064', imageKey: 'img_counselor_1' },
+            { name: '이청약 상담사', phone: '010-6585-3392', imageKey: 'img_counselor_2' }
+        ]
+    },
+
+    // --- 5. 페이지별 콘텐츠 ---
+    pageContents: {
+        cover: { title: "표지", description: "석계역 더블 역세권, 새로운 중심이 될 프리미엄" },
+        location: { title: "석계역 초역세권", subtitle: "서울 어디든 빠르게 통하는 교통의 허브", coreLocation: "1·6호선 석계역, GTX-C 광운대역 인접" },
+        premium: { title: "압도적 프리미엄", subtitle: "교통, 자연, 생활을 모두 품은 완벽한 입지", features: [
+            { icon: "fa-train-subway", title: "더블 역세권", desc: "1·6호선 석계역 바로 앞, 초역세권" },
+            { icon: "fa-rocket", title: "GTX-C 광역교통", desc: "광운대역 GTX-C노선으로 강남까지 10분대" },
+            { icon: "fa-tree", title: "북서울꿈의숲", desc: "가까이에서 누리는 쾌적한 자연 환경" },
+            { icon: "fa-building-columns", title: "장위뉴타운", desc: "대규모 주거타운으로 변모할 미래가치" }
+        ]},
+        educationSpecial: { title: "완벽한 교육 환경", subtitle: "자녀의 미래를 위한 최고의 선택", features: [
+            { icon: "fa-school", title: "안심 도보 통학", desc: "단지 인근 선곡초, 석관중·고 위치" },
+            { icon: "fa-graduation-cap", title: "명문 학원가", desc: "강북 교육의 중심, 중계동 학원가 인접" },
+            { icon: "fa-book-open-reader", title: "우수 교육 인프라", desc: "광운대, 경희대, 한국외대 등 명문대 밀집" }
+        ]},
+        schoolInfo: { title: "자녀를 위한 명문학군", subtitle: "안심하고 보낼 수 있는 우수한 교육 환경", elementary: { name: "선곡초등학교", type: "공립", distance: "450m / 7분", note: "안전한 통학" }, middle: { name: "석관중학교", type: "공립", performance: "높은 학업성취도", note: "" }, high: { name: "석관고등학교", type: "공립", classSize: "학급당 24.5명", note: "일반계 고등학교" } },
+        lifeInfra: { title: "원스톱 생활 인프라", subtitle: "쇼핑, 문화, 의료를 모두 가깝게 누리는 완벽한 환경", items: [ 
+            { icon: "fa-cart-shopping", title: "대형마트", desc: "이마트, 트레이더스 월계점 인접" }, 
+            { icon: "fa-film", title: "쇼핑·문화", desc: "롯데·현대백화점, CGV 등" }, 
+            { icon: "fa-kit-medical", title: "의료시설", desc: "노원을지대병원, 경희대병원 등" }, 
+            { icon: "fa-leaf", title: "힐링 라이프", desc: "북서울꿈의숲, 우이천 산책로" } 
+        ], special: { title: "GTX-C노선 확정", desc: "광운대역 개발과 함께 더욱 높아질 미래가치" } },
+        marketPrice: { title: "주변 시세 비교", subtitle: "인근 주요 단지 대비 합리적인 분양가", note: "※ 84㎡, 최근 실거래가 기준 (2025.07)", chartData: { labels: ['장위자이', '꿈의숲아이파크', '래미안아트리치', '롯데캐슬클라시아', '월계 중흥(예상)'], data: [10, 11, 12.5, 13.5, 12] } },
+        unitA: { title: "59㎡", subtitle: "합리적이고 실속있는 공간 설계", features: [{icon: "fa-bed", text: "침실 3"}, {icon: "fa-bath", text: "욕실 2"}, {icon: "fa-wind", text: "판상형 구조"}] },
+        unitB: { title: "74㎡", subtitle: "여유로움과 개방감을 더한 평면", features: [{icon: "fa-bed", text: "침실 3"}, {icon: "fa-bath", text: "욕실 2"}, {icon: "fa-person-shelter", text: "알파룸"}] },
+        unitC: { title: "84㎡", subtitle: "가장 선호도 높은 국민 평형", features: [{icon: "fa-bed", text: "침실 3"}, {icon: "fa-bath", text: "욕실 2"}, {icon: "fa-maximize", text: "광폭 거실"}] },
+        unitD: { title: "", subtitle: "", features: [] },
+        unitE: { title: "", subtitle: "", features: [] },
+        unitF: { title: "", subtitle: "", features: [] },
+        unitG: { title: "", subtitle: "", features: [] },
+        unitH: { title: "", subtitle: "", features: [] },
+        directions: { title: "오시는 길", subtitle: "모델하우스에서 월계 중흥S클래스의 가치를 직접 확인하세요." }
+    }
+};
+</script>
+
+<div id="landing-page" class="app-container">
+    <div class="content-viewer p-6 md:p-8 flex flex-col">
+        <div class="text-center mb-6">
+            <img data-src="img_logo_landing" alt="로고" class="h-12 mx-auto mb-4 rounded-lg">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">관심고객 등록</h1>
+            <p class="text-gray-500 mt-1 text-sm md:text-base">정보를 입력하시면 브로슈어를 보실 수 있습니다.</p>
+        </div>
+        <form id="customer-form" class="space-y-4 flex-grow">
+            <div><label for="name" class="form-label text-sm md:text-base">이름</label><input type="text" id="name" name="name" class="form-input"></div>
+            <div><label for="phone" class="form-label text-sm md:text-base">전화번호</label><input type="tel" id="phone" name="phone" class="form-input" placeholder="01012345678 ('-'없이 입력)"></div>
+            <div><label for="region" class="form-label text-sm md:text-base">관심지역</label><input type="text" id="region" name="region" class="form-input"></div>
+            <div><label class="form-label text-sm md:text-base">거래목적</label><div class="grid grid-cols-2 gap-2 radio-group"><input type="radio" name="purpose" id="purpose-invest" value="investment" class="sr-only"><label for="purpose-invest" class="text-xs md:text-sm">투자</label><input type="radio" name="purpose" id="purpose-reside" value="residence" class="sr-only"><label for="purpose-reside" class="text-xs md:text-sm">실거주</label></div></div>
+            <div><label class="form-label text-sm md:text-base">관심유형</label><div class="grid grid-cols-3 gap-2 radio-group"><input type="radio" name="type" id="type-apt" value="apartment" class="sr-only"><label for="type-apt" class="text-xs md:text-sm">아파트</label><input type="radio" name="type" id="type-op" value="officetel" class="sr-only"><label for="type-op" class="text-xs md:text-sm">오피스텔</label><input type="radio" name="type" id="type-office" value="office" class="sr-only"><label for="type-office" class="text-xs md:text-sm">오피스</label><input type="radio" name="type" id="type-commercial" value="commercial" class="sr-only"><label for="type-commercial" class="text-xs md:text-sm">상업시설</label><input type="radio" name="type" id="type-resi" value="residence-hotel" class="sr-only"><label for="type-resi" class="text-xs md:text-sm">생활형숙박</label><input type="radio" name="type" id="type-town" value="townhouse" class="sr-only"><label for="type-town" class="text-xs md:text-sm">타운하우스</label></div></div>
+            <div class="pt-2"><div class="flex items-center"><input id="consent" name="consent" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"><label for="consent" class="ml-2 block text-sm text-gray-700">개인정보 수집 및 이용에 동의합니다.</label></div></div>
+            <div class="pt-4"><button type="submit" id="submit-btn" class="w-full nav-button" disabled>브로슈어 보기</button></div>
+        </form>
+    </div>
+</div>
+
+<div id="brochure-app" class="app-container hidden">
+    <div id="content-viewer" class="content-viewer">
+        <div id="page-header">
+            <div class="logo-container"><img data-src="img_logo_brochure" alt="로고" class="h-8"></div>
+            <div id="progress-bar-container"><div id="progress-bar" style="width: 0%;"></div></div>
+        </div>
+        
+        <div id="page-container">
+            <div class="page flex flex-col justify-center items-center" data-page-name="cover">
+                <img data-src="img_cover_video_thumb" alt="현장 전경" class="w-full max-w-md rounded-lg shadow-lg mb-4">
+                <p class="font-semibold text-gray-800 text-lg md:text-xl text-center" data-content="cover.description"></p>
+            </div>
+
+            <div class="page" data-page-name="location"><h2 class="section-title" data-content="location.title"></h2><p class="section-subtitle" data-content="location.subtitle"></p><img data-src="img_location_map" alt="입지" class="w-full h-auto rounded-lg shadow-md mb-4"><div class="space-y-2"><div class="text-center bg-gray-50 p-3 rounded-lg shadow-sm"><p class="font-bold text-gray-800 text-sm md:text-base">사업지 주소</p><p class="text-xs md:text-sm text-gray-600" data-content="contact.siteAddress"></p></div><div class="text-center bg-indigo-50 p-3 rounded-lg shadow-sm"><p class="font-bold text-indigo-800 text-sm md:text-base">핵심 입지</p><p class="text-xs md:text-sm text-indigo-600" data-content="location.coreLocation"></p></div></div></div>
+            
+            <div class="page" data-page-name="premium"><h2 class="section-title" data-content="premium.title"></h2><p class="section-subtitle" data-content="premium.subtitle"></p><div class="space-y-4" data-infographic="premium"></div></div>
+            
+            <div class="page" data-page-name="educationSpecial"><h2 class="section-title" data-content="educationSpecial.title"></h2><p class="section-subtitle" data-content="educationSpecial.subtitle"></p><div class="space-y-4" data-infographic="educationSpecial"></div></div>
+            
+            <div class="page" data-page-name="schoolInfo"><h2 class="section-title" data-content="schoolInfo.title"></h2><p class="section-subtitle" data-content="schoolInfo.subtitle"></p><div class="space-y-6"><div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100"><h3 class="font-bold text-lg text-blue-600 mb-3">초등학교 정보</h3><div class="relative pt-6"><div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-gradient-to-r from-green-400 to-yellow-500 h-2 rounded-full" style="width: 20%;"></div></div><div class="absolute text-orange-500" style="left: 20%; top: 0; transform: translateX(-50%);"><i class="fa-solid fa-person-walking text-2xl"></i></div></div><div class="flex justify-between text-xs text-gray-500 mt-1 mb-4"><span>5분</span><span>10분</span><span>20분</span></div><div class="flex justify-between items-center"><div><p class="font-semibold text-gray-800" data-content="schoolInfo.elementary.name"></p><p class="text-sm text-gray-500" data-content="schoolInfo.elementary.type"></p></div><div class="text-right"><p class="font-bold text-blue-600" data-content="schoolInfo.elementary.distance"></p><p class="text-xs text-green-600" data-content="schoolInfo.elementary.note"></p></div></div></div><div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100"><h3 class="font-bold text-lg text-green-600 mb-2">중학교 정보</h3><div class="flex justify-between items-center"><div><p class="font-semibold text-gray-800" data-content="schoolInfo.middle.name"></p><p class="text-sm text-gray-500" data-content="schoolInfo.middle.type"></p></div><div class="text-right"><p class="font-semibold text-green-600" data-content="schoolInfo.middle.performance"></p><p class="text-xs text-gray-500" data-content="schoolInfo.middle.note"></p></div></div></div><div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100"><h3 class="font-bold text-lg text-purple-600 mb-2">고등학교 정보</h3><div class="flex justify-between items-center"><div><p class="font-semibold text-gray-800" data-content="schoolInfo.high.name"></p><p class="text-sm text-gray-500" data-content="schoolInfo.high.type"></p></div><div class="text-right"><p class="font-semibold text-purple-600" data-content="schoolInfo.high.classSize"></p><p class="text-xs text-green-600" data-content="schoolInfo.high.note"></p></div></div></div></div></div>
+            
+            <div class="page" data-page-name="lifeInfra"><h2 class="section-title" data-content="lifeInfra.title"></h2><p class="section-subtitle" data-content="lifeInfra.subtitle"></p><div class="space-y-3" id="life-infra-list"></div><div class="bg-orange-100 p-4 rounded-lg flex items-center space-x-4 mt-6"><div class="text-orange-600 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div><div><h4 class="font-bold text-orange-800" data-content="lifeInfra.special.title"></h4><p class="text-sm text-orange-700" data-content="lifeInfra.special.desc"></p></div></div></div>
+            
+            <div class="page" data-page-name="marketPrice"><h2 class="section-title" data-content="marketPrice.title"></h2><p class="section-subtitle" data-content="marketPrice.subtitle"></p><div class="w-full h-3/4 min-h-[300px]"><canvas id="priceChart"></canvas></div><p class="text-center mt-4 text-sm text-gray-500" data-content="marketPrice.note"></p></div>
+
+            <div class="page" data-page-name="unitA"><h2 class="section-title" data-content="unitA.title"></h2><p class="section-subtitle" data-content="unitA.subtitle"></p><img data-src="img_unit_A" alt="A타입 평면도" class="w-full h-auto rounded-md shadow-lg mb-4"><div class="grid grid-cols-3 gap-2 text-center" data-features="unitA"></div></div>
+            <div class="page" data-page-name="unitB"><h2 class="section-title" data-content="unitB.title"></h2><p class="section-subtitle" data-content="unitB.subtitle"></p><img data-src="img_unit_B" alt="B타입 평면도" class="w-full h-auto rounded-md shadow-lg mb-4"><div class="grid grid-cols-3 gap-2 text-center" data-features="unitB"></div></div>
+            <div class="page" data-page-name="unitC"><h2 class="section-title" data-content="unitC.title"></h2><p class="section-subtitle" data-content="unitC.subtitle"></p><img data-src="img_unit_C" alt="C타입 평면도" class="w-full h-auto rounded-md shadow-lg mb-4"><div class="grid grid-cols-3 gap-2 text-center" data-features="unitC"></div></div>
+            <div class="page" data-page-name="unitD"><h2 class="section-title" data-content="unitD.title"></h2><p class="section-subtitle" data-content="unitD.subtitle"></p><img data-src="img_unit_D" alt="D타입 평면도" class="w-full h-auto rounded-md shadow-lg mb-4"><div class="grid grid-cols-3 gap-2 text-center" data-features="unitD"></div></div>
+            <div class="page" data-page-name="unitE"><h2 class="section-title" data-content="unitE.title"></h2><p class="section-subtitle" data-content="unitE.subtitle"></p><img data-src="img_unit_E" alt="E타입 평면도" class="w-full h-auto rounded-md shadow-lg mb-4"><div class="grid grid-cols-3 gap-2 text-center" data-features="unitE"></div></div>
+            <div class="page" data-page-name="unitF"><h2 class="section-title" data-content="unitF.title"></h2><p class="section-subtitle" data-content="unitF.subtitle"></p><img data-src="img_unit_F" alt="F타입 평면도" class="w-full h-auto rounded-md shadow-lg mb-4"><div class="grid grid-cols-3 gap-2 text-center" data-features="unitF"></div></div>
+            <div class="page" data-page-name="unitG"><h2 class="section-title" data-content="unitG.title"></h2><p class="section-subtitle" data-content="unitG.subtitle"></p><img data-src="img_unit_G" alt="G타입 평면도" class="w-full h-auto rounded-md shadow-lg mb-4"><div class="grid grid-cols-3 gap-2 text-center" data-features="unitG"></div></div>
+            <div class="page" data-page-name="unitH"><h2 class="section-title" data-content="unitH.title"></h2><p class="section-subtitle" data-content="unitH.subtitle"></p><img data-src="img_unit_H" alt="H타입 평면도" class="w-full h-auto rounded-md shadow-lg mb-4"><div class="grid grid-cols-3 gap-2 text-center" data-features="unitH"></div></div>
+            
+            <div class="page" data-page-name="directions"><div class="text-center"><h2 class="section-title" data-content="directions.title"></h2><p class="text-gray-600 text-base mb-4" data-content="directions.subtitle"></p><a data-href="modelHouseMap" target="_blank" class="block w-full h-48 md:h-64 rounded-lg overflow-hidden shadow-lg relative"><iframe data-src-embed="modelHouseMapEmbed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><div class="absolute inset-0 bg-transparent"></div></a><p class="text-sm text-gray-500 mt-2">지도를 클릭하시면 길찾기 서비스로 연결됩니다.</p><p class="text-base font-bold mt-2" data-content="contact.modelHouseAddress"></p><p class="text-xl font-bold mt-2 text-indigo-600" data-tel="mainPhoneNumber"></p></div></div>
+        </div>
+        
+        <div id="counselor-popup" class="hidden">
+            <a data-tel-href="royalPhoneNumber" class="block text-center w-full p-3 bg-red-500 text-white font-bold rounded-lg mb-4 hover:bg-red-600"><i class="fa-solid fa-crown mr-2"></i>대표번호 바로연결</a>
+            <div id="counselor-list" class="space-y-3"></div>
+        </div>
+    </div>
+
+    <div id="navigation-controls" class="mt-6 flex gap-4 items-center justify-center hidden">
+        <button id="prev-btn" class="nav-button px-5"><</button>
+        <button id="counselor-btn" class="nav-button flex-grow bg-green-500 hover:bg-green-600"><i class="fa-solid fa-users mr-2"></i>상담사 선택하기</button>
+        <button id="next-btn" class="nav-button px-5">></button>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const getNestedValue = (path, obj = siteData) => path.split('.').reduce((o, k) => (o && o[k] != null) ? o[k] : null, obj);
+
+    function populateContent() {
+        // Dynamic content population
+        document.querySelectorAll('[data-content]').forEach(el => {
+            const path = el.dataset.content.includes('contact.') ? el.dataset.content : `pageContents.${el.dataset.content}`;
+            const value = getNestedValue(path);
+            if(value) el.innerHTML = value;
+        });
+        document.querySelectorAll('[data-src]').forEach(el => { 
+            const src = siteData.images[el.dataset.src];
+            if(src) el.src = src; 
+        });
+        document.querySelectorAll('[data-href]').forEach(el => { if(siteData.links[el.dataset.href]) el.href = siteData.links[el.dataset.href]; });
+        document.querySelectorAll('[data-src-embed]').forEach(el => { if(siteData.links[el.dataset.srcEmbed]) el.src = siteData.links[el.dataset.srcEmbed]; });
+        document.querySelectorAll('[data-tel]').forEach(el => { if(siteData.contact[el.dataset.tel]) el.textContent = `T. ${siteData.contact[el.dataset.tel]}`; });
+        document.querySelectorAll('[data-tel-href]').forEach(el => { if(siteData.contact[el.dataset.telHref]) el.href = `tel:${siteData.contact[el.dataset.telHref]}`; });
+        
+        document.querySelectorAll('[data-infographic]').forEach(el => {
+            const key = el.dataset.infographic;
+            const data = siteData.pageContents[key];
+            if (data && data.features) {
+                el.innerHTML = ''; // Clear existing content before adding new
+                data.features.forEach(item => {
+                    el.innerHTML += `<div class="bg-white p-4 rounded-lg flex items-center space-x-4 shadow-sm border border-gray-100"><div class="bg-indigo-100 text-indigo-600 p-3 rounded-full shrink-0"><i class="fa-solid ${item.icon} fa-lg"></i></div><div><h4 class="font-bold text-gray-800">${item.title}</h4><p class="text-sm text-gray-600">${item.desc}</p></div></div>`;
+                });
+            }
+        });
+        
+        const lifeInfraList = document.getElementById('life-infra-list');
+        if (siteData.pageContents.lifeInfra && siteData.pageContents.lifeInfra.items && lifeInfraList) {
+            lifeInfraList.innerHTML = ''; // Clear existing content
+            const colors = ['yellow', 'red', 'indigo', 'teal'];
+            siteData.pageContents.lifeInfra.items.forEach((item, i) => {
+                const color = colors[i % colors.length];
+                lifeInfraList.innerHTML += `<div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3 shadow-sm"><div class="bg-${color}-100 text-${color}-700 p-2 rounded-full shrink-0"><i class="fa-solid ${item.icon}"></i></div><div><h4 class="font-bold text-sm">${item.title}</h4><p class="text-xs text-gray-600">${item.desc}</p></div></div>`;
+            });
+        }
+        
+        document.querySelectorAll('[data-features]').forEach(el => {
+            const unitKey = el.dataset.features;
+            const unitData = siteData.pageContents[unitKey];
+            if(unitData && unitData.features && unitData.features.length > 0) {
+                el.innerHTML = ''; 
+                unitData.features.forEach(feature => {
+                    el.innerHTML += `<div class="bg-gray-100 p-3 rounded-lg text-sm shadow-sm flex flex-col items-center justify-center"><i class="fa-solid ${feature.icon} text-indigo-500 mb-1 text-lg"></i><span>${feature.text}</span></div>`;
+                });
+            }
+        });
+    }
+
+    function populateCounselorList() {
+        const counselorListDiv = document.getElementById('counselor-list');
+        counselorListDiv.innerHTML = '';
+        siteData.contact.counselors.forEach(c => {
+            const imgSrc = siteData.images[c.imageKey] || '';
+            counselorListDiv.innerHTML += `<a href="tel:${c.phone}" class="flex items-center p-3 bg-gray-50 hover:bg-indigo-100 rounded-lg transition duration-200"><img src="${imgSrc}" alt="${c.name}" class="w-12 h-12 rounded-full object-cover mr-4" ${!imgSrc ? 'style="display:none;"' : ''}><div class="flex-grow"><p class="font-bold text-gray-800">${c.name}</p><p class="text-sm text-gray-500">${c.phone}</p></div><div class="text-indigo-500"><i class="fa-solid fa-phone-volume"></i></div></a>`;
+        });
+    }
+    
+    const customerForm = document.getElementById('customer-form');
+    function validateForm() {
+        const submitBtn = document.getElementById('submit-btn');
+        const isNameValid = document.getElementById('name').value.trim() !== '';
+        const isPhoneValid = document.getElementById('phone').value.trim() !== '';
+        const isRegionValid = document.getElementById('region').value.trim() !== '';
+        const isPurposeValid = !!customerForm.querySelector('input[name="purpose"]:checked');
+        const isTypeValid = !!customerForm.querySelector('input[name="type"]:checked');
+        const isConsentChecked = document.getElementById('consent').checked;
+        submitBtn.disabled = !(isNameValid && isPhoneValid && isRegionValid && isPurposeValid && isTypeValid && isConsentChecked);
+    }
+    customerForm.querySelectorAll('input').forEach(el => { el.addEventListener('input', validateForm); el.addEventListener('change', validateForm); });
+    
+    customerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(customerForm);
+        const data = {
+            timestamp: new Date().toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}),
+            site: siteData.projectName,
+            name: formData.get('name'), phone: formData.get('phone'), region: formData.get('region'),
+            purpose: formData.get('purpose'), type: formData.get('type')
+        };
+        fetch(siteData.googleSheetUrl, { method: "POST", body: JSON.stringify(data) })
+        .then(res => res.json()).then(data => console.log('Google Sheet Response:', data))
+        .catch(error => console.error('Google Sheet Error:', error));
+
+        if (!document.getElementById('submit-btn').disabled) {
+            document.getElementById('landing-page').classList.add('hidden');
+            document.getElementById('brochure-app').classList.remove('hidden');
+            document.getElementById('navigation-controls').classList.remove('hidden');
+            document.getElementById('navigation-controls').classList.add('flex');
+            initBrochure();
+        }
+    });
+    
+    document.getElementById('counselor-btn').addEventListener('click', (e) => { e.stopPropagation(); populateCounselorList(); const pop = document.getElementById('counselor-popup'); pop.classList.toggle('open'); pop.classList.toggle('hidden'); });
+    document.addEventListener('click', (e) => { const pop = document.getElementById('counselor-popup'); if (!pop.classList.contains('hidden') && !pop.contains(e.target) && !document.getElementById('counselor-btn').contains(e.target)) { pop.classList.add('hidden'); pop.classList.remove('open'); } });
+    
+    function initBrochure() {
+        const pages = Array.from(document.querySelectorAll('#page-container > .page'));
+        const visiblePages = pages.filter(page => {
+            const pageName = page.dataset.pageName;
+            const data = getNestedValue(`pageContents.${pageName}`);
+            return data && data.title;
+        });
+
+        pages.forEach(p => { 
+            if (!visiblePages.includes(p)) p.classList.add('hidden');
+        });
+
+        let currentPageIndex = 0;
+        let chartRendered = false;
+
+        function showPage(index) {
+            const oldPageIndex = currentPageIndex;
+            currentPageIndex = index;
+            visiblePages.forEach((page, i) => {
+                page.classList.remove('active', 'exiting');
+                if (i === index) {
+                    setTimeout(() => page.classList.add('active'), 50);
+                }
+                else if (i === oldPageIndex) {
+                    page.classList.add('exiting');
+                }
+            });
+            updateNavigation();
+            
+            const chartPage = visiblePages[index];
+            if (chartPage && chartPage.dataset.pageName === "marketPrice" && !chartRendered) {
+                renderPriceChart();
+                chartRendered = true;
+            }
+        }
+
+        function updateNavigation() {
+            const progress = visiblePages.length <= 1 ? 100 : (currentPageIndex / (visiblePages.length - 1)) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            document.getElementById('prev-btn').disabled = currentPageIndex === 0;
+            document.getElementById('next-btn').disabled = currentPageIndex === visiblePages.length - 1;
+        }
+
+        function renderPriceChart() {
+            const ctx = document.getElementById('priceChart').getContext('2d');
+            const chartConfig = siteData.pageContents.marketPrice.chartData;
+            if (!chartConfig || !chartConfig.labels || !chartConfig.data || chartConfig.data.length === 0) {
+                document.querySelector('[data-page-name="marketPrice"]').classList.add('hidden');
+                return;
+            };
+            const backgroundColors = chartConfig.labels.map(label => label.includes('(예상)') ? 'rgba(239, 68, 68, 0.7)' : 'rgba(156, 163, 175, 0.7)');
+            const borderColors = chartConfig.labels.map(label => label.includes('(예상)') ? 'rgba(239, 68, 68, 1)' : 'rgba(156, 163, 175, 1)');
+            
+            const ourProjectIndex = chartConfig.labels.findIndex(label => label.includes('(예상)'));
+            if (ourProjectIndex !== -1) {
+                backgroundColors[ourProjectIndex] = 'rgba(59, 130, 246, 0.7)';
+                borderColors[ourProjectIndex] = 'rgba(59, 130, 246, 1)';
+            }
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartConfig.labels,
+                    datasets: [{
+                        label: '84㎡ 실거래가 (억원)', data: chartConfig.data,
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors,
+                        borderWidth: 1, borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, animation: { duration: 1500, easing: 'easeInOutQuart' },
+                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` ${c.raw}억원` }}},
+                    scales: { y: { beginAtZero: false, min: Math.floor(Math.min(...chartConfig.data) - 2), title: { display: true, text: '실거래가 (단위: 억원)' } } }
+                }
+            });
+        }
+
+        document.getElementById('next-btn').addEventListener('click', () => { if (currentPageIndex < visiblePages.length - 1) showPage(currentPageIndex + 1); });
+        document.getElementById('prev-btn').addEventListener('click', () => { if (currentPageIndex > 0) showPage(currentPageIndex - 1); });
+
+        // Set initial page to be visible
+        const initialPage = document.querySelector('#page-container > .page');
+        if(initialPage) initialPage.classList.add('active');
+        updateNavigation();
+    }
+
+    populateContent();
+});
+</script>
+</body>
+</html>
