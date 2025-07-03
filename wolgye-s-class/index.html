@@ -60,7 +60,7 @@ const siteData = {
         img_logo_landing: "boonyangcok(c).png",
         img_logo_brochure: "boonyangcok.png",
         img_logo_apart: "img_logo_apt.jpg",
-        img_cover_video_thumb: "img_cover_video_thumb.png",
+        img_cover_video_thumb: "img_cover_video_thumb.jpg",
         img_location_map: "img_location_map.jpg",
         img_unit_A: "img_unit_A.jpg",
         img_unit_B: "img_unit_B.jpg",
@@ -77,6 +77,7 @@ const siteData = {
     // --- 3. 외부 링크 정보 ---
     links: {
         youtube: "",
+        youtubeCover: "https://www.youtube.com/shorts/vzAb78xJ8fA",
         modelHouseMap: "https://www.google.com/maps/search/?api=1&query=서울특별시+성북구+장위동+25-55",
         modelHouseMapEmbed: "https://maps.google.com/maps?q=서울특별시%20성북구%20장위동%2025-55&t=&z=15&ie=UTF8&iwloc=&output=embed",
     },
@@ -95,7 +96,7 @@ const siteData = {
 
     // --- 5. 페이지별 콘텐츠 ---
     pageContents: {
-        cover: { title: "표지", description: "석계역 더블 역세권, 새로운 중심이 될 프리미엄" },
+        cover: { title: "표지", description: "👀 노원구에 새 아파트?\n월계 중흥S클래스, 이건 진짜 레어템!✨\n\n핵심만 콕콕! 꿀팁은 [인스타리드] 로 콕✔\n#분양콕 #인스타리드 #브로슈어전자책 #월계중흥S클래스" },
         location: { title: "석계역 초역세권", subtitle: "서울 어디든 빠르게 통하는 교통의 허브", coreLocation: "1·6호선 석계역, GTX-C 광운대역 인접" },
         premium: { title: "압도적 프리미엄", subtitle: "교통, 자연, 생활을 모두 품은 완벽한 입지", features: [
             { icon: "fa-train-subway", title: "더블 역세권", desc: "1·6호선 석계역 바로 앞, 초역세권" },
@@ -157,8 +158,13 @@ const siteData = {
         
         <div id="page-container">
             <div class="page flex flex-col justify-center items-center" data-page-name="cover">
-                <img data-src="img_cover_video_thumb" alt="현장 전경" class="w-full max-w-md rounded-lg shadow-lg mb-4">
-                <p class="font-semibold text-gray-800 text-lg md:text-xl text-center" data-content="cover.description"></p>
+                <a data-href="links.youtubeCover" target="_blank" class="block w-full max-w-sm rounded-lg overflow-hidden shadow-lg mb-4 group relative">
+                    <img data-src="img_cover_video_thumb" alt="월계 중흥S클래스 영상 썸네일" class="w-full h-auto transition-transform duration-300 group-hover:scale-105">
+                    <div class="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity duration-300 group-hover:opacity-75">
+                        <i class="fa-solid fa-play text-white text-6xl opacity-80 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110"></i>
+                    </div>
+                </a>
+                <p class="text-sm text-center text-gray-700 whitespace-pre-wrap" data-content="cover.description"></p>
             </div>
 
             <div class="page" data-page-name="location"><h2 class="section-title" data-content="location.title"></h2><p class="section-subtitle" data-content="location.subtitle"></p><img data-src="img_location_map" alt="입지" class="w-full h-auto rounded-lg shadow-md mb-4"><div class="space-y-2"><div class="text-center bg-gray-50 p-3 rounded-lg shadow-sm"><p class="font-bold text-gray-800 text-sm md:text-base">사업지 주소</p><p class="text-xs md:text-sm text-gray-600" data-content="contact.siteAddress"></p></div><div class="text-center bg-indigo-50 p-3 rounded-lg shadow-sm"><p class="font-bold text-indigo-800 text-sm md:text-base">핵심 입지</p><p class="text-xs md:text-sm text-indigo-600" data-content="location.coreLocation"></p></div></div></div>
@@ -213,8 +219,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const src = siteData.images[el.dataset.src];
             if(src) el.src = src; 
         });
-        document.querySelectorAll('[data-href]').forEach(el => { if(siteData.links[el.dataset.href]) el.href = siteData.links[el.dataset.href]; });
-        document.querySelectorAll('[data-src-embed]').forEach(el => { if(siteData.links[el.dataset.srcEmbed]) el.src = siteData.links[el.dataset.srcEmbed]; });
+        document.querySelectorAll('[data-href]').forEach(el => {
+            const path = el.dataset.href;
+            const value = getNestedValue(path);
+            if(value) el.href = value;
+        });
+        document.querySelectorAll('[data-src-embed]').forEach(el => {
+            const path = el.dataset.srcEmbed;
+            const value = getNestedValue(path);
+            if(value) el.src = value;
+        });
         document.querySelectorAll('[data-tel]').forEach(el => { if(siteData.contact[el.dataset.tel]) el.textContent = `T. ${siteData.contact[el.dataset.tel]}`; });
         document.querySelectorAll('[data-tel-href]').forEach(el => { if(siteData.contact[el.dataset.telHref]) el.href = `tel:${siteData.contact[el.dataset.telHref]}`; });
         
