@@ -21,13 +21,14 @@
 
     <style>
         :root {
-            --color-primary: #00c7ae; /* Soomgo-like mint color */
+            --color-primary: #00c7ae;
             --color-navy: #2c3e50;
             --color-background: #f8f9fa;
             --color-white: #ffffff;
             --color-text-primary: #212529;
             --color-text-secondary: #868e96;
             --color-border: #dee2e6;
+            --color-gold: #E6D8B4;
         }
 
         body {
@@ -72,6 +73,7 @@
             font-weight: 900; 
             margin: 0 0 24px 0;
             line-height: 1.4;
+            word-break: keep-all;
         }
         .search-bar {
             display: flex; max-width: 680px; margin: 0 auto 40px auto;
@@ -88,24 +90,26 @@
         .stat-item .label { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 4px; }
         .stat-item .value { font-size: 20px; font-weight: 700; color: var(--color-navy); }
 
-        /* Ad Banner Section for Fading Effect */
+        /* === MODIFIED: Ad Banner Section === */
         .ad-banner-section {
-            padding: 40px 0; /* MODIFIED: Reduced vertical padding */
+            padding: 20px 0; /* Reduced vertical padding */
+            background-color: var(--color-navy);
         }
         .ad-slider-container {
             position: relative;
-            min-height: 190px; /* MODIFIED: Adjusted min-height */
+            min-height: 180px; 
         }
         .ad-banner {
             display: flex; justify-content: space-between; align-items: center;
             border-radius: 12px;
-            padding: 32px 40px;
+            padding: 24px 40px;
             position: absolute; 
             top: 0; left: 0; width: 100%;
             opacity: 0; 
             visibility: hidden;
             transition: opacity 0.8s ease-in-out, visibility 0.8s;
             box-sizing: border-box;
+            color: var(--color-white);
         }
         .ad-banner.active {
             opacity: 1; 
@@ -115,17 +119,29 @@
         .ad-text { flex: 1; }
         .ad-tag {
             position: absolute; top: 16px; right: 16px; font-size: 12px;
-            padding: 4px 8px; border: 1px solid var(--color-border); border-radius: 4px;
-            color: var(--color-text-secondary); background-color: rgba(255,255,255,0.5);
+            padding: 4px 8px; border: 1px solid rgba(255,255,255,0.3); border-radius: 4px;
+            color: rgba(255,255,255,0.7);
         }
-        .ad-title { font-size: 14px; font-weight: 700; color: var(--color-text-secondary); margin: 0 0 8px 0; }
-        .ad-headline { font-size: 28px; font-weight: 900; color: var(--color-text-primary); margin: 0 0 8px 0; }
-        .ad-description { font-size: 15px; color: var(--color-text-secondary); margin: 0; }
-        .ad-image { width: 220px; margin-left: 40px; }
-        .ad-image img { width: 100%; border-radius: 8px; }
+        .ad-title { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.7); margin: 0 0 8px 0; }
+        .ad-headline { font-size: 28px; font-weight: 900; color: var(--color-gold); margin: 0 0 8px 0; }
+        .ad-description { font-size: 15px; color: rgba(255,255,255,0.9); margin: 0 0 24px 0; }
+        .ad-image { width: 180px; height: 120px; margin-left: 40px; }
+        .ad-image img { width: 100%; height: 100%; border-radius: 8px; object-fit: cover; }
+        .ad-controls {
+            display: flex; align-items: center; gap: 12px;
+            position: absolute; bottom: 24px; right: 40px;
+        }
+        .ad-controls .counter { font-size: 14px; color: rgba(255,255,255,0.7); }
+        .ad-controls button {
+            background: none; border: 1px solid rgba(255,255,255,0.3);
+            color: white; width: 28px; height: 28px; border-radius: 50%;
+            cursor: pointer; transition: background-color 0.3s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .ad-controls button:hover { background-color: rgba(255,255,255,0.1); }
 
         /* Main Content Section */
-        .content-section { padding: 60px 0 80px 0; } /* MODIFIED: Reduced top padding */
+        .content-section { padding: 80px 0; }
         .section-title { font-size: 28px; font-weight: 900; margin: 0 0 32px 0; }
 
         /* Property List */
@@ -166,37 +182,21 @@
         .ad-item--premium .item-info { padding-top: 20px; }
         
         .property-item.ad-item--property {
-            position: relative;
-            overflow: hidden;
-            background-color: #4a5a6c;
-            color: white;
-            border-radius: 12px;
+            position: relative; overflow: hidden; background-color: #4a5a6c;
+            color: white; border-radius: 12px;
         }
         .ad-item--property::after { /* Background Image */
-            content: '';
-            position: absolute;
-            top: 0; right: 0;
-            width: 60%;
-            height: 100%;
-            background-image: url('ad_banner.jpg');
-            background-size: cover;
-            background-position: center;
-            z-index: 0;
+            content: ''; position: absolute; top: 0; right: 0;
+            width: 60%; height: 100%; background-image: url('ad_banner.jpg');
+            background-size: cover; background-position: center; z-index: 0;
         }
         .ad-item--property::before { /* Gradient Overlay */
-            content: '';
-            position: absolute;
-            top: 0; right: 0;
-            width: 60%;
-            height: 100%;
+            content: ''; position: absolute; top: 0; right: 0;
+            width: 60%; height: 100%;
             background: linear-gradient(to left, rgba(74, 90, 108, 0) 0%, rgba(74, 90, 108, 1) 100%);
             z-index: 1;
         }
-        .ad-item--property .item-info,
-        .ad-item--property .item-action {
-            position: relative;
-            z-index: 2; 
-        }
+        .ad-item--property .item-info, .ad-item--property .item-action { position: relative; z-index: 2; }
         .ad-item--property .item-info h3 { color: white; }
         .ad-item--property .item-info p { color: rgba(255,255,255,0.8); }
         .ad-item--property .tag { background-color: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.2); }
@@ -206,15 +206,10 @@
         /* Consultant Slider Section */
         .consultant-section { padding-bottom: 80px; overflow: hidden; }
         .consultant-slider { 
-            display: flex; 
-            gap: 20px; 
-            overflow-x: auto; 
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none;  /* IE and Edge */
+            display: flex; gap: 20px; overflow-x: auto; 
+            scrollbar-width: none; -ms-overflow-style: none;
         }
-        .consultant-slider::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, and Opera */
-        }
+        .consultant-slider::-webkit-scrollbar { display: none; }
         .consultant-card {
             flex: 0 0 280px; background-color: var(--color-white); border: 1px solid var(--color-border);
             border-radius: 12px; padding: 24px; text-align: center;
@@ -250,10 +245,10 @@
         .main-footer { text-align: center; padding: 60px 0; }
         .footer-copyright { font-size: 13px; color: var(--color-text-secondary); }
 
-        /* === MODIFIED: Responsive Styles === */
+        /* Responsive */
         @media (max-width: 992px) {
             .property-item { flex-wrap: wrap; gap: 16px; }
-            .item-info { width: 100%; flex-grow: 0; }
+            .item-info { width: 100%; }
             .item-action { width: 100%; justify-content: space-between; }
         }
         @media (max-width: 768px) {
@@ -261,10 +256,11 @@
             .hero-section h1 { font-size: 32px; }
             .ad-banner { flex-direction: column-reverse; text-align: center; padding: 32px 24px; }
             .ad-image { margin: 0 0 24px 0; width: 150px; }
+            .ad-controls { bottom: 16px; right: 16px; }
             .sns-card-container { flex-direction: column; align-items: center; }
             .consultant-card { flex: 0 0 250px; }
             .recommended-by { flex-grow: 1; justify-content: flex-start; }
-            .ad-item--property::after, .ad-item--property::before { display: none; } /* Hide complex background on mobile for simplicity */
+            .ad-item--property::after, .ad-item--property::before { display: none; }
             .ad-item--property { background: var(--color-navy); }
         }
     </style>
@@ -309,7 +305,7 @@
             <div class="container">
                 <div class="ad-slider-container">
                     <!-- Ad Banner 1 -->
-                    <div class="ad-banner active" style="background-color: #fffaf0; border-color: #faeeda;">
+                    <div class="ad-banner active" style="background-color: var(--color-navy);">
                         <div class="ad-text">
                             <span class="ad-tag">AD</span>
                             <p class="ad-title">분양콕 파트너스</p>
@@ -319,10 +315,15 @@
                         <div class="ad-image">
                             <img src="ad_banner_1.jpg" alt="광고 배너 이미지 1">
                         </div>
+                        <div class="ad-controls">
+                            <span class="counter">1 / 3</span>
+                            <button class="prev-btn">&lt;</button>
+                            <button class="next-btn">&gt;</button>
+                        </div>
                     </div>
                     <!-- Ad Banner 2 -->
-                    <div class="ad-banner" style="background-color: #f0f5ff; border-color: #d6e4ff;">
-                        <div class="ad-text">
+                    <div class="ad-banner" style="background-color: var(--color-navy);">
+                         <div class="ad-text">
                             <span class="ad-tag">AD</span>
                             <p class="ad-title">특별 프로모션</p>
                             <h2 class="ad-headline">내 집 마련, 지금이 기회!</h2>
@@ -331,9 +332,14 @@
                         <div class="ad-image">
                             <img src="ad_banner_2.jpg" alt="광고 배너 이미지 2">
                         </div>
+                         <div class="ad-controls">
+                            <span class="counter">2 / 3</span>
+                            <button class="prev-btn">&lt;</button>
+                            <button class="next-btn">&gt;</button>
+                        </div>
                     </div>
                     <!-- Ad Banner 3 -->
-                     <div class="ad-banner" style="background-color: #f1f8f1; border-color: #d3e9d3;">
+                     <div class="ad-banner" style="background-color: var(--color-navy);">
                         <div class="ad-text">
                             <span class="ad-tag">AD</span>
                             <p class="ad-title">프리미엄 컨설팅</p>
@@ -342,6 +348,11 @@
                         </div>
                         <div class="ad-image">
                             <img src="ad_banner_3.jpg" alt="광고 배너 이미지 3">
+                        </div>
+                         <div class="ad-controls">
+                            <span class="counter">3 / 3</span>
+                            <button class="prev-btn">&lt;</button>
+                            <button class="next-btn">&gt;</button>
                         </div>
                     </div>
                 </div>
@@ -476,59 +487,84 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             
-            /**
-             * Fading slider for the main ad banner.
-             * @param {string} containerSelector - The CSS selector for the slider container.
-             * @param {number} intervalTime - The time in milliseconds between transitions.
-             */
             function setupFadingSlider(containerSelector, intervalTime) {
                 const container = document.querySelector(containerSelector);
                 if (!container) return;
-                const banners = container.querySelectorAll('.ad-banner');
-                if (banners.length <= 1) return;
+                const banners = Array.from(container.querySelectorAll('.ad-banner'));
+                const prevBtn = container.querySelector('.prev-btn');
+                const nextBtn = container.querySelector('.next-btn');
+                const counters = container.querySelectorAll('.counter');
+                
+                if (banners.length <= 1) {
+                    if(prevBtn) prevBtn.style.display = 'none';
+                    if(nextBtn) nextBtn.style.display = 'none';
+                    if(counters.length > 0) counters.forEach(c => c.style.display = 'none');
+                    return;
+                }
 
                 let currentIndex = 0;
                 let sliderInterval;
 
-                function showBanner(index) {
+                function updateControls() {
                     banners.forEach((banner, i) => {
-                        banner.classList.toggle('active', i === index);
+                        banner.classList.toggle('active', i === currentIndex);
+                        const counter = banner.querySelector('.counter');
+                        if (counter) {
+                            counter.textContent = `${currentIndex + 1} / ${banners.length}`;
+                        }
                     });
                 }
 
+                function showBanner(index) {
+                    currentIndex = (index + banners.length) % banners.length;
+                    updateControls();
+                }
+
                 function nextBanner() {
-                    currentIndex = (currentIndex + 1) % banners.length;
-                    showBanner(currentIndex);
+                    showBanner(currentIndex + 1);
+                }
+                
+                function prevBanner() {
+                    showBanner(currentIndex - 1);
                 }
 
                 function startSlider() {
-                    stopSlider(); // Ensure no multiple intervals are running
+                    stopSlider();
                     sliderInterval = setInterval(nextBanner, intervalTime);
                 }
 
                 function stopSlider() {
                     clearInterval(sliderInterval);
                 }
+                
+                // Add event listeners to all prev/next buttons within the slider
+                container.querySelectorAll('.prev-btn').forEach(btn => btn.addEventListener('click', () => {
+                    prevBanner();
+                    // Reset interval on manual control
+                    stopSlider();
+                    startSlider();
+                }));
+                
+                container.querySelectorAll('.next-btn').forEach(btn => btn.addEventListener('click', () => {
+                    nextBanner();
+                    // Reset interval on manual control
+                    stopSlider();
+                    startSlider();
+                }));
 
                 container.addEventListener('mouseenter', stopSlider);
                 container.addEventListener('mouseleave', startSlider);
                 container.addEventListener('touchstart', stopSlider, { passive: true });
                 container.addEventListener('touchend', startSlider);
                 
-                showBanner(0); // Show the first banner initially
+                updateControls();
                 startSlider();
             }
 
-            /**
-             * Auto-scrolling slider for horizontal lists like consultants.
-             * @param {string} containerSelector - The CSS selector for the scrollable container.
-             * @param {number} speed - The scroll speed in pixels per frame.
-             */
             function setupAutoScroll(containerSelector, speed = 1) {
                 const container = document.querySelector(containerSelector);
                 if (!container || container.children.length <= 1) return;
 
-                // Clone items to create a seamless infinite loop effect.
                 const originalItems = Array.from(container.children);
                 originalItems.forEach(item => {
                     const clone = item.cloneNode(true);
@@ -541,7 +577,6 @@
                 function scroll() {
                     if (!isPaused) {
                         container.scrollLeft += speed;
-                        // If scrolled to the end of the original items, reset to the beginning.
                         if (container.scrollLeft >= container.scrollWidth / 2) {
                             container.scrollLeft = 0;
                         }
@@ -549,19 +584,14 @@
                     animationFrameId = requestAnimationFrame(scroll);
                 }
 
-                // Pause on hover/touch for better user experience.
                 container.addEventListener('mouseenter', () => isPaused = true);
                 container.addEventListener('mouseleave', () => isPaused = false);
                 container.addEventListener('touchstart', () => isPaused = true, { passive: true });
                 container.addEventListener('touchend', () => isPaused = false);
 
-                // Start the animation.
                 scroll();
             }
             
-            /**
-             * Function to filter property listings based on search input.
-             */
             function activateSearch() {
                 const searchInput = document.getElementById('search-input');
                 const searchButton = document.getElementById('search-button');
