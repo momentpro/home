@@ -92,44 +92,54 @@
 
         /* === MODIFIED: Ad Banner Section === */
         .ad-banner-section {
-            padding: 20px 0; /* Reduced vertical padding */
-            background-color: var(--color-navy);
+            padding: 20px 0;
+            background-color: var(--color-white);
         }
         .ad-slider-container {
             position: relative;
-            min-height: 180px; 
+            height: 220px; /* Fixed height for the banner area */
+            border-radius: 12px;
+            overflow: hidden;
         }
         .ad-banner {
-            display: flex; justify-content: space-between; align-items: center;
-            border-radius: 12px;
-            padding: 24px 40px;
             position: absolute; 
-            top: 0; left: 0; width: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             opacity: 0; 
             visibility: hidden;
-            transition: opacity 0.8s ease-in-out, visibility 0.8s;
+            transition: opacity 0.8s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 40px;
             box-sizing: border-box;
             color: var(--color-white);
+        }
+        .ad-banner::before { /* Dark overlay for text readability */
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.1) 100%);
+            z-index: 1;
         }
         .ad-banner.active {
             opacity: 1; 
             visibility: visible;
-            position: relative; 
         }
-        .ad-text { flex: 1; }
+        .ad-text { position: relative; z-index: 2; max-width: 60%; }
         .ad-tag {
             position: absolute; top: 16px; right: 16px; font-size: 12px;
             padding: 4px 8px; border: 1px solid rgba(255,255,255,0.3); border-radius: 4px;
             color: rgba(255,255,255,0.7);
+            z-index: 3;
         }
         .ad-title { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.7); margin: 0 0 8px 0; }
-        .ad-headline { font-size: 28px; font-weight: 900; color: var(--color-gold); margin: 0 0 8px 0; }
+        .ad-headline { font-size: 28px; font-weight: 900; color: var(--color-white); margin: 0 0 8px 0; }
         .ad-description { font-size: 15px; color: rgba(255,255,255,0.9); margin: 0 0 24px 0; }
-        .ad-image { width: 180px; height: 120px; margin-left: 40px; }
-        .ad-image img { width: 100%; height: 100%; border-radius: 8px; object-fit: cover; }
         .ad-controls {
             display: flex; align-items: center; gap: 12px;
             position: absolute; bottom: 24px; right: 40px;
+            z-index: 3;
         }
         .ad-controls .counter { font-size: 14px; color: rgba(255,255,255,0.7); }
         .ad-controls button {
@@ -254,8 +264,9 @@
         @media (max-width: 768px) {
             .container { padding: 0 20px; }
             .hero-section h1 { font-size: 32px; }
-            .ad-banner { flex-direction: column-reverse; text-align: center; padding: 32px 24px; }
-            .ad-image { margin: 0 0 24px 0; width: 150px; }
+            .ad-banner { padding: 24px; }
+            .ad-text { max-width: 100%; }
+            .ad-headline { font-size: 24px; }
             .ad-controls { bottom: 16px; right: 16px; }
             .sns-card-container { flex-direction: column; align-items: center; }
             .consultant-card { flex: 0 0 250px; }
@@ -305,15 +316,11 @@
             <div class="container">
                 <div class="ad-slider-container">
                     <!-- Ad Banner 1 -->
-                    <div class="ad-banner active" style="background-color: var(--color-navy);">
+                    <div class="ad-banner active" style="background-image: url('ad_banner_1.jpg');">
                         <div class="ad-text">
-                            <span class="ad-tag">AD</span>
                             <p class="ad-title">분양콕 파트너스</p>
                             <h2 class="ad-headline">가장 확실한 선택, 김분양 전문가</h2>
                             <p class="ad-description">최고의 전문가가 당신의 내 집 마련을 돕습니다.</p>
-                        </div>
-                        <div class="ad-image">
-                            <img src="ad_banner_1.jpg" alt="광고 배너 이미지 1">
                         </div>
                         <div class="ad-controls">
                             <span class="counter">1 / 3</span>
@@ -322,15 +329,11 @@
                         </div>
                     </div>
                     <!-- Ad Banner 2 -->
-                    <div class="ad-banner" style="background-color: var(--color-navy);">
+                    <div class="ad-banner" style="background-image: url('ad_banner_2.jpg');">
                          <div class="ad-text">
-                            <span class="ad-tag">AD</span>
                             <p class="ad-title">특별 프로모션</p>
                             <h2 class="ad-headline">내 집 마련, 지금이 기회!</h2>
                             <p class="ad-description">선착순 계약자 대상 특별 혜택을 놓치지 마세요.</p>
-                        </div>
-                        <div class="ad-image">
-                            <img src="ad_banner_2.jpg" alt="광고 배너 이미지 2">
                         </div>
                          <div class="ad-controls">
                             <span class="counter">2 / 3</span>
@@ -339,15 +342,11 @@
                         </div>
                     </div>
                     <!-- Ad Banner 3 -->
-                     <div class="ad-banner" style="background-color: var(--color-navy);">
+                     <div class="ad-banner" style="background-image: url('ad_banner_3.jpg');">
                         <div class="ad-text">
-                            <span class="ad-tag">AD</span>
                             <p class="ad-title">프리미엄 컨설팅</p>
                             <h2 class="ad-headline">1:1 맞춤 분양 컨설팅</h2>
                             <p class="ad-description">자산 가치를 높이는 최고의 투자 전략을 제시합니다.</p>
-                        </div>
-                        <div class="ad-image">
-                            <img src="ad_banner_3.jpg" alt="광고 배너 이미지 3">
                         </div>
                          <div class="ad-controls">
                             <span class="counter">3 / 3</span>
@@ -491,14 +490,10 @@
                 const container = document.querySelector(containerSelector);
                 if (!container) return;
                 const banners = Array.from(container.querySelectorAll('.ad-banner'));
-                const prevBtn = container.querySelector('.prev-btn');
-                const nextBtn = container.querySelector('.next-btn');
-                const counters = container.querySelectorAll('.counter');
                 
                 if (banners.length <= 1) {
-                    if(prevBtn) prevBtn.style.display = 'none';
-                    if(nextBtn) nextBtn.style.display = 'none';
-                    if(counters.length > 0) counters.forEach(c => c.style.display = 'none');
+                    const controls = container.querySelector('.ad-controls');
+                    if(controls) controls.style.display = 'none';
                     return;
                 }
 
@@ -537,17 +532,14 @@
                     clearInterval(sliderInterval);
                 }
                 
-                // Add event listeners to all prev/next buttons within the slider
                 container.querySelectorAll('.prev-btn').forEach(btn => btn.addEventListener('click', () => {
                     prevBanner();
-                    // Reset interval on manual control
                     stopSlider();
                     startSlider();
                 }));
                 
                 container.querySelectorAll('.next-btn').forEach(btn => btn.addEventListener('click', () => {
                     nextBanner();
-                    // Reset interval on manual control
                     stopSlider();
                     startSlider();
                 }));
