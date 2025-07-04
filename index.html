@@ -67,7 +67,12 @@
             padding: 80px 0;
             border-bottom: 1px solid var(--color-border);
         }
-        .hero-section h1 { font-size: 42px; font-weight: 900; margin: 0 0 24px 0; }
+        .hero-section h1 { 
+            font-size: 42px; 
+            font-weight: 900; 
+            margin: 0 0 24px 0;
+            line-height: 1.4;
+        }
         .search-bar {
             display: flex; max-width: 680px; margin: 0 auto 40px auto;
             border: 2px solid var(--color-primary); border-radius: 50px; overflow: hidden;
@@ -85,11 +90,11 @@
 
         /* Ad Banner Section for Fading Effect */
         .ad-banner-section {
-            padding: 60px 0;
+            padding: 40px 0; /* MODIFIED: Reduced vertical padding */
         }
         .ad-slider-container {
             position: relative;
-            min-height: 200px; 
+            min-height: 190px; /* MODIFIED: Adjusted min-height */
         }
         .ad-banner {
             display: flex; justify-content: space-between; align-items: center;
@@ -120,7 +125,7 @@
         .ad-image img { width: 100%; border-radius: 8px; }
 
         /* Main Content Section */
-        .content-section { padding-bottom: 80px; }
+        .content-section { padding: 60px 0 80px 0; } /* MODIFIED: Reduced top padding */
         .section-title { font-size: 28px; font-weight: 900; margin: 0 0 32px 0; }
 
         /* Property List */
@@ -173,7 +178,7 @@
             top: 0; right: 0;
             width: 60%;
             height: 100%;
-            background-image: url('ad_banner.jpg'); /* MODIFIED */
+            background-image: url('ad_banner.jpg');
             background-size: cover;
             background-position: center;
             z-index: 0;
@@ -245,10 +250,10 @@
         .main-footer { text-align: center; padding: 60px 0; }
         .footer-copyright { font-size: 13px; color: var(--color-text-secondary); }
 
-        /* Responsive */
+        /* === MODIFIED: Responsive Styles === */
         @media (max-width: 992px) {
             .property-item { flex-wrap: wrap; gap: 16px; }
-            .item-info { width: 100%; }
+            .item-info { width: 100%; flex-grow: 0; }
             .item-action { width: 100%; justify-content: space-between; }
         }
         @media (max-width: 768px) {
@@ -259,8 +264,8 @@
             .sns-card-container { flex-direction: column; align-items: center; }
             .consultant-card { flex: 0 0 250px; }
             .recommended-by { flex-grow: 1; justify-content: flex-start; }
-            .ad-item--property::after, .ad-item--property::before { width: 100%; height: 50%; opacity: 0.7; }
-            .ad-item--property::before { background: linear-gradient(to top, rgba(74, 90, 108, 0) 0%, rgba(74, 90, 108, 1) 100%); }
+            .ad-item--property::after, .ad-item--property::before { display: none; } /* Hide complex background on mobile for simplicity */
+            .ad-item--property { background: var(--color-navy); }
         }
     </style>
 </head>
@@ -278,7 +283,7 @@
     <main>
         <section class="hero-section">
             <div class="container">
-                <h1>어떤 분양 정보를 찾고 계세요?</h1>
+                <h1>어떤 분양 정보를<br>찾고 계세요?</h1>
                 <div class="search-bar">
                     <input type="text" id="search-input" placeholder="아파트, 오피스텔, 지역명 등으로 검색해보세요.">
                     <button id="search-button">검색</button>
