@@ -124,7 +124,7 @@
         .section-title { font-size: 28px; font-weight: 900; margin: 0 0 32px 0; }
 
         /* Property List */
-        .property-list { background-color: var(--color-white); border: 1px solid var(--color-border); border-radius: 12px; }
+        .property-list { background-color: var(--color-white); border: 1px solid var(--color-border); border-radius: 12px; overflow: hidden; }
         .property-item {
             display: flex; align-items: center; justify-content: space-between;
             padding: 24px; border-bottom: 1px solid var(--color-border); transition: background-color 0.2s;
@@ -159,13 +159,44 @@
             padding: 4px 8px; border-radius: 4px;
         }
         .ad-item--premium .item-info { padding-top: 20px; }
-        .property-item.ad-item--consultant { background: linear-gradient(135deg, var(--color-navy) 0%, #4a6a8a 100%); color: white; }
-        .ad-item--consultant .item-info h3 { color: white; }
-        .ad-item--consultant .item-info p { color: rgba(255,255,255,0.8); }
-        .ad-item--consultant .tag { background-color: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.2); }
-        .ad-item--consultant .cta-button { background-color: var(--color-primary); color: white; border: none; }
-        .ad-item--consultant .recommended-by { color: rgba(255,255,255,0.8); }
-        .ad-item--consultant .recommended-by strong { color: white; }
+        
+        .property-item.ad-item--property {
+            position: relative;
+            overflow: hidden;
+            background-color: #4a5a6c;
+            color: white;
+            border-radius: 12px;
+        }
+        .ad-item--property::after { /* Background Image */
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 60%;
+            height: 100%;
+            background-image: url('ad_banner.jpg'); /* MODIFIED */
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+        .ad-item--property::before { /* Gradient Overlay */
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(to left, rgba(74, 90, 108, 0) 0%, rgba(74, 90, 108, 1) 100%);
+            z-index: 1;
+        }
+        .ad-item--property .item-info,
+        .ad-item--property .item-action {
+            position: relative;
+            z-index: 2; 
+        }
+        .ad-item--property .item-info h3 { color: white; }
+        .ad-item--property .item-info p { color: rgba(255,255,255,0.8); }
+        .ad-item--property .tag { background-color: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.2); }
+        .ad-item--property .cta-button { background-color: var(--color-primary); color: white; border: none; }
+        .ad-item--property .recommended-by { display: none; } 
 
         /* Consultant Slider Section */
         .consultant-section { padding-bottom: 80px; overflow: hidden; }
@@ -228,6 +259,8 @@
             .sns-card-container { flex-direction: column; align-items: center; }
             .consultant-card { flex: 0 0 250px; }
             .recommended-by { flex-grow: 1; justify-content: flex-start; }
+            .ad-item--property::after, .ad-item--property::before { width: 100%; height: 50%; opacity: 0.7; }
+            .ad-item--property::before { background: linear-gradient(to top, rgba(74, 90, 108, 0) 0%, rgba(74, 90, 108, 1) 100%); }
         }
     </style>
 </head>
@@ -361,18 +394,14 @@
                         </div>
                     </a>
 
-                    <a href="#" class="property-item ad-item--consultant">
+                    <a href="#" class="property-item ad-item--property">
                         <div class="item-info">
-                            <h3>최고의 전문가를 만나보세요</h3>
-                            <p>분양콕이 보증하는 박서준 상담사가 당신의 투자를 돕습니다.</p>
-                            <div class="item-tags"><span class="tag">#오피스텔 전문</span><span class="tag">#수익형 부동산</span></div>
+                            <h3>아크로드 서초</h3>
+                            <p>서초의 중심, 비교할 수 없는 프리미엄 라이프</p>
+                            <div class="item-tags"><span class="tag">#하이엔드</span><span class="tag">#강남업무지구</span></div>
                         </div>
                         <div class="item-action">
-                             <div class="recommended-by">
-                                <img src="profile_park.png" alt="박서준 상담사">
-                                <div><strong>박서준</strong> 상담사</div>
-                            </div>
-                            <span class="cta-button">상담 신청하기</span>
+                            <span class="cta-button">분양 정보 보기</span>
                         </div>
                     </a>
 
