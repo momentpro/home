@@ -83,17 +83,29 @@
         .stat-item .label { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 4px; }
         .stat-item .value { font-size: 20px; font-weight: 700; color: var(--color-navy); }
 
-        /* Ad Banner Section */
+        /* Ad Banner Section for Fading Effect */
         .ad-banner-section {
             padding: 60px 0;
-            overflow: hidden;
         }
-        .ad-slider { display: flex; }
+        .ad-slider-container {
+            position: relative;
+            min-height: 200px; 
+        }
         .ad-banner {
             display: flex; justify-content: space-between; align-items: center;
-            background-color: #fffaf0; border: 1px solid #faeeda; border-radius: 12px;
-            padding: 32px 40px; position: relative; overflow: hidden;
-            flex: 0 0 100%; box-sizing: border-box; margin-right: 20px;
+            border-radius: 12px;
+            padding: 32px 40px;
+            position: absolute; 
+            top: 0; left: 0; width: 100%;
+            opacity: 0; 
+            visibility: hidden;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s;
+            box-sizing: border-box;
+        }
+        .ad-banner.active {
+            opacity: 1; 
+            visibility: visible;
+            position: relative; 
         }
         .ad-text { flex: 1; }
         .ad-tag {
@@ -119,7 +131,6 @@
         }
         .property-item:last-child { border-bottom: none; }
         .property-item:hover { background-color: #fcfdff; }
-
         .item-info { flex-grow: 1; }
         .item-info h3 { font-size: 20px; font-weight: 700; margin: 0 0 8px 0; }
         .item-info p { font-size: 15px; color: var(--color-text-secondary); margin: 0 0 12px 0; }
@@ -129,41 +140,47 @@
             font-size: 12px; font-weight: 500; padding: 4px 10px;
             border-radius: 20px; border: 1px solid var(--color-border);
         }
-
-        /* === MODIFIED: Item Action Area === */
-        .item-action {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            flex-shrink: 0; /* Prevent shrinking */
-        }
+        .item-action { display: flex; align-items: center; gap: 24px; flex-shrink: 0; }
         .recommended-by {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            color: var(--color-text-secondary);
-            text-align: right;
+            display: flex; align-items: center; gap: 10px; font-size: 14px;
+            color: var(--color-text-secondary); text-align: right;
         }
-        .recommended-by img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 1px solid var(--color-border);
-        }
-        .recommended-by strong {
-            font-weight: 700;
-            color: var(--color-text-primary);
-        }
+        .recommended-by img { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--color-border); }
+        .recommended-by strong { font-weight: 700; color: var(--color-text-primary); }
         .cta-button {
             background-color: var(--color-white); border: 1px solid var(--color-border); color: var(--color-text-primary);
             font-weight: 700; padding: 12px 24px; border-radius: 8px; transition: all 0.3s; white-space: nowrap;
         }
         .property-item:hover .cta-button { background-color: var(--color-navy); color: var(--color-white); border-color: var(--color-navy); }
-        
+        .property-item.ad-item--premium { background-color: #f0f5ff; position: relative; }
+        .interest-tag {
+            position: absolute; top: 16px; left: 24px;
+            background-color: var(--color-navy); color: white; font-size: 11px; font-weight: 700;
+            padding: 4px 8px; border-radius: 4px;
+        }
+        .ad-item--premium .item-info { padding-top: 20px; }
+        .property-item.ad-item--consultant { background: linear-gradient(135deg, var(--color-navy) 0%, #4a6a8a 100%); color: white; }
+        .ad-item--consultant .item-info h3 { color: white; }
+        .ad-item--consultant .item-info p { color: rgba(255,255,255,0.8); }
+        .ad-item--consultant .tag { background-color: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.2); }
+        .ad-item--consultant .cta-button { background-color: var(--color-primary); color: white; border: none; }
+        .ad-item--consultant .recommended-by { color: rgba(255,255,255,0.8); }
+        .ad-item--consultant .recommended-by strong { color: white; }
+
         /* Consultant Slider Section */
         .consultant-section { padding-bottom: 80px; overflow: hidden; }
-        .consultant-slider { display: flex; gap: 20px; }
+        .consultant-slider { 
+            display: flex; 
+            gap: 20px; 
+            /* For JS driven scroll, overflow is not strictly needed but good for fallback */
+            overflow-x: auto; 
+            /* Hide scrollbar for a cleaner look */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+        }
+        .consultant-slider::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, and Opera */
+        }
         .consultant-card {
             flex: 0 0 280px; background-color: var(--color-white); border: 1px solid var(--color-border);
             border-radius: 12px; padding: 24px; text-align: center;
@@ -212,10 +229,7 @@
             .ad-image { margin: 0 0 24px 0; width: 150px; }
             .sns-card-container { flex-direction: column; align-items: center; }
             .consultant-card { flex: 0 0 250px; }
-            .recommended-by {
-                flex-grow: 1;
-                justify-content: flex-start;
-            }
+            .recommended-by { flex-grow: 1; justify-content: flex-start; }
         }
     </style>
 </head>
@@ -235,8 +249,8 @@
             <div class="container">
                 <h1>어떤 분양 정보를 찾고 계세요?</h1>
                 <div class="search-bar">
-                    <input type="text" placeholder="아파트, 오피스텔, 지역명 등으로 검색해보세요.">
-                    <button>검색</button>
+                    <input type="text" id="search-input" placeholder="아파트, 오피스텔, 지역명 등으로 검색해보세요.">
+                    <button id="search-button">검색</button>
                 </div>
                 <div class="stats-bar">
                     <div class="stat-item">
@@ -257,9 +271,9 @@
 
         <section class="ad-banner-section">
             <div class="container">
-                <div class="ad-slider">
+                <div class="ad-slider-container">
                     <!-- Ad Banner 1 -->
-                    <div class="ad-banner">
+                    <div class="ad-banner active" style="background-color: #fffaf0; border-color: #faeeda;">
                         <div class="ad-text">
                             <span class="ad-tag">AD</span>
                             <p class="ad-title">분양콕 파트너스</p>
@@ -305,7 +319,7 @@
                     
                     <a href="/icheon-bubal-efete/" class="property-item">
                         <div class="item-info">
-                            <h3>이천 부발 에피트</h3>
+                            <h3>이천 부발역 에피트</h3>
                             <p>도심 속에서 누리는 여유로운 주거 공간</p>
                             <div class="item-tags"><span class="tag">아파트</span><span class="tag">경기도 이천</span></div>
                         </div>
@@ -318,9 +332,10 @@
                         </div>
                     </a>
 
-                    <a href="/hillstate-isu-central/" class="property-item">
+                    <a href="/hillstate-isu-central/" class="property-item ad-item--premium">
+                        <span class="interest-tag">관심</span>
                         <div class="item-info">
-                            <h3>힐스테이트 이수 센트럴</h3>
+                            <h3>힐스테이트 이수역 센트럴</h3>
                             <p>교통의 중심에서 시작되는 프리미엄 라이프</p>
                             <div class="item-tags"><span class="tag">아파트</span><span class="tag">서울 동작구</span><span class="tag">초역세권</span></div>
                         </div>
@@ -347,6 +362,22 @@
                             <span class="cta-button">상세보기</span>
                         </div>
                     </a>
+
+                    <a href="#" class="property-item ad-item--consultant">
+                        <div class="item-info">
+                            <h3>최고의 전문가를 만나보세요</h3>
+                            <p>분양콕이 보증하는 박서준 상담사가 당신의 투자를 돕습니다.</p>
+                            <div class="item-tags"><span class="tag">#오피스텔 전문</span><span class="tag">#수익형 부동산</span></div>
+                        </div>
+                        <div class="item-action">
+                             <div class="recommended-by">
+                                <img src="https://placehold.co/40x40/EFEFEF/AAAAAA?text=User" alt="박서준 상담사">
+                                <div><strong>박서준</strong> 상담사</div>
+                            </div>
+                            <span class="cta-button">상담 신청하기</span>
+                        </div>
+                    </a>
+
                 </div>
             </div>
         </section>
@@ -383,13 +414,6 @@
                         <div class="item-tags" style="justify-content: center; margin-bottom: 20px;"><span class="tag">#경기 남부</span><span class="tag">#GTX</span></div>
                         <button class="consult-button">상담 신청</button>
                     </div>
-                     <div class="consultant-card">
-                        <div class="consultant-photo"><img src="https://placehold.co/160x160/EFEFEF/AAAAAA?text=User" alt="정재민 상담사 프로필 사진"></div>
-                        <h3>정재민 상담사</h3>
-                        <p class="affiliation">분양콕 인증 파트너</p>
-                        <div class="item-tags" style="justify-content: center; margin-bottom: 20px;"><span class="tag">#상가 전문</span><span class="tag">#수익형</span></div>
-                        <button class="consult-button">상담 신청</button>
-                    </div>
                 </div>
             </div>
         </section>
@@ -419,98 +443,60 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            function initializeAutoSlider(sliderContainerSelector, intervalTime) {
-                const slider = document.querySelector(sliderContainerSelector);
-                if (!slider) return;
-
-                const originalItems = Array.from(slider.children);
-                if (originalItems.length === 0) return;
-
-                // Clone items for infinite loop effect
-                originalItems.forEach(item => {
-                    const clone = item.cloneNode(true);
-                    slider.appendChild(clone);
-                });
+            
+            /**
+             * Fading slider for the main ad banner.
+             * @param {string} containerSelector - The CSS selector for the slider container.
+             * @param {number} intervalTime - The time in milliseconds between transitions.
+             */
+            function setupFadingSlider(containerSelector, intervalTime) {
+                const container = document.querySelector(containerSelector);
+                if (!container) return;
+                const banners = container.querySelectorAll('.ad-banner');
+                if (banners.length <= 1) return;
 
                 let currentIndex = 0;
                 let sliderInterval;
 
-                function moveToNextSlide() {
-                    const items = slider.children;
-                    const totalItems = items.length;
-                    const originalItemCount = totalItems / 2;
-                    
-                    currentIndex++;
-                    
-                    const itemWidth = items[0].offsetWidth + parseInt(window.getComputedStyle(items[0]).marginRight || '0');
-                    slider.style.transition = 'transform 0.5s ease-in-out';
-                    slider.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-
-                    // When it reaches the end of the cloned part, reset to the beginning
-                    if (currentIndex === originalItemCount) {
-                        setTimeout(() => {
-                            slider.style.transition = 'none';
-                            slider.style.transform = `translateX(0px)`;
-                            currentIndex = 0;
-                        }, 500);
-                    }
+                function showBanner(index) {
+                    banners.forEach((banner, i) => {
+                        banner.classList.toggle('active', i === index);
+                    });
                 }
-                
+
+                function nextBanner() {
+                    currentIndex = (currentIndex + 1) % banners.length;
+                    showBanner(currentIndex);
+                }
+
                 function startSlider() {
-                     sliderInterval = setInterval(moveToNextSlide, intervalTime);
+                    stopSlider(); // Ensure no multiple intervals are running
+                    sliderInterval = setInterval(nextBanner, intervalTime);
                 }
 
                 function stopSlider() {
                     clearInterval(sliderInterval);
                 }
 
-                // For consultant slider, we use a different logic for continuous scroll
-                if(sliderContainerSelector === '.consultant-slider') {
-                    let animation;
-                    const startConsultantSlider = () => {
-                        const items = slider.children;
-                        const totalWidth = Array.from(items).reduce((acc, item) => acc + item.offsetWidth + 20, 0);
-                        slider.style.width = `${totalWidth}px`;
-                        
-                        const animate = () => {
-                            slider.scrollLeft += 1;
-                            if (slider.scrollLeft >= totalWidth / 2) {
-                                slider.scrollLeft = 0;
-                            }
-                            animation = requestAnimationFrame(animate);
-                        };
-                        animation = requestAnimationFrame(animate);
-                    };
-                    const stopConsultantSlider = () => {
-                        cancelAnimationFrame(animation);
-                    };
-
-                    slider.addEventListener('mouseenter', stopConsultantSlider);
-                    slider.addEventListener('mouseleave', startConsultantSlider);
-                    slider.addEventListener('touchstart', stopConsultantSlider);
-                    slider.addEventListener('touchend', startConsultantSlider);
-                    startConsultantSlider();
-
-                } else { // For Ad banner
-                    // Need to wrap the slider for this logic
-                    const sliderWrapper = slider.parentElement;
-                    slider.style.width = `${originalItems.length * 2 * 100}%`; // Adjust width for clones
-                    
-                    slider.addEventListener('mouseenter', stopSlider);
-                    slider.addEventListener('mouseleave', startSlider);
-                    slider.addEventListener('touchstart', stopSlider);
-                    slider.addEventListener('touchend', startSlider);
-                    startSlider();
-                }
+                container.addEventListener('mouseenter', stopSlider);
+                container.addEventListener('mouseleave', startSlider);
+                container.addEventListener('touchstart', stopSlider, { passive: true });
+                container.addEventListener('touchend', startSlider);
+                
+                showBanner(0); // Show the first banner initially
+                startSlider();
             }
 
-            // The Ad banner slider needs a wrapper to work correctly with the transform logic.
-            // Let's modify the JS logic to be simpler and more robust, using scrollLeft for both.
-
+            /**
+             * Auto-scrolling slider for horizontal lists like consultants.
+             * @param {string} containerSelector - The CSS selector for the scrollable container.
+             * @param {number} speed - The scroll speed in pixels per frame.
+             */
             function setupAutoScroll(containerSelector, speed = 1) {
                 const container = document.querySelector(containerSelector);
-                if (!container) return;
+                if (!container || container.children.length <= 1) return;
 
+                // Clone items to create a seamless infinite loop effect.
                 const originalItems = Array.from(container.children);
                 originalItems.forEach(item => {
                     const clone = item.cloneNode(true);
@@ -523,6 +509,7 @@
                 function scroll() {
                     if (!isPaused) {
                         container.scrollLeft += speed;
+                        // If scrolled to the end of the original items, reset to the beginning.
                         if (container.scrollLeft >= container.scrollWidth / 2) {
                             container.scrollLeft = 0;
                         }
@@ -530,17 +517,51 @@
                     animationFrameId = requestAnimationFrame(scroll);
                 }
 
+                // Pause on hover/touch for better user experience.
                 container.addEventListener('mouseenter', () => isPaused = true);
                 container.addEventListener('mouseleave', () => isPaused = false);
                 container.addEventListener('touchstart', () => isPaused = true, { passive: true });
                 container.addEventListener('touchend', () => isPaused = false);
 
+                // Start the animation.
                 scroll();
             }
             
-            setupAutoScroll('.ad-slider', 2); // Faster speed for ad banner
-            setupAutoScroll('.consultant-slider', 1); // Slower speed for consultants
+            /**
+             * Function to filter property listings based on search input.
+             */
+            function activateSearch() {
+                const searchInput = document.getElementById('search-input');
+                const searchButton = document.getElementById('search-button');
+                const propertyItems = document.querySelectorAll('.property-list .property-item');
 
+                if (!searchInput || !searchButton || propertyItems.length === 0) return;
+
+                const performSearch = () => {
+                    const query = searchInput.value.toLowerCase().trim();
+                    
+                    propertyItems.forEach(item => {
+                        const itemText = item.textContent.toLowerCase();
+                        if (itemText.includes(query)) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                };
+
+                searchButton.addEventListener('click', performSearch);
+                searchInput.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') {
+                        performSearch();
+                    }
+                });
+            }
+
+            // Initialize all functionalities
+            setupFadingSlider('.ad-slider-container', 4000); 
+            setupAutoScroll('.consultant-slider', 1);
+            activateSearch();
         });
     </script>
 
