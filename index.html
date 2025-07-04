@@ -145,7 +145,7 @@
             display: flex; align-items: center; gap: 10px; font-size: 14px;
             color: var(--color-text-secondary); text-align: right;
         }
-        .recommended-by img { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--color-border); }
+        .recommended-by img { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--color-border); object-fit: cover; }
         .recommended-by strong { font-weight: 700; color: var(--color-text-primary); }
         .cta-button {
             background-color: var(--color-white); border: 1px solid var(--color-border); color: var(--color-text-primary);
@@ -172,9 +172,7 @@
         .consultant-slider { 
             display: flex; 
             gap: 20px; 
-            /* For JS driven scroll, overflow is not strictly needed but good for fallback */
             overflow-x: auto; 
-            /* Hide scrollbar for a cleaner look */
             scrollbar-width: none; /* Firefox */
             -ms-overflow-style: none;  /* IE and Edge */
         }
@@ -281,7 +279,7 @@
                             <p class="ad-description">최고의 전문가가 당신의 내 집 마련을 돕습니다.</p>
                         </div>
                         <div class="ad-image">
-                            <img src="https://placehold.co/400x400/2c3e50/FFFFFF?text=Expert" alt="광고 배너 이미지 1">
+                            <img src="ad_banner_1.jpg" alt="광고 배너 이미지 1">
                         </div>
                     </div>
                     <!-- Ad Banner 2 -->
@@ -293,7 +291,7 @@
                             <p class="ad-description">선착순 계약자 대상 특별 혜택을 놓치지 마세요.</p>
                         </div>
                         <div class="ad-image">
-                            <img src="https://placehold.co/400x400/3498db/FFFFFF?text=Event" alt="광고 배너 이미지 2">
+                            <img src="ad_banner_2.jpg" alt="광고 배너 이미지 2">
                         </div>
                     </div>
                     <!-- Ad Banner 3 -->
@@ -305,7 +303,7 @@
                             <p class="ad-description">자산 가치를 높이는 최고의 투자 전략을 제시합니다.</p>
                         </div>
                         <div class="ad-image">
-                            <img src="https://placehold.co/400x400/27ae60/FFFFFF?text=Premium" alt="광고 배너 이미지 3">
+                            <img src="ad_banner_3.jpg" alt="광고 배너 이미지 3">
                         </div>
                     </div>
                 </div>
@@ -325,7 +323,7 @@
                         </div>
                         <div class="item-action">
                             <div class="recommended-by">
-                                <img src="https://placehold.co/40x40/EFEFEF/AAAAAA?text=User" alt="김현수 상담사">
+                                <img src="profile_kim.png" alt="김현수 상담사">
                                 <div><strong>김현수</strong> 상담사 추천</div>
                             </div>
                             <span class="cta-button">상세보기</span>
@@ -341,7 +339,7 @@
                         </div>
                         <div class="item-action">
                              <div class="recommended-by">
-                                <img src="https://placehold.co/40x40/EFEFEF/AAAAAA?text=User" alt="이민아 상담사">
+                                <img src="profile_lee.png" alt="이민아 상담사">
                                 <div><strong>이민아</strong> 상담사 추천</div>
                             </div>
                             <span class="cta-button">상세보기</span>
@@ -356,7 +354,7 @@
                         </div>
                         <div class="item-action">
                              <div class="recommended-by">
-                                <img src="https://placehold.co/40x40/EFEFEF/AAAAAA?text=User" alt="박서준 상담사">
+                                <img src="profile_park.png" alt="박서준 상담사">
                                 <div><strong>박서준</strong> 상담사 추천</div>
                             </div>
                             <span class="cta-button">상세보기</span>
@@ -371,7 +369,7 @@
                         </div>
                         <div class="item-action">
                              <div class="recommended-by">
-                                <img src="https://placehold.co/40x40/EFEFEF/AAAAAA?text=User" alt="박서준 상담사">
+                                <img src="profile_park.png" alt="박서준 상담사">
                                 <div><strong>박서준</strong> 상담사</div>
                             </div>
                             <span class="cta-button">상담 신청하기</span>
@@ -387,28 +385,28 @@
                 <h2 class="section-title">바로 상담 가능한 전문 상담사</h2>
                 <div class="consultant-slider">
                     <div class="consultant-card">
-                        <div class="consultant-photo"><img src="https://placehold.co/160x160/EFEFEF/AAAAAA?text=User" alt="김현수 상담사 프로필 사진"></div>
+                        <div class="consultant-photo"><img src="profile_kim.png" alt="김현수 상담사 프로필 사진"></div>
                         <h3>김현수 상담사</h3>
                         <p class="affiliation">분양콕 전문 파트너</p>
                         <div class="item-tags" style="justify-content: center; margin-bottom: 20px;"><span class="tag">#강남권 전문</span><span class="tag">#재건축</span></div>
                         <button class="consult-button">상담 신청</button>
                     </div>
                     <div class="consultant-card">
-                        <div class="consultant-photo"><img src="https://placehold.co/160x160/EFEFEF/AAAAAA?text=User" alt="이민아 상담사 프로필 사진"></div>
+                        <div class="consultant-photo"><img src="profile_lee.png" alt="이민아 상담사 프로필 사진"></div>
                         <h3>이민아 상담사</h3>
                         <p class="affiliation">분양콕 인증 파트너</p>
                         <div class="item-tags" style="justify-content: center; margin-bottom: 20px;"><span class="tag">#신혼부부 특공</span><span class="tag">#역세권</span></div>
                         <button class="consult-button">상담 신청</button>
                     </div>
                     <div class="consultant-card">
-                        <div class="consultant-photo"><img src="https://placehold.co/160x160/EFEFEF/AAAAAA?text=User" alt="박서준 상담사 프로필 사진"></div>
+                        <div class="consultant-photo"><img src="profile_park.png" alt="박서준 상담사 프로필 사진"></div>
                         <h3>박서준 상담사</h3>
                         <p class="affiliation">분양콕 전문 파트너</p>
                         <div class="item-tags" style="justify-content: center; margin-bottom: 20px;"><span class="tag">#오피스텔</span><span class="tag">#수익형</span></div>
                         <button class="consult-button">상담 신청</button>
                     </div>
                     <div class="consultant-card">
-                        <div class="consultant-photo"><img src="https://placehold.co/160x160/EFEFEF/AAAAAA?text=User" alt="최유리 상담사 프로필 사진"></div>
+                        <div class="consultant-photo"><img src="profile_choi.png" alt="최유리 상담사 프로필 사진"></div>
                         <h3>최유리 상담사</h3>
                         <p class="affiliation">분양콕 전문 파트너</p>
                         <div class="item-tags" style="justify-content: center; margin-bottom: 20px;"><span class="tag">#경기 남부</span><span class="tag">#GTX</span></div>
