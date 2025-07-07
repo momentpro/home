@@ -43,6 +43,7 @@
         .radio-group input:checked + label { border-color: #4f46e5; background-color: #eef2ff; font-weight: 600; }
         #counselor-popup { position: absolute; bottom: 0; left: 0; right: 0; background-color: white; border-top: 1px solid #e5e7eb; box-shadow: 0 -10px 15px -3px rgb(0 0 0 / 0.1); padding: 1.5rem; transform: translateY(100%); transition: transform 0.3s ease-in-out; z-index: 100; }
         #counselor-popup.open { transform: translateY(0); }
+        .image-container { display: flex; align-items: center; justify-content: center; height: 100%; max-height: 500px; }
     </style>
 </head>
 <body>
@@ -154,7 +155,7 @@
             <div class="page" data-page-name="프리미엄">
                  <h2 class="section-title">PREMIUM 6</h2>
                  <p class="section-subtitle">김포를 리드할 가치의 완성작</p>
-                 <div class="flex items-center justify-center flex-grow">
+                 <div class="image-container">
                      <img src="img_premium_points.jpg" alt="프리미엄 6" class="w-full h-auto object-contain max-h-full" onerror="this.onerror=null;this.src='https://placehold.co/400x500/CCCCCC/FFFFFF?text=Premium+Points';">
                  </div>
             </div>
@@ -163,8 +164,8 @@
             <div class="page" data-page-name="특별 분양 조건">
                 <h2 class="section-title">특별 분양 조건</h2>
                 <p class="section-subtitle">지금만 누릴 수 있는 파격적인 혜택</p>
-                <div class="flex flex-col items-center text-center">
-                    <img src="img_premium_points2.jpg" alt="특별 분양 조건" class="max-w-xs w-full rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/320x480/CCCCCC/FFFFFF?text=Special+Offer';">
+                <div class="image-container">
+                    <img src="img_premium_points2.jpg" alt="특별 분양 조건" class="w-auto h-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/320x480/CCCCCC/FFFFFF?text=Special+Offer';">
                 </div>
             </div>
 
@@ -251,17 +252,8 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Page 8: Brand Power -->
-            <div class="page flex flex-col items-center justify-center" data-page-name="브랜드 파워">
-                 <h2 class="section-title">No.1 브랜드 파워</h2>
-                 <p class="section-subtitle">롯데캐슬이 선사하는 최고의 자부심</p>
-                 <div class="flex justify-center">
-                     <img src="brand_power.jpg" alt="롯데캐슬 브랜드" class="w-full max-w-sm rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=Brand+Power';">
-                 </div>
-            </div>
             
-            <!-- Page 9: Price Chart -->
+            <!-- Page 8: Price Chart -->
             <div class="page" data-page-name="주변 시세">
                 <h2 class="section-title">주변 시세 비교</h2>
                 <p class="section-subtitle">인근 단지 대비 뛰어난 가격 경쟁력</p>
@@ -271,35 +263,59 @@
                 <p class="text-center mt-4 text-sm text-gray-500">※ 84㎡, 최근 실거래가 기준</p>
             </div>
 
-            <!-- Page 10: UNIT 65A -->
+            <!-- Page 9: UNIT 65A -->
             <div class="page" data-page-name="UNIT 65A">
                 <h2 class="section-title">UNIT 65A</h2>
                 <p class="section-subtitle">실용성을 극대화한 4Bay 판상형 구조</p>
                 <img src="img_unit_A.jpg" alt="65A 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=65A 평면도';">
+                <div class="grid grid-cols-2 gap-2 text-center mt-3 text-sm">
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-ruler-combined text-indigo-500 mr-1"></i> 4-Bay 구조</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-wind text-indigo-500 mr-1"></i> 맞통풍 설계</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 드레스룸</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-box-archive text-indigo-500 mr-1"></i> 팬트리</div>
+                </div>
             </div>
             
-            <!-- Page 11: UNIT 65B -->
+            <!-- Page 10: UNIT 65B -->
             <div class="page" data-page-name="UNIT 65B">
                 <h2 class="section-title">UNIT 65B</h2>
                 <p class="section-subtitle">개방감과 조망을 극대화한 타워형</p>
                 <img src="img_unit_B.jpg" alt="65B 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=65B 평면도';">
+                <div class="grid grid-cols-2 gap-2 text-center mt-3 text-sm">
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-building text-indigo-500 mr-1"></i> 타워형 구조</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-mountain-sun text-indigo-500 mr-1"></i> 2면 개방</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 드레스룸</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-maximize text-indigo-500 mr-1"></i> 효율적 공간</div>
+                </div>
             </div>
 
-            <!-- Page 12: UNIT 84A -->
+            <!-- Page 11: UNIT 84A -->
             <div class="page" data-page-name="UNIT 84A">
                 <h2 class="section-title">UNIT 84A</h2>
                 <p class="section-subtitle">가장 선호도 높은 명품 평면</p>
                 <img src="img_unit_F.jpg" alt="84A 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=84A 평면도';">
+                <div class="grid grid-cols-2 gap-2 text-center mt-3 text-sm">
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-ruler-combined text-indigo-500 mr-1"></i> 4-Bay 구조</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-wind text-indigo-500 mr-1"></i> 우수한 채광</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 대형 드레스룸</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-box-archive text-indigo-500 mr-1"></i> 넓은 거실</div>
+                </div>
             </div>
 
-            <!-- Page 13: UNIT 84B -->
+            <!-- Page 12: UNIT 84B -->
             <div class="page" data-page-name="UNIT 84B">
                 <h2 class="section-title">UNIT 84B</h2>
                 <p class="section-subtitle">다양한 라이프스타일을 담는 감각적 평면</p>
                 <img src="img_unit_G.jpg" alt="84B 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=84B 평면도';">
+                <div class="grid grid-cols-2 gap-2 text-center mt-3 text-sm">
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-building text-indigo-500 mr-1"></i> 타워형 구조</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-person-shelter text-indigo-500 mr-1"></i> 독립적 공간</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 안방 드레스룸</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-sun text-indigo-500 mr-1"></i> LDK 구조</div>
+                </div>
             </div>
             
-            <!-- Page 14: Way to come -->
+            <!-- Page 13: Way to come -->
             <div class="page" data-page-name="오시는 길">
                 <div class="text-center">
                     <h2 class="section-title">오시는 길</h2>
@@ -346,7 +362,7 @@
         const counselorListDiv = document.getElementById('counselor-list');
         
         const counselors = [
-            { name: '박희준 상담사', phone: '010-2171-8206', image: 'counselor_man1.jpeg' }
+            { name: '박희준 상담사', phone: '010-2171-8206', image: 'counselor_man1.png' }
         ];
 
         function populateCounselorList() {
@@ -434,7 +450,7 @@
                 });
                 updateNavigation();
                 
-                if (currentPageIndex === 8 && !chartRendered) {
+                if (currentPageIndex === 7 && !chartRendered) { // Adjusted index for chart
                     renderPriceChart();
                     chartRendered = true;
                 }
