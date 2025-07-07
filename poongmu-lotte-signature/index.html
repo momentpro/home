@@ -7,7 +7,7 @@
     <title>풍무역 롯데캐슬 시그니처 | 인터랙티브 브로슈어</title>
     <meta property="og:title" content="풍무역 롯데캐슬 시그니처 | 인터랙티브 브로슈어">
     <meta property="og:description" content="본격적인 서울라이프의 시작, 풍무역 롯데캐슬 시그니처의 모든 것을 확인해보세요.">
-    <meta property="og:image" content="img_cover_video_thumb.jpg">
+    <meta property="og:image" content="img_cover_video_thumb.png">
     <link rel="icon" href="img_favicon.png" type="image/png">
     <!-- External Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -43,7 +43,6 @@
         .radio-group input:checked + label { border-color: #4f46e5; background-color: #eef2ff; font-weight: 600; }
         #counselor-popup { position: absolute; bottom: 0; left: 0; right: 0; background-color: white; border-top: 1px solid #e5e7eb; box-shadow: 0 -10px 15px -3px rgb(0 0 0 / 0.1); padding: 1.5rem; transform: translateY(100%); transition: transform 0.3s ease-in-out; z-index: 100; }
         #counselor-popup.open { transform: translateY(0); }
-        .image-container { display: flex; align-items: center; justify-content: center; height: 100%; max-height: 500px; }
     </style>
 </head>
 <body>
@@ -114,7 +113,7 @@
         <!-- Header with Progress Bar -->
         <div id="page-header">
             <div class="logo-container">
-                <img src="logo_lottecastle.png" alt="롯데캐슬 로고" class="h-8" onerror="this.onerror=null;this.src='https://placehold.co/200x40/FFFFFF/000000?text=LOTTE+CASTLE';">
+                <img src="boonyangcok(c).png" alt="분양콕 로고" class="h-8" onerror="this.onerror=null;this.src='https://placehold.co/200x40/FFFFFF/000000?text=분양콕';">
             </div>
             <div id="progress-bar-container">
                 <div id="progress-bar" style="width: 0%;"></div>
@@ -126,7 +125,7 @@
             <!-- Page 1: Cover -->
             <div class="page active flex flex-col justify-center items-center" data-page-name="표지">
                 <a href="#" class="block w-full max-w-md rounded-lg overflow-hidden shadow-lg mb-4 group relative">
-                    <img src="img_cover_video_thumb.jpg" alt="풍무역 롯데캐슬 시그니처 조감도" class="w-full h-auto transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=Cover+Image';">
+                    <img src="img_cover_video_thumb.png" alt="풍무역 롯데캐슬 시그니처 조감도" class="w-full h-auto transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=Cover+Image';">
                 </a>
                 <div class="text-center px-2 leading-relaxed">
                     <p class="font-semibold text-gray-800 text-lg md:text-xl">풍무역 롯데캐슬 시그니처</p>
@@ -155,7 +154,7 @@
             <div class="page" data-page-name="프리미엄">
                  <h2 class="section-title">PREMIUM 6</h2>
                  <p class="section-subtitle">김포를 리드할 가치의 완성작</p>
-                 <div class="image-container">
+                 <div class="flex items-center justify-center flex-grow">
                      <img src="img_premium_points.jpg" alt="프리미엄 6" class="w-full h-auto object-contain max-h-full" onerror="this.onerror=null;this.src='https://placehold.co/400x500/CCCCCC/FFFFFF?text=Premium+Points';">
                  </div>
             </div>
@@ -164,8 +163,8 @@
             <div class="page" data-page-name="특별 분양 조건">
                 <h2 class="section-title">특별 분양 조건</h2>
                 <p class="section-subtitle">지금만 누릴 수 있는 파격적인 혜택</p>
-                <div class="image-container">
-                    <img src="img_premium_points2.jpg" alt="특별 분양 조건" class="w-auto h-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/320x480/CCCCCC/FFFFFF?text=Special+Offer';">
+                <div class="flex items-center justify-center flex-grow">
+                    <img src="img_premium_points2.jpg" alt="특별 분양 조건" class="w-full h-auto object-contain max-h-full" onerror="this.onerror=null;this.src='https://placehold.co/320x480/CCCCCC/FFFFFF?text=Special+Offer';">
                 </div>
             </div>
 
@@ -229,13 +228,14 @@
 
             <!-- Page 6: Life Infrastructure -->
             <div class="page" data-page-name="생활 인프라">
-                <h2 class="section-title">풍요로운 생활인프라</h2>
-                <p class="section-subtitle">쇼핑, 문화, 자연을 모두 가깝게</p>
+                <h2 class="section-title">완벽한 생활 인프라</h2>
+                <p class="section-subtitle">쇼핑, 문화, 자연, 배송까지 편리하게</p>
                 <div class="space-y-3">
-                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-yellow-100 text-yellow-700 p-2 rounded-full shrink-0"><i class="fa-solid fa-store"></i></div><div><h4 class="font-bold text-sm">편리한 쇼핑</h4><p class="text-xs text-gray-600">이마트 트레이더스, 홈플러스 등</p></div></div>
-                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-red-100 text-red-700 p-2 rounded-full shrink-0"><i class="fa-solid fa-heart-pulse"></i></div><div><h4 class="font-bold text-sm">가까운 의료</h4><p class="text-xs text-gray-600">풍무동 내 다양한 병의원</p></div></div>
-                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-indigo-100 text-indigo-700 p-2 rounded-full shrink-0"><i class="fa-solid fa-book-open-reader"></i></div><div><h4 class="font-bold text-sm">다양한 문화/여가</h4><p class="text-xs text-gray-600">김포시네폴리스(예정), 풍무도서관</p></div></div>
-                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-teal-100 text-teal-700 p-2 rounded-full shrink-0"><i class="fa-solid fa-tree"></i></div><div><h4 class="font-bold text-sm">쾌적한 자연</h4><p class="text-xs text-gray-600">지구 내 근린공원 및 녹지</p></div></div>
+                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-yellow-100 text-yellow-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg></div><div><h4 class="font-bold text-sm">편리한 쇼핑</h4><p class="text-xs text-gray-600">이마트 트레이더스, 홈플러스 등</p></div></div>
+                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-red-100 text-red-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg></div><div><h4 class="font-bold text-sm">가까운 의료</h4><p class="text-xs text-gray-600">풍무동 내 다양한 병의원</p></div></div>
+                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-indigo-100 text-indigo-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg></div><div><h4 class="font-bold text-sm">다양한 문화/여가</h4><p class="text-xs text-gray-600">김포시네폴리스(예정), 풍무도서관</p></div></div>
+                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-teal-100 text-teal-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h8a2 2 0 002-2v-1a2 2 0 012-2h1.945C21.055 11 21 11.555 21 12c0 5.523-4.477 10-10 10S1 17.523 1 12c0-.445.055-1 .945-1z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 2a2 2 0 012 2v6h-4V4a2 2 0 012-2z" /></svg></div><div><h4 class="font-bold text-sm">쾌적한 자연</h4><p class="text-xs text-gray-600">지구 내 근린공원 및 녹지</p></div></div>
+                    <div class="bg-orange-100 p-4 rounded-lg flex items-center space-x-4 mt-6"><div class="text-orange-600 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div><div><h4 class="font-bold text-orange-800">빠른 배송 생활권</h4><p class="text-sm text-orange-700">쿠팡, 마켓컬리 등 새벽/당일배송 이용</p></div></div>
                 </div>
             </div>
 
@@ -370,7 +370,7 @@
             counselors.forEach(counselor => {
                 const counselorItem = `
                     <a href="tel:${counselor.phone}" class="flex items-center p-3 bg-gray-50 hover:bg-indigo-100 rounded-lg transition duration-200">
-                        <img src="${counselor.image}" alt="${counselor.name}" class="w-12 h-12 rounded-full object-cover mr-4" onerror="this.onerror=null;this.src='https://placehold.co/48x48/CCCCCC/FFFFFF?text=...';">
+                        <img src="${counselor.image}" alt="${counselor.name}" class="w-12 h-12 p-1 rounded-full object-contain mr-4" onerror="this.onerror=null;this.src='https://placehold.co/48x48/CCCCCC/FFFFFF?text=...';">
                         <div class="flex-grow">
                             <p class="font-bold text-gray-800">${counselor.name}</p>
                             <p class="text-sm text-gray-500">${counselor.phone}</p>
