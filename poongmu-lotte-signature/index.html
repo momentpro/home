@@ -233,7 +233,7 @@
 <div id="landing-page" class="app-container">
     <div class="content-viewer p-6 md:p-8 flex flex-col">
         <div class="text-center mb-6">
-            <img src="https://placehold.co/200x50/FFFFFF/000000?text=분양콕" alt="분양콕 로고" class="h-12 mx-auto mb-4 rounded-lg">
+            <img src="boonyangcok(c).png" alt="분양콕 로고" class="h-12 mx-auto mb-4 rounded-lg" onerror="this.onerror=null;this.src='https://placehold.co/200x50/FFFFFF/000000?text=분양콕';">
             <h1 class="text-2xl md:text-3xl font-bold text-gray-800">관심고객 등록</h1>
             <p class="text-gray-500 mt-1 text-sm md:text-base">정보를 입력하시면 브로슈어를 보실 수 있습니다.</p>
         </div>
@@ -295,7 +295,7 @@
         <!-- Header with Progress Bar -->
         <div id="page-header">
             <div class="logo-container">
-                 <img src="https://placehold.co/200x40/FFFFFF/000000?text=LOTTE+CASTLE" alt="롯데캐슬 로고" class="h-8" onerror="this.onerror=null;this.src='https://placehold.co/200x40/FFFFFF/000000?text=logo_lottecastle.png';">
+                 <img src="logo_lottecastle.png" alt="롯데캐슬 로고" class="h-8" onerror="this.onerror=null;this.src='https://placehold.co/200x40/FFFFFF/000000?text=LOTTE+CASTLE';">
             </div>
             <div id="progress-bar-container">
                 <div id="progress-bar" style="width: 0%;"></div>
@@ -306,7 +306,9 @@
         <div id="page-container">
             <!-- Page 1: Cover -->
             <div class="page active flex flex-col justify-center items-center" data-page-name="표지">
-                <img src="cover_image.jpg" alt="풍무역 롯데캐슬 시그니처 조감도" class="w-full h-auto rounded-lg shadow-lg mb-4" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=cover_image.jpg';">
+                <div class="block w-full max-w-md rounded-lg overflow-hidden shadow-lg mb-4 group relative">
+                    <img src="cover_image.jpg" alt="풍무역 롯데캐슬 시그니처 조감도" class="w-full h-auto" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=cover_image.jpg';">
+                </div>
                 <div class="text-center px-2 leading-relaxed">
                     <p class="font-semibold text-gray-800 text-lg md:text-xl">풍무역 롯데캐슬 시그니처</p>
                     <p class="text-gray-600 text-sm md:text-base mt-2">본격적인 서울라이프의 시작<br>김포가 기다린 단 하나의 시그니처</p>
@@ -325,7 +327,7 @@
                     </div>
                     <div class="text-center bg-indigo-50 p-3 rounded-lg">
                         <p class="font-bold text-indigo-800 text-sm md:text-base">핵심 입지</p>
-                        <p class="text-xs md:text-sm text-indigo-600">김포골드라인 풍무역 역세권, 5호선 연장(추진) 기대</p>
+                        <p class="text-xs md:text-sm text-indigo-600">김포골드라인 풍무역 역세권 & 5호선 연장(추진)</p>
                     </div>
                 </div>
             </div>
@@ -339,51 +341,100 @@
                  </div>
             </div>
             
-            <!-- Page 4: Education -->
-            <div class="page" data-page-name="교육 환경">
-                <h2 class="section-title">도보 안심 학세권</h2>
+            <!-- Page 4: Education (Seoul Univ) -> Repurposed -->
+            <div class="page" data-page-name="교육 특화">
+                <h2 class="section-title">명품 교육 환경</h2>
                 <p class="section-subtitle">자녀의 미래를 위한 최고의 선택</p>
-                <div class="space-y-4">
-                    <div class="bg-blue-50 p-4 rounded-xl shadow-md text-center">
-                        <h3 class="text-xl font-bold text-blue-800">신풍초등학교</h3>
-                        <p class="text-gray-600 text-base mt-2">단지 바로 옆에 위치한 초등학교로<br>안전한 도보 통학이 가능합니다.</p>
-                    </div>
-                    <div class="bg-green-50 p-4 rounded-xl shadow-md text-center">
-                        <h3 class="text-xl font-bold text-green-800">풍무중, 풍무고</h3>
-                        <p class="text-gray-600 text-base mt-2">도보 거리에 중학교와 고등학교가 있어<br>우수한 교육 환경을 자랑합니다.</p>
+                <div class="flex flex-col items-center text-center">
+                    <img src="education_special.jpg" alt="교육 특화" class="max-w-xs w-full rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/320x240/CCCCCC/FFFFFF?text=교육환경';">
+                    <div class="p-4 mt-2 bg-amber-50 rounded-lg">
+                        <h3 class="text-xl font-bold text-amber-800">도보거리 안심 학군</h3>
+                        <p class="text-gray-600 text-base mt-2">신풍초, 풍무중, 풍무고 등<br>우수한 학교들이 인접해 있습니다.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Page 5: Life Infrastructure -->
+            <!-- Page 5: Education (Infographic) -->
+            <div class="page" data-page-name="주변 학군">
+                 <h2 class="section-title">안심 통학 학군</h2>
+                 <p class="section-subtitle">자녀의 성장을 함께하는 우수한 교육 환경</p>
+                 <div class="space-y-6">
+                     <!-- 초등학교 -->
+                     <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
+                         <h3 class="font-bold text-lg text-blue-600 mb-3">초등학교 정보</h3>
+                         <div class="flex justify-between items-center">
+                             <div>
+                                 <p class="font-semibold text-gray-800">신풍초등학교</p>
+                                 <p class="text-sm text-gray-500">공립</p>
+                             </div>
+                             <div class="text-right">
+                                 <p class="font-bold text-blue-600">도보 통학</p>
+                                 <p class="text-xs text-green-600">가장 가까움</p>
+                             </div>
+                         </div>
+                     </div>
+                     <!-- 중학교 -->
+                     <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
+                         <h3 class="font-bold text-lg text-green-600 mb-2">중학교 정보</h3>
+                           <div class="flex justify-between items-center">
+                             <div>
+                                 <p class="font-semibold text-gray-800">풍무중학교</p>
+                                 <p class="text-sm text-gray-500">공립</p>
+                             </div>
+                             <div class="text-right">
+                                 <p class="font-semibold text-green-600">근거리 위치</p>
+                             </div>
+                         </div>
+                     </div>
+                     <!-- 고등학교 -->
+                     <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
+                         <h3 class="font-bold text-lg text-purple-600 mb-2">고등학교 정보</h3>
+                         <div class="flex justify-between items-center">
+                             <div>
+                                 <p class="font-semibold text-gray-800">풍무고등학교</p>
+                                 <p class="text-sm text-gray-500">공립</p>
+                             </div>
+                             <div class="text-right">
+                                 <p class="font-semibold text-purple-600">우수 학군</p>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+
+            <!-- Page 6: Life Infrastructure -->
             <div class="page" data-page-name="생활 인프라">
-                <h2 class="section-title">풍요로운 생활</h2>
-                <p class="section-subtitle">쇼핑, 문화, 자연을 모두 누리는 곳</p>
+                <h2 class="section-title">풍요로운 생활인프라</h2>
+                <p class="section-subtitle">쇼핑, 문화, 자연을 모두 가깝게</p>
                 <div class="space-y-3">
-                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-yellow-100 text-yellow-700 p-2 rounded-full shrink-0"><i class="fa-solid fa-store"></i></div><div><h4 class="font-bold text-sm">대형 쇼핑시설</h4><p class="text-xs text-gray-600">이마트 트레이더스, 홈플러스 등 인접</p></div></div>
-                    <div class="bg-red-100 text-red-700 p-2 rounded-full shrink-0"><i class="fa-solid fa-film"></i></div><div><h4 class="font-bold text-sm">문화 생활</h4><p class="text-xs text-gray-600">김포시네폴리스(예정) 등</p></div></div>
-                    <div class="bg-indigo-100 text-indigo-700 p-2 rounded-full shrink-0"><i class="fa-solid fa-tree"></i></div><div><h4 class="font-bold text-sm">자연 환경</h4><p class="text-xs text-gray-600">지구 내 공원 및 녹지 조성</p></div></div>
+                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-yellow-100 text-yellow-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg></div><div><h4 class="font-bold text-sm">편리한 쇼핑</h4><p class="text-xs text-gray-600">이마트 트레이더스, 홈플러스 등</p></div></div>
+                    <div class="bg-red-100 text-red-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg></div><div><h4 class="font-bold text-sm">가까운 의료</h4><p class="text-xs text-gray-600">풍무동 내 다양한 병의원</p></div></div>
+                    <div class="bg-indigo-100 text-indigo-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg></div><div><h4 class="font-bold text-sm">다양한 문화/여가</h4><p class="text-xs text-gray-600">김포시네폴리스(예정), 풍무도서관</p></div></div>
+                    <div class="bg-teal-100 text-teal-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h8a2 2 0 002-2v-1a2 2 0 012-2h1.945C21.055 11 21 11.555 21 12c0 5.523-4.477 10-10 10S1 17.523 1 12c0-.445.055-1 .945-1z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 2a2 2 0 012 2v6h-4V4a2 2 0 012-2z" /></svg></div><div><h4 class="font-bold text-sm">쾌적한 자연</h4><p class="text-xs text-gray-600">지구 내 근린공원 및 녹지</p></div></div>
                 </div>
             </div>
 
-            <!-- Page 6: Community -->
-            <div class="page" data-page-name="커뮤니티">
-                <h2 class="section-title">캐슬리안 센터</h2>
-                <p class="section-subtitle">일상의 품격을 높이는 커뮤니티</p>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="text-center">
-                        <img src="community_fitness.jpg" alt="피트니스클럽" class="w-full h-auto rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/200x150/CCCCCC/FFFFFF?text=community_fitness.jpg';">
-                        <p class="mt-2 font-semibold">피트니스클럽 & GX룸</p>
-                    </div>
-                    <div class="text-center">
-                        <img src="community_library.jpg" alt="작은도서관" class="w-full h-auto rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/200x150/CCCCCC/FFFFFF?text=community_library.jpg';">
-                        <p class="mt-2 font-semibold">작은도서관 & 독서실</p>
+            <div class="page flex items-center" data-page-name="청약 정보">
+                <div class="w-full">
+                    <h2 class="section-title">분양 정보</h2>
+                    <p class="section-subtitle">성공적인 분양, 그 가치를 확인하세요</p>
+                    <div class="flex flex-col items-center gap-4">
+                        <div class="w-full max-w-sm text-center">
+                            <img src="subscription_info.jpg" alt="청약 정보" class="w-full rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=분양정보';">
+                            <p class="text-sm text-gray-600 mt-2 bg-gray-100 p-2 rounded-md">자세한 분양 일정 및 조건은<br>모델하우스로 문의 바랍니다.</p>
+                        </div>
                     </div>
                 </div>
-                 <p class="text-center mt-4 text-sm text-gray-500">※ 이 외에도 실내골프클럽, 게스트하우스 등<br>다양한 시설이 제공됩니다.</p>
+            </div>
+
+            <div class="page flex flex-col items-center justify-center" data-page-name="브랜드 파워">
+                 <h2 class="section-title">No.1 브랜드 파워</h2>
+                 <p class="section-subtitle">롯데캐슬이 선사하는 최고의 자부심</p>
+                 <div class="flex justify-center">
+                     <img src="brand_power.jpg" alt="롯데캐슬 브랜드" class="w-full max-w-sm rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=브랜드+파워';">
+                 </div>
             </div>
             
-            <!-- Page 7: Price Chart -->
             <div class="page" data-page-name="주변 시세">
                 <h2 class="section-title">주변 시세 비교</h2>
                 <p class="section-subtitle">인근 단지 대비 뛰어난 가격 경쟁력</p>
@@ -393,59 +444,54 @@
                 <p class="text-center mt-4 text-sm text-gray-500">※ 84㎡, 최근 실거래가 기준</p>
             </div>
 
-            <!-- Page 8: UNIT 65A -->
             <div class="page" data-page-name="UNIT 65A">
                 <h2 class="section-title">UNIT 65A</h2>
-                <p class="section-subtitle">합리적이고 실용적인 공간 설계</p>
-                <img src="unit_65a.png" alt="65A 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=unit_65a.png';">
-                <div class="grid grid-cols-2 gap-2 text-center mt-3">
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-ruler-combined text-indigo-500 mr-1"></i> 4-Bay 구조</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-wind text-indigo-500 mr-1"></i> 맞통풍 설계</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 드레스룸</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-box-archive text-indigo-500 mr-1"></i> 팬트리</div>
-                </div>
-            </div>
-            
-            <!-- Page 9: UNIT 65B -->
-            <div class="page" data-page-name="UNIT 65B">
-                <h2 class="section-title">UNIT 65B</h2>
-                <p class="section-subtitle">개방감과 효율성을 모두 잡은 구조</p>
-                <img src="unit_65b.png" alt="65B 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=unit_65b.png';">
-                <div class="grid grid-cols-2 gap-2 text-center mt-3">
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-building text-indigo-500 mr-1"></i> 타워형 구조</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-mountain-sun text-indigo-500 mr-1"></i> 2면 개방 조망</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 드레스룸</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-maximize text-indigo-500 mr-1"></i> 넓은 거실</div>
-                </div>
-            </div>
-
-            <!-- Page 10: UNIT 84A -->
-            <div class="page" data-page-name="UNIT 84A">
-                <h2 class="section-title">UNIT 84A</h2>
-                <p class="section-subtitle">가장 선호도 높은 4Bay 판상형 구조</p>
-                <img src="unit_84a.png" alt="84A 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=unit_84a.png';">
+                <p class="section-subtitle">실용성을 극대화한 4Bay 판상형 구조</p>
+                <img src="unit_65a.png" alt="65A 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=65A+평면도';">
                 <div class="grid grid-cols-2 gap-2 text-center mt-3">
                     <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-ruler-combined text-indigo-500 mr-1"></i> 4-Bay 판상형</div>
                     <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-wind text-indigo-500 mr-1"></i> 맞통풍 구조</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 대형 드레스룸</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 드레스룸</div>
                     <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-box-archive text-indigo-500 mr-1"></i> 팬트리</div>
                 </div>
             </div>
             
-            <!-- Page 11: UNIT 84B -->
-            <div class="page" data-page-name="UNIT 84B">
-                <h2 class="section-title">UNIT 84B</h2>
-                <p class="section-subtitle">효율적인 공간 구성의 실속 평면</p>
-                <img src="unit_84b.png" alt="84B 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=unit_84b.png';">
+            <div class="page" data-page-name="UNIT 84A">
+                <h2 class="section-title">UNIT 84A</h2>
+                <p class="section-subtitle">가장 선호도 높은 명품 평면</p>
+                <img src="unit_84a.png" alt="84A 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=84A+평면도';">
                 <div class="grid grid-cols-2 gap-2 text-center mt-3">
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-building text-indigo-500 mr-1"></i> 타워형 구조</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-mountain-sun text-indigo-500 mr-1"></i> 2면 개방 조망</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 안방 드레스룸</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-building text-indigo-500 mr-1"></i> 4-Bay 구조</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-mountain-sun text-indigo-500 mr-1"></i> 우수한 채광</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 대형 드레스룸</div>
                     <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-maximize text-indigo-500 mr-1"></i> 넓은 거실</div>
                 </div>
             </div>
 
-            <!-- Page 12: Way to come -->
+            <div class="page" data-page-name="UNIT 65B">
+                <h2 class="section-title">UNIT 65B</h2>
+                <p class="section-subtitle">개방감과 조망을 극대화한 타워형</p>
+                <img src="unit_65b.png" alt="65B 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=65B+평면도';">
+                 <div class="grid grid-cols-2 gap-2 text-center mt-3">
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-ruler-combined text-indigo-500 mr-1"></i> 타워형 구조</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-plus text-indigo-500 mr-1"></i> 2면 개방</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 드레스룸</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-box-archive text-indigo-500 mr-1"></i> 효율적 공간</div>
+                </div>
+            </div>
+
+            <div class="page" data-page-name="UNIT 84B">
+                <h2 class="section-title">UNIT 84B</h2>
+                <p class="section-subtitle">다양한 라이프스타일을 담는 감각적 평면</p>
+                <img src="unit_84b.png" alt="84B 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=84B+평면도';">
+                <div class="grid grid-cols-2 gap-2 text-center mt-3">
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-building text-indigo-500 mr-1"></i> 타워형 구조</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-person-shelter text-indigo-500 mr-1"></i> 독립적 공간</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 안방 드레스룸</div>
+                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-sun text-indigo-500 mr-1"></i> LDK 구조</div>
+                </div>
+            </div>
+            
             <div class="page" data-page-name="오시는 길">
                 <div class="text-center">
                     <h2 class="section-title">오시는 길</h2>
@@ -495,8 +541,8 @@
 
         // --- Counselor Data ---
         const counselors = [
-            { name: '김캐슬 상담사', phone: '010-0000-0001', image: 'counselor_man1.jpeg' },
-            { name: '이시그니처 상담사', phone: '010-0000-0002', image: 'counselor_man2.jpeg' }
+            { name: '김캐슬 상담사', phone: '010-1234-5678', image: 'counselor_man1.jpeg' },
+            { name: '박시그니처 상담사', phone: '010-8765-4321', image: 'counselor_man2.jpeg' }
         ];
 
         // --- Populate Counselor List ---
@@ -552,9 +598,9 @@
             };
 
             // Replace with your actual Google Apps Script URL
-            // For demonstration, this part is commented out.
+            // For demonstration, this part is commented out as it requires a real endpoint.
             /*
-            fetch("https://script.google.com/macros/s/your_script_id/exec", {
+            fetch("https://script.google.com/macros/s/YOUR_GOOGLE_SCRIPT_ID/exec", {
                 method: "POST",
                 body: JSON.stringify(data)
             })
