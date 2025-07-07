@@ -3,228 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SITE DATA: Title and Meta Tags -->
     <title>풍무역 롯데캐슬 시그니처 | 인터랙티브 브로슈어</title>
     <meta property="og:title" content="풍무역 롯데캐슬 시그니처 | 인터랙티브 브로슈어">
     <meta property="og:description" content="본격적인 서울라이프의 시작, 풍무역 롯데캐슬 시그니처의 모든 것을 확인해보세요.">
-    <meta property="og:image" content="cover_image.jpg">
+    <meta property="og:image" content="img_cover_video_thumb.jpg">
     <link rel="icon" href="img_favicon.png" type="image/png">
+    <!-- External Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
-        /* Basic setup for the body and fonts */
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f0f2f5;
-            font-family: 'Noto Sans KR', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* Main container for the app-like interface */
-        .app-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Horizontally center the content */
-            width: 100%;
-            min-height: 100vh; /* Ensure it takes at least the full viewport height */
-            padding: 1rem;
-            box-sizing: border-box;
-        }
-        
-        /* Center content vertically for the brochure view */
-        #brochure-app {
-            justify-content: center;
-            height: 100vh; /* Fixed height for brochure view */
-        }
-
-        /* The white card that holds the content */
-        .content-viewer {
-            width: 100%;
-            max-width: 480px;
-            background-color: white;
-            border-radius: 1.5rem;
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            transition: all 0.3s ease-in-out;
-            position: relative;
-        }
-        
-        #landing-page .content-viewer {
-             margin: auto 0; /* Center vertically on landing */
-        }
-
-        #brochure-app .content-viewer {
-            height: 100%; /* Full height for brochure view */
-            max-height: 850px; /* Set a max-height for very tall screens */
-        }
-        
-        /* Header Area */
-        #page-header {
-            background-color: #4a5568; /* Dark background for logo visibility */
-            padding: 0.75rem 1.5rem;
-            flex-shrink: 0;
-        }
-        
-        .logo-container {
-            padding-bottom: 0.75rem;
-        }
-
-        #progress-bar-container {
-            width: 100%;
-            background-color: #718096;
-            border-radius: 9999px;
-            height: 6px;
-        }
-
-        #progress-bar {
-            height: 100%;
-            background: linear-gradient(to right, #a3bffa, #f6e05e);
-            border-radius: 9999px;
-            transition: width 0.4s ease-in-out;
-        }
-
-        /* Container for the sliding pages */
-        #page-container {
-            flex-grow: 1;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Individual page styles */
-        .page {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            padding: 1.5rem;
-            overflow-y: auto;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-            transform: translateX(20px);
-            box-sizing: border-box;
-        }
-        
-        .page.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(0);
-        }
-        
-        .page.exiting {
-            transform: translateX(-20px);
-        }
-
-        /* Navigation buttons styling */
-        .nav-button {
-            background-color: #4f46e5;
-            color: white;
-            border: none;
-            padding: 0.75rem 1rem;
-            border-radius: 9999px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 700;
-            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-        }
-
-        .nav-button:hover {
-            background-color: #4338ca;
-            transform: translateY(-2px);
-        }
-
-        .nav-button:disabled {
-            background-color: #a5b4fc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        /* Custom styles for section titles */
-        .section-title {
-            font-family: 'Noto Sans KR', sans-serif;
-            font-weight: 900;
-            font-size: clamp(1.75rem, 5vw, 2.25rem);
-            text-align: center;
-            margin-bottom: 0.5rem;
-            color: #111827;
-        }
-        .section-subtitle {
-            font-family: 'Gowun Dodum', sans-serif;
-            font-size: clamp(0.8rem, 3vw, 1.1rem);
-            text-align: center;
-            color: #4b5563;
-            margin-bottom: 2rem;
-            white-space: nowrap;
-        }
-        
-        /* Form styling */
-        .form-input {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.5rem;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-        .form-input:focus {
-            outline: none;
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
-        }
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #374151;
-        }
-        .radio-group label {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.5rem;
-            font-size: 0.875rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: border-color 0.2s, background-color 0.2s;
-        }
-        .radio-group input:checked + label {
-            border-color: #4f46e5;
-            background-color: #eef2ff;
-            font-weight: 600;
-        }
-
-        /* Counselor Popup */
-        #counselor-popup {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: white;
-            border-top: 1px solid #e5e7eb;
-            box-shadow: 0 -10px 15px -3px rgb(0 0 0 / 0.1);
-            padding: 1.5rem;
-            transform: translateY(100%);
-            transition: transform 0.3s ease-in-out;
-            z-index: 100;
-        }
-
-        #counselor-popup.open {
-            transform: translateY(0);
-        }
+        /* Styles are identical to the original template */
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #f0f2f5; font-family: 'Noto Sans KR', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .hidden { display: none; }
+        .app-container { display: flex; flex-direction: column; align-items: center; width: 100%; min-height: 100vh; padding: 1rem; box-sizing: border-box; }
+        #brochure-app { justify-content: center; height: 100vh; }
+        .content-viewer { width: 100%; max-width: 480px; background-color: white; border-radius: 1.5rem; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); display: flex; flex-direction: column; overflow: hidden; transition: all 0.3s ease-in-out; position: relative; }
+        #landing-page .content-viewer { margin: auto 0; }
+        #brochure-app .content-viewer { height: 100%; max-height: 850px; }
+        #page-header { background-color: #4a5568; padding: 0.75rem 1.5rem; flex-shrink: 0; }
+        .logo-container { padding-bottom: 0.75rem; }
+        #progress-bar-container { width: 100%; background-color: #718096; border-radius: 9999px; height: 6px; }
+        #progress-bar { height: 100%; background: linear-gradient(to right, #a3bffa, #f6e05e); border-radius: 9999px; transition: width 0.4s ease-in-out; }
+        #page-container { flex-grow: 1; position: relative; overflow: hidden; }
+        .page { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 1.5rem; overflow-y: auto; opacity: 0; visibility: hidden; transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out; transform: translateX(20px); box-sizing: border-box; }
+        .page.active { opacity: 1; visibility: visible; transform: translateX(0); }
+        .page.exiting { transform: translateX(-20px); }
+        .nav-button { background-color: #4f46e5; color: white; border: none; padding: 0.75rem 1rem; border-radius: 9999px; cursor: pointer; font-size: 1rem; font-weight: 700; transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+        .nav-button:hover { background-color: #4338ca; transform: translateY(-2px); }
+        .nav-button:disabled { background-color: #a5b4fc; cursor: not-allowed; transform: none; box-shadow: none; }
+        .section-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 900; font-size: clamp(1.75rem, 5vw, 2.25rem); text-align: center; margin-bottom: 0.5rem; color: #111827; }
+        .section-subtitle { font-family: 'Gowun Dodum', sans-serif; font-size: clamp(0.8rem, 3vw, 1.1rem); text-align: center; color: #4b5563; margin-bottom: 2rem; white-space: nowrap; }
+        .form-input { width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; transition: border-color 0.2s, box-shadow 0.2s; }
+        .form-input:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); }
+        .form-label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151; }
+        .radio-group label { display: flex; align-items: center; justify-content: center; padding: 0.5rem; font-size: 0.875rem; border: 1px solid #d1d5db; border-radius: 0.5rem; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; }
+        .radio-group input:checked + label { border-color: #4f46e5; background-color: #eef2ff; font-weight: 600; }
+        #counselor-popup { position: absolute; bottom: 0; left: 0; right: 0; background-color: white; border-top: 1px solid #e5e7eb; box-shadow: 0 -10px 15px -3px rgb(0 0 0 / 0.1); padding: 1.5rem; transform: translateY(100%); transition: transform 0.3s ease-in-out; z-index: 100; }
+        #counselor-popup.open { transform: translateY(0); }
     </style>
 </head>
 <body>
@@ -295,7 +113,7 @@
         <!-- Header with Progress Bar -->
         <div id="page-header">
             <div class="logo-container">
-                 <img src="logo_lottecastle.png" alt="롯데캐슬 로고" class="h-8" onerror="this.onerror=null;this.src='https://placehold.co/200x40/FFFFFF/000000?text=LOTTE+CASTLE';">
+                <img src="logo_lottecastle.png" alt="롯데캐슬 로고" class="h-8" onerror="this.onerror=null;this.src='https://placehold.co/200x40/FFFFFF/000000?text=LOTTE+CASTLE';">
             </div>
             <div id="progress-bar-container">
                 <div id="progress-bar" style="width: 0%;"></div>
@@ -306,9 +124,9 @@
         <div id="page-container">
             <!-- Page 1: Cover -->
             <div class="page active flex flex-col justify-center items-center" data-page-name="표지">
-                <div class="block w-full max-w-md rounded-lg overflow-hidden shadow-lg mb-4 group relative">
-                    <img src="cover_image.jpg" alt="풍무역 롯데캐슬 시그니처 조감도" class="w-full h-auto" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=cover_image.jpg';">
-                </div>
+                <a href="#" class="block w-full max-w-md rounded-lg overflow-hidden shadow-lg mb-4 group relative">
+                    <img src="img_cover_video_thumb.jpg" alt="풍무역 롯데캐슬 시그니처 조감도" class="w-full h-auto transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=Cover+Image';">
+                </a>
                 <div class="text-center px-2 leading-relaxed">
                     <p class="font-semibold text-gray-800 text-lg md:text-xl">풍무역 롯데캐슬 시그니처</p>
                     <p class="text-gray-600 text-sm md:text-base mt-2">본격적인 서울라이프의 시작<br>김포가 기다린 단 하나의 시그니처</p>
@@ -319,7 +137,7 @@
             <div class="page" data-page-name="입지">
                 <h2 class="section-title">압도적 입지</h2>
                 <p class="section-subtitle">김포의 새로운 중심, 서울을 더 가깝게</p>
-                <img src="location_map.jpg" alt="풍무역 롯데캐슬 시그니처 입지" class="w-full h-auto rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=location_map.jpg';">
+                <img src="location_map.jpg" alt="풍무역 롯데캐슬 시그니처 입지" class="w-full h-auto rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=Location+Map';">
                 <div class="mt-4 space-y-2">
                     <div class="text-center bg-gray-50 p-3 rounded-lg">
                         <p class="font-bold text-gray-800 text-sm md:text-base">사업지 주소</p>
@@ -335,47 +153,54 @@
             <!-- Page 3: Premium -->
             <div class="page" data-page-name="프리미엄">
                  <h2 class="section-title">PREMIUM 6</h2>
-                 <p class="section-subtitle">캐슬이 선사하는 6가지 특별한 가치</p>
+                 <p class="section-subtitle">김포를 리드할 가치의 완성작</p>
                  <div class="flex items-center justify-center flex-grow">
-                     <img src="premium_features.jpg" alt="프리미엄 6" class="w-full h-auto object-contain max-h-full" onerror="this.onerror=null;this.src='https://placehold.co/400x400/CCCCCC/FFFFFF?text=premium_features.jpg';">
+                     <img src="img_premium_points.jpg" alt="프리미엄 6" class="w-full h-auto object-contain max-h-full" onerror="this.onerror=null;this.src='https://placehold.co/400x500/CCCCCC/FFFFFF?text=Premium+Points';">
                  </div>
             </div>
             
-            <!-- Page 4: Education (Seoul Univ) -> Repurposed -->
-            <div class="page" data-page-name="교육 특화">
-                <h2 class="section-title">명품 교육 환경</h2>
-                <p class="section-subtitle">자녀의 미래를 위한 최고의 선택</p>
+            <!-- Page 4: Special Conditions -->
+            <div class="page" data-page-name="특별 분양 조건">
+                <h2 class="section-title">특별 분양 조건</h2>
+                <p class="section-subtitle">지금만 누릴 수 있는 파격적인 혜택</p>
                 <div class="flex flex-col items-center text-center">
-                    <img src="education_special.jpg" alt="교육 특화" class="max-w-xs w-full rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/320x240/CCCCCC/FFFFFF?text=교육환경';">
-                    <div class="p-4 mt-2 bg-amber-50 rounded-lg">
-                        <h3 class="text-xl font-bold text-amber-800">도보거리 안심 학군</h3>
-                        <p class="text-gray-600 text-base mt-2">신풍초, 풍무중, 풍무고 등<br>우수한 학교들이 인접해 있습니다.</p>
-                    </div>
+                    <img src="img_premium_points2.jpg" alt="특별 분양 조건" class="max-w-xs w-full rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/320x480/CCCCCC/FFFFFF?text=Special+Offer';">
                 </div>
             </div>
 
-            <!-- Page 5: Education (Infographic) -->
+            <!-- Page 5: School District Info -->
             <div class="page" data-page-name="주변 학군">
                  <h2 class="section-title">안심 통학 학군</h2>
                  <p class="section-subtitle">자녀의 성장을 함께하는 우수한 교육 환경</p>
                  <div class="space-y-6">
-                     <!-- 초등학교 -->
                      <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
                          <h3 class="font-bold text-lg text-blue-600 mb-3">초등학교 정보</h3>
+                         <div class="relative pt-6">
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-green-400 to-yellow-500 h-2 rounded-full" style="width: 10%;"></div>
+                            </div>
+                            <div class="absolute text-orange-500" style="left: 10%; top: 0; transform: translateX(-50%);">
+                                <i class="fa-solid fa-person-walking text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500 mt-1 mb-4">
+                            <span>도보 1분</span>
+                            <span>도보 5분</span>
+                            <span>도보 10분</span>
+                        </div>
                          <div class="flex justify-between items-center">
                              <div>
                                  <p class="font-semibold text-gray-800">신풍초등학교</p>
                                  <p class="text-sm text-gray-500">공립</p>
                              </div>
                              <div class="text-right">
-                                 <p class="font-bold text-blue-600">도보 통학</p>
-                                 <p class="text-xs text-green-600">가장 가까움</p>
+                                 <p class="font-bold text-blue-600">약 150m / 2분</p>
+                                 <p class="text-xs text-green-600">초품아 단지</p>
                              </div>
                          </div>
                      </div>
-                     <!-- 중학교 -->
                      <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
-                         <h3 class="font-bold text-lg text-green-600 mb-2">중학교 정보</h3>
+                         <h3 class="font-bold text-lg text-green-600 mb-2">중학교</h3>
                            <div class="flex justify-between items-center">
                              <div>
                                  <p class="font-semibold text-gray-800">풍무중학교</p>
@@ -386,9 +211,8 @@
                              </div>
                          </div>
                      </div>
-                     <!-- 고등학교 -->
                      <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
-                         <h3 class="font-bold text-lg text-purple-600 mb-2">고등학교 정보</h3>
+                         <h3 class="font-bold text-lg text-purple-600 mb-2">고등학교</h3>
                          <div class="flex justify-between items-center">
                              <div>
                                  <p class="font-semibold text-gray-800">풍무고등학교</p>
@@ -407,34 +231,37 @@
                 <h2 class="section-title">풍요로운 생활인프라</h2>
                 <p class="section-subtitle">쇼핑, 문화, 자연을 모두 가깝게</p>
                 <div class="space-y-3">
-                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-yellow-100 text-yellow-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg></div><div><h4 class="font-bold text-sm">편리한 쇼핑</h4><p class="text-xs text-gray-600">이마트 트레이더스, 홈플러스 등</p></div></div>
-                    <div class="bg-red-100 text-red-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg></div><div><h4 class="font-bold text-sm">가까운 의료</h4><p class="text-xs text-gray-600">풍무동 내 다양한 병의원</p></div></div>
-                    <div class="bg-indigo-100 text-indigo-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg></div><div><h4 class="font-bold text-sm">다양한 문화/여가</h4><p class="text-xs text-gray-600">김포시네폴리스(예정), 풍무도서관</p></div></div>
-                    <div class="bg-teal-100 text-teal-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h8a2 2 0 002-2v-1a2 2 0 012-2h1.945C21.055 11 21 11.555 21 12c0 5.523-4.477 10-10 10S1 17.523 1 12c0-.445.055-1 .945-1z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 2a2 2 0 012 2v6h-4V4a2 2 0 012-2z" /></svg></div><div><h4 class="font-bold text-sm">쾌적한 자연</h4><p class="text-xs text-gray-600">지구 내 근린공원 및 녹지</p></div></div>
+                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-yellow-100 text-yellow-700 p-2 rounded-full shrink-0"><i class="fa-solid fa-store"></i></div><div><h4 class="font-bold text-sm">편리한 쇼핑</h4><p class="text-xs text-gray-600">이마트 트레이더스, 홈플러스 등</p></div></div>
+                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-red-100 text-red-700 p-2 rounded-full shrink-0"><i class="fa-solid fa-heart-pulse"></i></div><div><h4 class="font-bold text-sm">가까운 의료</h4><p class="text-xs text-gray-600">풍무동 내 다양한 병의원</p></div></div>
+                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-indigo-100 text-indigo-700 p-2 rounded-full shrink-0"><i class="fa-solid fa-book-open-reader"></i></div><div><h4 class="font-bold text-sm">다양한 문화/여가</h4><p class="text-xs text-gray-600">김포시네폴리스(예정), 풍무도서관</p></div></div>
+                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-teal-100 text-teal-700 p-2 rounded-full shrink-0"><i class="fa-solid fa-tree"></i></div><div><h4 class="font-bold text-sm">쾌적한 자연</h4><p class="text-xs text-gray-600">지구 내 근린공원 및 녹지</p></div></div>
                 </div>
             </div>
 
-            <div class="page flex items-center" data-page-name="청약 정보">
+            <!-- Page 7: Community -->
+            <div class="page flex items-center" data-page-name="커뮤니티">
                 <div class="w-full">
-                    <h2 class="section-title">분양 정보</h2>
-                    <p class="section-subtitle">성공적인 분양, 그 가치를 확인하세요</p>
+                    <h2 class="section-title">캐슬리안 센터</h2>
+                    <p class="section-subtitle">일상의 품격을 높이는 커뮤니티</p>
                     <div class="flex flex-col items-center gap-4">
                         <div class="w-full max-w-sm text-center">
-                            <img src="subscription_info.jpg" alt="청약 정보" class="w-full rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=분양정보';">
-                            <p class="text-sm text-gray-600 mt-2 bg-gray-100 p-2 rounded-md">자세한 분양 일정 및 조건은<br>모델하우스로 문의 바랍니다.</p>
+                            <img src="community.jpg" alt="커뮤니티 시설" class="w-full rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=Community';">
+                            <p class="text-sm text-gray-600 mt-2 bg-gray-100 p-2 rounded-md">피트니스, 골프연습장, 작은도서관 등<br>다채로운 시설을 제공합니다.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Page 8: Brand Power -->
             <div class="page flex flex-col items-center justify-center" data-page-name="브랜드 파워">
                  <h2 class="section-title">No.1 브랜드 파워</h2>
                  <p class="section-subtitle">롯데캐슬이 선사하는 최고의 자부심</p>
                  <div class="flex justify-center">
-                     <img src="brand_power.jpg" alt="롯데캐슬 브랜드" class="w-full max-w-sm rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=브랜드+파워';">
+                     <img src="brand_power.jpg" alt="롯데캐슬 브랜드" class="w-full max-w-sm rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=Brand+Power';">
                  </div>
             </div>
             
+            <!-- Page 9: Price Chart -->
             <div class="page" data-page-name="주변 시세">
                 <h2 class="section-title">주변 시세 비교</h2>
                 <p class="section-subtitle">인근 단지 대비 뛰어난 가격 경쟁력</p>
@@ -444,54 +271,35 @@
                 <p class="text-center mt-4 text-sm text-gray-500">※ 84㎡, 최근 실거래가 기준</p>
             </div>
 
+            <!-- Page 10: UNIT 65A -->
             <div class="page" data-page-name="UNIT 65A">
                 <h2 class="section-title">UNIT 65A</h2>
                 <p class="section-subtitle">실용성을 극대화한 4Bay 판상형 구조</p>
-                <img src="unit_65a.png" alt="65A 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=65A+평면도';">
-                <div class="grid grid-cols-2 gap-2 text-center mt-3">
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-ruler-combined text-indigo-500 mr-1"></i> 4-Bay 판상형</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-wind text-indigo-500 mr-1"></i> 맞통풍 구조</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 드레스룸</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-box-archive text-indigo-500 mr-1"></i> 팬트리</div>
-                </div>
+                <img src="img_unit_A.jpg" alt="65A 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=65A 평면도';">
             </div>
             
-            <div class="page" data-page-name="UNIT 84A">
-                <h2 class="section-title">UNIT 84A</h2>
-                <p class="section-subtitle">가장 선호도 높은 명품 평면</p>
-                <img src="unit_84a.png" alt="84A 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=84A+평면도';">
-                <div class="grid grid-cols-2 gap-2 text-center mt-3">
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-building text-indigo-500 mr-1"></i> 4-Bay 구조</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-mountain-sun text-indigo-500 mr-1"></i> 우수한 채광</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 대형 드레스룸</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-maximize text-indigo-500 mr-1"></i> 넓은 거실</div>
-                </div>
-            </div>
-
+            <!-- Page 11: UNIT 65B -->
             <div class="page" data-page-name="UNIT 65B">
                 <h2 class="section-title">UNIT 65B</h2>
                 <p class="section-subtitle">개방감과 조망을 극대화한 타워형</p>
-                <img src="unit_65b.png" alt="65B 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=65B+평면도';">
-                 <div class="grid grid-cols-2 gap-2 text-center mt-3">
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-ruler-combined text-indigo-500 mr-1"></i> 타워형 구조</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-plus text-indigo-500 mr-1"></i> 2면 개방</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 드레스룸</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-box-archive text-indigo-500 mr-1"></i> 효율적 공간</div>
-                </div>
+                <img src="img_unit_B.jpg" alt="65B 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=65B 평면도';">
             </div>
 
+            <!-- Page 12: UNIT 84A -->
+            <div class="page" data-page-name="UNIT 84A">
+                <h2 class="section-title">UNIT 84A</h2>
+                <p class="section-subtitle">가장 선호도 높은 명품 평면</p>
+                <img src="img_unit_F.jpg" alt="84A 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=84A 평면도';">
+            </div>
+
+            <!-- Page 13: UNIT 84B -->
             <div class="page" data-page-name="UNIT 84B">
                 <h2 class="section-title">UNIT 84B</h2>
                 <p class="section-subtitle">다양한 라이프스타일을 담는 감각적 평면</p>
-                <img src="unit_84b.png" alt="84B 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=84B+평면도';">
-                <div class="grid grid-cols-2 gap-2 text-center mt-3">
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-building text-indigo-500 mr-1"></i> 타워형 구조</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-person-shelter text-indigo-500 mr-1"></i> 독립적 공간</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 안방 드레스룸</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-sun text-indigo-500 mr-1"></i> LDK 구조</div>
-                </div>
+                <img src="img_unit_G.jpg" alt="84B 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=84B 평면도';">
             </div>
             
+            <!-- Page 14: Way to come -->
             <div class="page" data-page-name="오시는 길">
                 <div class="text-center">
                     <h2 class="section-title">오시는 길</h2>
@@ -502,17 +310,17 @@
                     </a>
                     <p class="text-sm text-gray-500 mt-2">지도를 클릭하시면 길찾기 서비스로 연결됩니다.</p>
                     <p class="text-base font-bold mt-2">경기도 김포시 풍무동 36-8</p>
-                    <p class="text-xl font-bold mt-2 text-indigo-600">T. 1811-7200</p>
+                    <p class="text-xl font-bold mt-2 text-indigo-600">T. 1555-2624</p>
                 </div>
             </div>
         </div>
         
         <div id="counselor-popup" class="hidden">
-            <a href="tel:1811-7200" class="block text-center w-full p-3 bg-red-500 text-white font-bold rounded-lg mb-4 hover:bg-red-600">
+            <a href="tel:1555-2624" class="block text-center w-full p-3 bg-red-500 text-white font-bold rounded-lg mb-4 hover:bg-red-600">
                 <i class="fa-solid fa-crown mr-2"></i>대표번호 바로연결
             </a>
             <div id="counselor-list" class="space-y-3">
-                </div>
+            </div>
         </div>
 
     </div>
@@ -528,7 +336,6 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- Element Selections ---
         const landingPage = document.getElementById('landing-page');
         const brochureApp = document.getElementById('brochure-app');
         const customerForm = document.getElementById('customer-form');
@@ -537,17 +344,13 @@
         const counselorBtn = document.getElementById('counselor-btn');
         const counselorPopup = document.getElementById('counselor-popup');
         const counselorListDiv = document.getElementById('counselor-list');
-        const brochureContent = document.getElementById('content-viewer');
-
-        // --- Counselor Data ---
+        
         const counselors = [
-            { name: '김캐슬 상담사', phone: '010-1234-5678', image: 'counselor_man1.jpeg' },
-            { name: '박시그니처 상담사', phone: '010-8765-4321', image: 'counselor_man2.jpeg' }
+            { name: '박희준 상담사', phone: '010-2171-8206', image: 'counselor_man1.jpeg' }
         ];
 
-        // --- Populate Counselor List ---
         function populateCounselorList() {
-            counselorListDiv.innerHTML = ''; // Clear existing list
+            counselorListDiv.innerHTML = '';
             counselors.forEach(counselor => {
                 const counselorItem = `
                     <a href="tel:${counselor.phone}" class="flex items-center p-3 bg-gray-50 hover:bg-indigo-100 rounded-lg transition duration-200">
@@ -565,7 +368,6 @@
             });
         }
         
-        // --- Form Validation Logic ---
         function validateForm() {
             const isNameValid = document.getElementById('name').value.trim() !== '';
             const isPhoneValid = document.getElementById('phone').value.trim() !== '';
@@ -573,47 +375,18 @@
             const isPurposeValid = !!customerForm.querySelector('input[name="purpose"]:checked');
             const isTypeValid = !!customerForm.querySelector('input[name="type"]:checked');
             const isConsentChecked = document.getElementById('consent').checked;
-            
             submitBtn.disabled = !(isNameValid && isPhoneValid && isRegionValid && isPurposeValid && isTypeValid && isConsentChecked);
         }
 
-        // Attach event listeners to all form elements
         const allFormElements = customerForm.querySelectorAll('input');
         allFormElements.forEach(el => {
             el.addEventListener('input', validateForm);
             el.addEventListener('change', validateForm);
         });
         
-        // --- Form Submission Logic ---
         customerForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            
-            const formData = new FormData(customerForm);
-            const data = {
-                name: formData.get('name'),
-                phone: formData.get('phone'),
-                region: formData.get('region'),
-                purpose: formData.get('purpose'),
-                type: formData.get('type')
-            };
-
-            // Replace with your actual Google Apps Script URL
-            // For demonstration, this part is commented out as it requires a real endpoint.
-            /*
-            fetch("https://script.google.com/macros/s/YOUR_GOOGLE_SCRIPT_ID/exec", {
-                method: "POST",
-                body: JSON.stringify(data)
-            })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-            }).catch(error => {
-                console.log(error);
-            });
-            */
-
             if (!submitBtn.disabled) {
-                console.log('Form submitted!');
                 landingPage.classList.add('hidden');
                 brochureApp.classList.remove('hidden');
                 navigationControls.classList.remove('hidden');
@@ -622,14 +395,12 @@
             }
         });
         
-        // --- Counselor Popup Logic ---
         counselorBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             populateCounselorList();
             counselorPopup.classList.toggle('open');
             counselorPopup.classList.toggle('hidden');
         });
-
         document.addEventListener('click', (e) => {
             if (!counselorPopup.classList.contains('hidden') && !counselorPopup.contains(e.target) && !counselorBtn.contains(e.target)) {
                  counselorPopup.classList.add('hidden');
@@ -637,25 +408,20 @@
             }
         });
 
-
-        // --- Brochure Initialization Logic ---
         function initBrochure() {
             const pages = document.querySelectorAll('.page');
             const prevBtn = document.getElementById('prev-btn');
             const nextBtn = document.getElementById('next-btn');
             const progressBar = document.getElementById('progress-bar');
-            
             let currentPageIndex = 0;
             let chartRendered = false;
 
             function showPage(index) {
                 const oldPageIndex = currentPageIndex;
                 currentPageIndex = index;
-
                 if (pages[oldPageIndex] && oldPageIndex !== index) {
                     pages[oldPageIndex].classList.add('exiting');
                 }
-
                 pages.forEach((page, i) => {
                     if (i === index) {
                         setTimeout(() => {
@@ -666,11 +432,9 @@
                         page.classList.remove('active');
                     }
                 });
-                
                 updateNavigation();
                 
-                const targetPageName = pages[index].getAttribute('data-page-name');
-                if (targetPageName === '주변 시세' && !chartRendered) {
+                if (currentPageIndex === 8 && !chartRendered) {
                     renderPriceChart();
                     chartRendered = true;
                 }
@@ -692,8 +456,8 @@
                         datasets: [{
                             label: '84㎡ 실거래가 (억원)',
                             data: [7.5, 6.5, 6.8],
-                            backgroundColor: ['rgba(156, 163, 175, 0.6)', 'rgba(239, 68, 68, 0.6)', 'rgba(59, 130, 246, 0.7)'],
-                            borderColor: ['rgba(156, 163, 175, 1)', 'rgba(239, 68, 68, 1)', 'rgba(59, 130, 246, 1)'],
+                            backgroundColor: ['rgba(156, 163, 175, 0.6)', 'rgba(107, 114, 128, 0.6)', 'rgba(217, 182, 0, 0.7)'],
+                            borderColor: ['rgba(156, 163, 175, 1)', 'rgba(107, 114, 128, 1)', 'rgba(217, 182, 0, 1)'],
                             borderWidth: 1,
                             borderRadius: 5
                         }]
@@ -706,9 +470,7 @@
                             legend: { display: false },
                             tooltip: {
                                 callbacks: {
-                                    label: function(context) {
-                                        return ` ${context.raw}억원`;
-                                    }
+                                    label: function(context) { return ` ${context.raw}억원`; }
                                 }
                             }
                         },
