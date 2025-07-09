@@ -3,521 +3,360 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SITE DATA: Title and Meta Tags -->
-    <title>풍무역 롯데캐슬 시그니처 | 인터랙티브 브로슈어</title>
-    <meta property="og:title" content="풍무역 롯데캐슬 시그니처 | 인터랙티브 브로슈어">
-    <meta property="og:description" content="본격적인 서울라이프의 시작, 풍무역 롯데캐슬 시그니처의 모든 것을 확인해보세요.">
-    <!-- IMPORTANT: Replace with the full, absolute URL of your cover image on GitHub for social media previews -->
-    <meta property="og:image" content="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPOSITORY_NAME/img_cover_video_thumb.png">
-    <link rel="icon" href="img_favicon.png" type="image/png">
-    <!-- External Libraries -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <title>분양콕 | 믿을 수 있는 분양 정보 플랫폼</title>
+
+    <!-- Favicon and OG Info -->
+    <link rel="icon" type="image/png" href="img_favicon.png">
+    <link rel="apple-touch-icon" href="img_favicon.png">
+    <meta property="og:title" content="분양콕">
+    <meta property="og:description" content="믿을 수 있는 분양 정보 플랫폼, 분양콕">
+    <meta property="og:image" content="img_og_banner.png">
+    <meta property="og:url" content="https://YOUR_WEBSITE_URL">
+    <meta property="og:type" content="website">
+
+    <!-- Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
     <style>
-        /* Styles are identical to the original template */
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #f0f2f5; font-family: 'Noto Sans KR', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-        .hidden { display: none; }
-        .app-container { display: flex; flex-direction: column; align-items: center; width: 100%; min-height: 100vh; padding: 1rem; box-sizing: border-box; }
-        #brochure-app { justify-content: center; height: 100vh; }
-        .content-viewer { width: 100%; max-width: 480px; background-color: white; border-radius: 1.5rem; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); display: flex; flex-direction: column; overflow: hidden; transition: all 0.3s ease-in-out; position: relative; }
-        #landing-page .content-viewer { margin: auto 0; }
-        #brochure-app .content-viewer { height: 100%; max-height: 850px; }
-        #page-header { background-color: #4a5568; padding: 0.75rem 1.5rem; flex-shrink: 0; }
-        .logo-container { padding-bottom: 0.75rem; }
-        #progress-bar-container { width: 100%; background-color: #718096; border-radius: 9999px; height: 6px; }
-        #progress-bar { height: 100%; background: linear-gradient(to right, #a3bffa, #f6e05e); border-radius: 9999px; transition: width 0.4s ease-in-out; }
-        #page-container { flex-grow: 1; position: relative; overflow: hidden; }
-        .page { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 1.5rem; overflow-y: auto; opacity: 0; visibility: hidden; transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out; transform: translateX(20px); box-sizing: border-box; }
-        .page.active { opacity: 1; visibility: visible; transform: translateX(0); }
-        .page.exiting { transform: translateX(-20px); }
-        .nav-button { background-color: #4f46e5; color: white; border: none; padding: 0.75rem 1rem; border-radius: 9999px; cursor: pointer; font-size: 1rem; font-weight: 700; transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
-        .nav-button:hover { background-color: #4338ca; transform: translateY(-2px); }
-        .nav-button:disabled { background-color: #a5b4fc; cursor: not-allowed; transform: none; box-shadow: none; }
-        .section-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 900; font-size: clamp(1.75rem, 5vw, 2.25rem); text-align: center; margin-bottom: 0.5rem; color: #111827; }
-        .section-subtitle { font-family: 'Gowun Dodum', sans-serif; font-size: clamp(0.8rem, 3vw, 1.1rem); text-align: center; color: #4b5563; margin-bottom: 2rem; white-space: nowrap; }
-        .form-input { width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; transition: border-color 0.2s, box-shadow 0.2s; }
-        .form-input:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); }
-        .form-label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151; }
-        .radio-group label { display: flex; align-items: center; justify-content: center; padding: 0.5rem; font-size: 0.875rem; border: 1px solid #d1d5db; border-radius: 0.5rem; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; }
-        .radio-group input:checked + label { border-color: #4f46e5; background-color: #eef2ff; font-weight: 600; }
-        #counselor-popup { position: absolute; bottom: 0; left: 0; right: 0; background-color: white; border-top: 1px solid #e5e7eb; box-shadow: 0 -10px 15px -3px rgb(0 0 0 / 0.1); padding: 1.5rem; transform: translateY(100%); transition: transform 0.3s ease-in-out; z-index: 100; }
-        #counselor-popup.open { transform: translateY(0); }
+        :root {
+            --color-primary: #00c7ae;
+            --color-navy: #2c3e50;
+            --color-background: #f8f9fa;
+            --color-white: #ffffff;
+            --color-text-primary: #212529;
+            --color-text-secondary: #868e96;
+            --color-border: #dee2e6;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            word-break: keep-all;
+            word-wrap: break-word;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Header */
+        .main-header {
+            background-color: var(--color-white);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo img { width: 32px; height: 32px; }
+        .logo span { font-size: 22px; font-weight: 900; color: var(--color-navy); }
+
+        /* Hero Section */
+        .hero-section {
+            background-color: var(--color-white);
+            text-align: center;
+            padding: 80px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .hero-section h1 { 
+            font-size: 42px; 
+            font-weight: 900; 
+            margin: 0 0 24px 0;
+            line-height: 1.4;
+        }
+        .search-bar {
+            display: flex; max-width: 680px; margin: 0 auto 40px auto;
+            border: 2px solid var(--color-primary); border-radius: 50px; overflow: hidden;
+        }
+        .search-bar input { flex-grow: 1; border: none; padding: 18px 24px; font-size: 16px; outline: none; }
+        .search-bar button {
+            border: none; background-color: var(--color-primary); color: var(--color-white);
+            font-size: 16px; font-weight: 700; padding: 0 32px; cursor: pointer; transition: background-color 0.3s;
+        }
+        .search-bar button:hover { background-color: #00a38d; }
+        .stats-bar { display: flex; justify-content: center; gap: 40px; }
+        .stat-item { text-align: center; }
+        .stat-item .label { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 4px; }
+        .stat-item .value { font-size: 20px; font-weight: 700; color: var(--color-navy); }
+
+        /* Main Content Section */
+        .content-section { padding: 80px 0; }
+        .section-title { font-size: 28px; font-weight: 900; margin: 0 0 32px 0; }
+
+        /* Property List */
+        .property-list { background-color: var(--color-white); border: 1px solid var(--color-border); border-radius: 12px; overflow: hidden; }
+        .property-item {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 24px; border-bottom: 1px solid var(--color-border); transition: background-color 0.2s;
+        }
+        .property-item:last-child { border-bottom: none; }
+        .property-item:hover { background-color: #fcfdff; }
+        .item-info { flex-grow: 1; }
+        .item-info h3 { font-size: 20px; font-weight: 700; margin: 0 0 8px 0; }
+        .item-info p { font-size: 15px; color: var(--color-text-secondary); margin: 0 0 12px 0; }
+        .item-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+        .tag {
+            background-color: var(--color-background); color: var(--color-text-secondary);
+            font-size: 12px; font-weight: 500; padding: 4px 10px;
+            border-radius: 20px; border: 1px solid var(--color-border);
+        }
+        .item-action { display: flex; align-items: center; gap: 24px; flex-shrink: 0; }
+        .cta-button {
+            background-color: var(--color-white); border: 1px solid var(--color-border); color: var(--color-text-primary);
+            font-weight: 700; padding: 12px 24px; border-radius: 8px; transition: all 0.3s; white-space: nowrap;
+        }
+        .property-item:hover .cta-button { background-color: var(--color-navy); color: var(--color-white); border-color: var(--color-navy); }
+
+        /* SNS Section */
+        .sns-section { background-color: var(--color-white); padding: 80px 0; border-top: 1px solid var(--color-border); }
+        .sns-card-container { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
+        .sns-card {
+            display: flex; align-items: center; gap: 20px;
+            background-color: var(--color-background); padding: 24px; border-radius: 12px;
+            width: 320px; transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .sns-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .sns-card svg { width: 40px; height: 40px; flex-shrink: 0; }
+        .sns-card h3 { font-size: 18px; margin: 0 0 4px 0; }
+        .sns-card p { font-size: 14px; margin: 0; color: var(--color-text-secondary); }
+
+        /* === MODIFIED: Footer Section === */
+        .main-footer {
+            background-color: var(--color-background);
+            padding: 80px 0;
+            border-top: 1px solid var(--color-border);
+            margin-top: 0;
+        }
+        .contact-card {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            max-width: 600px;
+            margin: 0 auto 32px auto;
+            padding: 24px;
+        }
+        .contact-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .contact-item:first-child {
+            border-bottom: 1px solid var(--color-border);
+        }
+        .contact-label {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-secondary);
+        }
+        .contact-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-navy);
+            transition: color 0.3s;
+        }
+        a.contact-value:hover {
+            color: var(--color-primary);
+        }
+        .footer-copyright { text-align: center; font-size: 13px; color: var(--color-text-secondary); }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .property-item { flex-wrap: wrap; gap: 16px; }
+            .item-info { width: 100%; }
+            .item-action { width: 100%; justify-content: flex-end; }
+        }
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .hero-section h1 { font-size: 32px; }
+            .sns-card-container { flex-direction: column; align-items: center; }
+            .contact-item { flex-direction: column; gap: 8px; }
+        }
     </style>
 </head>
 <body>
 
-<!-- Landing Page for Customer Info -->
-<div id="landing-page" class="app-container">
-    <div class="content-viewer p-6 md:p-8 flex flex-col">
-        <div class="text-center mb-6">
-            <img src="boonyangcok(c).png" alt="분양콕 로고" class="h-12 mx-auto mb-4 rounded-lg" onerror="this.onerror=null;this.src='https://placehold.co/200x50/FFFFFF/000000?text=분양콕';">
-            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">관심고객 등록</h1>
-            <p class="text-gray-500 mt-1 text-sm md:text-base">정보를 입력하시면 브로슈어를 보실 수 있습니다.</p>
-        </div>
-        <form id="customer-form" class="space-y-4 flex-grow">
-            <div>
-                <label for="name" class="form-label text-sm md:text-base">이름</label>
-                <input type="text" id="name" name="name" class="form-input">
-            </div>
-            <div>
-                <label for="phone" class="form-label text-sm md:text-base">전화번호</label>
-                <input type="tel" id="phone" name="phone" class="form-input" placeholder="01012345678 ('-'없이 입력)">
-            </div>
-            <div>
-                <label for="region" class="form-label text-sm md:text-base">관심지역</label>
-                <input type="text" id="region" name="region" class="form-input">
-            </div>
-            <div>
-                <label class="form-label text-sm md:text-base">거래목적</label>
-                <div class="grid grid-cols-2 gap-2 radio-group">
-                    <input type="radio" name="purpose" id="purpose-invest" value="investment" class="sr-only">
-                    <label for="purpose-invest" class="text-xs md:text-sm">투자</label>
-                    <input type="radio" name="purpose" id="purpose-reside" value="residence" class="sr-only">
-                    <label for="purpose-reside" class="text-xs md:text-sm">실거주</label>
-                </div>
-            </div>
-            <div>
-                <label class="form-label text-sm md:text-base">관심유형</label>
-                <div class="grid grid-cols-3 gap-2 radio-group">
-                    <input type="radio" name="type" id="type-apt" value="apartment" class="sr-only">
-                    <label for="type-apt" class="text-xs md:text-sm">아파트</label>
-                    <input type="radio" name="type" id="type-op" value="officetel" class="sr-only">
-                    <label for="type-op" class="text-xs md:text-sm">오피스텔</label>
-                    <input type="radio" name="type" id="type-office" value="office" class="sr-only">
-                    <label for="type-office" class="text-xs md:text-sm">오피스</label>
-                    <input type="radio" name="type" id="type-commercial" value="commercial" class="sr-only">
-                    <label for="type-commercial" class="text-xs md:text-sm">상업시설</label>
-                    <input type="radio" name="type" id="type-resi" value="residence-hotel" class="sr-only">
-                    <label for="type-resi" class="text-xs md:text-sm">생활형숙박</label>
-                    <input type="radio" name="type" id="type-town" value="townhouse" class="sr-only">
-                    <label for="type-town" class="text-xs md:text-sm">타운하우스</label>
-                </div>
-            </div>
-            <div class="pt-2">
-                <div class="flex items-center">
-                    <input id="consent" name="consent" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="consent" class="ml-2 block text-sm text-gray-700">개인정보 수집 및 이용에 동의합니다.</label>
-                </div>
-            </div>
-            <div class="pt-4">
-                <button type="submit" id="submit-btn" class="w-full nav-button" disabled>브로슈어 보기</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Brochure App (Initially hidden) -->
-<div id="brochure-app" class="app-container hidden">
-    <div id="content-viewer" class="content-viewer">
-        <!-- Header with Progress Bar -->
-        <div id="page-header">
-            <div class="logo-container">
-                <img src="boonyangcok.png" alt="분양콕 로고" class="h-8" onerror="this.onerror=null;this.src='https://placehold.co/200x40/FFFFFF/000000?text=분양콕';">
-            </div>
-            <div id="progress-bar-container">
-                <div id="progress-bar" style="width: 0%;"></div>
-            </div>
-        </div>
-        
-        <!-- Page Content Area -->
-        <div id="page-container">
-            <!-- Page 1: Cover -->
-            <div class="page active flex flex-col justify-center items-center" data-page-name="표지">
-                <a href="#" class="block w-full max-w-md rounded-lg overflow-hidden shadow-lg mb-4 group relative">
-                    <img src="img_cover_video_thumb.png" alt="풍무역 롯데캐슬 시그니처 조감도" class="w-full h-auto transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=Cover+Image';">
-                </a>
-                <div class="text-center px-2 leading-relaxed">
-                    <p class="font-semibold text-gray-800 text-lg md:text-xl">풍무역 롯데캐슬 시그니처</p>
-                    <p class="text-gray-600 text-sm md:text-base mt-2">본격적인 서울라이프의 시작<br>김포가 기다린 단 하나의 시그니처</p>
-                </div>
-            </div>
-
-            <!-- Page 2: Location -->
-            <div class="page" data-page-name="입지">
-                <h2 class="section-title">압도적 입지</h2>
-                <p class="section-subtitle">김포의 새로운 중심, 서울을 더 가깝게</p>
-                <img src="location_map.jpg" alt="풍무역 롯데캐슬 시그니처 입지" class="w-full h-auto rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=Location+Map';">
-                <div class="mt-4 space-y-2">
-                    <div class="text-center bg-gray-50 p-3 rounded-lg">
-                        <p class="font-bold text-gray-800 text-sm md:text-base">사업지 주소</p>
-                        <p class="text-xs md:text-sm text-gray-600">경기도 김포시 풍무동 30-1번지 일원</p>
-                    </div>
-                    <div class="text-center bg-indigo-50 p-3 rounded-lg">
-                        <p class="font-bold text-indigo-800 text-sm md:text-base">핵심 입지</p>
-                        <p class="text-xs md:text-sm text-indigo-600">김포골드라인 풍무역 역세권 & 5호선 연장(추진)</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Page 3: Premium -->
-            <div class="page" data-page-name="프리미엄">
-                 <h2 class="section-title">PREMIUM 6</h2>
-                 <p class="section-subtitle">김포를 리드할 가치의 완성작</p>
-                 <div class="flex items-center justify-center flex-grow">
-                     <img src="img_premium_points.jpg" alt="프리미엄 6" class="w-full h-auto object-contain max-h-full" onerror="this.onerror=null;this.src='https://placehold.co/400x500/CCCCCC/FFFFFF?text=Premium+Points';">
-                 </div>
-            </div>
-            
-            <!-- Page 4: Special Conditions -->
-            <div class="page" data-page-name="특별 분양 조건">
-                <h2 class="section-title">특별 분양 조건</h2>
-                <p class="section-subtitle">지금만 누릴 수 있는 파격적인 혜택</p>
-                <div class="flex items-center justify-center flex-grow">
-                    <img src="img_premium_points2.jpg" alt="특별 분양 조건" class="w-full h-auto object-contain max-h-full" onerror="this.onerror=null;this.src='https://placehold.co/320x480/CCCCCC/FFFFFF?text=Special+Offer';">
-                </div>
-            </div>
-
-            <!-- Page 5: School District Info -->
-            <div class="page" data-page-name="주변 학군">
-                 <h2 class="section-title">안심 통학 학군</h2>
-                 <p class="section-subtitle">자녀의 성장을 함께하는 우수한 교육 환경</p>
-                 <div class="space-y-6">
-                     <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
-                         <h3 class="font-bold text-lg text-blue-600 mb-3">초등학교 정보</h3>
-                         <div class="relative pt-6">
-                            <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-gradient-to-r from-green-400 to-yellow-500 h-2 rounded-full" style="width: 10%;"></div>
-                            </div>
-                            <div class="absolute text-orange-500" style="left: 10%; top: 0; transform: translateX(-50%);">
-                                <i class="fa-solid fa-person-walking text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="flex justify-between text-xs text-gray-500 mt-1 mb-4">
-                            <span>도보 1분</span>
-                            <span>도보 5분</span>
-                            <span>도보 10분</span>
-                        </div>
-                         <div class="flex justify-between items-center">
-                             <div>
-                                 <p class="font-semibold text-gray-800">신풍초등학교</p>
-                                 <p class="text-sm text-gray-500">공립</p>
-                             </div>
-                             <div class="text-right">
-                                 <p class="font-bold text-blue-600">약 150m / 2분</p>
-                                 <p class="text-xs text-green-600">초품아 단지</p>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
-                         <h3 class="font-bold text-lg text-green-600 mb-2">중학교</h3>
-                           <div class="flex justify-between items-center">
-                             <div>
-                                 <p class="font-semibold text-gray-800">풍무중학교</p>
-                                 <p class="text-sm text-gray-500">공립</p>
-                             </div>
-                             <div class="text-right">
-                                 <p class="font-semibold text-green-600">근거리 위치</p>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
-                         <h3 class="font-bold text-lg text-purple-600 mb-2">고등학교</h3>
-                         <div class="flex justify-between items-center">
-                             <div>
-                                 <p class="font-semibold text-gray-800">풍무고등학교</p>
-                                 <p class="text-sm text-gray-500">공립</p>
-                             </div>
-                             <div class="text-right">
-                                 <p class="font-semibold text-purple-600">우수 학군</p>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-            </div>
-
-            <!-- Page 6: Life Infrastructure -->
-            <div class="page" data-page-name="생활 인프라">
-                <h2 class="section-title">완벽한 생활 인프라</h2>
-                <p class="section-subtitle">쇼핑, 문화, 자연, 배송까지 편리하게</p>
-                <div class="space-y-3">
-                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-yellow-100 text-yellow-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg></div><div><h4 class="font-bold text-sm">편리한 쇼핑</h4><p class="text-xs text-gray-600">이마트 트레이더스, 홈플러스 등</p></div></div>
-                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-red-100 text-red-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg></div><div><h4 class="font-bold text-sm">가까운 의료</h4><p class="text-xs text-gray-600">풍무동 내 다양한 병의원</p></div></div>
-                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-indigo-100 text-indigo-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg></div><div><h4 class="font-bold text-sm">다양한 문화/여가</h4><p class="text-xs text-gray-600">김포시네폴리스(예정), 풍무도서관</p></div></div>
-                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-teal-100 text-teal-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h8a2 2 0 002-2v-1a2 2 0 012-2h1.945C21.055 11 21 11.555 21 12c0 5.523-4.477 10-10 10S1 17.523 1 12c0-.445.055-1 .945-1z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 2a2 2 0 012 2v6h-4V4a2 2 0 012-2z" /></svg></div><div><h4 class="font-bold text-sm">쾌적한 자연</h4><p class="text-xs text-gray-600">지구 내 근린공원 및 녹지</p></div></div>
-                    <div class="bg-orange-100 p-4 rounded-lg flex items-center space-x-4 mt-6"><div class="text-orange-600 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div><div><h4 class="font-bold text-orange-800">빠른 배송 생활권</h4><p class="text-sm text-orange-700">쿠팡, 마켓컬리 등 새벽/당일배송 이용</p></div></div>
-                </div>
-            </div>
-
-            <!-- Page 7: Community -->
-            <div class="page flex items-center" data-page-name="커뮤니티">
-                <div class="w-full">
-                    <h2 class="section-title">캐슬리안 센터</h2>
-                    <p class="section-subtitle">일상의 품격을 높이는 커뮤니티</p>
-                    <div class="flex flex-col items-center gap-4">
-                        <div class="w-full max-w-sm text-center">
-                            <img src="community.jpg" alt="커뮤니티 시설" class="w-full rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=Community';">
-                            <p class="text-sm text-gray-600 mt-2 bg-gray-100 p-2 rounded-md">피트니스, 골프연습장, 작은도서관 등<br>다채로운 시설을 제공합니다.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Page 8: Price Chart -->
-            <div class="page" data-page-name="주변 시세">
-                <h2 class="section-title">주변 시세 비교</h2>
-                <p class="section-subtitle">인근 단지 대비 뛰어난 가격 경쟁력</p>
-                <div class="w-full h-3/4 min-h-[300px]">
-                    <canvas id="priceChart"></canvas>
-                </div>
-                <p class="text-center mt-4 text-sm text-gray-500">※ 84㎡, 최근 실거래가 기준</p>
-            </div>
-
-            <!-- Page 9: UNIT 65A -->
-            <div class="page" data-page-name="UNIT 65A">
-                <h2 class="section-title">UNIT 65A</h2>
-                <p class="section-subtitle">실용성을 극대화한 4Bay 판상형 구조</p>
-                <img src="img_unit_A.jpg" alt="65A 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=65A 평면도';">
-                <div class="grid grid-cols-2 gap-2 text-center mt-3 text-sm">
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-ruler-combined text-indigo-500 mr-1"></i> 4-Bay 구조</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-wind text-indigo-500 mr-1"></i> 맞통풍 설계</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 드레스룸</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-box-archive text-indigo-500 mr-1"></i> 팬트리</div>
-                </div>
-            </div>
-            
-            <!-- Page 10: UNIT 65B -->
-            <div class="page" data-page-name="UNIT 65B">
-                <h2 class="section-title">UNIT 65B</h2>
-                <p class="section-subtitle">개방감과 조망을 극대화한 타워형</p>
-                <img src="img_unit_B.jpg" alt="65B 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=65B 평면도';">
-                <div class="grid grid-cols-2 gap-2 text-center mt-3 text-sm">
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-building text-indigo-500 mr-1"></i> 타워형 구조</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-mountain-sun text-indigo-500 mr-1"></i> 2면 개방</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 드레스룸</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-maximize text-indigo-500 mr-1"></i> 효율적 공간</div>
-                </div>
-            </div>
-
-            <!-- Page 11: UNIT 84A -->
-            <div class="page" data-page-name="UNIT 84A">
-                <h2 class="section-title">UNIT 84A</h2>
-                <p class="section-subtitle">가장 선호도 높은 명품 평면</p>
-                <img src="img_unit_F.jpg" alt="84A 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=84A 평면도';">
-                <div class="grid grid-cols-2 gap-2 text-center mt-3 text-sm">
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-ruler-combined text-indigo-500 mr-1"></i> 4-Bay 구조</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-wind text-indigo-500 mr-1"></i> 우수한 채광</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 대형 드레스룸</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-box-archive text-indigo-500 mr-1"></i> 넓은 거실</div>
-                </div>
-            </div>
-
-            <!-- Page 12: UNIT 84B -->
-            <div class="page" data-page-name="UNIT 84B">
-                <h2 class="section-title">UNIT 84B</h2>
-                <p class="section-subtitle">다양한 라이프스타일을 담는 감각적 평면</p>
-                <img src="img_unit_G.jpg" alt="84B 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=84B 평면도';">
-                <div class="grid grid-cols-2 gap-2 text-center mt-3 text-sm">
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-building text-indigo-500 mr-1"></i> 타워형 구조</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-person-shelter text-indigo-500 mr-1"></i> 독립적 공간</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-door-open text-indigo-500 mr-1"></i> 안방 드레스룸</div>
-                    <div class="bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-sun text-indigo-500 mr-1"></i> LDK 구조</div>
-                </div>
-            </div>
-            
-            <!-- Page 13: Way to come -->
-            <div class="page" data-page-name="오시는 길">
-                <div class="text-center">
-                    <h2 class="section-title">오시는 길</h2>
-                    <p class="text-gray-600 text-base mb-4">모델하우스에서 롯데캐슬의 가치를 직접 확인하세요.</p>
-                    <a href="https://naver.me/55Ebf8g7" target="_blank" class="block w-full h-48 md:h-64 rounded-lg overflow-hidden shadow-lg relative">
-                        <iframe src="https://maps.google.com/maps?q=경기도+김포시+풍무동+36-8&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                         <div class="absolute inset-0 bg-transparent"></div>
-                    </a>
-                    <p class="text-sm text-gray-500 mt-2">지도를 클릭하시면 길찾기 서비스로 연결됩니다.</p>
-                    <p class="text-base font-bold mt-2">경기도 김포시 풍무동 36-8</p>
-                    <p class="text-xl font-bold mt-2 text-indigo-600">T. 1555-2624</p>
-                </div>
-            </div>
-        </div>
-        
-        <div id="counselor-popup" class="hidden">
-            <a href="tel:1555-2624" class="block text-center w-full p-3 bg-red-500 text-white font-bold rounded-lg mb-4 hover:bg-red-600">
-                <i class="fa-solid fa-crown mr-2"></i>대표번호 바로연결
+    <header class="main-header">
+        <div class="container header-content">
+            <a href="/" class="logo">
+                <img src="img_favicon.png" alt="분양콕 로고">
+                <span>분양콕</span>
             </a>
-            <div id="counselor-list" class="space-y-3">
-            </div>
         </div>
+    </header>
 
-    </div>
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <h1>어떤 분양 정보를<br>찾고 계세요?</h1>
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="아파트, 오피스텔, 지역명 등으로 검색해보세요.">
+                    <button id="search-button">검색</button>
+                </div>
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <div class="label">누적 분양 정보</div>
+                        <div class="value">5,120 건</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="label">월 평균 방문자</div>
+                        <div class="value">12만 명</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="label">등록 파트너사</div>
+                        <div class="value">320 곳</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <div id="navigation-controls" class="mt-6 flex gap-4 items-center justify-center hidden">
-        <button id="prev-btn" class="nav-button px-5"><</button>
-        <button id="counselor-btn" class="nav-button flex-grow bg-green-500 hover:bg-green-600">
-            <i class="fa-solid fa-users mr-2"></i>상담사 선택하기
-        </button>
-        <button id="next-btn" class="nav-button px-5">></button>
-    </div>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const landingPage = document.getElementById('landing-page');
-        const brochureApp = document.getElementById('brochure-app');
-        const customerForm = document.getElementById('customer-form');
-        const submitBtn = document.getElementById('submit-btn');
-        const navigationControls = document.getElementById('navigation-controls');
-        const counselorBtn = document.getElementById('counselor-btn');
-        const counselorPopup = document.getElementById('counselor-popup');
-        const counselorListDiv = document.getElementById('counselor-list');
-        
-        const counselors = [
-            { name: '박희준 상담사', phone: '010-2171-8206', image: 'counselor_man1.png' }
-        ];
-
-        function populateCounselorList() {
-            counselorListDiv.innerHTML = '';
-            counselors.forEach(counselor => {
-                const counselorItem = `
-                    <a href="tel:${counselor.phone}" class="flex items-center p-3 bg-gray-50 hover:bg-indigo-100 rounded-lg transition duration-200">
-                        <img src="${counselor.image}" alt="${counselor.name}" class="w-12 h-12 p-1 rounded-full object-contain mr-4" onerror="this.onerror=null;this.src='https://placehold.co/48x48/CCCCCC/FFFFFF?text=...';">
-                        <div class="flex-grow">
-                            <p class="font-bold text-gray-800">${counselor.name}</p>
-                            <p class="text-sm text-gray-500">${counselor.phone}</p>
+        <section class="content-section">
+            <div class="container">
+                <h2 class="section-title">주요 분양 정보</h2>
+                <div class="property-list">
+                    
+                    <a href="/icheon-bubal-efete/" class="property-item">
+                        <div class="item-info">
+                            <h3>이천 부발역 에피트</h3>
+                            <p>도심 속에서 누리는 여유로운 주거 공간</p>
+                            <div class="item-tags"><span class="tag">아파트</span><span class="tag">경기도 이천</span></div>
                         </div>
-                        <div class="text-indigo-500">
-                            <i class="fa-solid fa-phone-volume"></i>
+                        <div class="item-action">
+                            <span class="cta-button">상세보기</span>
                         </div>
                     </a>
-                `;
-                counselorListDiv.innerHTML += counselorItem;
-            });
-        }
-        
-        function validateForm() {
-            const isNameValid = document.getElementById('name').value.trim() !== '';
-            const isPhoneValid = document.getElementById('phone').value.trim() !== '';
-            const isRegionValid = document.getElementById('region').value.trim() !== '';
-            const isPurposeValid = !!customerForm.querySelector('input[name="purpose"]:checked');
-            const isTypeValid = !!customerForm.querySelector('input[name="type"]:checked');
-            const isConsentChecked = document.getElementById('consent').checked;
-            submitBtn.disabled = !(isNameValid && isPhoneValid && isRegionValid && isPurposeValid && isTypeValid && isConsentChecked);
-        }
 
-        const allFormElements = customerForm.querySelectorAll('input');
-        allFormElements.forEach(el => {
-            el.addEventListener('input', validateForm);
-            el.addEventListener('change', validateForm);
-        });
-        
-        customerForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (!submitBtn.disabled) {
-                landingPage.classList.add('hidden');
-                brochureApp.classList.remove('hidden');
-                navigationControls.classList.remove('hidden');
-                navigationControls.classList.add('flex');
-                initBrochure();
-            }
-        });
-        
-        counselorBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            populateCounselorList();
-            counselorPopup.classList.toggle('open');
-            counselorPopup.classList.toggle('hidden');
-        });
-        document.addEventListener('click', (e) => {
-            if (!counselorPopup.classList.contains('hidden') && !counselorPopup.contains(e.target) && !counselorBtn.contains(e.target)) {
-                 counselorPopup.classList.add('hidden');
-                 counselorPopup.classList.remove('open');
-            }
-        });
+                    <a href="/hillstate-isu-central/" class="property-item">
+                        <div class="item-info">
+                            <h3>힐스테이트 이수역 센트럴</h3>
+                            <p>교통의 중심에서 시작되는 프리미엄 라이프</p>
+                            <div class="item-tags"><span class="tag">아파트</span><span class="tag">서울 동작구</span><span class="tag">초역세권</span></div>
+                        </div>
+                        <div class="item-action">
+                            <span class="cta-button">상세보기</span>
+                        </div>
+                    </a>
 
-        function initBrochure() {
-            const pages = document.querySelectorAll('.page');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            const progressBar = document.getElementById('progress-bar');
-            let currentPageIndex = 0;
-            let chartRendered = false;
+                    <a href="/wolgye-s-class/" class="property-item">
+                        <div class="item-info">
+                            <h3>월계 중흥 S-클래스</h3>
+                            <p>자연과 도시가 어우러진 명품 주거단지</p>
+                            <div class="item-tags"><span class="tag">아파트</span><span class="tag">서울 노원구</span><span class="tag">대단지</span></div>
+                        </div>
+                        <div class="item-action">
+                            <span class="cta-button">상세보기</span>
+                        </div>
+                    </a>
+                    
+                    <a href="https://momentintl.com/poongmu-lotte-signature/" class="property-item">
+                        <div class="item-info">
+                            <h3>풍무역 롯데캐슬 시그니처</h3>
+                            <p>김포의 새로운 중심, 프리미엄 브랜드 타운</p>
+                            <div class="item-tags"><span class="tag">아파트</span><span class="tag">경기도 김포</span><span class="tag">대단지</span></div>
+                        </div>
+                        <div class="item-action">
+                            <span class="cta-button">상세보기</span>
+                        </div>
+                    </a>
 
-            function showPage(index) {
-                const oldPageIndex = currentPageIndex;
-                currentPageIndex = index;
-                if (pages[oldPageIndex] && oldPageIndex !== index) {
-                    pages[oldPageIndex].classList.add('exiting');
-                }
-                pages.forEach((page, i) => {
-                    if (i === index) {
-                        setTimeout(() => {
-                            page.classList.remove('exiting');
-                            page.classList.add('active');
-                        }, 50);
-                    } else {
-                        page.classList.remove('active');
-                    }
-                });
-                updateNavigation();
-                
-                if (currentPageIndex === 7 && !chartRendered) { // Adjusted index for chart
-                    renderPriceChart();
-                    chartRendered = true;
-                }
-            }
+                    <a href="#" class="property-item">
+                        <div class="item-info">
+                            <h3>아크로드 서초</h3>
+                            <p>서초의 중심, 비교할 수 없는 프리미엄 라이프</p>
+                            <div class="item-tags"><span class="tag">#하이엔드</span><span class="tag">#강남업무지구</span></div>
+                        </div>
+                        <div class="item-action">
+                            <span class="cta-button">상세보기</span>
+                        </div>
+                    </a>
 
-            function updateNavigation() {
-                const progress = (currentPageIndex / (pages.length - 1)) * 100;
-                progressBar.style.width = `${progress}%`;
-                prevBtn.disabled = currentPageIndex === 0;
-                nextBtn.disabled = currentPageIndex === pages.length - 1;
-            }
+                </div>
+            </div>
+        </section>
 
-            function renderPriceChart() {
-                const ctx = document.getElementById('priceChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['풍무 센트럴 푸르지오', '풍무 푸르지오', '풍무역 롯데캐슬'],
-                        datasets: [{
-                            label: '84㎡ 실거래가 (억원)',
-                            data: [7.5, 6.5, 6.8],
-                            backgroundColor: ['rgba(156, 163, 175, 0.6)', 'rgba(107, 114, 128, 0.6)', 'rgba(217, 182, 0, 0.7)'],
-                            borderColor: ['rgba(156, 163, 175, 1)', 'rgba(107, 114, 128, 1)', 'rgba(217, 182, 0, 1)'],
-                            borderWidth: 1,
-                            borderRadius: 5
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        animation: { duration: 1500, easing: 'easeInOutQuart' },
-                        plugins: { 
-                            legend: { display: false },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) { return ` ${context.raw}억원`; }
-                                }
-                            }
-                        },
-                        scales: { 
-                            y: { 
-                                beginAtZero: false,
-                                min: 5,
-                                title: { display: true, text: '실거래가 (단위: 억원)' } 
-                            } 
+        <section class="sns-section">
+            <div class="container">
+                 <h2 class="section-title" style="text-align: center;">더 많은 소식 보기</h2>
+                 <div class="sns-card-container">
+                    <a href="https://www.youtube.com/@%EB%B6%84%EC%96%91%EC%BD%95TV" target="_blank" class="sns-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FF0000"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg>
+                        <div><h3>분양콕TV</h3><p>생생한 현장 정보는 영상으로!</p></div>
+                    </a>
+                    <a href="https://www.instagram.com/boonyang_cok/" target="_blank" class="sns-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#insta-gradient)"><defs><radialGradient id="insta-gradient" cx="0.3" cy="1" r="1"><stop offset="0" stop-color="#FDCB52"/><stop offset="0.5" stop-color="#FD8D32"/><stop offset="1" stop-color="#D12A7B"/></radialGradient></defs><path d="M12,2.163c3.204,0,3.584,0.012,4.85,0.07,3.252,0.148,4.771,1.691,4.919,4.919,0.058,1.265,0.069,1.645,0.069,4.85s-0.012,3.584-0.069,4.85c-0.149,3.225-1.664,4.771-4.919,4.919-1.266,0.058-1.644,0.069-4.85,0.069s-3.585-0.012-4.85-0.069c-3.252-0.149-4.771-1.664-4.919-4.919-0.058-1.265-0.069-1.645-0.069-4.85,0-3.204,0.012-3.584,0.069-4.85,0.149-3.225,1.664-4.771,4.919-4.919,1.266-0.057,1.645-0.069,4.85-0.069M12,0C8.741,0,8.333,0.014,7.053,0.072c-4.356,0.2-6.784,2.634-6.98,6.98C0.014,8.333,0,8.741,0,12c0,3.259,0.014,3.668,0.072,4.948,0.2,4.356,2.624,6.783,6.98,6.98,1.27,0.058,1.688,0.072,4.948,0.072s3.681-0.014,4.948-0.072c4.354-0.2,6.782-2.624,6.979-6.98,0.058-1.28,0.073-1.689,0.073-4.948s-0.015-3.668-0.073-4.948c-0.197-4.354-2.624-6.782-6.979-6.98C15.668,0.014,15.259,0,12,0L12,0z M12,5.838c-3.403,0-6.162,2.759-6.162,6.162s2.759,6.162,6.162,6.162,6.162-2.759,6.162-6.162S15.403,5.838,12,5.838z M12,16.225c-2.328,0-4.225-1.897-4.225-4.225s1.897-4.225,4.225-4.225,4.225,1.897,4.225,4.225S14.328,16.225,12,16.225z M18.402,4.158c-1.036,0-1.875,0.84-1.875,1.875s0.84,1.875,1.875,1.875,1.875-0.84,1.875-1.875S19.438,4.158,18.402,4.158z"/></svg>
+                        <div><h3>공식 인스타그램</h3><p>가장 빠른 소식과 이벤트를 만나요!</p></div>
+                    </a>
+                 </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 24px;">광고 문의</h2>
+            <div class="contact-card">
+                <div class="contact-item">
+                    <span class="contact-label">대표 번호</span>
+                    <a href="tel:1555-1256" class="contact-value">1555-1256</a>
+                </div>
+                 <div class="contact-item">
+                    <span class="contact-label">이메일</span>
+                    <a href="mailto:boonyangcok@cok-teck.com" class="contact-value">boonyangcok@cok-teck.com</a>
+                </div>
+            </div>
+            <p class="footer-copyright">Copyright © 2025 분양콕. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            /**
+             * Function to filter property listings based on search input.
+             */
+            function activateSearch() {
+                const searchInput = document.getElementById('search-input');
+                const searchButton = document.getElementById('search-button');
+                const propertyItems = document.querySelectorAll('.property-list .property-item');
+
+                if (!searchInput || !searchButton || propertyItems.length === 0) return;
+
+                const performSearch = () => {
+                    const query = searchInput.value.toLowerCase().trim();
+                    
+                    propertyItems.forEach(item => {
+                        const itemText = item.textContent.toLowerCase();
+                        if (itemText.includes(query)) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
                         }
+                    });
+                };
+
+                searchButton.addEventListener('click', performSearch);
+                searchInput.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') {
+                        performSearch();
                     }
                 });
             }
 
-            nextBtn.addEventListener('click', () => {
-                if (currentPageIndex < pages.length - 1) {
-                    showPage(currentPageIndex + 1);
-                }
-            });
-
-            prevBtn.addEventListener('click', () => {
-                if (currentPageIndex > 0) {
-                    showPage(currentPageIndex - 1);
-                }
-            });
-
-            showPage(0);
-        }
-    });
-</script>
+            // Initialize all functionalities
+            activateSearch();
+        });
+    </script>
 
 </body>
 </html>
