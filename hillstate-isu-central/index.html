@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
             timestamp: new Date().toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}),
             site: siteData.projectName,
             name: formData.get('name'), phone: formData.get('phone'), region: formData.get('region'),
-            purpose: formData.get('purpose'), type: formData.get('type')
+            purpose: formData.get('purpose'), type: formData.get('type'), site: '힐스테이트 이수역 센트럴'
         };
         fetch(siteData.googleSheetUrl, { method: "POST", body: JSON.stringify(data) })
         .then(res => res.json()).then(data => console.log('Google Sheet Response:', data))
