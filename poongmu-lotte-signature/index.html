@@ -3,14 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SITE DATA: Title and Meta Tags -->
     <title>풍무역 롯데캐슬 시그니처 | 인터랙티브 브로슈어</title>
     <meta property="og:title" content="풍무역 롯데캐슬 시그니처 | 인터랙티브 브로슈어">
     <meta property="og:description" content="본격적인 서울라이프의 시작, 풍무역 롯데캐슬 시그니처의 모든 것을 확인해보세요.">
-    <!-- Correct, absolute URL for the social media preview image -->
     <meta property="og:image" content="https://momentintl.com/poongmu-lotte-signature/img_og_banner.png">
     <link rel="icon" href="img_favicon.png" type="image/png">
-    <!-- External Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
@@ -48,7 +45,6 @@
 </head>
 <body>
 
-<!-- Landing Page for Customer Info -->
 <div id="landing-page" class="app-container">
     <div class="content-viewer p-6 md:p-8 flex flex-col">
         <div class="text-center mb-6">
@@ -108,10 +104,8 @@
     </div>
 </div>
 
-<!-- Brochure App (Initially hidden) -->
 <div id="brochure-app" class="app-container hidden">
     <div id="content-viewer" class="content-viewer">
-        <!-- Header with Progress Bar -->
         <div id="page-header">
             <div class="logo-container">
                 <img src="boonyangcok.png" alt="분양콕 로고" class="h-8" onerror="this.onerror=null;this.src='https://placehold.co/200x40/FFFFFF/000000?text=분양콕';">
@@ -121,9 +115,7 @@
             </div>
         </div>
         
-        <!-- Page Content Area -->
         <div id="page-container">
-            <!-- Page 1: Cover -->
             <div class="page active flex flex-col justify-center items-center" data-page-name="표지">
                 <a href="#" class="block w-full max-w-md rounded-lg overflow-hidden shadow-lg mb-4 group relative">
                     <img src="img_cover_video_thumb.png" alt="풍무역 롯데캐슬 시그니처 조감도" class="w-full h-auto transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/400x300/CCCCCC/FFFFFF?text=Cover+Image';">
@@ -134,7 +126,6 @@
                 </div>
             </div>
 
-            <!-- Page 2: Location -->
             <div class="page" data-page-name="입지">
                 <h2 class="section-title">압도적 입지</h2>
                 <p class="section-subtitle">김포의 새로운 중심, 서울을 더 가깝게</p>
@@ -151,7 +142,6 @@
                 </div>
             </div>
 
-            <!-- Page 3: Premium -->
             <div class="page" data-page-name="프리미엄">
                  <h2 class="section-title">PREMIUM 6</h2>
                  <p class="section-subtitle">김포를 리드할 가치의 완성작</p>
@@ -160,7 +150,6 @@
                  </div>
             </div>
             
-            <!-- Page 4: Special Conditions -->
             <div class="page" data-page-name="특별 분양 조건">
                 <h2 class="section-title">특별 분양 조건</h2>
                 <p class="section-subtitle">지금만 누릴 수 있는 파격적인 혜택</p>
@@ -169,7 +158,6 @@
                 </div>
             </div>
 
-            <!-- Page 5: School District Info -->
             <div class="page" data-page-name="주변 학군">
                  <h2 class="section-title">안심 통학 학군</h2>
                  <p class="section-subtitle">자녀의 성장을 함께하는 우수한 교육 환경</p>
@@ -227,7 +215,6 @@
                  </div>
             </div>
 
-            <!-- Page 6: Life Infrastructure -->
             <div class="page" data-page-name="생활 인프라">
                 <h2 class="section-title">완벽한 생활 인프라</h2>
                 <p class="section-subtitle">쇼핑, 문화, 자연, 배송까지 편리하게</p>
@@ -240,7 +227,6 @@
                 </div>
             </div>
 
-            <!-- Page 7: Community -->
             <div class="page flex items-center" data-page-name="커뮤니티">
                 <div class="w-full">
                     <h2 class="section-title">캐슬리안 센터</h2>
@@ -254,7 +240,6 @@
                 </div>
             </div>
             
-            <!-- Page 8: Price Chart -->
             <div class="page" data-page-name="주변 시세">
                 <h2 class="section-title">주변 시세 비교</h2>
                 <p class="section-subtitle">인근 단지 대비 뛰어난 가격 경쟁력</p>
@@ -264,7 +249,6 @@
                 <p class="text-center mt-4 text-sm text-gray-500">※ 84㎡, 최근 실거래가 기준</p>
             </div>
 
-            <!-- Page 9: UNIT 65A -->
             <div class="page" data-page-name="UNIT 65A">
                 <h2 class="section-title">UNIT 65A</h2>
                 <p class="section-subtitle">실용성을 극대화한 4Bay 판상형 구조</p>
@@ -277,7 +261,6 @@
                 </div>
             </div>
             
-            <!-- Page 10: UNIT 65B -->
             <div class="page" data-page-name="UNIT 65B">
                 <h2 class="section-title">UNIT 65B</h2>
                 <p class="section-subtitle">개방감과 조망을 극대화한 타워형</p>
@@ -290,7 +273,6 @@
                 </div>
             </div>
 
-            <!-- Page 11: UNIT 84A -->
             <div class="page" data-page-name="UNIT 84A">
                 <h2 class="section-title">UNIT 84A</h2>
                 <p class="section-subtitle">가장 선호도 높은 명품 평면</p>
@@ -303,7 +285,6 @@
                 </div>
             </div>
 
-            <!-- Page 12: UNIT 84B -->
             <div class="page" data-page-name="UNIT 84B">
                 <h2 class="section-title">UNIT 84B</h2>
                 <p class="section-subtitle">다양한 라이프스타일을 담는 감각적 평면</p>
@@ -316,7 +297,6 @@
                 </div>
             </div>
             
-            <!-- Page 13: Way to come -->
             <div class="page" data-page-name="오시는 길">
                 <div class="text-center">
                     <h2 class="section-title">오시는 길</h2>
@@ -410,8 +390,8 @@
                 phone: formData.get('phone'),
                 region: formData.get('region'),
                 purpose: formData.get('purpose'),
-                type: formData.get('type')
-                site: '풍무 롯데캐슬 시그니처'
+                type: formData.get('type'),
+                site: '풍무역 롯데캐슬 시그니처'
             };
 
             fetch("https://script.google.com/macros/s/AKfycbwhlggC31OP9TUCD3Bq0Hr4wtELbfMyRey2ugXoWXEILDCE-MTlbhXUHsA2qUw2GH8nyw/exec", {
@@ -543,3 +523,5 @@
 
 </body>
 </html>
+
+이제 이걸로 최종 완료하면 돼 더 이상 수정사항은 없어 그동안 고생
