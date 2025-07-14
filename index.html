@@ -3,360 +3,427 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>분양콕 | 믿을 수 있는 분양 정보 플랫폼</title>
+    
+    <title>더샵 신풍역 | 인터랙티브 브로슈어</title>
+    <meta property="og:title" content="더샵 신풍역 | 인터랙티브 브로슈어">
+    <meta property="og:description" content="신길의 모든 가치를 품은 NO.1 랜드마크, 더샵 신풍역의 모든 것을 확인해보세요.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/mometpro/icheon-bubal-efete/main/banner.png">
+    <link rel="icon" href="img_favicon.png" type="image/png">
 
-    <!-- Favicon and OG Info -->
-    <link rel="icon" type="image/png" href="img_favicon.png">
-    <link rel="apple-touch-icon" href="img_favicon.png">
-    <meta property="og:title" content="분양콕">
-    <meta property="og:description" content="믿을 수 있는 분양 정보 플랫폼, 분양콕">
-    <meta property="og:image" content="img_og_banner.png">
-    <meta property="og:url" content="https://YOUR_WEBSITE_URL">
-    <meta property="og:type" content="website">
-
-    <!-- Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
-
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
-        :root {
-            --color-primary: #00c7ae;
-            --color-navy: #2c3e50;
-            --color-background: #f8f9fa;
-            --color-white: #ffffff;
-            --color-text-primary: #212529;
-            --color-text-secondary: #868e96;
-            --color-border: #dee2e6;
-        }
-
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            margin: 0;
-            background-color: var(--color-background);
-            color: var(--color-text-primary);
-            word-break: keep-all;
-            word-wrap: break-word;
-        }
-
-        a { text-decoration: none; color: inherit; }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        /* Header */
-        .main-header {
-            background-color: var(--color-white);
-            border-bottom: 1px solid var(--color-border);
-        }
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 70px;
-        }
-        .logo { display: flex; align-items: center; gap: 12px; }
-        .logo img { width: 32px; height: 32px; }
-        .logo span { font-size: 22px; font-weight: 900; color: var(--color-navy); }
-
-        /* Hero Section */
-        .hero-section {
-            background-color: var(--color-white);
-            text-align: center;
-            padding: 80px 0;
-            border-bottom: 1px solid var(--color-border);
-        }
-        .hero-section h1 { 
-            font-size: 42px; 
-            font-weight: 900; 
-            margin: 0 0 24px 0;
-            line-height: 1.4;
-        }
-        .search-bar {
-            display: flex; max-width: 680px; margin: 0 auto 40px auto;
-            border: 2px solid var(--color-primary); border-radius: 50px; overflow: hidden;
-        }
-        .search-bar input { flex-grow: 1; border: none; padding: 18px 24px; font-size: 16px; outline: none; }
-        .search-bar button {
-            border: none; background-color: var(--color-primary); color: var(--color-white);
-            font-size: 16px; font-weight: 700; padding: 0 32px; cursor: pointer; transition: background-color 0.3s;
-        }
-        .search-bar button:hover { background-color: #00a38d; }
-        .stats-bar { display: flex; justify-content: center; gap: 40px; }
-        .stat-item { text-align: center; }
-        .stat-item .label { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 4px; }
-        .stat-item .value { font-size: 20px; font-weight: 700; color: var(--color-navy); }
-
-        /* Main Content Section */
-        .content-section { padding: 80px 0; }
-        .section-title { font-size: 28px; font-weight: 900; margin: 0 0 32px 0; }
-
-        /* Property List */
-        .property-list { background-color: var(--color-white); border: 1px solid var(--color-border); border-radius: 12px; overflow: hidden; }
-        .property-item {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 24px; border-bottom: 1px solid var(--color-border); transition: background-color 0.2s;
-        }
-        .property-item:last-child { border-bottom: none; }
-        .property-item:hover { background-color: #fcfdff; }
-        .item-info { flex-grow: 1; }
-        .item-info h3 { font-size: 20px; font-weight: 700; margin: 0 0 8px 0; }
-        .item-info p { font-size: 15px; color: var(--color-text-secondary); margin: 0 0 12px 0; }
-        .item-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-        .tag {
-            background-color: var(--color-background); color: var(--color-text-secondary);
-            font-size: 12px; font-weight: 500; padding: 4px 10px;
-            border-radius: 20px; border: 1px solid var(--color-border);
-        }
-        .item-action { display: flex; align-items: center; gap: 24px; flex-shrink: 0; }
-        .cta-button {
-            background-color: var(--color-white); border: 1px solid var(--color-border); color: var(--color-text-primary);
-            font-weight: 700; padding: 12px 24px; border-radius: 8px; transition: all 0.3s; white-space: nowrap;
-        }
-        .property-item:hover .cta-button { background-color: var(--color-navy); color: var(--color-white); border-color: var(--color-navy); }
-
-        /* SNS Section */
-        .sns-section { background-color: var(--color-white); padding: 80px 0; border-top: 1px solid var(--color-border); }
-        .sns-card-container { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
-        .sns-card {
-            display: flex; align-items: center; gap: 20px;
-            background-color: var(--color-background); padding: 24px; border-radius: 12px;
-            width: 320px; transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .sns-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .sns-card svg { width: 40px; height: 40px; flex-shrink: 0; }
-        .sns-card h3 { font-size: 18px; margin: 0 0 4px 0; }
-        .sns-card p { font-size: 14px; margin: 0; color: var(--color-text-secondary); }
-
-        /* === MODIFIED: Footer Section === */
-        .main-footer {
-            background-color: var(--color-background);
-            padding: 80px 0;
-            border-top: 1px solid var(--color-border);
-            margin-top: 0;
-        }
-        .contact-card {
-            background-color: var(--color-white);
-            border: 1px solid var(--color-border);
-            border-radius: 16px;
-            max-width: 600px;
-            margin: 0 auto 32px auto;
-            padding: 24px;
-        }
-        .contact-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        .contact-item:first-child {
-            border-bottom: 1px solid var(--color-border);
-        }
-        .contact-label {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--color-text-secondary);
-        }
-        .contact-value {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--color-navy);
-            transition: color 0.3s;
-        }
-        a.contact-value:hover {
-            color: var(--color-primary);
-        }
-        .footer-copyright { text-align: center; font-size: 13px; color: var(--color-text-secondary); }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .property-item { flex-wrap: wrap; gap: 16px; }
-            .item-info { width: 100%; }
-            .item-action { width: 100%; justify-content: flex-end; }
-        }
-        @media (max-width: 768px) {
-            .container { padding: 0 20px; }
-            .hero-section h1 { font-size: 32px; }
-            .sns-card-container { flex-direction: column; align-items: center; }
-            .contact-item { flex-direction: column; gap: 8px; }
-        }
+        /* General body and container styling */
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #f0f2f5; font-family: 'Noto Sans KR', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .hidden { display: none !important; }
+        .app-container { display: flex; flex-direction: column; align-items: center; width: 100%; min-height: 100vh; padding: 1rem; box-sizing: border-box; }
+        #brochure-app { justify-content: center; height: 100vh; }
+        
+        /* Main content viewer styling */
+        .content-viewer { width: 100%; max-width: 480px; background-color: white; border-radius: 1.5rem; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); display: flex; flex-direction: column; overflow: hidden; transition: all 0.3s ease-in-out; position: relative; }
+        #landing-page .content-viewer { margin: auto 0; }
+        #brochure-app .content-viewer { height: 100%; max-height: 850px; }
+        
+        /* Header and progress bar styling */
+        #page-header { background-color: #4a5568; padding: 0.75rem 1.5rem; flex-shrink: 0; z-index: 10;}
+        .logo-container { padding-bottom: 0.75rem; }
+        #progress-bar-container { width: 100%; background-color: #718096; border-radius: 9999px; height: 6px; }
+        #progress-bar { height: 100%; background: linear-gradient(to right, #a3bffa, #f6e05e); border-radius: 9999px; transition: width 0.4s ease-in-out; }
+        
+        /* Page container and transition styling */
+        #page-container { flex-grow: 1; position: relative; overflow: hidden; background-color: #f8fafc; }
+        .page { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 1.5rem; overflow-y: auto; opacity: 0; visibility: hidden; transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out; transform: translateX(20px); box-sizing: border-box; }
+        .page.active { opacity: 1; visibility: visible; transform: translateX(0); }
+        .page.exiting { transform: translateX(-20px); }
+        
+        /* Navigation buttons styling */
+        .nav-button { background-color: #4f46e5; color: white; border: none; padding: 0.75rem 1rem; border-radius: 9999px; cursor: pointer; font-size: 1rem; font-weight: 700; transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+        .nav-button:hover { background-color: #4338ca; transform: translateY(-2px); }
+        .nav-button:disabled { background-color: #a5b4fc; cursor: not-allowed; transform: none; box-shadow: none; }
+        
+        /* Section titles and subtitles */
+        .section-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 900; font-size: clamp(1.75rem, 5vw, 2.25rem); text-align: center; margin-bottom: 0.5rem; color: #111827; }
+        .section-subtitle { font-family: 'Gowun Dodum', sans-serif; font-size: clamp(0.8rem, 3vw, 1.1rem); text-align: center; color: #4b5563; margin-bottom: 2rem; white-space: pre-wrap; }
+        
+        /* Form elements styling */
+        .form-input { width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; transition: border-color 0.2s, box-shadow 0.2s; }
+        .form-input:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); }
+        .form-label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151; }
+        .radio-group label { display: flex; align-items: center; justify-content: center; padding: 0.5rem; font-size: 0.875rem; border: 1px solid #d1d5db; border-radius: 0.5rem; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; }
+        .radio-group input:checked + label { border-color: #4f46e5; background-color: #eef2ff; font-weight: 600; }
+        
+        /* Counselor popup styling */
+        #counselor-popup { position: absolute; bottom: 0; left: 0; right: 0; background-color: white; border-top: 1px solid #e5e7eb; box-shadow: 0 -10px 15px -3px rgb(0 0 0 / 0.1); padding: 1.5rem; transform: translateY(100%); transition: transform 0.3s ease-in-out; z-index: 100; }
+        #counselor-popup.open { transform: translateY(0); }
     </style>
 </head>
 <body>
+<script>
+// ===================================================================================
+// ============================= PLATFORM CONFIGURATION ==============================
+// ===================================================================================
+const siteData = {
+    // --- 1. Basic Information ---
+    projectName: "더샵 신풍역", 
+    projectDescription: "신길의 모든 가치를 품은 NO.1 랜드마크, 더샵 신풍역의 모든 것을 확인해보세요.",
+    googleSheetUrl: "https://script.google.com/macros/s/AKfycbzcCvlIlSEo7XFIC1XUdMU-qLLmyrQcl-2_PJQNytD4qyYMveYGBZ_oSylIsPWRopre0A/exec",
 
-    <header class="main-header">
-        <div class="container header-content">
-            <a href="/" class="logo">
-                <img src="img_favicon.png" alt="분양콕 로고">
-                <span>분양콕</span>
-            </a>
+    // --- 2. Image Information ---
+    images: {
+        img_logo_landing: "boonyangcok(c).png",
+        img_logo_brochure: "boonyangcok.png",
+        img_favicon: "img_favicon.png",
+        og_banner: "https://raw.githubusercontent.com/mometpro/icheon-bubal-efete/main/banner.png",
+        img_cover_video_thumb: "img_cover_video_thumb.png",
+        img_location_map: "location_map.jpg",
+        img_premium: "img_premium_points.jpg",
+        img_brand_story: "img_premium_points2.jpg",
+        img_complex_plan: "img_premium_points3.jpg",
+        img_community: "community.jpg",
+        img_unit_A: "img_unit_A.jpg",
+        img_unit_B: "img_unit_B.jpg",
+        img_unit_C: "img_unit_C.jpg",
+        img_unit_D: "img_unit_D.jpg",
+        img_counselor_1: "man1.jpeg",
+        img_counselor_2: "man2.jpeg",
+    },
+
+    // --- 3. External Link Information ---
+    links: {
+        youtubeCover: "https://www.youtube.com/@%EB%B6%84%EC%96%91%EC%BD%95TV/shorts", 
+        modelHouseMap: "https://naver.me/5UTgCtZl", 
+        modelHouseMapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.257692198086!2d127.02538181516515!3d37.5026241798099!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca168a2166a1d%3A0x7a30c51c56b7189!2z642U7IOBIOyLoOyEuO2EsOydgOq4uA!5e0!3m2!1sko!2skr!4v1657865101234!5m2!1sko!2skr",
+    },
+    
+    // --- 4. Contact and Address Information ---
+    contact: {
+        siteAddress: "서울특별시 영등포구 신길동 413-8번지 일원",
+        modelHouseAddress: "서울특별시 서초구 서초동 1328-11",
+        mainPhoneNumber: "1800-4503",
+        royalPhoneNumber: "1800-4503",
+        counselors: [
+            { name: '김더샵 상담사', phone: '010-0000-0000', imageKey: 'img_counselor_1' },
+            { name: '박신풍 상담사', phone: '010-0000-0000', imageKey: 'img_counselor_2' }
+        ] 
+    },
+
+    // --- 5. Page-specific Content ---
+    pageContents: {
+        cover: { title: "더샵 신풍역", description: "서울의 중심에서 누리는<br>2,030세대 브랜드 대단지의 가치<br><b>더샵 신풍역</b>에서 당신의 자부심이 됩니다." },
+        location: { title: "압도적 입지", subtitle: "서울의 교통, 생활, 자연을 모두 누리는 중심", coreLocation: "7호선 신풍역 초역세권 & 신안산선(예정) 더블 역세권" },
+        premium: { title: "Premium 6", subtitle: "더샵 신풍역이 선보이는 6가지 프리미엄" },
+        schoolInfo: { title: "안심 통학 학군", subtitle: "자녀의 성장을 함께하는 우수한 교육 환경", elementary: { name: "도신초등학교", type: "공립", distance: "150m / 3분", note: "단지 바로 옆" }, middle: { name: "대영중학교", type: "공립, 800m", performance: "특목/자사고 다수 진학", note: "우수 학군" }, high: { name: "대영고등학교", type: "공립, 850m", classSize: "학급당 25.3명", note: "면학 분위기" } },
+        lifeInfra: { title: "완벽한 생활 인프라", subtitle: "쇼핑, 문화, 자연 모든 것을 편리하게", items: [ { icon: "fa-cart-shopping", title: "대형 쇼핑몰", desc: "타임스퀘어, 신세계/롯데백화점" }, { icon: "fa-kit-medical", title: "종합병원", desc: "한림대 강남성심병원 인접" }, { icon: "fa-masks-theater", title: "문화/여가", desc: "보라매공원, 신길근린공원" }, { icon: "fa-leaf", title: "쾌적한 자연", desc: "단지 내 풍부한 녹지 공간" } ], special: { title: "여의도 생활권", desc: "차량 10분 거리의 여의도 IFC몰 등" } },
+        brandStory: { title: "No.1 브랜드 파워", subtitle: "소비자가 인정한 브랜드, 주거의 자부심이 되다" },
+        complexPlan: { title: "2,030세대 대단지", subtitle: "다양한 공원과 휴식공간, 최첨단 커뮤니티까지" },
+        community: { title: "최첨단 복합 커뮤니티", subtitle: "비교할수록 돋보이는 또 하나의 자부심입니다" },
+        marketPrice: { title: "주변 시세 비교", subtitle: "신길뉴타운 내 뛰어난 가격 경쟁력", note: "※ 84㎡, 20층 이상 실거래가 기준 (단위: 억원)", chartData: { labels: ['신길센트럴자이', '힐스테이트 클래시안', '더샵 신풍역(예상)'], data: [15.2, 14.5, 14.2] } },
+        unitA: { title: "51㎡", subtitle: "2,030세대 중 571세대", features: [{icon: "fa-ruler-combined", text: "효율적 공간설계"}, {icon: "fa-wind", text: "쾌적한 구조"}, {icon: "fa-person-shelter", text: "신혼부부 추천"}, {icon: "fa-box-archive", text: "알찬 수납공간"}] },
+        unitB: { title: "59㎡", subtitle: "2,030세대 중 926세대", features: [{icon: "fa-ruler-combined", text: "대중적 선호 평면"}, {icon: "fa-sun", text: "채광 우수"}, {icon: "fa-door-open", text: "드레스룸"}, {icon: "fa-maximize", text: "넓은 생활공간"}] },
+        unitC: { title: "74㎡", subtitle: "2,030세대 중 315세대", features: [{icon: "fa-ruler-combined", text: "여유로운 공간"}, {icon: "fa-wind", text: "맞통풍 구조"}, {icon: "fa-door-open", text: "대형 드레스룸"}, {icon: "fa-box-archive", text: "팬트리"}] },
+        unitD: { title: "84㎡", subtitle: "2,030세대 중 218세대", features: [{icon: "fa-ruler-combined", text: "국민 평형"}, {icon: "fa-mountain-sun", text: "우수한 조망"}, {icon: "fa-door-open", text: "알파룸"}, {icon: "fa-sun", text: "4-Bay 구조"}] },
+        directions: { title: "오시는 길", subtitle: "모델하우스에서 더샵의 가치를 직접 확인하세요." }
+    }
+};
+</script>
+
+<!-- Landing Page Section -->
+<div id="landing-page" class="app-container">
+    <div class="content-viewer p-6 md:p-8 flex flex-col">
+        <div class="text-center mb-6">
+            <img data-src="img_logo_landing" alt="로고" class="h-12 mx-auto mb-4 rounded-lg">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">관심고객 등록</h1>
+            <p class="text-gray-500 mt-1 text-sm md:text-base">정보를 입력하시면 브로슈어를 보실 수 있습니다.</p>
         </div>
-    </header>
+        <form id="customer-form" class="space-y-4 flex-grow">
+            <div><label for="name" class="form-label text-sm md:text-base">이름</label><input type="text" id="name" name="name" class="form-input"></div>
+            <div><label for="phone" class="form-label text-sm md:text-base">전화번호</label><input type="tel" id="phone" name="phone" class="form-input" placeholder="01012345678 ('-'없이 입력)"></div>
+            <div><label for="region" class="form-label text-sm md:text-base">관심지역</label><input type="text" id="region" name="region" class="form-input"></div>
+            <div><label class="form-label text-sm md:text-base">거래목적</label><div class="grid grid-cols-2 gap-2 radio-group"><input type="radio" name="purpose" id="purpose-invest" value="investment" class="sr-only"><label for="purpose-invest" class="text-xs md:text-sm">투자</label><input type="radio" name="purpose" id="purpose-reside" value="residence" class="sr-only"><label for="purpose-reside" class="text-xs md:text-sm">실거주</label></div></div>
+            <div><label class="form-label text-sm md:text-base">관심유형</label><div class="grid grid-cols-3 gap-2 radio-group"><input type="radio" name="type" id="type-apt" value="apartment" class="sr-only"><label for="type-apt" class="text-xs md:text-sm">아파트</label><input type="radio" name="type" id="type-op" value="officetel" class="sr-only"><label for="type-op" class="text-xs md:text-sm">오피스텔</label><input type="radio" name="type" id="type-office" value="office" class="sr-only"><label for="type-office" class="text-xs md:text-sm">오피스</label><input type="radio" name="type" id="type-commercial" value="commercial" class="sr-only"><label for="type-commercial" class="text-xs md:text-sm">상업시설</label><input type="radio" name="type" id="type-resi" value="residence-hotel" class="sr-only"><label for="type-resi" class="text-xs md:text-sm">생활형숙박</label><input type="radio" name="type" id="type-town" value="townhouse" class="sr-only"><label for="type-town" class="text-xs md:text-sm">타운하우스</label></div></div>
+            <div class="pt-2"><div class="flex items-center"><input id="consent" name="consent" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"><label for="consent" class="ml-2 block text-sm text-gray-700">개인정보 수집 및 이용에 동의합니다.</label></div></div>
+            <div class="pt-4"><button type="submit" id="submit-btn" class="w-full nav-button" disabled>브로슈어 보기</button></div>
+        </form>
+    </div>
+</div>
 
-    <main>
-        <section class="hero-section">
-            <div class="container">
-                <h1>어떤 분양 정보를<br>찾고 계세요?</h1>
-                <div class="search-bar">
-                    <input type="text" id="search-input" placeholder="아파트, 오피스텔, 지역명 등으로 검색해보세요.">
-                    <button id="search-button">검색</button>
-                </div>
-                <div class="stats-bar">
-                    <div class="stat-item">
-                        <div class="label">누적 분양 정보</div>
-                        <div class="value">5,120 건</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="label">월 평균 방문자</div>
-                        <div class="value">12만 명</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="label">등록 파트너사</div>
-                        <div class="value">320 곳</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="content-section">
-            <div class="container">
-                <h2 class="section-title">주요 분양 정보</h2>
-                <div class="property-list">
-                    
-                    <a href="/icheon-bubal-efete/" class="property-item">
-                        <div class="item-info">
-                            <h3>이천 부발역 에피트</h3>
-                            <p>도심 속에서 누리는 여유로운 주거 공간</p>
-                            <div class="item-tags"><span class="tag">아파트</span><span class="tag">경기도 이천</span></div>
-                        </div>
-                        <div class="item-action">
-                            <span class="cta-button">상세보기</span>
-                        </div>
-                    </a>
-
-                    <a href="/hillstate-isu-central/" class="property-item">
-                        <div class="item-info">
-                            <h3>힐스테이트 이수역 센트럴</h3>
-                            <p>교통의 중심에서 시작되는 프리미엄 라이프</p>
-                            <div class="item-tags"><span class="tag">아파트</span><span class="tag">서울 동작구</span><span class="tag">초역세권</span></div>
-                        </div>
-                        <div class="item-action">
-                            <span class="cta-button">상세보기</span>
-                        </div>
-                    </a>
-
-                    <a href="/wolgye-s-class/" class="property-item">
-                        <div class="item-info">
-                            <h3>월계 중흥 S-클래스</h3>
-                            <p>자연과 도시가 어우러진 명품 주거단지</p>
-                            <div class="item-tags"><span class="tag">아파트</span><span class="tag">서울 노원구</span><span class="tag">대단지</span></div>
-                        </div>
-                        <div class="item-action">
-                            <span class="cta-button">상세보기</span>
-                        </div>
-                    </a>
-                    
-                    <a href="https://momentintl.com/poongmu-lotte-signature/" class="property-item">
-                        <div class="item-info">
-                            <h3>풍무역 롯데캐슬 시그니처</h3>
-                            <p>김포의 새로운 중심, 프리미엄 브랜드 타운</p>
-                            <div class="item-tags"><span class="tag">아파트</span><span class="tag">경기도 김포</span><span class="tag">대단지</span></div>
-                        </div>
-                        <div class="item-action">
-                            <span class="cta-button">상세보기</span>
-                        </div>
-                    </a>
-
-                    <a href="#" class="property-item">
-                        <div class="item-info">
-                            <h3>아크로드 서초</h3>
-                            <p>서초의 중심, 비교할 수 없는 프리미엄 라이프</p>
-                            <div class="item-tags"><span class="tag">#하이엔드</span><span class="tag">#강남업무지구</span></div>
-                        </div>
-                        <div class="item-action">
-                            <span class="cta-button">상세보기</span>
-                        </div>
-                    </a>
-
-                </div>
-            </div>
-        </section>
-
-        <section class="sns-section">
-            <div class="container">
-                 <h2 class="section-title" style="text-align: center;">더 많은 소식 보기</h2>
-                 <div class="sns-card-container">
-                    <a href="https://www.youtube.com/@%EB%B6%84%EC%96%91%EC%BD%95TV" target="_blank" class="sns-card">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FF0000"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg>
-                        <div><h3>분양콕TV</h3><p>생생한 현장 정보는 영상으로!</p></div>
-                    </a>
-                    <a href="https://www.instagram.com/boonyang_cok/" target="_blank" class="sns-card">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#insta-gradient)"><defs><radialGradient id="insta-gradient" cx="0.3" cy="1" r="1"><stop offset="0" stop-color="#FDCB52"/><stop offset="0.5" stop-color="#FD8D32"/><stop offset="1" stop-color="#D12A7B"/></radialGradient></defs><path d="M12,2.163c3.204,0,3.584,0.012,4.85,0.07,3.252,0.148,4.771,1.691,4.919,4.919,0.058,1.265,0.069,1.645,0.069,4.85s-0.012,3.584-0.069,4.85c-0.149,3.225-1.664,4.771-4.919,4.919-1.266,0.058-1.644,0.069-4.85,0.069s-3.585-0.012-4.85-0.069c-3.252-0.149-4.771-1.664-4.919-4.919-0.058-1.265-0.069-1.645-0.069-4.85,0-3.204,0.012-3.584,0.069-4.85,0.149-3.225,1.664-4.771,4.919-4.919,1.266-0.057,1.645-0.069,4.85-0.069M12,0C8.741,0,8.333,0.014,7.053,0.072c-4.356,0.2-6.784,2.634-6.98,6.98C0.014,8.333,0,8.741,0,12c0,3.259,0.014,3.668,0.072,4.948,0.2,4.356,2.624,6.783,6.98,6.98,1.27,0.058,1.688,0.072,4.948,0.072s3.681-0.014,4.948-0.072c4.354-0.2,6.782-2.624,6.979-6.98,0.058-1.28,0.073-1.689,0.073-4.948s-0.015-3.668-0.073-4.948c-0.197-4.354-2.624-6.782-6.979-6.98C15.668,0.014,15.259,0,12,0L12,0z M12,5.838c-3.403,0-6.162,2.759-6.162,6.162s2.759,6.162,6.162,6.162,6.162-2.759,6.162-6.162S15.403,5.838,12,5.838z M12,16.225c-2.328,0-4.225-1.897-4.225-4.225s1.897-4.225,4.225-4.225,4.225,1.897,4.225,4.225S14.328,16.225,12,16.225z M18.402,4.158c-1.036,0-1.875,0.84-1.875,1.875s0.84,1.875,1.875,1.875,1.875-0.84,1.875-1.875S19.438,4.158,18.402,4.158z"/></svg>
-                        <div><h3>공식 인스타그램</h3><p>가장 빠른 소식과 이벤트를 만나요!</p></div>
-                    </a>
-                 </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <div class="container">
-            <h2 class="section-title" style="text-align: center; margin-bottom: 24px;">광고 문의</h2>
-            <div class="contact-card">
-                <div class="contact-item">
-                    <span class="contact-label">대표 번호</span>
-                    <a href="tel:1555-1256" class="contact-value">1555-1256</a>
-                </div>
-                 <div class="contact-item">
-                    <span class="contact-label">이메일</span>
-                    <a href="mailto:boonyangcok@cok-teck.com" class="contact-value">boonyangcok@cok-teck.com</a>
-                </div>
-            </div>
-            <p class="footer-copyright">Copyright © 2025 분양콕. All rights reserved.</p>
+<!-- Brochure Application Section -->
+<div id="brochure-app" class="app-container hidden">
+    <div id="content-viewer" class="content-viewer">
+        <div id="page-header">
+            <div class="logo-container"><img data-src="img_logo_brochure" alt="로고" class="h-8"></div>
+            <div id="progress-bar-container"><div id="progress-bar" style="width: 0%;"></div></div>
         </div>
-    </footer>
+        
+        <div id="page-container">
+            <!-- Cover Page -->
+            <div class="page flex flex-col justify-center items-center" data-page-name="cover">
+                 <a data-href="youtubeCover" target="_blank" class="block w-full max-w-sm rounded-lg overflow-hidden shadow-lg mb-4 group relative">
+                    <img data-src="img_cover_video_thumb" alt="영상 썸네일" class="w-full h-auto transition-transform duration-300 group-hover:scale-105">
+                    <div class="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity duration-300 group-hover:opacity-75">
+                        <i class="fa-solid fa-play text-white text-6xl opacity-80 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110"></i>
+                    </div>
+                </a>
+                <p class="text-sm text-center text-gray-700 whitespace-pre-wrap" data-content="cover.description"></p>
+            </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
+            <!-- Location Page -->
+            <div class="page" data-page-name="location"><h2 class="section-title" data-content="location.title"></h2><p class="section-subtitle" data-content="location.subtitle"></p><img data-src="img_location_map" alt="입지" class="w-full h-auto rounded-lg shadow-md mb-4"><div class="space-y-2"><div class="text-center bg-gray-50 p-3 rounded-lg shadow-sm"><p class="font-bold text-gray-800 text-sm md:text-base">사업지 주소</p><p class="text-xs md:text-sm text-gray-600" data-content="contact.siteAddress"></p></div><div class="text-center bg-indigo-50 p-3 rounded-lg shadow-sm"><p class="font-bold text-indigo-800 text-sm md:text-base">핵심 입지</p><p class="text-xs md:text-sm text-indigo-600" data-content="location.coreLocation"></p></div></div></div>
             
-            /**
-             * Function to filter property listings based on search input.
-             */
-            function activateSearch() {
-                const searchInput = document.getElementById('search-input');
-                const searchButton = document.getElementById('search-button');
-                const propertyItems = document.querySelectorAll('.property-list .property-item');
+            <!-- Premium Page -->
+            <div class="page" data-page-name="premium"><h2 class="section-title" data-content="premium.title"></h2><p class="section-subtitle" data-content="premium.subtitle"></p><div class="flex items-center justify-center flex-grow"><img data-src="img_premium" alt="프리미엄" class="w-full h-auto object-contain max-h-full"></div></div>
+            
+            <!-- School Info Page -->
+            <div class="page" data-page-name="schoolInfo"><h2 class="section-title" data-content="schoolInfo.title"></h2><p class="section-subtitle" data-content="schoolInfo.subtitle"></p><div class="space-y-6"><div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100"><h3 class="font-bold text-lg text-blue-600 mb-3">초등학교 정보</h3><div class="relative pt-6"><div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-gradient-to-r from-green-400 to-yellow-500 h-2 rounded-full" style="width: 10%;"></div></div><div class="absolute text-orange-500" style="left: 10%; top: 0; transform: translateX(-50%);"><i class="fa-solid fa-person-walking text-2xl"></i></div></div><div class="flex justify-between text-xs text-gray-500 mt-1 mb-4"><span>1분</span><span>5분</span><span>10분</span></div><div class="flex justify-between items-center"><div><p class="font-semibold text-gray-800" data-content="schoolInfo.elementary.name"></p><p class="text-sm text-gray-500" data-content="schoolInfo.elementary.type"></p></div><div class="text-right"><p class="font-bold text-blue-600" data-content="schoolInfo.elementary.distance"></p><p class="text-xs text-green-600 font-bold" data-content="schoolInfo.elementary.note"></p></div></div></div><div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100"><h3 class="font-bold text-lg text-green-600 mb-2">중학교 정보</h3><div class="flex justify-between items-center"><div><p class="font-semibold text-gray-800" data-content="schoolInfo.middle.name"></p><p class="text-sm text-gray-500" data-content="schoolInfo.middle.type"></p></div><div class="text-right"><p class="font-semibold text-green-600" data-content="schoolInfo.middle.performance"></p><p class="text-xs text-gray-500" data-content="schoolInfo.middle.note"></p></div></div></div><div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100"><h3 class="font-bold text-lg text-purple-600 mb-2">고등학교 정보</h3><div class="flex justify-between items-center"><div><p class="font-semibold text-gray-800" data-content="schoolInfo.high.name"></p><p class="text-sm text-gray-500" data-content="schoolInfo.high.type"></p></div><div class="text-right"><p class="font-semibold text-purple-600" data-content="schoolInfo.high.classSize"></p><p class="text-xs text-gray-500" data-content="schoolInfo.high.note"></p></div></div></div></div></div>
 
-                if (!searchInput || !searchButton || propertyItems.length === 0) return;
+            <!-- Life Infra Page -->
+            <div class="page" data-page-name="lifeInfra"><h2 class="section-title" data-content="lifeInfra.title"></h2><p class="section-subtitle" data-content="lifeInfra.subtitle"></p><div class="space-y-3" id="life-infra-list"></div><div class="bg-orange-100 p-4 rounded-lg flex items-center space-x-4 mt-6"><div class="text-orange-600 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div><div><h4 class="font-bold text-orange-800" data-content="lifeInfra.special.title"></h4><p class="text-sm text-orange-700" data-content="lifeInfra.special.desc"></p></div></div></div>
 
-                const performSearch = () => {
-                    const query = searchInput.value.toLowerCase().trim();
-                    
-                    propertyItems.forEach(item => {
-                        const itemText = item.textContent.toLowerCase();
-                        if (itemText.includes(query)) {
-                            item.style.display = 'flex';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-                };
+            <!-- Brand Story Page -->
+            <div class="page" data-page-name="brandStory"><h2 class="section-title" data-content="brandStory.title"></h2><p class="section-subtitle" data-content="brandStory.subtitle"></p><div class="flex items-center justify-center flex-grow"><img data-src="img_brand_story" alt="브랜드 스토리" class="w-full h-auto object-contain max-h-full"></div></div>
 
-                searchButton.addEventListener('click', performSearch);
-                searchInput.addEventListener('keyup', (event) => {
-                    if (event.key === 'Enter') {
-                        performSearch();
-                    }
+            <!-- Complex Plan Page -->
+            <div class="page" data-page-name="complexPlan"><h2 class="section-title" data-content="complexPlan.title"></h2><p class="section-subtitle" data-content="complexPlan.subtitle"></p><div class="flex items-center justify-center flex-grow"><img data-src="img_complex_plan" alt="단지 배치도" class="w-full h-auto object-contain max-h-full"></div></div>
+
+            <!-- Community Page -->
+            <div class="page" data-page-name="community"><h2 class="section-title" data-content="community.title"></h2><p class="section-subtitle" data-content="community.subtitle"></p><div class="flex items-center justify-center flex-grow"><img data-src="img_community" alt="커뮤니티 시설" class="w-full h-auto object-contain max-h-full"></div></div>
+
+            <!-- Market Price Page -->
+            <div class="page" data-page-name="marketPrice"><h2 class="section-title" data-content="marketPrice.title"></h2><p class="section-subtitle" data-content="marketPrice.subtitle"></p><div class="w-full h-3/4 min-h-[300px]"><canvas id="priceChart"></canvas></div><p class="text-center mt-4 text-sm text-gray-500" data-content="marketPrice.note"></p></div>
+
+            <!-- Unit Type Pages -->
+            <div class="page" data-page-name="unitA"><h2 class="section-title" data-content="unitA.title"></h2><p class="section-subtitle" data-content="unitA.subtitle"></p><img data-src="img_unit_A" alt="51타입 평면도" class="w-full h-auto rounded-md shadow-lg mb-4"><div class="grid grid-cols-2 gap-2 text-center" data-features="unitA"></div></div>
+            <div class="page" data-page-name="unitB"><h2 class="section-title" data-content="unitB.title"></h2><p class="section-subtitle" data-content="unitB.subtitle"></p><img data-src="img_unit_B" alt="59타입 평면도" class="w-full h-auto rounded-md shadow-lg mb-4"><div class="grid grid-cols-2 gap-2 text-center" data-features="unitB"></div></div>
+            <div class="page" data-page-name="unitC"><h2 class="section-title" data-content="unitC.title"></h2><p class="section-subtitle" data-content="unitC.subtitle"></p><img data-src="img_unit_C" alt="74타입 평면도" class="w-full h-auto rounded-md shadow-lg mb-4"><div class="grid grid-cols-2 gap-2 text-center" data-features="unitC"></div></div>
+            <div class="page" data-page-name="unitD"><h2 class="section-title" data-content="unitD.title"></h2><p class="section-subtitle" data-content="unitD.subtitle"></p><img data-src="img_unit_D" alt="84타입 평면도" class="w-full h-auto rounded-md shadow-lg mb-4"><div class="grid grid-cols-2 gap-2 text-center" data-features="unitD"></div></div>
+
+            <!-- Directions Page -->
+            <div class="page" data-page-name="directions"><div class="text-center"><h2 class="section-title" data-content="directions.title"></h2><p class="text-gray-600 text-base mb-4" data-content="directions.subtitle"></p><a data-href="modelHouseMap" target="_blank" class="block w-full h-48 md:h-64 rounded-lg overflow-hidden shadow-lg relative"><iframe data-src-embed="modelHouseMapEmbed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><div class="absolute inset-0 bg-transparent"></div></a><p class="text-sm text-gray-500 mt-2">지도를 클릭하시면 길찾기 서비스로 연결됩니다.</p><p class="text-base font-bold mt-2" data-content="contact.modelHouseAddress"></p><p class="text-xl font-bold mt-2 text-indigo-600" data-tel="mainPhoneNumber"></p></div></div>
+        </div>
+        
+        <!-- Counselor Popup -->
+        <div id="counselor-popup" class="hidden">
+            <a data-tel-href="royalPhoneNumber" class="block text-center w-full p-3 bg-red-500 text-white font-bold rounded-lg mb-4 hover:bg-red-600"><i class="fa-solid fa-crown mr-2"></i>대표번호 바로연결</a>
+            <div id="counselor-list" class="space-y-3"></div>
+             <p id="no-counselor-msg" class="text-center text-sm text-gray-500 hidden">등록된 담당 상담사가 없습니다.</p>
+        </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div id="navigation-controls" class="mt-6 flex gap-4 items-center justify-center hidden">
+        <button id="prev-btn" class="nav-button px-5"><</button>
+        <button id="counselor-btn" class="nav-button flex-grow bg-green-500 hover:bg-green-600"><i class="fa-solid fa-users mr-2"></i>상담사 선택하기</button>
+        <button id="next-btn" class="nav-button px-5">></button>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Utility function to get nested values from the siteData object
+    const getNestedValue = (path, obj = siteData) => path.split('.').reduce((o, k) => (o && o[k] != null) ? o[k] : null, obj);
+
+    // Function to populate content from siteData into the HTML
+    function populateContent() {
+        document.title = siteData.projectName + " | 인터랙티브 브로슈어";
+        document.querySelector('meta[property="og:title"]').setAttribute("content", siteData.projectName + " | 인터랙티브 브로슈어");
+        document.querySelector('meta[property="og:description"]').setAttribute("content", siteData.projectDescription);
+        
+        document.querySelector('link[rel="icon"]').href = siteData.images.img_favicon;
+        document.querySelector('meta[property="og:image"]').content = siteData.images.og_banner;
+
+        // Populate text content
+        document.querySelectorAll('[data-content]').forEach(el => {
+            const path = el.dataset.content.includes('contact.') ? el.dataset.content : `pageContents.${el.dataset.content}`;
+            const value = getNestedValue(path);
+            if(value !== null) el.innerHTML = value;
+        });
+        // Populate image sources
+        document.querySelectorAll('[data-src]').forEach(el => { 
+            const src = siteData.images[el.dataset.src];
+            if(src) el.src = src; 
+        });
+        // Populate anchor hrefs
+        document.querySelectorAll('[data-href]').forEach(el => { 
+            const value = getNestedValue(`links.${el.dataset.href}`);
+            if(value) el.href = value; 
+        });
+        // Populate iframe sources
+        document.querySelectorAll('[data-src-embed]').forEach(el => { 
+            const value = getNestedValue(`links.${el.dataset.srcEmbed}`);
+            if(value) el.src = value; 
+        });
+        // Populate telephone numbers
+        document.querySelectorAll('[data-tel]').forEach(el => { if(siteData.contact[el.dataset.tel]) el.textContent = `T. ${siteData.contact[el.dataset.tel]}`; });
+        document.querySelectorAll('[data-tel-href]').forEach(el => { if(siteData.contact[el.dataset.telHref]) el.href = `tel:${siteData.contact[el.dataset.telHref]}`; });
+        
+        // Populate life infrastructure list
+        const lifeInfraList = document.getElementById('life-infra-list');
+        if (getNestedValue('pageContents.lifeInfra.items') && lifeInfraList) {
+            lifeInfraList.innerHTML = ''; 
+            const colors = ['yellow', 'red', 'indigo', 'teal'];
+            siteData.pageContents.lifeInfra.items.forEach((item, i) => {
+                const color = colors[i % colors.length];
+                lifeInfraList.innerHTML += `<div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3 shadow-sm"><div class="bg-${color}-100 text-${color}-700 p-2 rounded-full shrink-0"><i class="fa-solid ${item.icon}"></i></div><div><h4 class="font-bold text-sm">${item.title}</h4><p class="text-xs text-gray-600">${item.desc}</p></div></div>`;
+            });
+        }
+
+        // Populate unit features
+        document.querySelectorAll('[data-features]').forEach(el => {
+            const unitKey = el.dataset.features;
+            const unitData = getNestedValue(`pageContents.${unitKey}`);
+            if(unitData && unitData.features && unitData.features.length > 0) {
+                el.innerHTML = ''; 
+                unitData.features.forEach(feature => {
+                    el.innerHTML += `<div class="bg-gray-100 p-3 rounded-lg text-sm shadow-sm flex flex-col items-center justify-center"><i class="fa-solid ${feature.icon} text-indigo-500 mb-1 text-lg"></i><span>${feature.text}</span></div>`;
                 });
             }
-
-            // Initialize all functionalities
-            activateSearch();
         });
-    </script>
+    }
 
+    // Function to populate the counselor list popup
+    function populateCounselorList() {
+        const counselorListDiv = document.getElementById('counselor-list');
+        const noCounselorMsg = document.getElementById('no-counselor-msg');
+        counselorListDiv.innerHTML = '';
+        if (!siteData.contact.counselors || siteData.contact.counselors.length === 0) {
+            noCounselorMsg.classList.remove('hidden');
+            return;
+        }
+        noCounselorMsg.classList.add('hidden');
+        siteData.contact.counselors.forEach(c => {
+            const imgSrc = siteData.images[c.imageKey] || '';
+            counselorListDiv.innerHTML += `<a href="tel:${c.phone}" class="flex items-center p-3 bg-gray-50 hover:bg-indigo-100 rounded-lg transition duration-200"><img src="${imgSrc}" alt="${c.name}" class="w-12 h-12 rounded-full object-cover mr-4" ${!imgSrc ? 'style="display:none;"' : ''}><div class="flex-grow"><p class="font-bold text-gray-800">${c.name}</p><p class="text-sm text-gray-500">${c.phone}</p></div><div class="text-indigo-500"><i class="fa-solid fa-phone-volume"></i></div></a>`;
+        });
+    }
+    
+    // Form validation logic
+    const customerForm = document.getElementById('customer-form');
+    function validateForm() {
+        const submitBtn = document.getElementById('submit-btn');
+        const isNameValid = document.getElementById('name').value.trim() !== '';
+        const isPhoneValid = document.getElementById('phone').value.trim() !== '';
+        const isRegionValid = document.getElementById('region').value.trim() !== '';
+        const isPurposeValid = !!customerForm.querySelector('input[name="purpose"]:checked');
+        const isTypeValid = !!customerForm.querySelector('input[name="type"]:checked');
+        const isConsentChecked = document.getElementById('consent').checked;
+        submitBtn.disabled = !(isNameValid && isPhoneValid && isRegionValid && isPurposeValid && isTypeValid && isConsentChecked);
+    }
+    customerForm.querySelectorAll('input').forEach(el => { el.addEventListener('input', validateForm); el.addEventListener('change', validateForm); });
+    
+    // Form submission handler
+    customerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(customerForm);
+        const data = {
+            timestamp: new Date().toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}),
+            site: siteData.projectName,
+            name: formData.get('name'), phone: formData.get('phone'), region: formData.get('region'),
+            purpose: formData.get('purpose'), type: formData.get('type')
+        };
+        // Post data to Google Sheet
+        fetch(siteData.googleSheetUrl, { method: "POST", body: JSON.stringify(data), mode: 'no-cors' })
+        .then(() => console.log('Form data sent to Google Sheet.'))
+        .catch(error => console.error('Google Sheet Error:', error));
+
+        // Switch to brochure view
+        if (!document.getElementById('submit-btn').disabled) {
+            document.getElementById('landing-page').classList.add('hidden');
+            document.getElementById('brochure-app').classList.remove('hidden');
+            document.getElementById('navigation-controls').classList.remove('hidden');
+            document.getElementById('navigation-controls').classList.add('flex');
+            initBrochure();
+        }
+    });
+    
+    // Counselor popup toggle logic
+    document.getElementById('counselor-btn').addEventListener('click', (e) => { e.stopPropagation(); populateCounselorList(); const pop = document.getElementById('counselor-popup'); pop.classList.toggle('open'); pop.classList.toggle('hidden'); });
+    document.addEventListener('click', (e) => { const pop = document.getElementById('counselor-popup'); if (!pop.classList.contains('hidden') && !pop.contains(e.target) && !document.getElementById('counselor-btn').contains(e.target)) { pop.classList.add('hidden'); pop.classList.remove('open'); } });
+    
+    // Brochure initialization and navigation logic
+    function initBrochure() {
+        const pages = Array.from(document.querySelectorAll('#page-container > .page'));
+        let chartRendered = false;
+
+        const visiblePages = pages.filter(page => {
+            const pageName = page.dataset.pageName;
+            return getNestedValue(`pageContents.${pageName}`);
+        });
+
+        pages.forEach(p => { 
+            if (!visiblePages.includes(p)) p.remove();
+        });
+        
+        const finalPages = Array.from(document.querySelectorAll('#page-container > .page'));
+        let currentPageIndex = 0;
+
+        function showPage(index) {
+            const oldPageIndex = currentPageIndex;
+            currentPageIndex = index;
+            finalPages.forEach((page, i) => {
+                page.classList.remove('active', 'exiting');
+                if (i === index) {
+                    setTimeout(() => page.classList.add('active'), 50);
+                }
+                else if (i === oldPageIndex) {
+                    page.classList.add('exiting');
+                }
+            });
+            updateNavigation();
+            
+            const chartPage = finalPages[index];
+            if (chartPage && chartPage.dataset.pageName === "marketPrice" && !chartRendered) {
+                renderPriceChart();
+                chartRendered = true;
+            }
+        }
+
+        function updateNavigation() {
+            const progress = finalPages.length <= 1 ? 100 : (currentPageIndex / (finalPages.length - 1)) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            document.getElementById('prev-btn').disabled = currentPageIndex === 0;
+            document.getElementById('next-btn').disabled = currentPageIndex === finalPages.length - 1;
+        }
+
+        function renderPriceChart() {
+            const ctx = document.getElementById('priceChart').getContext('2d');
+            const chartConfig = siteData.pageContents.marketPrice.chartData;
+            if (!chartConfig || !chartConfig.labels || !chartConfig.data || chartConfig.data.length === 0) {
+                document.querySelector('[data-page-name="marketPrice"]').remove();
+                return;
+            };
+            
+            const backgroundColors = chartConfig.labels.map(label => label.includes('더샵') ? 'rgba(79, 70, 229, 0.7)' : 'rgba(156, 163, 175, 0.7)');
+            const borderColors = chartConfig.labels.map(label => label.includes('더샵') ? 'rgba(79, 70, 229, 1)' : 'rgba(156, 163, 175, 1)');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartConfig.labels,
+                    datasets: [{
+                        label: '84㎡ 실거래가 (억원)', data: chartConfig.data,
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors,
+                        borderWidth: 1, borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, animation: { duration: 1500, easing: 'easeInOutQuart' },
+                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` ${c.raw}억원` }}},
+                    scales: { y: { beginAtZero: false, min: Math.floor(Math.min(...chartConfig.data) - 1), title: { display: true, text: '실거래가 (단위: 억원)' } } }
+                }
+            });
+        }
+
+        document.getElementById('next-btn').addEventListener('click', () => { if (currentPageIndex < finalPages.length - 1) showPage(currentPageIndex + 1); });
+        document.getElementById('prev-btn').addEventListener('click', () => { if (currentPageIndex > 0) showPage(currentPageIndex - 1); });
+
+        showPage(0);
+    }
+
+    populateContent();
+});
+</script>
 </body>
 </html>
