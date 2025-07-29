@@ -118,7 +118,7 @@
         </div>
         
         <div id="page-container">
-            <!-- 페이지 1: 표지 (수정됨) -->
+            <!-- 페이지 1: 표지 -->
             <div class="page active flex flex-col justify-center items-center" data-page-name="표지">
                 <a href="#" class="block w-full max-w-md rounded-lg overflow-hidden shadow-lg mb-4 group relative">
                     <img src="imgi_12_img_visual_fbg3.png" alt="여주역 로제비앙 더센텀 조감도" class="w-full h-auto transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/400x350/CCCCCC/FFFFFF?text=Image+Load+Fail';">
@@ -190,7 +190,78 @@
                 </div>
             </div>
             
-            <!-- 페이지 7: 주변 시세 -->
+            <!-- 신규 페이지: 주변 학군 -->
+            <div class="page" data-page-name="주변 학군">
+                 <h2 class="section-title">안심 통학 학군</h2>
+                 <p class="section-subtitle">자녀의 성장을 함께하는 우수한 교육 환경</p>
+                 <div class="space-y-6">
+                     <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
+                         <h3 class="font-bold text-lg text-blue-600 mb-3">초등학교 정보</h3>
+                         <div class="relative pt-6">
+                             <div class="w-full bg-gray-200 rounded-full h-2">
+                                 <div class="bg-gradient-to-r from-green-400 to-yellow-500 h-2 rounded-full" style="width: 30%;"></div>
+                             </div>
+                             <div class="absolute text-orange-500" style="left: 30%; top: 0; transform: translateX(-50%);">
+                                 <i class="fa-solid fa-person-walking text-2xl"></i>
+                             </div>
+                         </div>
+                         <div class="flex justify-between text-xs text-gray-500 mt-1 mb-4">
+                             <span>도보 1분</span>
+                             <span>도보 5분</span>
+                             <span>도보 10분</span>
+                         </div>
+                         <div class="flex justify-between items-center">
+                             <div>
+                                 <p class="font-semibold text-gray-800">여주초등학교</p>
+                                 <p class="text-sm text-gray-500">공립</p>
+                             </div>
+                             <div class="text-right">
+                                 <p class="font-bold text-blue-600">약 350m / 도보 5분</p>
+                                 <p class="text-xs text-green-600">안심 도보 통학</p>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
+                         <h3 class="font-bold text-lg text-green-600 mb-2">중학교</h3>
+                         <div class="flex justify-between items-center">
+                             <div>
+                                 <p class="font-semibold text-gray-800">여주중·여주여자중</p>
+                                 <p class="text-sm text-gray-500">근거리 위치</p>
+                             </div>
+                             <div class="text-right">
+                                 <p class="font-semibold text-green-600">우수 학군</p>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
+                         <h3 class="font-bold text-lg text-purple-600 mb-2">고등학교</h3>
+                         <div class="flex justify-between items-center">
+                             <div>
+                                 <p class="font-semibold text-gray-800">여주고·세종고</p>
+                                 <p class="text-sm text-gray-500">명문 학군</p>
+                             </div>
+                             <div class="text-right">
+                                 <p class="font-semibold text-purple-600">다양한 선택</p>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+
+            <!-- 신규 페이지: 생활 인프라 -->
+            <div class="page" data-page-name="생활 인프라">
+                <h2 class="section-title">완벽한 생활 인프라</h2>
+                <p class="section-subtitle">쇼핑, 교통, 행정, 의료를 모두 누리는 중심</p>
+                <div class="space-y-3">
+                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-yellow-100 text-yellow-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg></div><div><h4 class="font-bold text-sm">편리한 쇼핑</h4><p class="text-xs text-gray-600">이마트, 하나로마트 등 대형마트 인접</p></div></div>
+                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-blue-100 text-blue-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 2zM5.036 3.912a.75.75 0 011.06 0l1.06 1.06a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zM14.964 3.912a.75.75 0 010 1.06l-1.06 1.06a.75.75 0 01-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zM2.75 9.5a.75.75 0 010-1.5h1.5a.75.75 0 010 1.5h-1.5zM15.75 9.5a.75.75 0 010-1.5h1.5a.75.75 0 010 1.5h-1.5zM5.036 16.088a.75.75 0 01-1.06 0l-1.06-1.06a.75.75 0 011.06-1.06l1.06 1.06a.75.75 0 010 1.06zM14.964 16.088a.75.75 0 010-1.06l1.06-1.06a.75.75 0 011.06 1.06l-1.06 1.06a.75.75 0 01-1.06 0zM10 18a.75.75 0 01-.75-.75v-1.5a.75.75 0 011.5 0v1.5A.75.75 0 0110 18z" clip-rule="evenodd" /></svg></div><div><h4 class="font-bold text-sm">쾌속 교통망</h4><p class="text-xs text-gray-600">경강선 여주역, 여주종합터미널 인접</p></div></div>
+                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-red-100 text-red-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg></div><div><h4 class="font-bold text-sm">가까운 의료</h4><p class="text-xs text-gray-600">여주세종병원 등 다양한 병의원</p></div></div>
+                    <div class="bg-gray-50 p-3 rounded-lg flex items-center space-x-3"><div class="bg-indigo-100 text-indigo-700 p-2 rounded-full shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg></div><div><h4 class="font-bold text-sm">편리한 행정</h4><p class="text-xs text-gray-600">여주시청, 여주경찰서 등 행정타운 인접</p></div></div>
+                    <div class="bg-teal-100 p-4 rounded-lg flex items-center space-x-4 mt-6"><div class="text-teal-600 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h8a2 2 0 002-2v-1a2 2 0 012-2h1.945C21.055 11 21 11.555 21 12c0 5.523-4.477 10-10 10S1 17.523 1 12c0-.445.055-1 .945-1z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 2a2 2 0 012 2v6h-4V4a2 2 0 012-2z" /></svg></div><div><h4 class="font-bold text-teal-800">쾌적한 자연</h4><p class="text-sm text-teal-700">남한강, 황학산 수목원 등 힐링 라이프</p></div></div>
+                </div>
+            </div>
+
+            <!-- 페이지 8: 주변 시세 -->
             <div class="page" data-page-name="주변 시세">
                 <h2 class="section-title">주변 시세 비교</h2>
                 <p class="section-subtitle">인근 단지 대비 뛰어난 가격 경쟁력</p>
@@ -200,49 +271,49 @@
                 <p class="text-center mt-4 text-sm text-gray-500">※ 84㎡, 최근 실거래가 기준</p>
             </div>
 
-            <!-- 페이지 8: UNIT 84A -->
+            <!-- 페이지 9: UNIT 84A -->
             <div class="page" data-page-name="UNIT 84A">
                 <h2 class="section-title">UNIT 84A</h2>
                 <p class="section-subtitle">실용성을 극대화한 4Bay 판상형 구조</p>
                 <img src="imgi_9_img_unit_01.png" alt="84A 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x450/EEEEEE/333333?text=Image+Load+Fail';">
             </div>
             
-            <!-- 페이지 9: UNIT 84B -->
+            <!-- 페이지 10: UNIT 84B -->
             <div class="page" data-page-name="UNIT 84B">
                 <h2 class="section-title">UNIT 84B</h2>
                 <p class="section-subtitle">개방감과 조망을 극대화한 타워형</p>
                 <img src="imgi_10_img_unit_02.png" alt="84B 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x450/EEEEEE/333333?text=Image+Load+Fail';">
             </div>
 
-            <!-- 페이지 10: UNIT 84C -->
+            <!-- 페이지 11: UNIT 84C -->
             <div class="page" data-page-name="UNIT 84C">
                 <h2 class="section-title">UNIT 84C</h2>
                 <p class="section-subtitle">가장 선호도 높은 명품 평면</p>
                 <img src="imgi_11_img_unit_03.png" alt="84C 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x450/EEEEEE/333333?text=Image+Load+Fail';">
             </div>
 
-            <!-- 페이지 11: UNIT 113 -->
+            <!-- 페이지 12: UNIT 113 -->
             <div class="page" data-page-name="UNIT 113">
                 <h2 class="section-title">UNIT 113</h2>
                 <p class="section-subtitle">품격과 실용을 모두 담은 혁신 평면</p>
                 <img src="imgi_12_img_unit_04.png" alt="113 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x450/EEEEEE/333333?text=Image+Load+Fail';">
             </div>
 
-            <!-- 페이지 12: UNIT 120 -->
+            <!-- 페이지 13: UNIT 120 -->
             <div class="page" data-page-name="UNIT 120">
                 <h2 class="section-title">UNIT 120</h2>
                 <p class="section-subtitle">여유로운 공간 설계의 프리미엄 평면</p>
                 <img src="imgi_13_img_unit_05.png" alt="120 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x450/EEEEEE/333333?text=Image+Load+Fail';">
             </div>
             
-            <!-- 페이지 13: UNIT P160 -->
+            <!-- 페이지 14: UNIT P160 -->
             <div class="page" data-page-name="UNIT P160">
                 <h2 class="section-title">UNIT P160</h2>
                 <p class="section-subtitle">하늘과 맞닿은 펜트하우스의 가치</p>
                 <img src="imgi_14_img_unit_06.png" alt="P160 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x450/EEEEEE/333333?text=Image+Load+Fail';">
             </div>
             
-            <!-- 페이지 14: 오시는 길 -->
+            <!-- 페이지 15: 오시는 길 -->
             <div class="page" data-page-name="오시는 길">
                 <div class="text-center">
                     <h2 class="section-title">오시는 길</h2>
@@ -293,8 +364,8 @@
         
         // 상담사 정보
         const counselors = [
-            { name: '김로제 상담사', phone: '1800-8863', image: 'https://placehold.co/48x48/EFEFEF/333333?text=상담사1' },
-            { name: '박센텀 상담사', phone: '1800-8863', image: 'https://placehold.co/48x48/EFEFEF/333333?text=상담사2' }
+            { name: '김로제 상담사', phone: '1800-8863', image: 'man1.jpeg' },
+            { name: '박센텀 상담사', phone: '1800-8863', image: 'man2.jpeg' }
         ];
 
         // 상담사 목록 동적 생성
@@ -303,7 +374,7 @@
             counselors.forEach(counselor => {
                 const counselorItem = `
                     <a href="tel:${counselor.phone}" class="flex items-center p-3 bg-gray-50 hover:bg-indigo-100 rounded-lg transition duration-200">
-                        <img src="${counselor.image}" alt="${counselor.name}" class="w-12 h-12 p-1 rounded-full object-contain mr-4" onerror="this.onerror=null;this.src='https://placehold.co/48x48/CCCCCC/FFFFFF?text=...';">
+                        <img src="${counselor.image}" alt="${counselor.name}" class="w-12 h-12 p-1 rounded-full object-cover mr-4" onerror="this.onerror=null;this.src='https://placehold.co/48x48/CCCCCC/FFFFFF?text=...';">
                         <div class="flex-grow">
                             <p class="font-bold text-gray-800">${counselor.name}</p>
                             <p class="text-sm text-gray-500">${counselor.phone}</p>
