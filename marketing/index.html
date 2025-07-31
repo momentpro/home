@@ -6,11 +6,9 @@
     <title>분양콕 - 부동산 광고 통합 제안서</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
-
         :root {
             --primary-color: #007bff;
         }
-
         body {
             margin: 0;
             background-color: #f0f2f5;
@@ -28,9 +26,10 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         
+        /* === 꾸미기 효과 1: 세련된 배경 및 구분선 === */
         .section-divider {
             padding: 60px 20px;
-            background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+            background: linear-gradient(to bottom, #ffffff, #f8f9fa); /* 은은한 그라데이션 배경 */
             margin: 0 auto;
         }
         .section-divider h2 {
@@ -39,6 +38,7 @@
             margin-bottom: 20px;
             position: relative;
         }
+        /* 제목 아래 장식용 라인 추가 */
         .section-divider h2::after {
             content: '';
             display: block;
@@ -58,6 +58,16 @@
             margin: 0 auto;
             border-radius: 8px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .shorts-container {
+            max-width: 360px;
+            padding-bottom: 640px;
+        }
+        /* 비디오 위에 마우스 올렸을 때 효과 */
+        .video-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
         .video-container iframe {
             position: absolute;
@@ -66,49 +76,6 @@
             width: 100%;
             height: 100%;
         }
-
-        /* 클릭 가능한 썸네일 스타일 */
-        .thumbnail-container {
-            max-width: 360px;
-            margin: 0 auto;
-        }
-        .thumbnail-link {
-            display: inline-block;
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            line-height: 0; /* 이미지 아래 여백 제거 */
-        }
-        .thumbnail-link .thumbnail-image {
-            max-width: 100%;
-            transition: transform 0.3s ease;
-        }
-        .thumbnail-link:hover .thumbnail-image {
-            transform: scale(1.05);
-        }
-        .play-icon-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .thumbnail-link:hover .play-icon-overlay {
-            opacity: 1;
-        }
-        .play-icon {
-            width: 80px;
-            height: 80px;
-            fill: rgba(255, 255, 255, 0.9);
-        }
-
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
@@ -123,8 +90,10 @@
         .btn:hover {
             background-color: #0056b3;
             transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
+        /* === 꾸미기 효과 2: 스크롤 애니메이션 === */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -139,24 +108,22 @@
 <body>
 
     <div class="page-container">
-        <img src="page_01.png" alt="제안서 1페이지: 메인 타이틀" class="page-image reveal">
-        <img src="page_03.png" alt="제안서 3페이지: 회사 슬로건" class="page-image reveal">
-        
-        <div class="section-divider reveal"><h2>핵심 성과</h2></div>
-        <img src="page_05.png" alt="제안서 5페이지: 광고 운영 성과" class="page-image reveal">
-        
-        <div class="section-divider reveal"><h2>주요 성공 사례</h2></div>
-        <img src="page_04.png" alt="제안서 4페이지: 포트폴리오 1" class="page-image reveal">
-        <img src="page_07.png" alt="제안서 7페이지: 포트폴리오 2" class="page-image reveal">
-
-        <div class="section-divider reveal"><h2>체계적인 운영 시스템</h2></div>
-        <img src="page_08.png" alt="제안서 8페이지: KRMI 데이터랩 소개" class="page-image reveal">
-        <img src="page_09.png" alt="제안서 9페이지: 광고 운영 프로세스" class="page-image reveal">
-
-        <div class="section-divider reveal"><h2>대표 콘텐츠: 집보러 왔수다</h2></div>
-        <img src="page_14.png" alt="제안서 14페이지: 집보러 왔수다 소개" class="page-image reveal">
-        <img src="page_15.png" alt="제안서 15페이지: 메인 MC 소개" class="page-image reveal">
-        <img src="page_16.png" alt="제안서 16페이지: 콘텐츠 예시" class="page-image reveal">
+        <img src="page_01.png" alt="제안서 1페이지" class="page-image reveal">
+        <img src="page_02.png" alt="제안서 2페이지" class="page-image reveal">
+        <img src="page_03.png" alt="제안서 3페이지" class="page-image reveal">
+        <img src="page_04.png" alt="제안서 4페이지" class="page-image reveal">
+        <img src="page_05.png" alt="제안서 5페이지" class="page-image reveal">
+        <img src="page_06.png" alt="제안서 6페이지" class="page-image reveal">
+        <img src="page_07.png" alt="제안서 7페이지" class="page-image reveal">
+        <img src="page_08.png" alt="제안서 8페이지" class="page-image reveal">
+        <img src="page_09.png" alt="제안서 9페이지" class="page-image reveal">
+        <img src="page_10.png" alt="제안서 10페이지" class="page-image reveal">
+        <img src="page_11.png" alt="제안서 11페이지" class="page-image reveal">
+        <img src="page_12.png" alt="제안서 12페이지" class="page-image reveal">
+        <img src="page_13.png" alt="제안서 13페이지" class="page-image reveal">
+        <img src="page_14.png" alt="제안서 14페이지" class="page-image reveal">
+        <img src="page_15.png" alt="제안서 15페이지" class="page-image reveal">
+        <img src="page_16.png" alt="제안서 16페이지" class="page-image reveal">
         
         <div class="section-divider reveal">
             <h2>'집보러 왔수다' 대표 영상</h2>
@@ -165,53 +132,42 @@
             </div>
         </div>
         
-        <div class="section-divider reveal"><h2>전체 서비스 상세 안내</h2></div>
-        <img src="page_18.png" alt="제안서 18페이지: 집보러 왔수다 가격표" class="page-image reveal">
-        
-        <img src="page_19.png" alt="제안서 19페이지: 인스타그램 숏폼 서비스" class="page-image reveal">
+        <img src="page_17.png" alt="제안서 17페이지" class="page-image reveal">
+        <img src="page_18.png" alt="제안서 18페이지" class="page-image reveal">
+        <img src="page_19.png" alt="제안서 19페이지" class="page-image reveal">
+
         <div class="section-divider reveal">
             <h2>인스타그램 숏폼 샘플 영상</h2>
-            <div class="thumbnail-container">
-                <a href="https://www.youtube.com/shorts/P_xTYs8HBug" target="_blank" class="thumbnail-link">
-                    <img src="shorts_1.jpg" alt="쇼츠 영상 썸네일 1" class="thumbnail-image">
-                    <div class="play-icon-overlay">
-                        <svg class="play-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" fill="rgba(0,0,0,0.5)"/><path d="M140 100L80 65V135L140 100Z"/></svg>
-                    </div>
-                </a>
+            <div class="video-container shorts-container">
+                <iframe src="http://googleusercontent.com/youtube.com/embed/P-2u32n2O_k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
 
-        <img src="page_20.png" alt="제안서 20페이지: 서포터.ZIP 서비스" class="page-image reveal">
+        <img src="page_20.png" alt="제안서 20페이지" class="page-image reveal">
+
         <div class="section-divider reveal">
             <h2>서포터.ZIP 후기 샘플 영상</h2>
-            <div class="thumbnail-container">
-                <a href="https://www.youtube.com/shorts/IRzvVKZC31s" target="_blank" class="thumbnail-link">
-                    <img src="shorts_2.jpg" alt="쇼츠 영상 썸네일 2" class="thumbnail-image">
-                    <div class="play-icon-overlay">
-                        <svg class="play-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" fill="rgba(0,0,0,0.5)"/><path d="M140 100L80 65V135L140 100Z"/></svg>
-                    </div>
-                </a>
+            <div class="video-container shorts-container">
+                <iframe src="http://googleusercontent.com/youtube.com/embed/jT-5Y9_a4go" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
 
-        <img src="page_21.png" alt="제안서 21페이지: 브로슈어 전자책 서비스" class="page-image reveal">
+        <img src="page_21.png" alt="제안서 21페이지" class="page-image reveal">
+
         <div class="section-divider reveal">
             <h2>브로슈어/이벤트 관련 페이지</h2>
-            <p style="margin-bottom:25px; font-size: 1.1em;">콘텐츠와 연계하여 진행했던 이벤트 페이지 예시입니다。</p>
+            <p style="margin-bottom:25px; font-size: 1.1em;">콘텐츠와 연계하여 진행했던 이벤트 페이지 예시입니다.</p>
             <a href="https://momentintl.com/icheon-bubal-efete/" target="_blank" class="btn">샘플 페이지 보러가기</a>
         </div>
 
-
-        <div class="section-divider reveal"><h2>광고 채널 및 집행 예시</h2></div>
-        <img src="page_24.png" alt="제안서 24페이지: 채널 운영 소개" class="page-image reveal">
-        <img src="page_25.png" alt="제안서 25페이지: 온라인 광고 종류 예시" class="page-image reveal">
-
-        <div class="section-divider reveal"><h2>온/오프라인 통합 마케팅</h2></div>
-        <img src="page_27.png" alt="제안서 27페이지: 오프라인 광고 소개" class="page-image reveal">
-        <img src="page_28.png" alt="제안서 28페이지: 오프라인 광고 예시" class="page-image reveal">
-
-        <div class="section-divider reveal"><h2>문의 및 제휴 안내</h2></div>
-        <img src="page_29.png" alt="제안서 29페이지: 연락처 정보" class="page-image reveal">
+        <img src="page_22.png" alt="제안서 22페이지" class="page-image reveal">
+        <img src="page_23.png" alt="제안서 23페이지" class="page-image reveal">
+        <img src="page_24.png" alt="제안서 24페이지" class="page-image reveal">
+        <img src="page_25.png" alt="제안서 25페이지" class="page-image reveal">
+        <img src="page_26.png" alt="제안서 26페이지" class="page-image reveal">
+        <img src="page_27.png" alt="제안서 27페이지" class="page-image reveal">
+        <img src="page_28.png" alt="제안서 28페이지" class="page-image reveal">
+        <img src="page_29.png" alt="제안서 29페이지" class="page-image reveal">
     </div>
 
     <script>
@@ -225,13 +181,8 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, {
-                threshold: 0.1 // 10% 보이면 애니메이션 시작
-            });
-
-            reveals.forEach(reveal => {
-                observer.observe(reveal);
-            });
+            }, { threshold: 0.1 });
+            reveals.forEach(reveal => { observer.observe(reveal); });
         }
         revealSections();
     </script>
