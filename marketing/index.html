@@ -35,6 +35,18 @@
             background: linear-gradient(to bottom, #ffffff, #f8f9fa);
             margin: 0 auto;
         }
+        /* --- 여기가 핵심 수정 부분 1 --- */
+        /* 영상이 포함된 섹션은 좌우 여백을 없애서 꽉 채웁니다. */
+        .video-section {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .video-section h2, .video-section p {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        /* --- 여기까지 --- */
+
         .section-divider h2 {
             font-size: 2.2em;
             font-weight: 900;
@@ -52,24 +64,23 @@
             margin: 20px auto 0 auto;
         }
 
-        /* --- 여기가 핵심 수정 부분입니다 --- */
+        /* --- 여기가 핵심 수정 부분 2 --- */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
-            width: 100%; /* 너비를 100%로 설정해 반응형으로 만듭니다 */
-            max-width: 1200px; /* 최대 너비를 다른 이미지들과 맞춥니다 */
+            width: 100%; 
+            max-width: 1200px; /* 이미지와 최대 너비를 맞춤 */
             margin: 0 auto;
-            border-radius: 8px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            /* 영상 자체에는 그림자나 둥근 모서리가 필요 없으므로 제거 */
         }
+        /* --- 여기까지 --- */
+
         .thumbnail-container {
             max-width: 360px;
             margin: 0 auto;
         }
-        /* --- 여기까지 --- */
-
         .thumbnail-link {
             display: inline-block;
             position: relative;
@@ -149,7 +160,7 @@
         <img src="page_15.png" alt="제안서 15페이지" class="page-image reveal">
         <img src="page_16.png" alt="제안서 16페이지" class="page-image reveal">
         
-        <div class="section-divider reveal">
+        <div class="section-divider reveal video-section">
             <h2>'집보러 왔수다'<br>보러가기</h2>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/DG_xJsOomq8?si=oWHzT2c-3YyIHblx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -212,6 +223,7 @@
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
                         observer.unobserve(entry.target);
+.
                     }
                 });
             }, { threshold: 0.1 });
