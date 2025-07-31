@@ -7,24 +7,25 @@
     <style>
         body {
             margin: 0;
-            background-color: #f0f2f5; /* A light grey background to frame the pages */
-            font-family: sans-serif;
-            text-align: center; /* Center everything */
+            background-color: #f0f2f5;
+            font-family: 'Noto Sans KR', sans-serif;
+            text-align: center;
         }
         .page-image {
             max-width: 100%;
             height: auto;
-            display: block; /* Removes bottom space */
-            margin: 0 auto; /* Center the image */
+            display: block;
+            margin: 0 auto;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .section-divider {
-            padding: 40px 20px;
+            padding: 50px 20px;
             background-color: #ffffff;
             margin: 0 auto;
         }
         .section-divider h2 {
             font-size: 2em;
+            font-weight: bold;
             margin-bottom: 20px;
         }
         .video-container {
@@ -32,7 +33,7 @@
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
             height: 0;
             overflow: hidden;
-            max-width: 1000px; /* Limit video size */
+            max-width: 1000px;
             margin: 0 auto;
             border-radius: 8px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
@@ -44,28 +45,90 @@
             width: 100%;
             height: 100%;
         }
+        .btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
     </style>
 </head>
 <body>
 
-    <img src="page_01.png" alt="제안서 1페이지: 메인 타이틀" class="page-image">
-    <img src="page_03.png" alt="제안서 3페이지: 회사 슬로건" class="page-image">
-    <img src="page_05.png" alt="제안서 5페이지: 광고 운영 성과" class="page-image">
-    <img src="page_09.png" alt="제안서 9페이지: 광고 운영 프로세스" class="page-image">
-    <img src="page_14.png" alt="제안서 14페이지: 집보러 왔수다 소개" class="page-image">
+    <div class="page-container">
+        <img src="page_01.png" alt="제안서 1페이지: 메인 타이틀" class="page-image">
+        <img src="page_03.png" alt="제안서 3페이지: 회사 슬로건" class="page-image">
+        
+        <div class="section-divider"><h2>핵심 성과</h2></div>
+        <img src="page_05.png" alt="제안서 5페이지: 광고 운영 성과" class="page-image">
+        
+        <div class="section-divider"><h2>주요 성공 사례</h2></div>
+        <img src="page_04.png" alt="제안서 4페이지: 포트폴리오 1" class="page-image">
+        <img src="page_07.png" alt="제안서 7페이지: 포트폴리오 2" class="page-image">
 
-    <div class="section-divider">
-        <h2>'집보러 왔수다' 대표 영상</h2>
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="section-divider"><h2>체계적인 운영 시스템</h2></div>
+        <img src="page_08.png" alt="제안서 8페이지: KRMI 데이터랩 소개" class="page-image">
+        <img src="page_09.png" alt="제안서 9페이지: 광고 운영 프로세스" class="page-image">
+
+        <div class="section-divider"><h2>대표 콘텐츠: 집보러 왔수다</h2></div>
+        <img src="page_14.png" alt="제안서 14페이지: 집보러 왔수다 소개" class="page-image">
+        <img src="page_15.png" alt="제안서 15페이지: 메인 MC 소개" class="page-image">
+        <img src="page_16.png" alt="제안서 16페이지: 콘텐츠 예시" class="page-image">
+        
+        <div class="section-divider">
+            <h2>'집보러 왔수다' 대표 영상</h2>
+            <div class="video-container">
+                <iframe src="https://youtu.be/DG_xJsOomq8?si=MGtaI8QES5he4lMB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
         </div>
+        
+        <div class="section-divider"><h2>전체 서비스 상세 안내</h2></div>
+        <img src="page_18.png" alt="제안서 18페이지: 집보러 왔수다 가격표" class="page-image">
+        
+        <img src="page_19.png" alt="제안서 19페이지: 인스타그램 숏폼 서비스" class="page-image">
+        <div class="section-divider">
+            <h2>인스타그램 숏폼 샘플 영상</h2>
+            <div class="video-container">
+                <iframe src="https://youtube.com/shorts/P_xTYs8HBug?si=cDzbjtFEWzQMeJmt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <img src="page_20.png" alt="제안서 20페이지: 서포터.ZIP 서비스" class="page-image">
+        <div class="section-divider">
+            <h2>서포터.ZIP 후기 샘플 영상</h2>
+            <div class="video-container">
+                <iframe src="https://youtube.com/shorts/IRzvVKZC31s?si=IxlDfEYhVumhPGAc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <img src="page_21.png" alt="제안서 21페이지: 브로슈어 전자책 서비스" class="page-image">
+        <div class="section-divider">
+            <h2>브로슈어/이벤트 관련 페이지</h2>
+            <p style="margin-bottom:25px;">콘텐츠와 연계하여 진행했던 이벤트 페이지 예시입니다.</p>
+            <a href="https://momentintl.com/icheon-bubal-efete/" target="_blank" class="btn">샘플 페이지 보러가기</a>
+        </div>
+
+
+        <div class="section-divider"><h2>광고 채널 및 집행 예시</h2></div>
+        <img src="page_24.png" alt="제안서 24페이지: 채널 운영 소개" class="page-image">
+        <img src="page_25.png" alt="제안서 25페이지: 온라인 광고 종류 예시" class="page-image">
+
+        <div class="section-divider"><h2>온/오프라인 통합 마케팅</h2></div>
+        <img src="page_27.png" alt="제안서 27페이지: 오프라인 광고 소개" class="page-image">
+        <img src="page_28.png" alt="제안서 28페이지: 오프라인 광고 예시" class="page-image">
+
+        <div class="section-divider"><h2>문의 및 제휴 안내</h2></div>
+        <img src="page_29.png" alt="제안서 29페이지: 연락처 정보" class="page-image">
     </div>
-    
-    <img src="page_18.png" alt="제안서 18페이지: 집보러 왔수다 가격표" class="page-image">
-    <img src="page_19.png" alt="제안서 19페이지: 인스타그램 숏폼 소개" class="page-image">
-    <img src="page_24.png" alt="제안서 24페이지: 채널 운영 소개" class="page-image">
-    <img src="page_27.png" alt="제안서 27페이지: 오프라인 광고 소개" class="page-image">
-    <img src="page_29.png" alt="제안서 29페이지: 연락처 정보" class="page-image">
 
 </body>
 </html>
