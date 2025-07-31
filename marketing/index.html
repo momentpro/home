@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>분양콕 - 부동산 광고 통합 제안서</title>
+    <link rel="icon" type="image/png" href="img_favicon.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
 
@@ -35,7 +36,6 @@
             background: linear-gradient(to bottom, #ffffff, #f8f9fa);
             margin: 0 auto;
         }
-        /* --- 여기가 핵심 수정 부분 1 --- */
         /* 영상이 포함된 섹션은 좌우 여백을 없애서 꽉 채웁니다. */
         .video-section {
             padding-left: 0;
@@ -45,7 +45,6 @@
             padding-left: 20px;
             padding-right: 20px;
         }
-        /* --- 여기까지 --- */
 
         .section-divider h2 {
             font-size: 2.2em;
@@ -63,20 +62,15 @@
             border-radius: 2px;
             margin: 20px auto 0 auto;
         }
-
-        /* --- 여기가 핵심 수정 부분 2 --- */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             width: 100%; 
-            max-width: 1200px; /* 이미지와 최대 너비를 맞춤 */
+            max-width: 1200px;
             margin: 0 auto;
-            /* 영상 자체에는 그림자나 둥근 모서리가 필요 없으므로 제거 */
         }
-        /* --- 여기까지 --- */
-
         .thumbnail-container {
             max-width: 360px;
             margin: 0 auto;
@@ -223,7 +217,6 @@
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
                         observer.unobserve(entry.target);
-.
                     }
                 });
             }, { threshold: 0.1 });
