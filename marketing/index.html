@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>분양콕 - 부동산 광고 통합 제안서</title>
-    <link rel="icon" type="image/png" href="img_favicon.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
 
@@ -18,34 +17,26 @@
             font-family: 'Noto Sans KR', sans-serif;
             text-align: center;
         }
-        .page-container {
-            overflow-x: hidden;
-            width: 100%;
-        }
-        .page-image {
-            width: 100%;
-            max-width: 1200px;
-            height: auto;
-            display: block;
+        
+        /* --- 여기가 핵심 수정 부분 1 --- */
+        /* 모든 콘텐츠를 감싸는 일관된 틀(Wrapper)을 만듭니다. */
+        .content-wrapper {
+            max-width: 1200px; /* 모든 콘텐츠의 최대 너비를 1200px로 통일 */
             margin: 0 auto;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         
+        .page-image {
+            width: 100%; /* 이미지는 항상 틀의 너비에 꽉 차게 설정 */
+            height: auto;
+            display: block;
+        }
+        /* --- 여기까지 --- */
+        
         .section-divider {
             padding: 60px 20px;
             background: linear-gradient(to bottom, #ffffff, #f8f9fa);
-            margin: 0 auto;
         }
-        /* 영상이 포함된 섹션은 좌우 여백을 없애서 꽉 채웁니다. */
-        .video-section {
-            padding-left: 0;
-            padding-right: 0;
-        }
-        .video-section h2, .video-section p {
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
         .section-divider h2 {
             font-size: 2.2em;
             font-weight: 900;
@@ -62,14 +53,13 @@
             border-radius: 2px;
             margin: 20px auto 0 auto;
         }
+
         .video-container {
             position: relative;
-            padding-bottom: 56.25%;
+            width: 100%; /* 영상도 항상 틀의 너비에 꽉 차게 설정 */
+            padding-bottom: 56.25%; /* 16:9 비율 유지 */
             height: 0;
             overflow: hidden;
-            width: 100%; 
-            max-width: 1200px;
-            margin: 0 auto;
         }
         .thumbnail-container {
             max-width: 360px;
@@ -136,34 +126,72 @@
 </head>
 <body>
 
-    <div class="page-container">
-        <img src="page_01.png" alt="제안서 1페이지" class="page-image reveal">
-        <img src="page_02.png" alt="제안서 2페이지" class="page-image reveal">
-        <img src="page_03.png" alt="제안서 3페이지" class="page-image reveal">
-        <img src="page_04.png" alt="제안서 4페이지" class="page-image reveal">
-        <img src="page_05.png" alt="제안서 5페이지" class="page-image reveal">
-        <img src="page_06.png" alt="제안서 6페이지" class="page-image reveal">
-        <img src="page_07.png" alt="제안서 7페이지" class="page-image reveal">
-        <img src="page_08.png" alt="제안서 8페이지" class="page-image reveal">
-        <img src="page_09.png" alt="제안서 9페이지" class="page-image reveal">
-        <img src="page_10.png" alt="제안서 10페이지" class="page-image reveal">
-        <img src="page_11.png" alt="제안서 11페이지" class="page-image reveal">
-        <img src="page_12.png" alt="제안서 12페이지" class="page-image reveal">
-        <img src="page_13.png" alt="제안서 13페이지" class="page-image reveal">
-        <img src="page_14.png" alt="제안서 14페이지" class="page-image reveal">
-        <img src="page_15.png" alt="제안서 15페이지" class="page-image reveal">
-        <img src="page_16.png" alt="제안서 16페이지" class="page-image reveal">
+    <div class="content-wrapper">
+        <div class="reveal">
+            <img src="page_01.png" alt="제안서 1페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_02.png" alt="제안서 2페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_03.png" alt="제안서 3페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_04.png" alt="제안서 4페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_05.png" alt="제안서 5페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_06.png" alt="제안서 6페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_07.png" alt="제안서 7페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_08.png" alt="제안서 8페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_09.png" alt="제안서 9페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_10.png" alt="제안서 10페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_11.png" alt="제안서 11페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_12.png" alt="제안서 12페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_13.png" alt="제안서 13페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_14.png" alt="제안서 14페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_15.png" alt="제안서 15페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_16.png" alt="제안서 16페이지" class="page-image">
+        </div>
         
-        <div class="section-divider reveal video-section">
+        <div class="section-divider reveal">
             <h2>'집보러 왔수다'<br>보러가기</h2>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/DG_xJsOomq8?si=oWHzT2c-3YyIHblx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
         
-        <img src="page_17.png" alt="제안서 17페이지" class="page-image reveal">
-        <img src="page_18.png" alt="제안서 18페이지" class="page-image reveal">
-        <img src="page_19.png" alt="제안서 19페이지" class="page-image reveal">
+        <div class="reveal">
+            <img src="page_17.png" alt="제안서 17페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_18.png" alt="제안서 18페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_19.png" alt="제안서 19페이지" class="page-image">
+        </div>
 
         <div class="section-divider reveal">
             <h2>인스타리드<br>보러가기</h2>
@@ -177,7 +205,9 @@
             </div>
         </div>
 
-        <img src="page_20.png" alt="제안서 20페이지" class="page-image reveal">
+        <div class="reveal">
+            <img src="page_20.png" alt="제안서 20페이지" class="page-image">
+        </div>
 
         <div class="section-divider reveal">
             <h2>서포터.ZIP<br>보러가기</h2>
@@ -191,22 +221,40 @@
             </div>
         </div>
 
-        <img src="page_21.png" alt="제안서 21페이지" class="page-image reveal">
+        <div class="reveal">
+            <img src="page_21.png" alt="제안서 21페이지" class="page-image">
+        </div>
 
         <div class="section-divider reveal">
             <h2>브로슈어 전자책<br>보러가기</h2>
             <p style="margin-bottom:25px; font-size: 1.1em;">콘텐츠와 연계하여 진행했던 이벤트 페이지 예시입니다.</p>
             <a href="https://momentintl.com/icheon-bubal-efete/" target="_blank" class="btn">샘플 페이지 보러가기</a>
         </div>
-
-        <img src="page_22.png" alt="제안서 22페이지" class="page-image reveal">
-        <img src="page_23.png" alt="제안서 23페이지" class="page-image reveal">
-        <img src="page_24.png" alt="제안서 24페이지" class="page-image reveal">
-        <img src="page_25.png" alt="제안서 25페이지" class="page-image reveal">
-        <img src="page_26.png" alt="제안서 26페이지" class="page-image reveal">
-        <img src="page_27.png" alt="제안서 27페이지" class="page-image reveal">
-        <img src="page_28.png" alt="제안서 28페이지" class="page-image reveal">
-        <img src="page_29.png" alt="제안서 29페이지" class="page-image reveal">
+        
+        <div class="reveal">
+            <img src="page_22.png" alt="제안서 22페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_23.png" alt="제안서 23페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_24.png" alt="제안서 24페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_25.png" alt="제안서 25페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_26.png" alt="제안서 26페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_27.png" alt="제안서 27페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_28.png" alt="제안서 28페이지" class="page-image">
+        </div>
+        <div class="reveal">
+            <img src="page_29.png" alt="제안서 29페이지" class="page-image">
+        </div>
     </div>
 
     <script>
