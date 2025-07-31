@@ -19,9 +19,13 @@
         }
         .page-container {
             overflow-x: hidden;
+            width: 100%; /* 전체 너비를 화면에 맞춤 */
         }
         .page-image {
-            max-width: 100%;
+            /* --- 여기가 핵심 수정 부분입니다 --- */
+            width: 100%;      /* 이미지 너비를 항상 화면에 꽉 채움 */
+            max-width: 1200px; /* 하지만 너무 큰 화면에서는 최대 1200px로 제한 */
+            /* --- 여기까지 --- */
             height: auto;
             display: block;
             margin: 0 auto;
@@ -60,7 +64,6 @@
             border-radius: 8px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        
         .thumbnail-container {
             max-width: 360px;
             margin: 0 auto;
@@ -98,7 +101,6 @@
             height: 80px;
             fill: rgba(255, 255, 255, 0.9);
         }
-
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
@@ -114,7 +116,6 @@
             background-color: #0056b3;
             transform: translateY(-3px);
         }
-
         .reveal {
             opacity: 0;
             transform: translateY(40px);
