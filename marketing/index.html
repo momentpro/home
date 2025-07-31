@@ -7,25 +7,130 @@
     <link rel="icon" type="image/png" href="img_favicon.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
-        :root { --primary-color: #007bff; }
-        body { margin: 0; background-color: #f0f2f5; font-family: 'Noto Sans KR', sans-serif; text-align: center; }
-        .content-wrapper { max-width: 1200px; margin: 0 auto; box-shadow: 0 5px 25px rgba(0,0,0,0.1); background-color: #ffffff; }
-        .page-image { width: 100%; height: auto; display: block; }
-        .section-divider { padding: 60px 20px; background: linear-gradient(to bottom, #ffffff, #f8f9fa); }
-        .section-divider h2 { font-size: 2.2em; font-weight: 900; margin-bottom: 20px; position: relative; line-height: 1.4; }
-        .section-divider h2::after { content: ''; display: block; width: 60px; height: 4px; background-color: var(--primary-color); border-radius: 2px; margin: 20px auto 0 auto; }
-        .video-container { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; }
-        .thumbnail-container { max-width: 360px; margin: 0 auto; }
-        .thumbnail-link { display: inline-block; position: relative; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); line-height: 0; }
-        .thumbnail-link .thumbnail-image { max-width: 100%; transition: transform 0.3s ease; }
-        .thumbnail-link:hover .thumbnail-image { transform: scale(1.05); }
-        .play-icon-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3); display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
-        .thumbnail-link:hover .play-icon-overlay { opacity: 1; }
-        .play-icon { width: 80px; height: 80px; fill: rgba(255, 255, 255, 0.9); }
-        .btn { display: inline-block; background-color: var(--primary-color); color: #fff; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1em; transition: all 0.3s; }
-        .btn:hover { background-color: #0056b3; transform: translateY(-3px); }
-        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s ease-out, transform 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        :root {
+            --primary-color: #007bff;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f0f2f5;
+            font-family: 'Noto Sans KR', sans-serif;
+            text-align: center;
+        }
+        
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            background-color: #ffffff;
+        }
+        
+        .page-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .section-divider {
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+        }
+
+        /* --- 여기가 핵심 수정 부분 --- */
+        /* 영상/썸네일이 포함된 섹션은 좌우 여백을 없애서 꽉 채웁니다. */
+        .visual-section {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        /* --- 여기까지 --- */
+
+        .section-divider h2 {
+            font-size: 2.2em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            position: relative;
+            line-height: 1.4;
+        }
+        .section-divider h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+            margin: 20px auto 0 auto;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .thumbnail-container {
+            max-width: 360px;
+            margin: 0 auto;
+            padding-top: 20px; /* 제목과의 간격 추가 */
+        }
+        .thumbnail-link {
+            display: inline-block;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            line-height: 0;
+        }
+        .thumbnail-link .thumbnail-image {
+            max-width: 100%;
+            transition: transform 0.3s ease;
+        }
+        .thumbnail-link:hover .thumbnail-image {
+            transform: scale(1.05);
+        }
+        .play-icon-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .thumbnail-link:hover .play-icon-overlay {
+            opacity: 1;
+        }
+        .play-icon {
+            width: 80px;
+            height: 80px;
+            fill: rgba(255, 255, 255, 0.9);
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -48,7 +153,7 @@
         <div class="reveal"><img src="page_15.png" alt="제안서 15페이지" class="page-image"></div>
         <div class="reveal"><img src="page_16.png" alt="제안서 16페이지" class="page-image"></div>
         
-        <div class="section-divider reveal">
+        <div class="section-divider reveal visual-section">
             <h2>'집보러 왔수다'<br>보러가기</h2>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/DG_xJsOomq8?si=oWHzT2c-3YyIHblx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -105,10 +210,9 @@
         <div class="section-divider reveal">
             <h2>제안서 전체 보기</h2>
             <p style="margin-bottom:25px; font-size: 1.1em;">웹페이지의 모든 내용이 담긴 원본 제안서 PDF 파일을 다운로드하실 수 있습니다.</p>
-    
-            <a href="https://raw.githubusercontent.com/momentpro/home/main/marketing/boonyangcok_proposal.pdf" class="btn" download="boonyangcok_proposal.pdf">출력용 제안서 다운 받기</a>
+            <a href="boonyangkok_proposal.pdf" class="btn" download="boonyangkok_proposal.pdf">출력용 제안서 다운 받기</a>
         </div>
-        </div>
+    </div>
 
     <script>
         function revealSections() {
