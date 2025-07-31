@@ -19,13 +19,11 @@
         }
         .page-container {
             overflow-x: hidden;
-            width: 100%; /* 전체 너비를 화면에 맞춤 */
+            width: 100%;
         }
         .page-image {
-            /* --- 여기가 핵심 수정 부분입니다 --- */
-            width: 100%;      /* 이미지 너비를 항상 화면에 꽉 채움 */
-            max-width: 1200px; /* 하지만 너무 큰 화면에서는 최대 1200px로 제한 */
-            /* --- 여기까지 --- */
+            width: 100%;
+            max-width: 1200px;
             height: auto;
             display: block;
             margin: 0 auto;
@@ -54,12 +52,14 @@
             margin: 20px auto 0 auto;
         }
 
+        /* --- 여기가 핵심 수정 부분입니다 --- */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
-            max-width: 1000px;
+            width: 100%; /* 너비를 100%로 설정해 반응형으로 만듭니다 */
+            max-width: 1200px; /* 최대 너비를 다른 이미지들과 맞춥니다 */
             margin: 0 auto;
             border-radius: 8px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
@@ -68,6 +68,8 @@
             max-width: 360px;
             margin: 0 auto;
         }
+        /* --- 여기까지 --- */
+
         .thumbnail-link {
             display: inline-block;
             position: relative;
