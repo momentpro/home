@@ -6,9 +6,11 @@
     <title>분양콕 - 부동산 광고 통합 제안서</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
+
         :root {
             --primary-color: #007bff;
         }
+
         body {
             margin: 0;
             background-color: #f0f2f5;
@@ -26,10 +28,9 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         
-        /* === 꾸미기 효과 1: 세련된 배경 및 구분선 === */
         .section-divider {
             padding: 60px 20px;
-            background: linear-gradient(to bottom, #ffffff, #f8f9fa); /* 은은한 그라데이션 배경 */
+            background: linear-gradient(to bottom, #ffffff, #f8f9fa);
             margin: 0 auto;
         }
         .section-divider h2 {
@@ -38,7 +39,6 @@
             margin-bottom: 20px;
             position: relative;
         }
-        /* 제목 아래 장식용 라인 추가 */
         .section-divider h2::after {
             content: '';
             display: block;
@@ -58,16 +58,6 @@
             margin: 0 auto;
             border-radius: 8px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .shorts-container {
-            max-width: 360px;
-            padding-bottom: 640px;
-        }
-        /* 비디오 위에 마우스 올렸을 때 효과 */
-        .video-container:hover {
-            transform: scale(1.02);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
         .video-container iframe {
             position: absolute;
@@ -76,6 +66,46 @@
             width: 100%;
             height: 100%;
         }
+        
+        /* 클릭 가능한 썸네일 스타일 */
+        .thumbnail-container {
+            max-width: 360px;
+            margin: 0 auto;
+        }
+        .thumbnail-link {
+            display: inline-block;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            line-height: 0;
+        }
+        .thumbnail-link .thumbnail-image {
+            max-width: 100%;
+            transition: transform 0.3s ease;
+        }
+        .thumbnail-link:hover .thumbnail-image {
+            transform: scale(1.05);
+        }
+        .play-icon-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .thumbnail-link:hover .play-icon-overlay {
+            opacity: 1;
+        }
+        .play-icon {
+            width: 80px;
+            height: 80px;
+            fill: rgba(255, 255, 255, 0.9);
+        }
+
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
@@ -90,10 +120,8 @@
         .btn:hover {
             background-color: #0056b3;
             transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        /* === 꾸미기 효과 2: 스크롤 애니메이션 === */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -138,8 +166,13 @@
 
         <div class="section-divider reveal">
             <h2>인스타그램 숏폼 샘플 영상</h2>
-            <div class="video-container shorts-container">
-                <iframe src="http://googleusercontent.com/youtube.com/embed/P-2u32n2O_k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="thumbnail-container">
+                <a href="https://www.youtube.com/shorts/P_xTYs8HBug" target="_blank" class="thumbnail-link">
+                    <img src="shorts_1.jpg" alt="쇼츠 영상 썸네일 1" class="thumbnail-image">
+                    <div class="play-icon-overlay">
+                        <svg class="play-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" fill="rgba(0,0,0,0.5)"/><path d="M140 100L80 65V135L140 100Z"/></svg>
+                    </div>
+                </a>
             </div>
         </div>
 
@@ -147,8 +180,13 @@
 
         <div class="section-divider reveal">
             <h2>서포터.ZIP 후기 샘플 영상</h2>
-            <div class="video-container shorts-container">
-                <iframe src="http://googleusercontent.com/youtube.com/embed/jT-5Y9_a4go" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="thumbnail-container">
+                <a href="https://www.youtube.com/shorts/IRzvVKZC31s" target="_blank" class="thumbnail-link">
+                    <img src="shorts_2.jpg" alt="쇼츠 영상 썸네일 2" class="thumbnail-image">
+                    <div class="play-icon-overlay">
+                        <svg class="play-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" fill="rgba(0,0,0,0.5)"/><path d="M140 100L80 65V135L140 100Z"/></svg>
+                    </div>
+                </a>
             </div>
         </div>
 
@@ -173,7 +211,6 @@
     <script>
         function revealSections() {
             const reveals = document.querySelectorAll('.reveal');
-
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
