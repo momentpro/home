@@ -273,7 +273,7 @@
 
   <!-- DB 수집 모달 -->
   <div id="db-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-30 p-4">
-    <div id="modal-content" class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-sm relative transform transition-all">
+    <div id="modal-content" class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-sm relative transform transition-all max-h-[90vh] overflow-y-auto">
         <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
@@ -304,7 +304,7 @@
             <div class="text-6xl mb-4">📋</div>
             <h3 class="text-2xl font-bold text-gray-800 mb-2">맞춤 분양 전략 보고서</h3>
             <p class="text-gray-600 mb-6">테스트 결과를 바탕으로<br>${customerInfo.name}님만을 위한 맞춤 전략을 준비했습니다.</p>
-            <div id="report-view" class="text-left mt-6 p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100 shadow-sm"></div>
+            <div id="report-view" class="text-left mt-6 p-6 bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl border border-teal-100 shadow-sm"></div>
         </div>
     </div>
   </div>
@@ -604,8 +604,51 @@
         // 보고서 표시
         const reportView = document.getElementById('report-view');
         reportView.innerHTML = `
-            <h3 class="text-2xl font-bold text-center mb-4 text-gray-800">${report.title}</h3>
-            <div class="text-gray-700 leading-relaxed whitespace-pre-line">${report.content}</div>
+            <div class="space-y-6">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">${report.title}</h3>
+                    <div class="w-16 h-1 bg-gradient-to-r from-teal-400 to-cyan-400 mx-auto rounded-full"></div>
+                </div>
+                <div class="text-gray-700 leading-relaxed space-y-4">
+                    ${report.content.split('\n\n').map(section => {
+                        if (section.includes('【')) {
+                            // 섹션 제목인 경우
+                            const title = section.match(/【(.+?)】/)[1];
+                            const content = section.replace(/【.+?】/, '').trim();
+                            return `
+                                <div class="bg-white p-4 rounded-lg border border-teal-200 shadow-sm">
+                                    <h4 class="font-bold text-teal-700 mb-2 flex items-center">
+                                        <span class="w-2 h-2 bg-teal-400 rounded-full mr-2"></span>
+                                        ${title}
+                                    </h4>
+                                    <p class="text-gray-600 text-sm leading-relaxed">${content}</p>
+                                </div>
+                            `;
+                        } else if (section.includes('•')) {
+                            // 추천 현장인 경우
+                            return `
+                                <div class="bg-white p-4 rounded-lg border border-teal-200 shadow-sm">
+                                    <h4 class="font-bold text-teal-700 mb-2 flex items-center">
+                                        <span class="w-2 h-2 bg-teal-400 rounded-full mr-2"></span>
+                                        추천 분양 현장
+                                    </h4>
+                                    <div class="text-gray-600 text-sm space-y-2">
+                                        ${section.split('\n').filter(line => line.trim()).map(line => 
+                                            `<div class="flex items-start">
+                                                <span class="text-teal-500 mr-2">•</span>
+                                                <span>${line.replace('•', '').trim()}</span>
+                                            </div>`
+                                        ).join('')}
+                                    </div>
+                                </div>
+                            `;
+                        } else {
+                            // 일반 텍스트인 경우
+                            return `<p class="text-gray-600 text-sm leading-relaxed">${section}</p>`;
+                        }
+                    }).join('')}
+                </div>
+            </div>
         `;
     });
 
