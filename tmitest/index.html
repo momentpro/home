@@ -3,81 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>내 집 마련 성향 테스트</title>
+  <title>내 집 마련 TMI 테스트</title>
+  <script defer src="script.js"></script>
   <style>
     body {
+      font-family: 'Pretendard', sans-serif;
       margin: 0;
-      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-      background: linear-gradient(145deg, #fdfbfb, #ebedee);
-      color: #222;
+      background: linear-gradient(180deg, #f4f6fa, #ffffff);
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       min-height: 100vh;
     }
     .container {
       width: 100%;
       max-width: 480px;
-      padding: 30px 20px;
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      background: white;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border-radius: 1rem;
       text-align: center;
+      animation: fadeIn 0.5s ease-in;
     }
-    .question-box {
-      display: none;
-      animation: fadeIn 0.4s ease-in-out;
+    .question {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
     }
-    .question-box.active {
+    .answer {
       display: block;
-    }
-    .question-text {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 24px;
-    }
-    .option {
-      display: block;
-      background: #f7f9fc;
-      border: 1px solid #e0e6ed;
-      border-radius: 12px;
-      padding: 16px;
-      margin: 10px 0;
-      font-size: 16px;
-      line-height: 1.5;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .option:hover {
-      background-color: #e8f0fe;
-      border-color: #a8c0ff;
-    }
-    .result-box {
-      display: none;
-    }
-    .result-box h2 {
-      font-size: 24px;
-      margin-bottom: 12px;
-      color: #333;
-    }
-    .result-box p {
-      font-size: 18px;
-      margin-top: 0;
-    }
-    .cta {
-      margin-top: 30px;
-      padding: 14px 24px;
-      background: #007aff;
-      color: #fff;
+      background: #eef1f6;
       border: none;
-      border-radius: 12px;
-      text-decoration: none;
-      display: inline-block;
-      font-weight: bold;
-      transition: background 0.3s ease;
+      border-radius: 0.8rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
     }
-    .cta:hover {
-      background: #0059c4;
+    .answer:hover {
+      background: #dce4ed;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
@@ -86,78 +49,82 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <div id="questionContainer"></div>
-    <div id="resultBox" class="result-box">
-      <h2>🏠 당신의 성향 결과는?</h2>
-      <p id="resultText"></p>
-      <a href="https://momentintl.com/tmitest/form" class="cta">내 조건에 맞는 분양 전략 상담받기</a>
-    </div>
+  <div id="app" class="container">
+    <h2 id="question" class="question"></h2>
+    <div id="answers"></div>
   </div>
-
   <script>
     const questions = [
       {
-        text: "내 집 마련에 대해 어떻게 생각하나요?",
-        options: [
-          { text: "그냥 언젠가는 되겠지, 아직은 먼 이야기 같다.", type: "A" },
-          { text: "아무리 늦어도 2~3년 안에는 준비해야 한다고 생각한다.", type: "B" },
-          { text: "지금 바로 계획 세워야 한다. 기회는 빨리 잡아야 한다.", type: "C" }
-        ]
+        q: "내 집 마련에 대해 어떻게 생각하나요?",
+        a: ["그냥 언젠가는 되겠지, 아직은 먼 이야기 같다.", "2~3년 안에는 준비해야 한다고 생각한다.", "지금 바로 계획 세워야 한다. 기회는 빨리 잡아야 한다."]
       },
       {
-        text: "최근 부동산 콘텐츠를 본 이유는?",
-        options: [
-          { text: "무섭게 오른다니까 그냥 호기심에", type: "A" },
-          { text: "살 만한 곳이 어디일까 싶어서 비교용으로", type: "B" },
-          { text: "청약이나 분양 타이밍 잡으려고 공부 중이다", type: "C" }
-        ]
+        q: "최근 부동산 콘텐츠를 본 이유는?",
+        a: ["무섭게 오른다니까 그냥 호기심에", "살 만한 곳이 어디일까 싶어서 비교용으로", "청약이나 분양 타이밍 잡으려고 공부 중이다"]
+      },
+      {
+        q: "청약 제도에 대해 얼마나 알고 있나요?",
+        a: ["이름만 들어봤지, 정확히는 잘 모른다", "기본 개념은 알지만 실전은 어렵다", "가점 계산부터 분양 일정까지 꼼꼼히 체크한다"]
+      },
+      {
+        q: "부동산 관련 대화를 하면 나는?",
+        a: ["그냥 듣기만 한다", "질문하거나 정보 교환을 해본 적 있다", "내 경험이나 공부한 걸 종종 공유한다"]
+      },
+      {
+        q: "현재 자산 관리는 어떻게 하고 있나요?",
+        a: ["월급 들어오면 그냥 쓰는 편이다", "적금/예금 정도는 하고 있다", "종잣돈 목표까지 계획 세워서 모으고 있다"]
+      },
+      {
+        q: "전월세 계약을 앞뒀을 때 나는?",
+        a: ["부모님이 다 해주셨다", "중개사 말만 믿고 했다", "계약 내용 꼼꼼히 따져보고 진행했다"]
+      },
+      {
+        q: "투자/내 집 마련의 차이에 대한 인식은?",
+        a: ["그냥 다 똑같은 부동산 아니야?", "개념은 구분되지만 아직 실감은 안 난다", "명확히 다르다고 생각하고 접근도 달리 한다"]
+      },
+      {
+        q: "서울 외 지역의 분양에도 관심이 있나요?",
+        a: ["거긴 너무 멀고 나랑은 상관없는 얘기다", "가격은 괜찮지만 교통이 걱정된다", "실거주, 투자 둘 다 염두에 두고 분석한다"]
+      },
+      {
+        q: "가장 두려운 부동산 이슈는?",
+        a: ["돈이 없어 못 산다는 것", "집값이 떨어질까 걱정", "정책·세금 변화로 인해 불이익"]
+      },
+      {
+        q: "내가 만약 5억이 있다면?",
+        a: ["그냥 은행에 넣어둘 것 같다", "부동산을 포함해 고민은 해볼 듯", "당장 입지별로 부동산 시세부터 알아본다"]
       }
+      // 이후 질문도 동일한 형식으로 추가 가능
     ];
 
     let current = 0;
-    let score = { A: 0, B: 0, C: 0 };
-    const container = document.getElementById("questionContainer");
-    const resultBox = document.getElementById("resultBox");
-    const resultText = document.getElementById("resultText");
 
-    function renderQuestion(index) {
-      const q = questions[index];
-      const div = document.createElement("div");
-      div.className = "question-box active";
-      div.innerHTML = `<div class="question-text">${q.text}</div>`;
-      q.options.forEach((opt) => {
+    const questionEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+
+    function showQuestion() {
+      const q = questions[current];
+      questionEl.innerText = q.q;
+      answersEl.innerHTML = "";
+      q.a.forEach((ans, idx) => {
         const btn = document.createElement("button");
-        btn.className = "option";
-        btn.innerText = opt.text;
+        btn.innerText = ans;
+        btn.className = "answer";
         btn.onclick = () => {
-          score[opt.type]++;
-          div.remove();
           current++;
           if (current < questions.length) {
-            renderQuestion(current);
+            showQuestion();
           } else {
-            showResult();
+            questionEl.innerText = "테스트가 완료되었습니다!";
+            answersEl.innerHTML = `<a href='https://momentintl.com/tmitest/result' style='display:inline-block;margin-top:1rem;padding:1rem 2rem;background:#3d5afe;color:#fff;border-radius:0.6rem;text-decoration:none;'>결과 보러가기</a>`;
           }
         };
-        div.appendChild(btn);
+        answersEl.appendChild(btn);
       });
-      container.appendChild(div);
     }
 
-    function showResult() {
-      container.style.display = "none";
-      resultBox.style.display = "block";
-      const maxType = Object.keys(score).reduce((a, b) => (score[a] > score[b] ? a : b));
-      const messages = {
-        A: "🛌 미루기형 – 아직은 멀었다고 느끼는 당신. 하지만 기회는 기다려주지 않습니다.",
-        B: "👀 기회주의형 – 흐름을 살피고 있지만 아직 전략이 부족한 상태입니다.",
-        C: "🚀 실행형 – 이미 계획 중이거나 실전에 돌입한 준비된 당신!"
-      };
-      resultText.innerText = messages[maxType];
-    }
-
-    renderQuestion(current);
+    showQuestion();
   </script>
 </body>
 </html>
