@@ -3,61 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>내 집 마련 성향 테스트 - TMI Test</title>
+  <title>내 집 마련 성향 테스트</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Helvetica Neue', sans-serif;
-      background: #f4f4f4;
-      color: #333;
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: linear-gradient(145deg, #fdfbfb, #ebedee);
+      color: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
     }
     .container {
-      max-width: 600px;
-      margin: 60px auto;
-      background: #fff;
-      border-radius: 10px;
+      width: 100%;
+      max-width: 480px;
       padding: 30px 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      text-align: center;
     }
     .question-box {
       display: none;
-      text-align: center;
+      animation: fadeIn 0.4s ease-in-out;
     }
     .question-box.active {
       display: block;
     }
     .question-text {
-      font-size: 20px;
-      margin-bottom: 30px;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 24px;
     }
     .option {
       display: block;
-      background: #f0f0f0;
-      border: none;
-      border-radius: 6px;
-      padding: 14px 20px;
-      margin: 10px auto;
+      background: #f7f9fc;
+      border: 1px solid #e0e6ed;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 10px 0;
       font-size: 16px;
+      line-height: 1.5;
       cursor: pointer;
-      width: 90%;
+      transition: all 0.3s ease;
+    }
+    .option:hover {
+      background-color: #e8f0fe;
+      border-color: #a8c0ff;
     }
     .result-box {
       display: none;
-      text-align: center;
     }
     .result-box h2 {
-      font-size: 22px;
-      margin-bottom: 20px;
+      font-size: 24px;
+      margin-bottom: 12px;
+      color: #333;
+    }
+    .result-box p {
+      font-size: 18px;
+      margin-top: 0;
     }
     .cta {
       margin-top: 30px;
-      padding: 12px 24px;
-      background: #28a745;
-      color: white;
+      padding: 14px 24px;
+      background: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
       text-decoration: none;
-      border-radius: 5px;
       display: inline-block;
       font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .cta:hover {
+      background: #0059c4;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -65,7 +89,7 @@
   <div class="container">
     <div id="questionContainer"></div>
     <div id="resultBox" class="result-box">
-      <h2>당신의 성향 결과는?</h2>
+      <h2>🏠 당신의 성향 결과는?</h2>
       <p id="resultText"></p>
       <a href="https://momentintl.com/tmitest/form" class="cta">내 조건에 맞는 분양 전략 상담받기</a>
     </div>
