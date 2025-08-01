@@ -3,49 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>내 집 마련 성향 테스트</title>
+  <title>내 집 마련 성향 테스트 - TMI Test</title>
   <style>
     body {
       font-family: 'Helvetica Neue', sans-serif;
-      background: #f8f9fa;
+      background: #f4f4f4;
       margin: 0;
       padding: 0;
+      color: #333;
     }
     .container {
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 20px;
+      max-width: 720px;
+      margin: 50px auto;
+      padding: 30px;
       background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
     }
     h1 {
-      font-size: 24px;
-      color: #333;
+      font-size: 28px;
+      margin-bottom: 10px;
       text-align: center;
+    }
+    .intro {
+      font-size: 16px;
       margin-bottom: 30px;
+      text-align: center;
+      color: #666;
     }
     .question {
-      margin-bottom: 25px;
+      margin-bottom: 30px;
     }
     .question p {
-      font-weight: bold;
+      font-weight: 600;
+      margin-bottom: 10px;
     }
     .options label {
       display: block;
-      margin: 5px 0;
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 8px;
       cursor: pointer;
+    }
+    .options input {
+      margin-right: 8px;
     }
     .submit-btn {
       display: block;
-      margin: 30px auto 0;
-      padding: 10px 20px;
+      width: 100%;
+      padding: 12px;
       background: #007bff;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       font-size: 16px;
       cursor: pointer;
+      margin-top: 20px;
     }
     .result {
       display: none;
@@ -53,15 +67,34 @@
       margin-top: 40px;
     }
     .result h2 {
-      font-size: 20px;
-      margin-bottom: 15px;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .result p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .cta {
+      margin-top: 30px;
+      padding: 12px 24px;
+      background: #28a745;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>내 집 마련 성향 테스트</h1>
+    <div class="intro">
+      내 집 마련은 운이 아니라 성향의 문제입니다.<br>
+      지금 당신의 태도를 점검해보세요.
+    </div>
     <form id="quizForm">
+      <!-- 20개 질문 중 3개만 예시로 먼저 작성 -->
       <div class="question">
         <p>1. 내 집 마련에 대해 어떻게 생각하나요?</p>
         <div class="options">
@@ -69,14 +102,30 @@
           <label><input type="radio" name="q1" value="B"> 지금부터 준비해야지</label>
         </div>
       </div>
-      <!-- 나머지 질문도 이 패턴으로 19개 추가 예정 -->
+      <div class="question">
+        <p>2. 최근 부동산 관련 정보를 본 적이 있나요?</p>
+        <div class="options">
+          <label><input type="radio" name="q2" value="A"> 아니요, 관심 없다</label>
+          <label><input type="radio" name="q2" value="B"> 유튜브/블로그 등 자주 본다</label>
+        </div>
+      </div>
+      <div class="question">
+        <p>3. 집 살 계획을 세우면 가장 먼저 생각나는 건?</p>
+        <div class="options">
+          <label><input type="radio" name="q3" value="A"> 돈이 없는데 어떻게 사?</label>
+          <label><input type="radio" name="q3" value="B"> 대출 조건부터 확인해야지</label>
+        </div>
+      </div>
+
+      <!-- 결과 보기 버튼 -->
       <button type="submit" class="submit-btn">결과 보기</button>
     </form>
 
+    <!-- 결과 박스 -->
     <div class="result" id="resultBox">
-      <h2>당신의 성향 결과는...</h2>
+      <h2>당신의 성향 결과는?</h2>
       <p id="resultText"></p>
-      <a href="#" class="submit-btn">전략 상담 받기</a>
+      <a href="https://momentintl.com/tmitest/form" class="cta">내 조건에 맞는 분양 전략 상담받기</a>
     </div>
   </div>
 
@@ -87,19 +136,22 @@
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      const answers = new FormData(form);
+      const data = new FormData(form);
       let scoreA = 0;
       let scoreB = 0;
-      for (let pair of answers.entries()) {
+      for (let pair of data.entries()) {
         if (pair[1] === 'A') scoreA++;
         else scoreB++;
       }
       form.style.display = 'none';
       resultBox.style.display = 'block';
-      if (scoreA >= scoreB) {
-        resultText.innerText = '🛌 미루기형 - 집은 언젠가 되겠지라고 생각하는 타입입니다. 하지만 지금부터 전략적으로 준비하지 않으면 기회를 놓칠 수 있어요.';
+
+      if (scoreA >= 2) {
+        resultText.innerText = '🛌 미루기형 - 집은 언젠가 되겠지라고 생각하지만, 준비 없이 기회는 오지 않습니다. 지금부터 조건 정리와 기초 정보부터 쌓아야 합니다.';
+      } else if (scoreB >= 2) {
+        resultText.innerText = '🚀 실행형 - 당신은 이미 관심과 실행력을 갖춘 상태입니다. 지금 조건에 맞는 현장을 비교하고 전략을 수립할 타이밍입니다.';
       } else {
-        resultText.innerText = '🚀 실행형 - 당신은 이미 준비가 되어있거나, 빠르게 움직일 수 있는 사람입니다. 지금 조건을 확인해보세요.';
+        resultText.innerText = '🤔 중간형 - 관심은 있지만 구체적인 계획이 부족한 상태입니다. 지금부터 방향을 잡아가는 것이 중요합니다.';
       }
     });
   </script>
