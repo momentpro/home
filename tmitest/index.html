@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>분양콕 | 내 집 마련 TMI 테스트</title>
   
-  <link rel="icon" href="https://googleusercontent.com/file_content/1" type="image/png">
+  <link rel="icon" href="img_og_banner.png" type="image/png">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,13 +16,43 @@
     body {
       font-family: 'Noto Sans KR', sans-serif;
       overflow: hidden;
-      background-color: #f0f4f8;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)),
-        linear-gradient(to right, #e5e7eb 1px, transparent 1px),
-        linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);
-      background-size: 100%, 100%, 20px 20px;
+      background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 50%, #cbd5e1 100%);
+      position: relative;
     }
+    
+    /* 부드러운 배경 그래픽 */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(45, 212, 191, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(20, 184, 166, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 20%, rgba(14, 165, 233, 0.04) 0%, transparent 50%);
+    }
+    
+    /* 정적인 건물 실루엣 */
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 30%;
+      pointer-events: none;
+      z-index: 1;
+      background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 300' fill='%23e5e7eb' opacity='0.3'%3E%3Cpath d='M0 300 L0 200 L50 180 L100 200 L100 300 Z M120 300 L120 180 L170 160 L220 180 L220 300 Z M240 300 L240 160 L290 140 L340 160 L340 300 Z M360 300 L360 200 L410 180 L460 200 L460 300 Z M480 300 L480 180 L530 160 L580 180 L580 300 Z M600 300 L600 160 L650 140 L700 160 L700 300 Z M720 300 L720 200 L770 180 L820 200 L820 300 Z M840 300 L840 180 L890 160 L940 180 L940 300 Z M960 300 L960 160 L1010 140 L1060 160 L1060 300 Z'/%3E%3C/svg%3E");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: bottom;
+    }
+    
     h1, h2, .font-jua {
       font-family: 'Jua', sans-serif;
     }
@@ -47,6 +77,54 @@
         color: white;
         border-color: #14b8a6;
     }
+    
+    /* 메인 콘텐츠 컨테이너 개선 */
+    #app {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+    
+    /* 버튼 개선 */
+    button {
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    /* 진행바 개선 */
+    .progress-container {
+      background: rgba(229, 231, 235, 0.5);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    /* 질문 컨테이너 개선 */
+    #question-container {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      margin-bottom: 20px;
+    }
+    
+    /* 답변 버튼 개선 */
+    .answer-btn {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .answer-btn:hover {
+      background: rgba(45, 212, 191, 0.1);
+      border-color: rgba(45, 212, 191, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(45, 212, 191, 0.2);
+    }
   </style>
 </head>
 <body class="flex justify-center items-center min-h-screen p-4">
@@ -56,45 +134,139 @@
 
   <div id="app" class="w-full max-w-md mx-auto bg-white rounded-2xl shadow-xl p-6 sm:p-8 transition-all duration-500 z-10">
     
-    <div id="start-screen" class="text-center">
-        <img src="https://googleusercontent.com/file_content/1" alt="분양콕 로고" class="w-48 mx-auto mb-4">
-        <h1 class="text-3xl sm:text-4xl font-jua text-gray-800 mb-3">내 집 마련 TMI 테스트</h1>
-        <p class="text-gray-600 mb-8">나는 부동산에 대해 얼마나 알고 있을까?<br>나의 내 집 마련 준비 상태를 확인해보세요!</p>
-        <button id="start-btn" class="w-full bg-main-color hover:bg-main-color-dark text-white font-bold text-lg py-3 px-4 rounded-lg shadow-lg transition-all transform hover:scale-105">
-            테스트 시작하기
-        </button>
+    <div id="start-screen" class="text-center relative">
+        <!-- 배경 장식 요소들 -->
+        <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
+          <div class="absolute top-10 left-10 w-20 h-20 bg-gradient-to-br from-teal-200 to-cyan-200 rounded-full opacity-30 animate-pulse"></div>
+          <div class="absolute top-20 right-8 w-16 h-16 bg-gradient-to-br from-blue-200 to-indigo-200 rounded-full opacity-40 animate-pulse" style="animation-delay: 1s;"></div>
+          <div class="absolute bottom-20 left-8 w-12 h-12 bg-gradient-to-br from-emerald-200 to-teal-200 rounded-full opacity-30 animate-pulse" style="animation-delay: 2s;"></div>
+          <div class="absolute bottom-10 right-16 w-14 h-14 bg-gradient-to-br from-cyan-200 to-blue-200 rounded-full opacity-35 animate-pulse" style="animation-delay: 0.5s;"></div>
+        </div>
+        
+        <!-- 로고 섹션 -->
+        <div class="relative z-10 mb-8">
+          <div class="inline-block p-4 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 mb-6">
+            <img src="img_og_banner.png" alt="분양콕 로고" class="w-48 mx-auto">
+          </div>
+        </div>
+        
+        <!-- 메인 콘텐츠 -->
+        <div class="relative z-10 space-y-6">
+          <div class="bg-gradient-to-r from-teal-50 to-cyan-50 p-6 rounded-2xl border border-teal-100 shadow-sm">
+            <h1 class="text-3xl sm:text-4xl font-jua text-gray-800 mb-3">내 집 마련 TMI 테스트</h1>
+            <p class="text-gray-600 mb-4">나는 부동산에 대해 얼마나 알고 있을까?</p>
+            <p class="text-gray-600">나의 내 집 마련 준비 상태를 확인해보세요!</p>
+          </div>
+          
+          <!-- 특징 아이콘들 -->
+          <div class="flex justify-center space-x-6 text-sm text-gray-500">
+            <div class="flex items-center space-x-2">
+              <span class="text-2xl">🏠</span>
+              <span>부동산 지식</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-2xl">📊</span>
+              <span>준비도 체크</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-2xl">🎯</span>
+              <span>맞춤 추천</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 시작 버튼 -->
+        <div class="relative z-10 mt-8">
+          <button id="start-btn" class="w-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-bold text-lg py-4 px-6 rounded-xl shadow-lg transition-all transform hover:scale-105 hover:shadow-xl">
+            <span class="flex items-center justify-center space-x-2">
+              <span>테스트 시작하기</span>
+              <span class="text-xl">🚀</span>
+            </span>
+          </button>
+        </div>
     </div>
 
     <div id="quiz-screen" class="hidden">
-      <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
-        <div id="progress-bar" class="bg-main-color h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+      <!-- 진행 상황 표시 -->
+      <div class="mb-6">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-sm font-medium text-gray-600">진행 상황</span>
+          <span class="text-sm text-gray-500 font-jua">
+            <span id="current-q">1</span> / <span id="total-q"></span>
+          </span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-3 progress-container">
+          <div id="progress-bar" class="bg-gradient-to-r from-teal-500 to-cyan-500 h-3 rounded-full transition-all duration-300" style="width: 0%"></div>
+        </div>
       </div>
-      <div class="text-right text-sm text-gray-500 mb-6 font-jua">
-        <span id="current-q">1</span> / <span id="total-q"></span>
+      
+      <!-- 질문 컨테이너 -->
+      <div id="question-container" class="flex items-center justify-center mb-8 min-h-[8rem] bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl border border-blue-100 shadow-sm">
+        <div class="flex items-center space-x-4">
+          <div id="question-icon" class="text-5xl bg-white p-4 rounded-full shadow-sm"></div>
+          <h2 id="question" class="text-xl sm:text-2xl font-bold text-gray-800 text-left"></h2>
+        </div>
       </div>
-      <div id="question-container" class="flex items-center justify-center mb-8 min-h-[8rem]">
-        <div id="question-icon" class="text-5xl mr-4 text-gray-400"></div>
-        <h2 id="question" class="text-xl sm:text-2xl font-bold text-gray-800 text-left"></h2>
-      </div>
-      <div id="answers" class="space-y-3"></div>
+      
+      <!-- 답변 버튼들 -->
+      <div id="answers" class="space-y-4"></div>
     </div>
 
     <div id="loading-screen" class="hidden text-center py-10">
-        <div class="text-5xl animate-spin mb-6">⏳</div>
-        <h2 class="text-2xl font-jua text-gray-700">두근두근...</h2>
-        <p class="text-gray-600">결과를 분석하고 있어요!</p>
+        <!-- 로딩 애니메이션 -->
+        <div class="relative mb-8">
+          <div class="w-24 h-24 mx-auto bg-gradient-to-r from-teal-400 to-cyan-400 rounded-full animate-spin flex items-center justify-center">
+            <div class="w-16 h-16 bg-white rounded-full"></div>
+          </div>
+          <div class="absolute inset-0 w-24 h-24 mx-auto border-4 border-teal-200 border-t-teal-500 rounded-full animate-spin"></div>
+        </div>
+        
+        <div class="space-y-4">
+          <h2 class="text-2xl font-jua text-gray-700">두근두근...</h2>
+          <p class="text-gray-600">결과를 분석하고 있어요!</p>
+          
+          <!-- 로딩 단계 표시 -->
+          <div class="flex justify-center space-x-2 mt-6">
+            <div class="w-2 h-2 bg-teal-400 rounded-full animate-pulse"></div>
+            <div class="w-2 h-2 bg-teal-400 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+            <div class="w-2 h-2 bg-teal-400 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+          </div>
+        </div>
     </div>
 
     <div id="result-screen" class="hidden text-center">
-        <div id="result-illustration" class="mb-4 h-32 flex justify-center items-center text-7xl"></div>
-        <h2 id="result-title" class="text-3xl font-jua text-gray-800 mb-2"></h2>
-        <p id="result-description" class="text-gray-600 mb-8"></p>
-        <div class="flex flex-col space-y-3">
-            <button id="recommend-btn" class="w-full bg-main-color hover:bg-main-color-dark text-white font-bold text-lg py-4 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
-                내게 맞는 분양 현장 추천받기
+        <!-- 결과 아이콘 -->
+        <div class="mb-6">
+          <div id="result-illustration" class="text-8xl bg-gradient-to-br from-yellow-100 to-orange-100 p-6 rounded-full inline-block shadow-lg"></div>
+        </div>
+        
+        <!-- 결과 내용 -->
+        <div class="space-y-6">
+          <div class="bg-gradient-to-r from-teal-50 to-cyan-50 p-6 rounded-2xl border border-teal-100">
+            <h2 id="result-title" class="text-3xl font-jua text-gray-800 mb-3"></h2>
+            <p id="result-description" class="text-gray-600 text-lg"></p>
+          </div>
+          
+          <!-- 점수 표시 -->
+          <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+            <div class="text-sm text-gray-500 mb-2">당신의 부동산 지식 점수</div>
+            <div class="text-3xl font-bold text-teal-600" id="score-display"></div>
+          </div>
+        </div>
+        
+        <!-- 액션 버튼들 -->
+        <div class="flex flex-col space-y-4 mt-8">
+            <button id="recommend-btn" class="w-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-bold text-lg py-4 px-6 rounded-xl shadow-lg transition-all transform hover:scale-105 hover:shadow-xl">
+                <span class="flex items-center justify-center space-x-2">
+                  <span>내게 맞는 분양 현장 추천받기</span>
+                  <span class="text-xl">🏠</span>
+                </span>
             </button>
-            <button id="retry-btn" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">
-                테스트 다시하기
+            <button id="retry-btn" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded-xl transition-all transform hover:scale-105 border border-gray-200">
+                <span class="flex items-center justify-center space-x-2">
+                  <span>테스트 다시하기</span>
+                  <span class="text-lg">🔄</span>
+                </span>
             </button>
         </div>
     </div>
@@ -221,8 +393,8 @@
       answersEl.innerHTML = "";
       q.a.forEach(answer => {
         const btn = document.createElement("button");
-        btn.innerHTML = `<span>${answer.text}</span>`;
-        btn.className = "w-full text-left p-4 bg-gray-100 hover:bg-teal-100 border border-gray-200 rounded-lg answer-btn transition-all";
+        btn.innerHTML = `<span class="text-left">${answer.text}</span>`;
+        btn.className = "w-full text-left p-5 bg-white hover:bg-gradient-to-r hover:from-teal-50 hover:to-cyan-50 border border-gray-200 rounded-xl answer-btn transition-all shadow-sm hover:shadow-md";
         btn.onclick = (e) => selectAnswer(answer.score, e.currentTarget);
         answersEl.appendChild(btn);
       });
@@ -265,6 +437,11 @@
         document.getElementById('result-illustration').innerText = resultType.illustration;
         document.getElementById('result-title').innerText = resultType.title;
         document.getElementById('result-description').innerText = resultType.description;
+        
+        // 점수 표시 추가
+        const maxScore = questions.length * 3;
+        const percentage = Math.round((totalScore / maxScore) * 100);
+        document.getElementById('score-display').innerText = `${totalScore}점 (${percentage}%)`;
         
         myConfetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
     }
