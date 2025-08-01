@@ -3,128 +3,314 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>내 집 마련 TMI 테스트</title>
-  <script defer src="script.js"></script>
+  <title>분양콕 | 내 집 마련 TMI 테스트</title>
+  
+  <link rel="icon" href="https://googleusercontent.com/file_content/1" type="image/png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
   <style>
     body {
-      font-family: 'Pretendard', sans-serif;
-      margin: 0;
-      background: linear-gradient(180deg, #f4f6fa, #ffffff);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      font-family: 'Noto Sans KR', sans-serif;
+      overflow: hidden;
+      background-color: #f0f4f8;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)),
+        linear-gradient(to right, #e5e7eb 1px, transparent 1px),
+        linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);
+      background-size: 100%, 100%, 20px 20px;
     }
-    .container {
-      width: 100%;
-      max-width: 480px;
-      background: white;
-      padding: 2rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      border-radius: 1rem;
-      text-align: center;
-      animation: fadeIn 0.5s ease-in;
+    h1, h2, .font-jua {
+      font-family: 'Jua', sans-serif;
     }
-    .question {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-    }
-    .answer {
-      display: block;
-      background: #eef1f6;
-      border: none;
-      border-radius: 0.8rem;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .answer:hover {
-      background: #dce4ed;
-    }
+    .main-color { color: #2dd4bf; }
+    .bg-main-color { background-color: #2dd4bf; }
+    .hover\:bg-main-color-dark:hover { background-color: #14b8a6; }
+    .border-main-color { border-color: #2dd4bf; }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-10px); }
+    }
+    .fade-in { animation: fadeIn 0.5s ease-in-out forwards; }
+    .fade-out { animation: fadeOut 0.5s ease-in-out forwards; }
+    
+    .answer-btn.selected {
+        background-color: #2dd4bf;
+        color: white;
+        border-color: #14b8a6;
     }
   </style>
 </head>
-<body>
-  <div id="app" class="container">
-    <h2 id="question" class="question"></h2>
-    <div id="answers"></div>
+<body class="flex justify-center items-center min-h-screen p-4">
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas" class="absolute top-0 left-0 w-full h-full z-20 pointer-events-none"></canvas>
+
+  <div id="app" class="w-full max-w-md mx-auto bg-white rounded-2xl shadow-xl p-6 sm:p-8 transition-all duration-500 z-10">
+    
+    <div id="start-screen" class="text-center">
+        <img src="https://googleusercontent.com/file_content/1" alt="분양콕 로고" class="w-48 mx-auto mb-4">
+        <h1 class="text-3xl sm:text-4xl font-jua text-gray-800 mb-3">내 집 마련 TMI 테스트</h1>
+        <p class="text-gray-600 mb-8">나는 부동산에 대해 얼마나 알고 있을까?<br>나의 내 집 마련 준비 상태를 확인해보세요!</p>
+        <button id="start-btn" class="w-full bg-main-color hover:bg-main-color-dark text-white font-bold text-lg py-3 px-4 rounded-lg shadow-lg transition-all transform hover:scale-105">
+            테스트 시작하기
+        </button>
+    </div>
+
+    <div id="quiz-screen" class="hidden">
+      <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+        <div id="progress-bar" class="bg-main-color h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+      </div>
+      <div class="text-right text-sm text-gray-500 mb-6 font-jua">
+        <span id="current-q">1</span> / <span id="total-q"></span>
+      </div>
+      <div id="question-container" class="flex items-center justify-center mb-8 min-h-[8rem]">
+        <div id="question-icon" class="text-5xl mr-4 text-gray-400"></div>
+        <h2 id="question" class="text-xl sm:text-2xl font-bold text-gray-800 text-left"></h2>
+      </div>
+      <div id="answers" class="space-y-3"></div>
+    </div>
+
+    <div id="loading-screen" class="hidden text-center py-10">
+        <div class="text-5xl animate-spin mb-6">⏳</div>
+        <h2 class="text-2xl font-jua text-gray-700">두근두근...</h2>
+        <p class="text-gray-600">결과를 분석하고 있어요!</p>
+    </div>
+
+    <div id="result-screen" class="hidden text-center">
+        <div id="result-illustration" class="mb-4 h-32 flex justify-center items-center text-7xl"></div>
+        <h2 id="result-title" class="text-3xl font-jua text-gray-800 mb-2"></h2>
+        <p id="result-description" class="text-gray-600 mb-8"></p>
+        <div class="flex flex-col space-y-3">
+            <button id="recommend-btn" class="w-full bg-main-color hover:bg-main-color-dark text-white font-bold text-lg py-4 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+                내게 맞는 분양 현장 추천받기
+            </button>
+            <button id="retry-btn" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105">
+                테스트 다시하기
+            </button>
+        </div>
+    </div>
   </div>
+
+  <!-- DB 수집 모달 -->
+  <div id="db-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-30 p-4">
+    <div id="modal-content" class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-sm relative transform transition-all">
+        <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        
+        <div id="form-view">
+            <h3 class="text-2xl font-bold text-center mb-2 text-gray-800">맞춤 분양 정보 받기</h3>
+            <p class="text-center text-gray-500 mb-6">테스트 결과를 바탕으로<br>꼭 맞는 분양 현장을 추천해 드립니다.</p>
+            <form id="db-form">
+                <div class="mb-4">
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">이름</label>
+                    <input type="text" id="name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-main-color focus:border-main-color" placeholder="홍길동">
+                </div>
+                <div class="mb-6">
+                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">연락처</label>
+                    <input type="tel" id="phone" name="phone" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-main-color focus:border-main-color" placeholder="010-1234-5678">
+                </div>
+                <div class="flex items-start mb-6">
+                    <input id="privacy-agree" type="checkbox" required class="h-4 w-4 text-main-color border-gray-300 rounded focus:ring-main-color mt-1">
+                    <label for="privacy-agree" class="ml-2 text-sm text-gray-600">개인정보 수집 및 이용에 동의합니다.</label>
+                </div>
+                <button type="submit" class="w-full bg-main-color hover:bg-main-color-dark text-white font-bold py-3 rounded-lg shadow-md transition-all">
+                    무료로 추천받기
+                </button>
+            </form>
+        </div>
+
+        <div id="success-view" class="hidden text-center py-8">
+            <div class="text-6xl mb-4">🎉</div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">신청이 완료되었습니다!</h3>
+            <p class="text-gray-600">전문가가 곧 연락드려<br>최적의 현장을 안내해 드리겠습니다.</p>
+        </div>
+    </div>
+  </div>
+
   <script>
     const questions = [
-      {
-        q: "내 집 마련에 대해 어떻게 생각하나요?",
-        a: ["그냥 언젠가는 되겠지, 아직은 먼 이야기 같다.", "2~3년 안에는 준비해야 한다고 생각한다.", "지금 바로 계획 세워야 한다. 기회는 빨리 잡아야 한다."]
-      },
-      {
-        q: "최근 부동산 콘텐츠를 본 이유는?",
-        a: ["무섭게 오른다니까 그냥 호기심에", "살 만한 곳이 어디일까 싶어서 비교용으로", "청약이나 분양 타이밍 잡으려고 공부 중이다"]
-      },
-      {
-        q: "청약 제도에 대해 얼마나 알고 있나요?",
-        a: ["이름만 들어봤지, 정확히는 잘 모른다", "기본 개념은 알지만 실전은 어렵다", "가점 계산부터 분양 일정까지 꼼꼼히 체크한다"]
-      },
-      {
-        q: "부동산 관련 대화를 하면 나는?",
-        a: ["그냥 듣기만 한다", "질문하거나 정보 교환을 해본 적 있다", "내 경험이나 공부한 걸 종종 공유한다"]
-      },
-      {
-        q: "현재 자산 관리는 어떻게 하고 있나요?",
-        a: ["월급 들어오면 그냥 쓰는 편이다", "적금/예금 정도는 하고 있다", "종잣돈 목표까지 계획 세워서 모으고 있다"]
-      },
-      {
-        q: "전월세 계약을 앞뒀을 때 나는?",
-        a: ["부모님이 다 해주셨다", "중개사 말만 믿고 했다", "계약 내용 꼼꼼히 따져보고 진행했다"]
-      },
-      {
-        q: "투자/내 집 마련의 차이에 대한 인식은?",
-        a: ["그냥 다 똑같은 부동산 아니야?", "개념은 구분되지만 아직 실감은 안 난다", "명확히 다르다고 생각하고 접근도 달리 한다"]
-      },
-      {
-        q: "서울 외 지역의 분양에도 관심이 있나요?",
-        a: ["거긴 너무 멀고 나랑은 상관없는 얘기다", "가격은 괜찮지만 교통이 걱정된다", "실거주, 투자 둘 다 염두에 두고 분석한다"]
-      },
-      {
-        q: "가장 두려운 부동산 이슈는?",
-        a: ["돈이 없어 못 산다는 것", "집값이 떨어질까 걱정", "정책·세금 변화로 인해 불이익"]
-      },
-      {
-        q: "내가 만약 5억이 있다면?",
-        a: ["그냥 은행에 넣어둘 것 같다", "부동산을 포함해 고민은 해볼 듯", "당장 입지별로 부동산 시세부터 알아본다"]
-      }
-      // 이후 질문도 동일한 형식으로 추가 가능
+        { q: "내 집 마련에 대해 어떻게 생각하시나요?", icon: "🤔", a: [{ text: "아직은 먼 이야기 같아요.", score: 1 }, { text: "2~3년 내로 준비하고 싶어요.", score: 2 }, { text: "지금 바로 계획을 세워야죠!", score: 3 }] },
+        { q: "최근 부동산 콘텐츠를 본 이유는 무엇인가요?", icon: "📺", a: [{ text: "단순한 호기심으로 봤어요.", score: 1 }, { text: "살 만한 곳을 비교해 보려고요.", score: 2 }, { text: "청약/분양 타이밍을 공부 중이에요.", score: 3 }] },
+        { q: "청약 제도에 대해 얼마나 알고 계신가요?", icon: "📝", a: [{ text: "이름만 들어봤어요.", score: 1 }, { text: "기본 개념은 알지만, 실전은 어려워요.", score: 2 }, { text: "가점 계산부터 일정까지 꼼꼼히 챙겨요.", score: 3 }] },
+        { q: "부동산 관련 대화를 할 때, 당신은?", icon: "💬", a: [{ text: "주로 듣기만 하는 편이에요.", score: 1 }, { text: "가끔 질문하거나 정보를 교환해요.", score: 2 }, { text: "제 경험과 지식을 자주 공유해요.", score: 3 }] },
+        { q: "현재 자산 관리는 어떻게 하고 계신가요?", icon: "🐷", a: [{ text: "특별한 관리 없이 쓰는 편이에요.", score: 1 }, { text: "적금/예금 정도는 하고 있어요.", score: 2 }, { text: "목표를 세워 종잣돈을 모으고 있어요.", score: 3 }] },
+        { q: "LTV, DTI, DSR과 같은 용어를 아시나요?", icon: "🧮", a: [{ text: "전혀 모르겠어요.", score: 1 }, { text: "들어는 봤지만, 뜻은 가물가물해요.", score: 2 }, { text: "대출에 어떻게 적용되는지 알고 있어요.", score: 3 }] },
+        { q: "부동산 관련 세금에 대해 얼마나 아시나요?", icon: "⚖️", a: [{ text: "세금은 너무 복잡하고 어려워요.", score: 1 }, { text: "종류와 내야 한다는 사실만 알아요.", score: 2 }, { text: "세율과 비과세 요건을 고려해 계획해요.", score: 3 }] },
+        { q: "부동산 임장(현장답사) 경험이 있으신가요?", icon: "🚶‍♂️", a: [{ text: "없어요. 온라인 정보로도 충분해요.", score: 1 }, { text: "관심 지역 한두 곳을 둘러봤어요.", score: 2 }, { text: "여러 번 방문해 꼼꼼히 살펴봐요.", score: 3 }] },
+        { q: "부동산 시장의 금리 변화를 어떻게 생각하시나요?", icon: "📈", a: [{ text: "나와는 상관 없는 얘기 같아요.", score: 1 }, { text: "대출 이자 걱정이 앞서요.", score: 2 }, { text: "시장의 흐름을 읽는 중요한 지표로 봐요.", score: 3 }] },
+        { q: "내 집 마련을 위한 최종 목표는 무엇인가요?", icon: "🎯", a: [{ text: "안정적인 내 공간이면 충분해요.", score: 1 }, { text: "거주와 자산 가치 상승 둘 다 원해요.", score: 2 }, { text: "성공적인 투자의 발판으로 삼고 싶어요.", score: 3 }] }
     ];
+    // 문항 수를 10개로 줄여 사용자의 피로도를 낮추고 이탈률을 방지합니다.
+
+    const results = {
+        low: { title: "부동산 꿈나무", description: "이제 막 관심을 갖기 시작한 단계군요!", illustration: `🌱` },
+        medium: { title: "현명한 탐색가", description: "적극적으로 정보를 찾으며 기회를 엿보고 있어요!", illustration: `🧭` },
+        high: { title: "준비된 전략가", description: "체계적인 준비가 돋보이는 전문가 수준!", illustration: `🏆` }
+    };
 
     let current = 0;
+    let totalScore = 0;
 
+    const app = document.getElementById("app");
+    const startScreen = document.getElementById("start-screen");
+    const quizScreen = document.getElementById("quiz-screen");
+    const loadingScreen = document.getElementById("loading-screen");
+    const resultScreen = document.getElementById("result-screen");
+    
+    const startBtn = document.getElementById("start-btn");
+    const questionIconEl = document.getElementById("question-icon");
     const questionEl = document.getElementById("question");
     const answersEl = document.getElementById("answers");
+    const progressBar = document.getElementById("progress-bar");
+    const currentQEl = document.getElementById("current-q");
+    const totalQEl = document.getElementById("total-q");
+    
+    const recommendBtn = document.getElementById("recommend-btn");
+    const retryBtn = document.getElementById("retry-btn");
+
+    const dbModal = document.getElementById("db-modal");
+    const modalContent = document.getElementById("modal-content");
+    const closeModalBtn = document.getElementById("close-modal-btn");
+    const dbForm = document.getElementById("db-form");
+    const formView = document.getElementById("form-view");
+    const successView = document.getElementById("success-view");
+
+    const myCanvas = document.getElementById('confetti-canvas');
+    const myConfetti = confetti.create(myCanvas, { resize: true, useWorker: true });
+
+    function switchScreen(from, to, callback) {
+        from.classList.remove('fade-in');
+        from.classList.add('fade-out');
+        setTimeout(() => {
+            from.classList.add('hidden');
+            from.classList.remove('fade-out');
+            to.classList.remove('hidden', 'fade-out');
+            to.classList.add('fade-in');
+            if(callback) callback();
+        }, 400);
+    }
+
+    function startQuiz() {
+        totalQEl.innerText = questions.length;
+        showQuestion();
+    }
+    
+    function retryQuiz() {
+        current = 0;
+        totalScore = 0;
+        progressBar.style.width = '0%';
+        switchScreen(resultScreen, startScreen);
+    }
 
     function showQuestion() {
       const q = questions[current];
+      
+      questionIconEl.innerText = q.icon;
       questionEl.innerText = q.q;
+      
       answersEl.innerHTML = "";
-      q.a.forEach((ans, idx) => {
+      q.a.forEach(answer => {
         const btn = document.createElement("button");
-        btn.innerText = ans;
-        btn.className = "answer";
-        btn.onclick = () => {
-          current++;
-          if (current < questions.length) {
-            showQuestion();
-          } else {
-            questionEl.innerText = "테스트가 완료되었습니다!";
-            answersEl.innerHTML = `<a href='https://momentintl.com/tmitest/result' style='display:inline-block;margin-top:1rem;padding:1rem 2rem;background:#3d5afe;color:#fff;border-radius:0.6rem;text-decoration:none;'>결과 보러가기</a>`;
-          }
-        };
+        btn.innerHTML = `<span>${answer.text}</span>`;
+        btn.className = "w-full text-left p-4 bg-gray-100 hover:bg-teal-100 border border-gray-200 rounded-lg answer-btn transition-all";
+        btn.onclick = (e) => selectAnswer(answer.score, e.currentTarget);
         answersEl.appendChild(btn);
       });
+
+      progressBar.style.width = `${((current + 1) / questions.length) * 100}%`;
+      currentQEl.innerText = current + 1;
     }
 
-    showQuestion();
+    function selectAnswer(score, selectedButton) {
+      const answerButtons = answersEl.querySelectorAll('.answer-btn');
+      answerButtons.forEach(btn => btn.disabled = true);
+      
+      selectedButton.classList.add('selected');
+      totalScore += score;
+      
+      setTimeout(() => {
+        current++;
+        if (current < questions.length) {
+            showQuestion();
+        } else {
+            switchScreen(quizScreen, loadingScreen, () => {
+                setTimeout(() => {
+                    switchScreen(loadingScreen, resultScreen, showResult);
+                }, 1500);
+            });
+        }
+      }, 300);
+    }
+
+    function showResult() {
+        let resultType;
+        if (totalScore <= 15) { 
+            resultType = results.low;
+        } else if (totalScore <= 25) {
+            resultType = results.medium;
+        } else {
+            resultType = results.high;
+        }
+
+        document.getElementById('result-illustration').innerText = resultType.illustration;
+        document.getElementById('result-title').innerText = resultType.title;
+        document.getElementById('result-description').innerText = resultType.description;
+        
+        myConfetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+    }
+
+    function openModal() {
+        dbModal.classList.remove('hidden');
+        dbModal.classList.add('fade-in');
+        modalContent.classList.add('fade-in');
+    }
+
+    function closeModal() {
+        modalContent.classList.remove('fade-in');
+        modalContent.classList.add('fade-out');
+        dbModal.classList.remove('fade-in');
+        dbModal.classList.add('fade-out');
+        setTimeout(() => {
+            dbModal.classList.add('hidden');
+            modalContent.classList.remove('fade-out');
+            // 폼 초기화
+            formView.classList.remove('hidden');
+            successView.classList.add('hidden');
+            dbForm.reset();
+        }, 400);
+    }
+
+    dbForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // 실제로는 여기서 서버로 폼 데이터를 전송합니다.
+        console.log('Form submitted:', {
+            name: e.target.name.value,
+            phone: e.target.phone.value
+        });
+        formView.classList.add('hidden');
+        successView.classList.remove('hidden');
+    });
+
+    // Event Listeners
+    startBtn.addEventListener('click', () => switchScreen(startScreen, quizScreen, startQuiz));
+    retryBtn.addEventListener('click', retryQuiz);
+    recommendBtn.addEventListener('click', openModal);
+    closeModalBtn.addEventListener('click', closeModal);
+    dbModal.addEventListener('click', (e) => {
+        if (e.target === dbModal) {
+            closeModal();
+        }
+    });
   </script>
 </body>
 </html>
