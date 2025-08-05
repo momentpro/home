@@ -118,8 +118,57 @@
         </div>
         
         <div id="page-container">
-            <!-- 페이지 1: 표지 -->
-            <div class="page active flex flex-col justify-center items-center" data-page-name="표지">
+            <!-- 페이지 1: 인스타리드 -->
+            <div class="page active flex flex-col justify-center items-center" data-page-name="인스타리드">
+                <div class="w-full max-w-md mx-auto">
+                    <h2 class="text-xl font-bold text-center mb-4 text-gray-800">📌 인스타리드 추천 콘텐츠</h2>
+                    
+                    <!-- 썸네일 및 재생 버튼 -->
+                    <div class="relative group cursor-pointer" onclick="window.open('https://youtube.com/shorts/xgOXVEFa-7k?si=fXbf5dqPpnV42Zq5', '_blank')">
+                        <div class="aspect-[9/16] w-full max-w-xs mx-auto rounded-lg overflow-hidden shadow-lg relative">
+                            <img src="screenshot.png" alt="인스타리드 썸네일" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/300x533/E11D48/FFFFFF?text=%EC%9D%B8%EC%8A%A4%ED%83%80%EB%A6%AC%EB%93%9C%0A%EC%98%81%EC%83%81';" >
+                            
+                            <!-- 재생 버튼 오버레이 -->
+                            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center transition-all duration-300 group-hover:bg-opacity-40">
+                                <div class="bg-red-600 rounded-full p-4 shadow-lg transform transition-transform duration-300 group-hover:scale-110">
+                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <!-- YouTube Shorts 표시 -->
+                            <div class="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">
+                                SHORTS
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 제목 -->
+                    <div class="mt-4 px-2 text-center">
+                        <h3 class="text-lg font-bold text-gray-800 leading-tight">
+                            👀 6.27 대출 규제? 여기는 걱정 없어요!
+                        </h3>
+                        <p class="text-base font-semibold text-indigo-600 mt-2">
+                            여주역 대광로제비앙 더센텀✨
+                        </p>
+                        <p class="text-sm text-gray-600 mt-2">
+                            핵심만 콕콕! 꿀팁은 <span class="font-bold text-red-600">[인스타리드]</span> 로 콕✔
+                        </p>
+                    </div>
+                    
+                    <!-- 버튼 -->
+                    <div class="mt-6 text-center">
+                        <button onclick="window.open('https://youtube.com/shorts/xgOXVEFa-7k?si=fXbf5dqPpnV42Zq5', '_blank')" 
+                                class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-full transition-colors duration-300 shadow-md">
+                            📺 영상 보러가기
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 페이지 2: 표지 -->
+            <div class="page flex flex-col justify-center items-center" data-page-name="표지">
                 <a href="#" class="block w-full max-w-md rounded-lg overflow-hidden shadow-lg mb-4 group relative">
                     <img src="imgi_12_img_visual_fbg3.png" alt="여주역 로제비앙 더센텀 조감도" class="w-full h-auto transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/400x350/CCCCCC/FFFFFF?text=Image+Load+Fail';">
                 </a>
@@ -132,7 +181,7 @@
                 </div>
             </div>
 
-            <!-- 페이지 2: 브랜드 -->
+            <!-- 페이지 3: 브랜드 -->
             <div class="page" data-page-name="브랜드">
                  <h2 class="section-title">BRAND INFO</h2>
                  <p class="section-subtitle">자부심의 높이가 남다른 명품 주거문화 로제비앙</p>
@@ -141,7 +190,7 @@
                  </div>
             </div>
 
-            <!-- 페이지 3: 입지 -->
+            <!-- 페이지 4: 입지 -->
             <div class="page" data-page-name="입지">
                 <h2 class="section-title">PREMIUM LOCATION</h2>
                 <p class="section-subtitle">여주 최고의 중심상권! 역세권지구 교육상권 특화 입지</p>
@@ -158,7 +207,7 @@
                 </div>
             </div>
 
-            <!-- 페이지 4: 프리미엄 -->
+            <!-- 페이지 5: 프리미엄 -->
             <div class="page" data-page-name="프리미엄">
                  <h2 class="section-title">PREMIUM</h2>
                  <p class="section-subtitle">여주의 가치를 완성하는 특급 프리미엄</p>
@@ -167,7 +216,7 @@
                  </div>
             </div>
             
-            <!-- 페이지 5: 단지배치도 -->
+            <!-- 페이지 6: 단지배치도 -->
             <div class="page" data-page-name="단지배치도">
                 <h2 class="section-title">단지 배치도</h2>
                 <p class="section-subtitle">남향 위주 배치와 넓은 동간거리로 쾌적한 단지</p>
@@ -176,7 +225,7 @@
                 </div>
             </div>
 
-            <!-- 페이지 6: 커뮤니티 -->
+            <!-- 페이지 7: 커뮤니티 -->
             <div class="page flex items-center" data-page-name="커뮤니티">
                 <div class="w-full">
                     <h2 class="section-title">커뮤니티</h2>
@@ -261,7 +310,7 @@
                 </div>
             </div>
 
-            <!-- 페이지 8: 주변 시세 -->
+            <!-- 페이지 9: 주변 시세 -->
             <div class="page" data-page-name="주변 시세">
                 <h2 class="section-title">주변 시세 비교</h2>
                 <p class="section-subtitle">인근 단지 대비 뛰어난 가격 경쟁력</p>
@@ -271,49 +320,49 @@
                 <p class="text-center mt-4 text-sm text-gray-500">※ 84㎡, 최근 실거래가 기준</p>
             </div>
 
-            <!-- 페이지 9: UNIT 84A -->
+            <!-- 페이지 10: UNIT 84A -->
             <div class="page" data-page-name="UNIT 84A">
                 <h2 class="section-title">UNIT 84A</h2>
                 <p class="section-subtitle">실용성을 극대화한 4Bay 판상형 구조</p>
                 <img src="imgi_9_img_unit_01.png" alt="84A 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x450/EEEEEE/333333?text=Image+Load+Fail';">
             </div>
             
-            <!-- 페이지 10: UNIT 84B -->
+            <!-- 페이지 11: UNIT 84B -->
             <div class="page" data-page-name="UNIT 84B">
                 <h2 class="section-title">UNIT 84B</h2>
                 <p class="section-subtitle">개방감과 조망을 극대화한 타워형</p>
                 <img src="imgi_10_img_unit_02.png" alt="84B 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x450/EEEEEE/333333?text=Image+Load+Fail';">
             </div>
 
-            <!-- 페이지 11: UNIT 84C -->
+            <!-- 페이지 12: UNIT 84C -->
             <div class="page" data-page-name="UNIT 84C">
                 <h2 class="section-title">UNIT 84C</h2>
                 <p class="section-subtitle">가장 선호도 높은 명품 평면</p>
                 <img src="imgi_11_img_unit_03.png" alt="84C 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x450/EEEEEE/333333?text=Image+Load+Fail';">
             </div>
 
-            <!-- 페이지 12: UNIT 113 -->
+            <!-- 페이지 13: UNIT 113 -->
             <div class="page" data-page-name="UNIT 113">
                 <h2 class="section-title">UNIT 113</h2>
                 <p class="section-subtitle">품격과 실용을 모두 담은 혁신 평면</p>
                 <img src="imgi_12_img_unit_04.png" alt="113 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x450/EEEEEE/333333?text=Image+Load+Fail';">
             </div>
 
-            <!-- 페이지 13: UNIT 120 -->
+            <!-- 페이지 14: UNIT 120 -->
             <div class="page" data-page-name="UNIT 120">
                 <h2 class="section-title">UNIT 120</h2>
                 <p class="section-subtitle">여유로운 공간 설계의 프리미엄 평면</p>
                 <img src="imgi_13_img_unit_05.png" alt="120 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x450/EEEEEE/333333?text=Image+Load+Fail';">
             </div>
             
-            <!-- 페이지 14: UNIT P160 -->
+            <!-- 페이지 15: UNIT P160 -->
             <div class="page" data-page-name="UNIT P160">
                 <h2 class="section-title">UNIT P160</h2>
                 <p class="section-subtitle">하늘과 맞닿은 펜트하우스의 가치</p>
                 <img src="imgi_14_img_unit_06.png" alt="P160 평면도" class="w-full h-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/400x450/EEEEEE/333333?text=Image+Load+Fail';">
             </div>
             
-            <!-- 페이지 15: 오시는 길 -->
+            <!-- 페이지 16: 오시는 길 -->
             <div class="page" data-page-name="오시는 길">
                 <div class="text-center">
                     <h2 class="section-title">오시는 길</h2>
