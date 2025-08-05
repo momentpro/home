@@ -67,7 +67,7 @@
                     
                     <!-- 썸네일 및 재생 버튼 -->
                     <div class="relative group cursor-pointer" onclick="window.open('https://youtube.com/shorts/xgOXVEFa-7k?si=fXbf5dqPpnV42Zq5', '_blank')">
-                        <div class="aspect-[9/16] w-full max-w-xs mx-auto rounded-lg overflow-hidden shadow-lg relative">
+                        <div class="aspect-[9/16] w-48 max-w-[200px] mx-auto rounded-lg overflow-hidden shadow-lg relative">
                             <img src="screenshot.png" alt="인스타리드 썸네일" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/300x533/E11D48/FFFFFF?text=%EC%9D%B8%EC%8A%A4%ED%83%80%EB%A6%AC%EB%93%9C%0A%EC%98%81%EC%83%81';" >
                             
                             <!-- 재생 버튼 오버레이 -->
@@ -314,15 +314,15 @@
                         <div class="absolute inset-0 bg-transparent"></div>
                     </a>
                     <p class="text-sm text-gray-500 mt-2">지도를 클릭하시면 길찾기 서비스로 연결됩니다.</p>
-                    <p class="text-base font-bold mt-2">경기도 여주시 세종로 80</p>
-                    <p class="text-xl font-bold mt-2 text-indigo-600">T. 1800-8863</p>
+                    <p class="text-base font-bold mt-2">경기도 여주시 교동 654-17</p>
+                    <p class="text-xl font-bold mt-2 text-indigo-600">T. 1600-5848 (방문예약)</p>
                 </div>
             </div>
         </div>
         
         <!-- 상담사 팝업 -->
         <div id="counselor-popup" class="hidden">
-            <a href="tel:1800-8863" class="block text-center w-full p-3 bg-red-500 text-white font-bold rounded-lg mb-4 hover:bg-red-600">
+            <a href="tel:1600-5848" class="block text-center w-full p-3 bg-red-500 text-white font-bold rounded-lg mb-4 hover:bg-red-600">
                 <i class="fa-solid fa-crown mr-2"></i>대표 상담사 바로연결
             </a>
             <div id="counselor-list" class="space-y-3">
@@ -350,8 +350,7 @@
         
         // 상담사 정보
         const counselors = [
-            { name: '김로제 상담사', phone: '1800-8863', image: 'man1.jpeg' },
-            { name: '박센텀 상담사', phone: '1800-8863', image: 'man2.jpeg' }
+            { name: '김윤미 실장', phone: '1600-5848', image: 'man1.jpeg' }
         ];
 
         // 상담사 목록 동적 생성
