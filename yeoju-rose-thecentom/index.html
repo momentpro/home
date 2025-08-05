@@ -45,68 +45,10 @@
 </head>
 <body>
 
-<!-- 랜딩 페이지: 관심고객 등록 -->
-<div id="landing-page" class="app-container">
-    <div class="content-viewer p-6 md:p-8 flex flex-col">
-        <div class="text-center mb-6">
-            <img src="boonyangcok(c).png" alt="분양콕 로고" class="h-12 mx-auto mb-4 rounded-lg" onerror="this.onerror=null;this.src='https://placehold.co/200x50/FFFFFF/000000?text=Logo';">
-            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">관심고객 등록</h1>
-            <p class="text-gray-500 mt-1 text-sm md:text-base">정보를 입력하시면 브로슈어를 보실 수 있습니다.</p>
-        </div>
-        <form id="customer-form" class="space-y-4 flex-grow">
-            <div>
-                <label for="name" class="form-label text-sm md:text-base">이름</label>
-                <input type="text" id="name" name="name" class="form-input">
-            </div>
-            <div>
-                <label for="phone" class="form-label text-sm md:text-base">전화번호</label>
-                <input type="tel" id="phone" name="phone" class="form-input" placeholder="01012345678 ('-'없이 입력)">
-            </div>
-            <div>
-                <label for="region" class="form-label text-sm md:text-base">관심지역</label>
-                <input type="text" id="region" name="region" class="form-input">
-            </div>
-            <div>
-                <label class="form-label text-sm md:text-base">거래목적</label>
-                <div class="grid grid-cols-2 gap-2 radio-group">
-                    <input type="radio" name="purpose" id="purpose-invest" value="investment" class="sr-only">
-                    <label for="purpose-invest" class="text-xs md:text-sm">투자</label>
-                    <input type="radio" name="purpose" id="purpose-reside" value="residence" class="sr-only">
-                    <label for="purpose-reside" class="text-xs md:text-sm">실거주</label>
-                </div>
-            </div>
-            <div>
-                <label class="form-label text-sm md:text-base">관심유형</label>
-                <div class="grid grid-cols-3 gap-2 radio-group">
-                    <input type="radio" name="type" id="type-apt" value="apartment" class="sr-only">
-                    <label for="type-apt" class="text-xs md:text-sm">아파트</label>
-                    <input type="radio" name="type" id="type-op" value="officetel" class="sr-only">
-                    <label for="type-op" class="text-xs md:text-sm">오피스텔</label>
-                    <input type="radio" name="type" id="type-office" value="office" class="sr-only">
-                    <label for="type-office" class="text-xs md:text-sm">오피스</label>
-                    <input type="radio" name="type" id="type-commercial" value="commercial" class="sr-only">
-                    <label for="type-commercial" class="text-xs md:text-sm">상업시설</label>
-                    <input type="radio" name="type" id="type-resi" value="residence-hotel" class="sr-only">
-                    <label for="type-resi" class="text-xs md:text-sm">생활형숙박</label>
-                    <input type="radio" name="type" id="type-town" value="townhouse" class="sr-only">
-                    <label for="type-town" class="text-xs md:text-sm">타운하우스</label>
-                </div>
-            </div>
-            <div class="pt-2">
-                <div class="flex items-center">
-                    <input id="consent" name="consent" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="consent" class="ml-2 block text-sm text-gray-700">개인정보 수집 및 이용에 동의합니다.</label>
-                </div>
-            </div>
-            <div class="pt-4">
-                <button type="submit" id="submit-btn" class="w-full nav-button" disabled>브로슈어 보기</button>
-            </div>
-        </form>
-    </div>
-</div>
+
 
 <!-- 브로슈어 앱 -->
-<div id="brochure-app" class="app-container hidden">
+<div id="brochure-app" class="app-container">
     <div id="content-viewer" class="content-viewer">
         <div id="page-header">
             <div class="logo-container">
@@ -390,7 +332,7 @@
     </div>
 
     <!-- 네비게이션 버튼 -->
-    <div id="navigation-controls" class="mt-6 flex gap-4 items-center justify-center hidden">
+    <div id="navigation-controls" class="mt-6 flex gap-4 items-center justify-center">
         <button id="prev-btn" class="nav-button px-5"><</button>
         <button id="counselor-btn" class="nav-button flex-grow bg-green-500 hover:bg-green-600">
             <i class="fa-solid fa-users mr-2"></i>상담사 선택하기
@@ -402,11 +344,6 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         // DOM 요소 가져오기
-        const landingPage = document.getElementById('landing-page');
-        const brochureApp = document.getElementById('brochure-app');
-        const customerForm = document.getElementById('customer-form');
-        const submitBtn = document.getElementById('submit-btn');
-        const navigationControls = document.getElementById('navigation-controls');
         const counselorBtn = document.getElementById('counselor-btn');
         const counselorPopup = document.getElementById('counselor-popup');
         const counselorListDiv = document.getElementById('counselor-list');
@@ -437,60 +374,6 @@
             });
         }
         
-        // 폼 유효성 검사
-        function validateForm() {
-            const isNameValid = document.getElementById('name').value.trim() !== '';
-            const isPhoneValid = document.getElementById('phone').value.trim() !== '';
-            const isRegionValid = document.getElementById('region').value.trim() !== '';
-            const isPurposeValid = !!customerForm.querySelector('input[name="purpose"]:checked');
-            const isTypeValid = !!customerForm.querySelector('input[name="type"]:checked');
-            const isConsentChecked = document.getElementById('consent').checked;
-            submitBtn.disabled = !(isNameValid && isPhoneValid && isRegionValid && isPurposeValid && isTypeValid && isConsentChecked);
-        }
-
-        // 폼 입력/변경 시 유효성 검사 실행
-        const allFormElements = customerForm.querySelectorAll('input');
-        allFormElements.forEach(el => {
-            el.addEventListener('input', validateForm);
-            el.addEventListener('change', validateForm);
-        });
-        
-        // 폼 제출 이벤트
-        customerForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const formData = new FormData(customerForm);
-            const data = {
-                name: formData.get('name'),
-                phone: formData.get('phone'),
-                region: formData.get('region'),
-                purpose: formData.get('purpose'),
-                type: formData.get('type'),
-                site: '여주역 로제비앙 더센텀'
-            };
-
-            // Google Apps Script로 데이터 전송
-            fetch("https://script.google.com/macros/s/AKfycbzcCvlIlSEo7XFIC1XUdMU-qLLmyrQcl-2_PJQNytD4qyYMveYGBZ_oSylIsPWRopre0A/exec", {
-                method: "POST",
-                body: JSON.stringify(data)
-            })
-            .then(res => res.json())
-            .then(data => {
-                console.log('Success:', data);
-            }).catch(error => {
-                console.error('Error:', error);
-            });
-
-            // 유효성 통과 시 브로슈어 앱 표시
-            if (!submitBtn.disabled) {
-                landingPage.classList.add('hidden');
-                brochureApp.classList.remove('hidden');
-                navigationControls.classList.remove('hidden');
-                navigationControls.classList.add('flex');
-                initBrochure();
-            }
-        });
-        
         // 상담사 팝업 토글
         counselorBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -506,6 +389,9 @@
                  counselorPopup.classList.remove('open');
             }
         });
+
+        // 페이지 로드 시 바로 브로슈어 초기화
+        initBrochure();
 
         // 브로슈어 초기화 함수
         function initBrochure() {
