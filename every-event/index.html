@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Events</title>
+    <title>딜하르방 - 제주도민 전용 혜택</title>
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+        :root {
+            --primary-brand: #005A9C;
+            --secondary-accent: #F7C852;
+            --background: #F9F9F9;
+            --text-dark: #333333;
+            --text-light: #767676;
+            --card-background: #FFFFFF;
+        }
 
         * {
             margin: 0;
@@ -15,16 +24,17 @@
 
         body {
             font-family: 'Pretendard', sans-serif;
-            background-color: #F8F9FA;
-            color: #212529;
+            background-color: var(--background);
+            color: var(--text-dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* Animations */
-        @keyframes fadeIn {
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -32,367 +42,403 @@
             }
         }
 
-        @keyframes checkmark {
-            0% {
+        @keyframes fadeIn {
+            from {
                 opacity: 0;
-                transform: scale(0.3);
             }
-            50% {
+            to {
                 opacity: 1;
-                transform: scale(1.1);
             }
-            100% {
+        }
+
+        @keyframes slideInFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
                 opacity: 1;
-                transform: scale(1);
+                transform: translateY(0);
             }
         }
 
         /* Header */
         .header {
-            background-color: #FFFFFF;
-            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-brand) 0%, #0066b3 100%);
+            padding: 30px 20px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            position: sticky;
+            box-shadow: 0 4px 20px rgba(0, 90, 156, 0.15);
+            position: relative;
+            overflow: hidden;
+            animation: slideInFromTop 0.8s ease-out;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
             top: 0;
-            z-index: 100;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="0%" r="100%"><stop offset="0%" stop-color="rgba(255,255,255,0.1)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><rect width="100" height="20" fill="url(%23a)"/></svg>');
+            pointer-events: none;
         }
 
         .header h1 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #212529;
+            font-size: 36px;
+            font-weight: 800;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
         }
 
-        .back-link {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #007BFF;
-            text-decoration: none;
-            font-weight: 500;
+        .header .subtitle {
             font-size: 16px;
-        }
-
-        .back-link:hover {
-            color: #0056b3;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
         }
 
         /* Main Content */
         .main-content {
-            animation: fadeIn 0.5s ease-in-out;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
+            animation: fadeIn 1s ease-out 0.3s both;
         }
 
-        .welcome-title {
+        .main-title {
             text-align: center;
             font-size: 28px;
             font-weight: 700;
-            margin-bottom: 40px;
-            color: #212529;
+            color: var(--text-dark);
+            margin-bottom: 50px;
+            line-height: 1.4;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+
+        .main-title .highlight {
+            color: var(--primary-brand);
+            position: relative;
+        }
+
+        .main-title .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary-accent), var(--primary-brand));
+            border-radius: 2px;
         }
 
         /* Event Grid */
         .event-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 24px;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         @media (min-width: 768px) {
             .event-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
             }
         }
 
         /* Event Cards */
         .event-card {
-            background: #FFFFFF;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            background: var(--card-background);
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .event-card:nth-child(1) {
+            animation-delay: 0.7s;
+        }
+
+        .event-card:nth-child(2) {
+            animation-delay: 0.9s;
         }
 
         .event-card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-brand), var(--secondary-accent));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .event-card:hover::before {
+            opacity: 1;
         }
 
         .event-card img {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .event-card:hover img {
+            transform: scale(1.05);
         }
 
         .event-card-content {
-            padding: 24px;
+            padding: 25px;
+            position: relative;
         }
 
         .event-card h3 {
             font-size: 20px;
-            font-weight: 600;
+            font-weight: 700;
+            color: var(--text-dark);
             margin-bottom: 12px;
-            color: #212529;
+            line-height: 1.3;
         }
 
         .event-card p {
             font-size: 16px;
-            color: #6C757D;
-            margin-bottom: 20px;
+            color: var(--text-light);
+            margin-bottom: 25px;
             line-height: 1.5;
         }
 
         /* Buttons */
-        .btn {
+        .button {
             display: inline-block;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
+            background-color: var(--secondary-accent);
+            color: var(--text-dark);
+            border-radius: 25px;
+            padding: 12px 25px;
+            font-weight: 700;
             font-size: 16px;
-            font-weight: 500;
             text-decoration: none;
             text-align: center;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
             width: 100%;
         }
 
-        .btn-primary {
-            background-color: #007BFF;
-            color: white;
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
         }
 
-        .btn-primary:hover {
-            background-color: #0056b3;
+        .button:hover::before {
+            left: 100%;
         }
 
-        .btn-disabled {
-            background-color: #6C757D;
-            color: white;
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(247, 200, 82, 0.4);
+        }
+
+        .button:active {
+            transform: translateY(-1px);
+        }
+
+        .button.disabled {
+            background-color: #e0e0e0;
+            color: #999;
             cursor: not-allowed;
+            opacity: 0.7;
         }
 
-        .btn-disabled:hover {
-            background-color: #6C757D;
+        .button.disabled:hover {
+            transform: none;
+            box-shadow: none;
         }
 
-        /* Event Detail Page */
-        .hero-image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 30px;
+        .button.disabled::before {
+            display: none;
         }
 
-        .event-detail-title {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            color: #212529;
-            text-align: center;
-        }
-
-        .restaurant-list {
-            background: #FFFFFF;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
-        .restaurant-item {
-            padding: 20px 0;
-            border-bottom: 1px solid #E9ECEF;
-        }
-
-        .restaurant-item:last-child {
-            border-bottom: none;
-        }
-
-        .restaurant-name {
-            font-size: 18px;
-            font-weight: 600;
-            color: #212529;
-            margin-bottom: 8px;
-        }
-
-        .restaurant-desc {
-            font-size: 14px;
-            color: #6C757D;
-        }
-
-        .coming-soon {
-            text-align: center;
-            background: #FFFFFF;
-            border-radius: 12px;
-            padding: 60px 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            margin: 40px 0;
-        }
-
-        .coming-soon h2 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #212529;
-            margin-bottom: 20px;
-        }
-
-        .coming-soon p {
-            font-size: 16px;
-            color: #6C757D;
-            line-height: 1.6;
-        }
-
-        /* Form */
-        .application-form {
-            background: #FFFFFF;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            margin-top: 40px;
-        }
-
-        .form-title {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            color: #212529;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 16px;
-            font-weight: 500;
-            color: #212529;
-            margin-bottom: 8px;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #E9ECEF;
-            border-radius: 8px;
-            font-size: 16px;
-            font-family: 'Pretendard', sans-serif;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #007BFF;
-        }
-
-        /* Thank You Page */
-        .thank-you-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .checkmark {
-            font-size: 64px;
-            margin-bottom: 30px;
-            animation: checkmark 0.6s ease-in-out;
-        }
-
-        .thank-you-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #212529;
-        }
-
-        .thank-you-message {
-            font-size: 18px;
-            color: #6C757D;
-            margin-bottom: 40px;
-            max-width: 400px;
-            line-height: 1.6;
-        }
-
-        /* Responsive */
+        /* Responsive Typography */
         @media (min-width: 768px) {
-            .main-content {
-                padding: 40px 20px;
+            .header h1 {
+                font-size: 42px;
             }
 
-            .welcome-title {
-                font-size: 36px;
-                margin-bottom: 50px;
+            .header .subtitle {
+                font-size: 18px;
             }
 
-            .event-detail-title {
-                font-size: 40px;
+            .main-title {
+                font-size: 32px;
+                margin-bottom: 60px;
             }
 
-            .hero-image {
-                height: 400px;
+            .event-card h3 {
+                font-size: 22px;
+            }
+
+            .event-card img {
+                height: 240px;
             }
         }
 
         @media (min-width: 1024px) {
-            .event-card img {
-                height: 240px;
+            .main-content {
+                padding: 60px 20px;
             }
+
+            .main-title {
+                font-size: 36px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
         }
 
         /* Scroll behavior */
         html {
             scroll-behavior: smooth;
         }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus states for accessibility */
+        .button:focus {
+            outline: 3px solid var(--primary-brand);
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body>
     <header class="header">
-        <h1>Our Events</h1>
+        <h1>딜하르방</h1>
+        <p class="subtitle">제주도민만을 위한 특별한 혜택</p>
     </header>
 
     <main class="main-content">
-        <h2 class="welcome-title">파트너사와 함께하는 특별한 경험</h2>
+        <h1 class="main-title">
+            <span class="highlight">딜하르방</span>이 찾아온 우리동네 혜택
+        </h1>
         
         <div class="event-grid">
             <!-- Event Card 1: Grand Hyatt -->
             <div class="event-card">
-                <img src="https://via.placeholder.com/800x600/00008B/FFFFFF?text=Grand+Hyatt+Jeju" alt="그랜드 하얏트 제주">
+                <img src="https://via.placeholder.com/800x600/005A9C/FFFFFF?text=Grand+Hyatt+Jeju" alt="그랜드 하얏트 제주 특급 혜택" loading="lazy">
                 <div class="event-card-content">
-                    <h3>그랜드 하얏트 제주 레스토랑</h3>
-                    <p>7개의 레스토랑에서 특별한 혜택을 만나보세요.</p>
-                    <a href="event-detail.html?event=hyatt" class="btn btn-primary">혜택 확인하기</a>
+                    <h3>딜하르방 Pick! 그랜드 하얏트 특급 혜택</h3>
+                    <p>우리 동네 주민이라면, 최대 40% 할인</p>
+                    <a href="event-detail.html?event=hyatt" class="button">자세히 보기</a>
                 </div>
             </div>
 
             <!-- Event Card 2: Mujigae Yacht -->
             <div class="event-card">
-                <img src="https://via.placeholder.com/800x600/FFD700/000000?text=Mujigae+Yacht" alt="무지개 요트 제주">
+                <img src="https://via.placeholder.com/800x600/F7C852/000000?text=Mujigae+Yacht" alt="무지개 요트 제주 준비중" loading="lazy">
                 <div class="event-card-content">
-                    <h3>무지개 요트 제주</h3>
-                    <p>제주 애월 바다에서의 로맨틱한 순간.</p>
-                    <a href="event-detail.html?event=yacht" class="btn btn-disabled">준비 중</a>
+                    <h3>딜하르방이 준비한 다음 혜택</h3>
+                    <p>애월 바다 위, 잊지 못할 추억을 선사합니다.</p>
+                    <a href="event-detail.html?event=yacht" class="button disabled">준비 중</a>
                 </div>
             </div>
         </div>
     </main>
 
     <script>
-        // Minimal JavaScript for future interactions
+        // Enhanced loading animation
         document.addEventListener('DOMContentLoaded', function() {
-            // Add any future interactive functionality here
-            console.log('Events page loaded successfully');
+            // Add loading class to body
+            document.body.classList.add('loading');
+            
+            // Staggered animation for cards
+            const cards = document.querySelectorAll('.event-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${0.7 + index * 0.2}s`;
+            });
+
+            // Add smooth scroll behavior for internal links
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add hover effect sound feedback (visual only)
+            const buttons = document.querySelectorAll('.button:not(.disabled)');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.02)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+
+            console.log('딜하르방 메인 페이지가 성공적으로 로드되었습니다! 🗿');
         });
+
+        // Intersection Observer for scroll animations
+        if ('IntersectionObserver' in window) {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements that should animate on scroll
+            const animateElements = document.querySelectorAll('.event-card, .main-title');
+            animateElements.forEach(el => observer.observe(el));
+        }
     </script>
 </body>
 </html>
