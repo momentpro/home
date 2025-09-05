@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #F8F9FA;
+            color: #212529;
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes checkmark {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Header */
+        .header {
+            background-color: #FFFFFF;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .back-link {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .back-link:hover {
+            color: #0056b3;
+        }
+
+        /* Main Content */
+        .main-content {
+            animation: fadeIn 0.5s ease-in-out;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .welcome-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #212529;
+        }
+
+        /* Event Grid */
+        .event-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .event-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Event Cards */
+        .event-card {
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .event-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .event-card-content {
+            padding: 24px;
+        }
+
+        .event-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #212529;
+        }
+
+        .event-card p {
+            font-size: 16px;
+            color: #6C757D;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-disabled {
+            background-color: #6C757D;
+            color: white;
+            cursor: not-allowed;
+        }
+
+        .btn-disabled:hover {
+            background-color: #6C757D;
+        }
+
+        /* Event Detail Page */
+        .hero-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .event-detail-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #212529;
+            text-align: center;
+        }
+
+        .restaurant-list {
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .restaurant-item {
+            padding: 20px 0;
+            border-bottom: 1px solid #E9ECEF;
+        }
+
+        .restaurant-item:last-child {
+            border-bottom: none;
+        }
+
+        .restaurant-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 8px;
+        }
+
+        .restaurant-desc {
+            font-size: 14px;
+            color: #6C757D;
+        }
+
+        .coming-soon {
+            text-align: center;
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 60px 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin: 40px 0;
+        }
+
+        .coming-soon h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 20px;
+        }
+
+        .coming-soon p {
+            font-size: 16px;
+            color: #6C757D;
+            line-height: 1.6;
+        }
+
+        /* Form */
+        .application-form {
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-top: 40px;
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #212529;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 16px;
+            font-weight: 500;
+            color: #212529;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E9ECEF;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Pretendard', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #007BFF;
+        }
+
+        /* Thank You Page */
+        .thank-you-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .checkmark {
+            font-size: 64px;
+            margin-bottom: 30px;
+            animation: checkmark 0.6s ease-in-out;
+        }
+
+        .thank-you-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #212529;
+        }
+
+        .thank-you-message {
+            font-size: 18px;
+            color: #6C757D;
+            margin-bottom: 40px;
+            max-width: 400px;
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .main-content {
+                padding: 40px 20px;
+            }
+
+            .welcome-title {
+                font-size: 36px;
+                margin-bottom: 50px;
+            }
+
+            .event-detail-title {
+                font-size: 40px;
+            }
+
+            .hero-image {
+                height: 400px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .event-card img {
+                height: 240px;
+            }
+        }
+
+        /* Scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="back-link">← 뒤로 가기</a>
+        <h1>Event Details</h1>
+    </header>
+
+    <main class="main-content">
+        <!-- Content will be dynamically loaded based on URL parameter -->
+        <div id="event-content">
+            <!-- Default content will be replaced by JavaScript -->
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const eventType = urlParams.get('event');
+            const contentDiv = document.getElementById('event-content');
+
+            if (eventType === 'hyatt') {
+                // Grand Hyatt content
+                contentDiv.innerHTML = `
+                    <img src="https://via.placeholder.com/800x600/00008B/FFFFFF?text=Grand+Hyatt+Jeju" alt="그랜드 하얏트 제주" class="hero-image">
+                    
+                    <h2 class="event-detail-title">그랜드 하얏트 제주 | 레스토랑 특별 혜택</h2>
+                    
+                    <div class="restaurant-list">
+                        <div class="restaurant-item">
+                            <div class="restaurant-name">더 테라스</div>
+                            <div class="restaurant-desc">올데이 다이닝 레스토랑에서 특별한 할인 혜택을 만나보세요.</div>
+                        </div>
+                        <div class="restaurant-item">
+                            <div class="restaurant-name">스시 바</div>
+                            <div class="restaurant-desc">신선한 일식 요리와 함께하는 프리미엄 다이닝 경험.</div>
+                        </div>
+                        <div class="restaurant-item">
+                            <div class="restaurant-name">차이니즈 레스토랑</div>
+                            <div class="restaurant-desc">정통 중식 요리의 깊은 맛을 경험해보세요.</div>
+                        </div>
+                        <div class="restaurant-item">
+                            <div class="restaurant-name">그릴 & 바</div>
+                            <div class="restaurant-desc">프리미엄 스테이크와 칵테일로 완벽한 저녁을 만들어보세요.</div>
+                        </div>
+                        <div class="restaurant-item">
+                            <div class="restaurant-name">카페 델마르</div>
+                            <div class="restaurant-desc">바다 전망과 함께하는 여유로운 카페 타임.</div>
+                        </div>
+                        <div class="restaurant-item">
+                            <div class="restaurant-name">풀사이드 바</div>
+                            <div class="restaurant-desc">수영장 옆에서 즐기는 트로피컬 음료와 가벼운 식사.</div>
+                        </div>
+                        <div class="restaurant-item">
+                            <div class="restaurant-name">룸서비스</div>
+                            <div class="restaurant-desc">객실에서 편안하게 즐기는 24시간 룸서비스 할인.</div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="scrollToForm()">신청하기</button>
+                    
+                    <form class="application-form" id="application-form">
+                        <h3 class="form-title">혜택 신청하기</h3>
+                        <div class="form-group">
+                            <label for="name" class="form-label">이름</label>
+                            <input type="text" id="name" name="name" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="form-label">연락처</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">신청 완료</button>
+                    </form>
+                `;
+            } else if (eventType === 'yacht') {
+                // Yacht content (coming soon)
+                contentDiv.innerHTML = `
+                    <img src="https://via.placeholder.com/800x600/FFD700/000000?text=Mujigae+Yacht" alt="무지개 요트 제주" class="hero-image">
+                    
+                    <h2 class="event-detail-title">무지개 요트 제주 | 할인 이벤트</h2>
+                    
+                    <div class="coming-soon">
+                        <h2>Coming Soon</h2>
+                        <p>현재 준비 중인 이벤트입니다.<br>곧 멋진 혜택으로 찾아뵙겠습니다. ⛵️</p>
+                    </div>
+                `;
+            } else {
+                // Default content if no valid event parameter
+                contentDiv.innerHTML = `
+                    <div class="coming-soon">
+                        <h2>이벤트를 찾을 수 없습니다</h2>
+                        <p><a href="index.html" class="btn btn-primary" style="display: inline-block; width: auto; margin-top: 20px;">메인으로 돌아가기</a></p>
+                    </div>
+                `;
+            }
+
+            // Add form submit handler if form exists
+            const form = document.getElementById('application-form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const name = document.getElementById('name').value;
+                    const phone = document.getElementById('phone').value;
+                    
+                    // Basic validation
+                    if (!name || !phone) {
+                        alert('모든 필드를 입력해주세요.');
+                        return;
+                    }
+                    
+                    // Store data in localStorage (for demo purposes)
+                    localStorage.setItem('applicantName', name);
+                    localStorage.setItem('applicantPhone', phone);
+                    
+                    // Redirect to thank you page
+                    window.location.href = 'thank-you.html';
+                });
+            }
+        });
+
+        function scrollToForm() {
+            const form = document.getElementById('application-form');
+            if (form) {
+                form.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
