@@ -64,13 +64,17 @@
 
         /* Header */
         .header {
-            background: linear-gradient(135deg, var(--primary-brand) 0%, #0066b3 100%);
-            padding: 30px 20px;
+            background: linear-gradient(135deg, #001a33 0%, var(--primary-brand) 50%, #0066b3 100%);
+            padding: 60px 20px 80px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 90, 156, 0.15);
             position: relative;
             overflow: hidden;
             animation: slideInFromTop 0.8s ease-out;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .header::before {
@@ -80,26 +84,125 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="0%" r="100%"><stop offset="0%" stop-color="rgba(255,255,255,0.1)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><rect width="100" height="20" fill="url(%23a)"/></svg>');
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(247, 200, 82, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
             pointer-events: none;
         }
 
-        .header h1 {
-            font-size: 36px;
-            font-weight: 800;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            margin-bottom: 8px;
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(180deg, transparent 0%, var(--background) 100%);
+            pointer-events: none;
+        }
+
+        .header-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+            position: relative;
+            letter-spacing: -1px;
+        }
+
+        .header h1::after {
+            content: '🗿';
+            position: absolute;
+            top: -10px;
+            right: -50px;
+            font-size: 32px;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
 
         .header .subtitle {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
             position: relative;
             z-index: 1;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .header .tagline {
+            font-size: 16px;
+            color: var(--secondary-accent);
+            font-weight: 700;
+            background: rgba(247, 200, 82, 0.2);
+            padding: 12px 24px;
+            border-radius: 25px;
+            border: 2px solid rgba(247, 200, 82, 0.3);
+            backdrop-filter: blur(10px);
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(247, 200, 82, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(247, 200, 82, 0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+        }
+
+        /* Floating decorative elements */
+        .floating-deco {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.3;
+            animation: float 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .floating-deco:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-deco:nth-child(2) {
+            top: 30%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .floating-deco:nth-child(3) {
+            bottom: 25%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .floating-deco:nth-child(4) {
+            bottom: 35%;
+            right: 10%;
+            animation-delay: 1.5s;
         }
 
         /* Main Content */
@@ -284,12 +387,33 @@
 
         /* Responsive Typography */
         @media (min-width: 768px) {
+            .header {
+                min-height: 500px;
+                padding: 80px 20px 100px;
+            }
+
             .header h1 {
+                font-size: 64px;
+                margin-bottom: 25px;
+            }
+
+            .header h1::after {
                 font-size: 42px;
+                right: -60px;
             }
 
             .header .subtitle {
+                font-size: 24px;
+                margin-bottom: 40px;
+            }
+
+            .header .tagline {
                 font-size: 18px;
+                padding: 15px 30px;
+            }
+
+            .floating-deco {
+                font-size: 32px;
             }
 
             .main-title {
@@ -345,8 +469,17 @@
 </head>
 <body>
     <header class="header">
-        <h1>딜하르방</h1>
-        <p class="subtitle">제주도민만을 위한 특별한 혜택</p>
+        <!-- Floating decorative elements -->
+        <div class="floating-deco">🌺</div>
+        <div class="floating-deco">🏖️</div>
+        <div class="floating-deco">🌊</div>
+        <div class="floating-deco">🍊</div>
+        
+        <div class="header-content">
+            <h1>딜하르방</h1>
+            <p class="subtitle">제주도민만을 위한 특별한 혜택</p>
+            <div class="tagline">🎯 우리 동네만의 확실한 딜!</div>
+        </div>
     </header>
 
     <main class="main-content">
