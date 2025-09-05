@@ -295,6 +295,29 @@
             padding: 20px 50px;
         }
 
+        .button.secondary {
+            background: linear-gradient(135deg, var(--primary-brand) 0%, #0066b3 100%);
+            color: white;
+            font-size: 16px;
+            padding: 15px 30px;
+            margin: 20px auto 0;
+            max-width: 300px;
+        }
+
+        .button.secondary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 90, 156, 0.4);
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin: 40px auto 0;
+            max-width: 450px;
+        }
+
         .button::before {
             content: '';
             position: absolute;
@@ -377,6 +400,15 @@
             .coming-soon-message {
                 font-size: 22px;
             }
+
+            .button-group {
+                flex-direction: row;
+                gap: 20px;
+            }
+
+            .button.secondary {
+                max-width: 250px;
+            }
         }
 
         /* Accessibility */
@@ -448,7 +480,10 @@
                         <p class="note">※ 자세한 내용은 신청 링크에서 변동될 수 있습니다.</p>
                     </section>
                     
-                    <a href="https://forms.gle/ywfgkD2G92bV22bf6" class="button large" target="_blank" rel="noopener noreferrer">딜하르방 믿고 신청하기</a>
+                    <div class="button-group">
+                        <a href="https://www.hyatt.com/grand-hyatt/ko-KR/cjugh-grand-hyatt-jeju/dining" class="button secondary" target="_blank" rel="noopener noreferrer">🏨 매장 정보 자세히 보기</a>
+                        <a href="https://forms.gle/ywfgkD2G92bV22bf6" class="button large" target="_blank" rel="noopener noreferrer">딜하르방 믿고 신청하기</a>
+                    </div>
                 `;
             } else if (eventType === 'yacht') {
                 // Yacht content (coming soon)
