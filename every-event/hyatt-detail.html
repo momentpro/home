@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>딜하르방 - 그랜드 하얏트 제주 특급 혜택</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+        :root {
+            --primary-brand: #005A9C;
+            --secondary-accent: #F7C852;
+            --background: #F9F9F9;
+            --text-dark: #333333;
+            --text-light: #767676;
+            --card-background: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--background);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-brand) 0%, #0066b3 100%);
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 90, 156, 0.15);
+            position: relative;
+            animation: slideInFromLeft 0.8s ease-out;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .back-link::before {
+            content: '←';
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        /* Hero Image */
+        .hero-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 18px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+
+        @media (min-width: 768px) {
+            .hero-image {
+                height: 400px;
+            }
+        }
+
+        /* Main Title */
+        .main-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            line-height: 1.3;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out 0.7s both;
+        }
+
+        .main-title .highlight {
+            color: var(--primary-brand);
+            position: relative;
+        }
+
+        .main-title .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary-accent), var(--primary-brand));
+            border-radius: 2px;
+        }
+
+        /* Intro Paragraph */
+        .intro {
+            background: var(--card-background);
+            padding: 30px;
+            border-radius: 18px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-dark);
+            animation: fadeInUp 0.8s ease-out 0.9s both;
+            position: relative;
+        }
+
+        .intro::before {
+            content: '💬';
+            position: absolute;
+            top: -10px;
+            left: 30px;
+            font-size: 24px;
+            background: var(--card-background);
+            padding: 0 10px;
+        }
+
+        /* Sections */
+        .section {
+            background: var(--card-background);
+            padding: 35px;
+            border-radius: 18px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 0.8s ease-out both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section:nth-child(4) { animation-delay: 1.1s; }
+        .section:nth-child(5) { animation-delay: 1.3s; }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-brand), var(--secondary-accent));
+        }
+
+        .section h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .section li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            font-size: 16px;
+            color: var(--text-dark);
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .section li:last-child {
+            border-bottom: none;
+        }
+
+        .section li::before {
+            content: '🏨';
+            position: absolute;
+            left: 0;
+            top: 12px;
+        }
+
+        .section p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .section p strong {
+            color: var(--primary-brand);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .note {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0, 90, 156, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-brand);
+        }
+
+        /* Button Group */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin: 40px auto 0;
+            max-width: 450px;
+        }
+
+        .button {
+            display: block;
+            background: linear-gradient(135deg, var(--secondary-accent) 0%, #f5d76e 100%);
+            color: var(--text-dark);
+            border-radius: 25px;
+            padding: 18px 40px;
+            font-weight: 700;
+            font-size: 18px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out 1.5s both;
+        }
+
+        .button.secondary {
+            background: linear-gradient(135deg, var(--primary-brand) 0%, #0066b3 100%);
+            color: white;
+            font-size: 16px;
+            padding: 15px 30px;
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .button:hover::before {
+            left: 100%;
+        }
+
+        .button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(247, 200, 82, 0.4);
+        }
+
+        .button.secondary:hover {
+            box-shadow: 0 10px 25px rgba(0, 90, 156, 0.4);
+        }
+
+        .button:active {
+            transform: translateY(-1px) scale(1.01);
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .main-content {
+                padding: 60px 40px;
+            }
+
+            .main-title {
+                font-size: 36px;
+                margin-bottom: 40px;
+            }
+
+            .section {
+                padding: 40px;
+            }
+
+            .section h2 {
+                font-size: 24px;
+            }
+
+            .intro {
+                padding: 40px;
+                font-size: 18px;
+            }
+
+            .button-group {
+                flex-direction: row;
+                gap: 20px;
+            }
+
+            .button.secondary {
+                max-width: 250px;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .button:focus {
+            outline: 3px solid var(--primary-brand);
+            outline-offset: 2px;
+        }
+
+        .back-link:focus {
+            outline: 2px solid white;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="back-link">뒤로 가기</a>
+    </header>
+
+    <main class="main-content">
+        <img src="images/grand-hyatt-jeju.jpg" alt="그랜드 하얏트 제주 특별 혜택" class="hero-image">
+        
+        <h1 class="main-title">
+            <span class="highlight">딜하르방 Pick!</span> 그랜드 하얏트 특급 혜택
+        </h1>
+        
+        <div class="intro">
+            안녕하세요! 제주도민을 위해 발로 뛰는 딜하르방입니다. 이번엔 그랜드 하얏트 레스토랑의 확실한 혜택을 가져왔으니, 놓치지 말고 꼭 챙겨가세요.
+        </div>
+        
+        <section class="section">
+            <h2>✍️ 혜택 적용 레스토랑</h2>
+            <ul>
+                <li>더 테라스 (올데이 다이닝)</li>
+                <li>스시 바 (일식 전문)</li>
+                <li>차이니즈 레스토랑 (중식 전문)</li>
+                <li>그릴 & 바 (스테이크 & 칵테일)</li>
+                <li>카페 델마르 (카페 & 디저트)</li>
+                <li>풀사이드 바 (수영장 바)</li>
+                <li>룸서비스 (24시간)</li>
+            </ul>
+        </section>
+        
+        <section class="section">
+            <h2>🎁 이번 혜택은?</h2>
+            <p>제주도민 인증 시 <strong>최대 40% 할인</strong> 혜택 제공</p>
+            <p class="note">※ 자세한 내용은 신청 링크에서 변동될 수 있습니다.</p>
+        </section>
+        
+        <div class="button-group">
+            <a href="https://www.hyatt.com/grand-hyatt/ko-KR/cjugh-grand-hyatt-jeju/dining" class="button secondary" target="_blank" rel="noopener noreferrer">🏨 매장 정보 자세히 보기</a>
+            <a href="application.html" class="button">딜하르방 믿고 신청하기</a>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Enhanced animations and interactions
+            const animatedElements = document.querySelectorAll('.section, .hero-image, .main-title, .intro, .button');
+            
+            // Intersection Observer for scroll animations
+            if ('IntersectionObserver' in window) {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, observerOptions);
+
+                animatedElements.forEach(el => observer.observe(el));
+            }
+
+            // Button hover effects
+            const buttons = document.querySelectorAll('.button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.02)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+
+            console.log('딜하르방 그랜드 하얏트 페이지가 성공적으로 로드되었습니다! 🗿');
+        });
+    </script>
+</body>
+</html>
