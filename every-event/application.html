@@ -691,15 +691,35 @@
                 submitButton.disabled = true;
                 submitButton.textContent = '신청 중...';
 
-                // Simulate form submission (replace with actual API call)
-                setTimeout(() => {
-                    // Store data in localStorage for demo
-                    localStorage.setItem('applicationData', JSON.stringify(data));
-                    localStorage.setItem('applicantName', data.name);
+                // Send data to Google Sheets via Apps Script
+                fetch('https://script.google.com/macros/s/AKfycby_DuJHZCHJRvy6apHT_wGS6uN7I2yj_K9aYHNA-9DzLh8xOvdS1RN_j_q9YHhC2CFG/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        // Store name for thank you page
+                        localStorage.setItem('applicantName', data.name);
+                        localStorage.setItem('applicationData', JSON.stringify(data));
+                        
+                        // Redirect to thank you page
+                        window.location.href = 'thank-you.html';
+                    } else {
+                        throw new Error(result.message || '신청 처리 중 오류가 발생했습니다.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('신청 처리 중 오류가 발생했습니다. 다시 시도해주세요.\n\n오류 내용: ' + error.message);
                     
-                    // Redirect to thank you page
-                    window.location.href = 'thank-you.html';
-                }, 1500);
+                    // Re-enable submit button
+                    submitButton.disabled = false;
+                    submitButton.textContent = '🗿 딜하르방 믿고 신청하기!';
+                });
             });
 
             // Enhanced animations and interactions
