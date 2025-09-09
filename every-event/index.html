@@ -109,6 +109,29 @@
             margin: 0 auto;
         }
 
+        /* 딜하르방 캐릭터 스타일 */
+        .character-showcase {
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .main-character {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+            animation: characterFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes characterFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(-2deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+        }
+
         .header h1 {
             font-size: 48px;
             font-weight: 900;
@@ -120,13 +143,16 @@
         }
 
         .header h1::after {
-            content: '🗿';
+            content: '';
             position: absolute;
-            top: -10px;
-            right: -50px;
-            font-size: 32px;
+            top: -20px;
+            right: -80px;
+            width: 80px;
+            height: 80px;
+            background: url('images/deal-harabang-character.png') no-repeat center center;
+            background-size: contain;
             animation: float 3s ease-in-out infinite;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
         }
 
         .header .subtitle {
@@ -509,8 +535,10 @@
             }
 
             .header h1::after {
-                font-size: 42px;
-                right: -60px;
+                width: 120px;
+                height: 120px;
+                top: -30px;
+                right: -100px;
             }
 
             .header .subtitle {
@@ -525,6 +553,11 @@
 
             .floating-deco {
                 font-size: 32px;
+            }
+
+            .main-character {
+                width: 160px;
+                height: 160px;
             }
 
             .main-title {
@@ -587,6 +620,9 @@
         <div class="floating-deco">🍊</div>
         
         <div class="header-content">
+            <div class="character-showcase">
+                <img src="images/deal-harabang-character.png" alt="딜하르방 캐릭터" class="main-character">
+            </div>
             <h1>딜하르방</h1>
             <p class="subtitle">제주도민만을 위한 특별한 혜택</p>
             <div class="tagline">🎯 우리 동네만의 확실한 딜!</div>
