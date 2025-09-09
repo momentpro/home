@@ -370,6 +370,76 @@
             outline: 2px solid white;
             outline-offset: 2px;
         }
+
+        /* Instagram Feed Section Styles */
+        .instagram-feed-section {
+            background: var(--card-background);
+            border-radius: 18px;
+            padding: 35px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 0.8s ease-out 1.1s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .instagram-feed-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-brand), var(--secondary-accent));
+        }
+
+        .instagram-feed-section h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .feed-intro {
+            text-align: center;
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Instagram Container */
+        .instagram-widget-container {
+            padding: 0;
+            margin: 20px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .instagram-widget-container iframe,
+        .instagram-widget-container > div {
+            width: 100% !important;
+            border: none !important;
+            border-radius: 0 !important;
+        }
+
+        @media (min-width: 768px) {
+            .instagram-widget-container {
+                min-height: 500px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -444,6 +514,46 @@
             <a href="https://www.hyatt.com/grand-hyatt/ko-KR/cjugh-grand-hyatt-jeju/dining" class="button secondary" target="_blank" rel="noopener noreferrer">🏨 매장 정보 자세히 보기</a>
             <a href="application.html" class="button">딜하르방 믿고 신청하기</a>
         </div>
+        
+        <section class="section instagram-feed-section">
+            <h2>🏨 제주드림타워 실시간 소식</h2>
+            <p class="feed-intro">아래에서 제주드림타워의 생생한 실제 레스토랑 사진과 최신 소식을 바로 확인해보세요!</p>
+            
+            <!-- Instagram Official Embed -->
+            <div class="instagram-widget-container">
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/jejudreamtower/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px; box-shadow:none; margin: 0; max-width:100%; min-width:326px; padding:0; width:100%;">
+                    <div style="padding:16px;">
+                        <div style="display: flex; flex-direction: row; align-items: center;">
+                            <div style="background: linear-gradient(135deg, #405de6, #5b51d8, #833ab4, #c13584, #e1306c, #fd1d1d); border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px; display: flex; align-items: center; justify-content: center;">
+                                <div style="color: white; font-size: 18px;">🏨</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
+                                <div style="color: #262626; font-family: -apple-system,BlinkMacSystemFont,sans-serif; font-size: 14px; font-weight: 600; line-height: 18px;">jejudreamtower</div>
+                                <div style="color: #8e8e8e; font-family: -apple-system,BlinkMacSystemFont,sans-serif; font-size: 12px; line-height: 16px;">제주드림타워</div>
+                            </div>
+                        </div>
+                        <div style="padding: 19% 0;"></div>
+                        <div style="display:block; height:50px; margin:0 auto 12px; width:50px;">
+                            <div style="background: linear-gradient(135deg, #405de6, #5b51d8, #833ab4, #c13584, #e1306c, #fd1d1d); border-radius: 50%; height: 50px; width: 50px; display: flex; align-items: center; justify-content: center;">
+                                <div style="color: white; font-size: 24px;">📸</div>
+                            </div>
+                        </div>
+                        <div style="padding-top: 8px;">
+                            <div style="color: var(--primary-brand); font-family: 'Pretendard', sans-serif; font-size: 16px; font-weight: 600; line-height: 20px; text-align: center;">제주드림타워 공식 인스타그램</div>
+                            <div style="color: var(--text-light); font-family: 'Pretendard', sans-serif; font-size: 14px; line-height: 18px; text-align: center; margin-top: 5px;">실제 레스토랑 사진과 최신 소식을 확인하세요</div>
+                        </div>
+                        <div style="padding: 12.5% 0;"></div>
+                    </div>
+                </blockquote>
+                <script async src="//www.instagram.com/embed.js"></script>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="https://www.instagram.com/jejudreamtower/" target="_blank" rel="noopener noreferrer" class="button">
+                    제주드림타워 인스타그램 바로가기
+                </a>
+            </div>
+        </section>
     </main>
 
     <script>
