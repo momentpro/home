@@ -413,31 +413,59 @@
             line-height: 1.6;
         }
 
-        /* Instagram Container */
+        /* Instagram Container - 모바일 최적화 */
         .instagram-widget-container {
             padding: 0;
             margin: 20px 0;
             border-radius: 12px;
-            overflow: hidden;
+            overflow: visible; /* 짤림 방지 */
             border: 1px solid #eee;
             background: #fff;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             min-height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 100%;
+        }
+
+        .instagram-widget-container blockquote {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 280px !important;
+            margin: 0 !important;
+            border-radius: 12px !important;
+            overflow: hidden !important;
         }
 
         .instagram-widget-container iframe,
         .instagram-widget-container > div {
             width: 100% !important;
+            max-width: 100% !important;
             border: none !important;
-            border-radius: 0 !important;
+            border-radius: 12px !important;
+        }
+
+        /* 모바일 환경 최적화 */
+        @media (max-width: 767px) {
+            .instagram-widget-container {
+                margin: 10px -15px; /* 좌우 여백 줄임 */
+                border-radius: 8px;
+                min-height: 350px;
+            }
+            
+            .instagram-widget-container blockquote {
+                border-radius: 8px !important;
+                min-width: 100% !important;
+            }
+            
+            .instagram-feed-section {
+                padding: 25px 20px; /* 모바일에서 패딩 줄임 */
+            }
         }
 
         @media (min-width: 768px) {
             .instagram-widget-container {
                 min-height: 500px;
+                max-width: 540px;
+                margin: 20px auto;
             }
         }
     </style>
@@ -493,11 +521,20 @@
             <h2>📌 필수 안내사항</h2>
             <ul>
                 <li><strong>1. 신청서 작성</strong> → 선정 후 개별 연락 예정</li>
-                <li><strong>2. 예약 진행</strong> → 선정된 분은 '캐치테이블' 앱을 통해 반드시 신청자 본인 명의로 예약</li>
-                <li><strong>3. 예약 확인 전달</strong> → 예약 완료 후, 예약 확인 화면 캡쳐 이미지를 담당자에게 전달해야 혜택이 적용됨</li>
-                <li><strong>4. 인원 규정</strong> → 예약 시 입력한 인원과 실제 방문 인원이 반드시 동일해야 함<br>
-                <small>방문 전 사전 수정은 가능 (예: 2인 예약 후 4인 방문 시 할인 불가)</small></li>
-                <li><strong>5. 방문 시 할인 적용</strong> → 예약 내역과 인원 확인 후 현장에서 최대 40% 할인</li>
+                <li><strong>2. 예약 진행</strong><br>
+                선정된 분은 '캐치테이블' 앱을 통해<br>
+                반드시 신청자 본인 명의로 예약</li>
+                <li><strong>3. 예약 확인 전달</strong><br>
+                예약 완료 후, 예약 확인 화면 캡쳐 이미지를<br>
+                담당자에게 전달해야 혜택이 적용됨</li>
+                <li><strong>4. 인원 규정</strong><br>
+                예약 시 입력한 인원과 실제 방문 인원이<br>
+                반드시 동일해야 함<br>
+                <small>방문 전 사전 수정은 가능<br>
+                (예: 2인 예약 후 4인 방문 시 할인 불가)</small></li>
+                <li><strong>5. 방문 시 할인 적용</strong><br>
+                예약 내역과 인원 확인 후<br>
+                현장에서 최대 40% 할인</li>
             </ul>
         </section>
         

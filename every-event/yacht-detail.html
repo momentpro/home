@@ -414,37 +414,59 @@
             line-height: 1.6;
         }
 
-        /* Lightwidget Container - 3컬럼 그리드용 최적화 */
+        /* Instagram Container - 모바일 최적화 */
         .instagram-widget-container {
             padding: 0;
             margin: 20px 0;
             border-radius: 12px;
-            overflow: hidden;
+            overflow: visible; /* 짤림 방지 */
             border: 1px solid #eee;
             background: #fff;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             min-height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 100%;
         }
 
-        /* Lightwidget 로딩 상태 */
-        .instagram-widget-container p {
-            margin: 0;
+        .instagram-widget-container blockquote {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 280px !important;
+            margin: 0 !important;
+            border-radius: 12px !important;
+            overflow: hidden !important;
         }
 
-        /* Lightwidget이 삽입되면 자동으로 스타일 적용 */
         .instagram-widget-container iframe,
         .instagram-widget-container > div {
             width: 100% !important;
+            max-width: 100% !important;
             border: none !important;
-            border-radius: 0 !important;
+            border-radius: 12px !important;
+        }
+
+        /* 모바일 환경 최적화 */
+        @media (max-width: 767px) {
+            .instagram-widget-container {
+                margin: 10px -15px; /* 좌우 여백 줄임 */
+                border-radius: 8px;
+                min-height: 350px;
+            }
+            
+            .instagram-widget-container blockquote {
+                border-radius: 8px !important;
+                min-width: 100% !important;
+            }
+            
+            .instagram-feed-section {
+                padding: 25px 20px; /* 모바일에서 패딩 줄임 */
+            }
         }
 
         @media (min-width: 768px) {
             .instagram-widget-container {
                 min-height: 500px;
+                max-width: 540px;
+                margin: 20px auto;
             }
         }
     </style>
@@ -466,11 +488,21 @@
         </div>
         
         <section class="section">
+            <h2>✅ 이벤트 기간</h2>
+            <p style="font-size: 18px; text-align: center; color: var(--primary-brand); font-weight: 700;">
+                <strong>2025년 9월 1일 ~ 9월 30일</strong>
+            </p>
+        </section>
+        
+        <section class="section">
             <h2>🛥️ 투어 종류</h2>
             <ul>
                 <li><strong>퍼블릭(데이)투어</strong> - 일반 요트투어 (오전부터 일몰시간 전까지)</li>
                 <li><strong>선셋투어</strong> - 제주 서쪽 노을을 바라보며 낭만적인 선셋요트투어</li>
-                <li><strong>해녀와 함께하는 요트투어</strong> - 유네스코에 등재된 '제주 해녀'와 함께 요트를 타고 나가 실제 해녀분들이 물질하는 모습을 눈 앞에서 볼 수 있는 제주 유일 무지개요트만의 특별한 요트투어</li>
+                <li><strong>해녀와 함께하는 요트투어</strong><br>
+                유네스코에 등재된 '제주 해녀'와 함께 요트를 타고 나가<br>
+                실제 해녀분들이 물질하는 모습을 눈 앞에서 볼 수 있는<br>
+                제주 유일 무지개요트만의 특별한 요트투어</li>
             </ul>
         </section>
         
@@ -500,11 +532,14 @@
             <ul>
                 <li><strong>투어시간:</strong> 총 50분</li>
                 <li><strong>출항시간:</strong> 10시부터 19시까지 정각 기준으로 출항</li>
-                <li><strong>주의사항:</strong> 일몰시간에 따라 변동이 있을 수 있으니 예약 전 반드시 유선으로 출항시간 문의</li>
+                <li><strong>주의사항:</strong><br>
+                일몰시간에 따라 변동이 있을 수 있으니<br>
+                예약 전 반드시 유선으로 출항시간 문의</li>
             </ul>
             <div class="note">
                 📞 <strong>예약 문의:</strong> 064-745-1324<br>
-                ※ 출항시간 확인을 위해 예약 전 반드시 전화 문의 바랍니다.
+                ※ 출항시간 확인을 위해<br>
+                예약 전 반드시 전화 문의 바랍니다.
             </div>
         </section>
         
