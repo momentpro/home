@@ -416,7 +416,7 @@
         /* Instagram Container - 모바일 최적화 */
         .instagram-widget-container {
             padding: 0;
-            margin: 20px 0;
+            margin: 20px auto;
             border-radius: 12px;
             overflow: visible; /* 짤림 방지 */
             border: 1px solid #eee;
@@ -424,15 +424,20 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             min-height: 400px;
             width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .instagram-widget-container blockquote {
             width: 100% !important;
             max-width: 100% !important;
             min-width: 280px !important;
-            margin: 0 !important;
+            margin: 0 auto !important;
             border-radius: 12px !important;
             overflow: hidden !important;
+            display: block !important;
+            text-align: center !important;
         }
 
         .instagram-widget-container iframe,
@@ -557,8 +562,8 @@
             <p class="feed-intro">아래에서 제주드림타워의 생생한 실제 레스토랑 사진과 최신 소식을 바로 확인해보세요!</p>
             
             <!-- Instagram Official Embed -->
-            <div class="instagram-widget-container">
-                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/jejudreamtower/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px; box-shadow:none; margin: 0; max-width:100%; min-width:326px; padding:0; width:100%;">
+            <div class="instagram-widget-container" style="text-align: center;">
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/jejudreamtower/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px; box-shadow:none; margin: 0 auto; max-width:540px; min-width:326px; padding:0; width:100%; display: inline-block;">
                     <div style="padding:16px;">
                         <div style="display: flex; flex-direction: row; align-items: center;">
                             <div style="background: linear-gradient(135deg, #405de6, #5b51d8, #833ab4, #c13584, #e1306c, #fd1d1d); border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px; display: flex; align-items: center; justify-content: center;">
