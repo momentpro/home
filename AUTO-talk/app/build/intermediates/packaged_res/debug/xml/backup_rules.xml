@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<full-backup-content>
-    <!-- 
-    백업에서 제외할 파일들을 지정할 수 있습니다.
-    예: <exclude domain="sharedpref" path="device_preferences.xml"/>
-    -->
-</full-backup-content>
