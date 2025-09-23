@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- 
+        클라우드 백업에서 제외할 파일들을 지정할 수 있습니다.
+        예: <exclude domain="sharedpref" path="device_preferences.xml"/>
+        -->
+    </cloud-backup>
+    <device-transfer>
+        <!-- 
+        기기 전송에서 제외할 파일들을 지정할 수 있습니다.
+        예: <exclude domain="sharedpref" path="device_preferences.xml"/>
+        -->
+    </device-transfer>
+</data-extraction-rules>

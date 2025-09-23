@@ -1,0 +1,13 @@
+{
+  "delay_range": [2, 5],
+  "max_posts_per_keyword": 10,
+  "scroll_count": 10,
+  "max_follow_count": 200,
+  "search_criteria": "인기글",
+  "secret_mode": false,
+  "auto_like": true,
+  "auto_repost": false,
+  "auto_follow": false,
+  "auto_comment": false,
+  "comments": ["좋아요!", "스하리!", "대박!", "개꿀!", "인정!", "동감!", "ㄱㅇㄷ", "ㅇㅈ", "ㄹㅇ", "팩트!", "완전 공감!", "넘 좋아요!", "최고!", "짱이에요!", "맞아요!"]
+}

@@ -3,360 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>분양콕 | 믿을 수 있는 분양 정보 플랫폼</title>
+    
+    <title>분양콕 | 관심고객 등록</title>
+    <meta property="og:title" content="분양콕 | 관심고객 등록">
+    <meta property="og:description" content="정보를 입력하시면 브로슈어를 보실 수 있습니다.">
+    <meta property="og:image" content="img_favicon.png">
+    <link rel="icon" href="img_favicon.png" type="image/png">
 
-    <!-- Favicon and OG Info -->
-    <link rel="icon" type="image/png" href="img_favicon.png">
-    <link rel="apple-touch-icon" href="img_favicon.png">
-    <meta property="og:title" content="분양콕">
-    <meta property="og:description" content="믿을 수 있는 분양 정보 플랫폼, 분양콕">
-    <meta property="og:image" content="img_og_banner.png">
-    <meta property="og:url" content="https://YOUR_WEBSITE_URL">
-    <meta property="og:type" content="website">
-
-    <!-- Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
-
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --color-primary: #00c7ae;
-            --color-navy: #2c3e50;
-            --color-background: #f8f9fa;
-            --color-white: #ffffff;
-            --color-text-primary: #212529;
-            --color-text-secondary: #868e96;
-            --color-border: #dee2e6;
-        }
-
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            margin: 0;
-            background-color: var(--color-background);
-            color: var(--color-text-primary);
-            word-break: keep-all;
-            word-wrap: break-word;
-        }
-
-        a { text-decoration: none; color: inherit; }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        /* Header */
-        .main-header {
-            background-color: var(--color-white);
-            border-bottom: 1px solid var(--color-border);
-        }
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 70px;
-        }
-        .logo { display: flex; align-items: center; gap: 12px; }
-        .logo img { width: 32px; height: 32px; }
-        .logo span { font-size: 22px; font-weight: 900; color: var(--color-navy); }
-
-        /* Hero Section */
-        .hero-section {
-            background-color: var(--color-white);
-            text-align: center;
-            padding: 80px 0;
-            border-bottom: 1px solid var(--color-border);
-        }
-        .hero-section h1 { 
-            font-size: 42px; 
-            font-weight: 900; 
-            margin: 0 0 24px 0;
-            line-height: 1.4;
-        }
-        .search-bar {
-            display: flex; max-width: 680px; margin: 0 auto 40px auto;
-            border: 2px solid var(--color-primary); border-radius: 50px; overflow: hidden;
-        }
-        .search-bar input { flex-grow: 1; border: none; padding: 18px 24px; font-size: 16px; outline: none; }
-        .search-bar button {
-            border: none; background-color: var(--color-primary); color: var(--color-white);
-            font-size: 16px; font-weight: 700; padding: 0 32px; cursor: pointer; transition: background-color 0.3s;
-        }
-        .search-bar button:hover { background-color: #00a38d; }
-        .stats-bar { display: flex; justify-content: center; gap: 40px; }
-        .stat-item { text-align: center; }
-        .stat-item .label { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 4px; }
-        .stat-item .value { font-size: 20px; font-weight: 700; color: var(--color-navy); }
-
-        /* Main Content Section */
-        .content-section { padding: 80px 0; }
-        .section-title { font-size: 28px; font-weight: 900; margin: 0 0 32px 0; }
-
-        /* Property List */
-        .property-list { background-color: var(--color-white); border: 1px solid var(--color-border); border-radius: 12px; overflow: hidden; }
-        .property-item {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 24px; border-bottom: 1px solid var(--color-border); transition: background-color 0.2s;
-        }
-        .property-item:last-child { border-bottom: none; }
-        .property-item:hover { background-color: #fcfdff; }
-        .item-info { flex-grow: 1; }
-        .item-info h3 { font-size: 20px; font-weight: 700; margin: 0 0 8px 0; }
-        .item-info p { font-size: 15px; color: var(--color-text-secondary); margin: 0 0 12px 0; }
-        .item-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-        .tag {
-            background-color: var(--color-background); color: var(--color-text-secondary);
-            font-size: 12px; font-weight: 500; padding: 4px 10px;
-            border-radius: 20px; border: 1px solid var(--color-border);
-        }
-        .item-action { display: flex; align-items: center; gap: 24px; flex-shrink: 0; }
-        .cta-button {
-            background-color: var(--color-white); border: 1px solid var(--color-border); color: var(--color-text-primary);
-            font-weight: 700; padding: 12px 24px; border-radius: 8px; transition: all 0.3s; white-space: nowrap;
-        }
-        .property-item:hover .cta-button { background-color: var(--color-navy); color: var(--color-white); border-color: var(--color-navy); }
-
-        /* SNS Section */
-        .sns-section { background-color: var(--color-white); padding: 80px 0; border-top: 1px solid var(--color-border); }
-        .sns-card-container { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
-        .sns-card {
-            display: flex; align-items: center; gap: 20px;
-            background-color: var(--color-background); padding: 24px; border-radius: 12px;
-            width: 320px; transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .sns-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .sns-card svg { width: 40px; height: 40px; flex-shrink: 0; }
-        .sns-card h3 { font-size: 18px; margin: 0 0 4px 0; }
-        .sns-card p { font-size: 14px; margin: 0; color: var(--color-text-secondary); }
-
-        /* === MODIFIED: Footer Section === */
-        .main-footer {
-            background-color: var(--color-background);
-            padding: 80px 0;
-            border-top: 1px solid var(--color-border);
-            margin-top: 0;
-        }
-        .contact-card {
-            background-color: var(--color-white);
-            border: 1px solid var(--color-border);
-            border-radius: 16px;
-            max-width: 600px;
-            margin: 0 auto 32px auto;
-            padding: 24px;
-        }
-        .contact-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        .contact-item:first-child {
-            border-bottom: 1px solid var(--color-border);
-        }
-        .contact-label {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--color-text-secondary);
-        }
-        .contact-value {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--color-navy);
-            transition: color 0.3s;
-        }
-        a.contact-value:hover {
-            color: var(--color-primary);
-        }
-        .footer-copyright { text-align: center; font-size: 13px; color: var(--color-text-secondary); }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .property-item { flex-wrap: wrap; gap: 16px; }
-            .item-info { width: 100%; }
-            .item-action { width: 100%; justify-content: flex-end; }
-        }
-        @media (max-width: 768px) {
-            .container { padding: 0 20px; }
-            .hero-section h1 { font-size: 32px; }
-            .sns-card-container { flex-direction: column; align-items: center; }
-            .contact-item { flex-direction: column; gap: 8px; }
-        }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #f0f2f5; font-family: 'Noto Sans KR', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .hidden { display: none !important; }
+        .app-container { display: flex; flex-direction: column; align-items: center; width: 100%; min-height: 100vh; padding: 1rem; box-sizing: border-box; }
+        .content-viewer { width: 100%; max-width: 480px; background-color: white; border-radius: 1.5rem; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); display: flex; flex-direction: column; overflow: hidden; transition: all 0.3s ease-in-out; position: relative; margin: auto 0; }
+        .form-input { width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; transition: border-color 0.2s, box-shadow 0.2s; }
+        .form-input:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); }
+        .form-label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151; }
+        .radio-group label { display: flex; align-items: center; justify-content: center; padding: 0.5rem; font-size: 0.875rem; border: 1px solid #d1d5db; border-radius: 0.5rem; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; }
+        .radio-group input:checked + label { border-color: #4f46e5; background-color: #eef2ff; font-weight: 600; }
+        .nav-button { background-color: #4f46e5; color: white; border: none; padding: 0.75rem 1rem; border-radius: 9999px; cursor: pointer; font-size: 1rem; font-weight: 700; transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+        .nav-button:hover { background-color: #4338ca; transform: translateY(-2px); }
+        .nav-button:disabled { background-color: #a5b4fc; cursor: not-allowed; transform: none; box-shadow: none; }
     </style>
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="container header-content">
-            <a href="/" class="logo">
-                <img src="img_favicon.png" alt="분양콕 로고">
-                <span>분양콕</span>
+<div id="landing-page" class="app-container">
+    <div class="content-viewer p-6 md:p-8 flex flex-col">
+        <div class="text-center mb-6">
+            <img src="img_favicon.png" alt="분양콕 로고" class="h-12 mx-auto mb-4 rounded-lg">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">관심고객 등록</h1>
+            <p class="text-gray-500 mt-1 text-sm md:text-base">정보를 입력하시면 브로슈어를 보실 수 있습니다.</p>
+        </div>
+        <form id="customer-form" class="space-y-4 flex-grow">
+            <div><label for="name" class="form-label text-sm md:text-base">이름</label><input type="text" id="name" name="name" class="form-input"></div>
+            <div><label for="phone" class="form-label text-sm md:text-base">전화번호</label><input type="tel" id="phone" name="phone" class="form-input" placeholder="01012345678 ('-'없이 입력)"></div>
+            <div><label for="region" class="form-label text-sm md:text-base">관심지역</label><input type="text" id="region" name="region" class="form-input"></div>
+            <div><label class="form-label text-sm md:text-base">거래목적</label><div class="grid grid-cols-2 gap-2 radio-group"><input type="radio" name="purpose" id="purpose-invest" value="investment" class="sr-only"><label for="purpose-invest" class="text-xs md:text-sm">투자</label><input type="radio" name="purpose" id="purpose-reside" value="residence" class="sr-only"><label for="purpose-reside" class="text-xs md:text-sm">실거주</label></div></div>
+            <div><label class="form-label text-sm md:text-base">관심유형</label><div class="grid grid-cols-3 gap-2 radio-group"><input type="radio" name="type" id="type-apt" value="apartment" class="sr-only"><label for="type-apt" class="text-xs md:text-sm">아파트</label><input type="radio" name="type" id="type-op" value="officetel" class="sr-only"><label for="type-op" class="text-xs md:text-sm">오피스텔</label><input type="radio" name="type" id="type-office" value="office" class="sr-only"><label for="type-office" class="text-xs md:text-sm">오피스</label><input type="radio" name="type" id="type-commercial" value="commercial" class="sr-only"><label for="type-commercial" class="text-xs md:text-sm">상업시설</label><input type="radio" name="type" id="type-resi" value="residence-hotel" class="sr-only"><label for="type-resi" class="text-xs md:text-sm">생활형숙박</label><input type="radio" name="type" id="type-town" value="townhouse" class="sr-only"><label for="type-town" class="text-xs md:text-sm">타운하우스</label></div></div>
+            <div class="pt-2"><div class="flex items-center"><input id="consent" name="consent" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"><label for="consent" class="ml-2 block text-sm text-gray-700">개인정보 수집 및 이용에 동의합니다.</label></div></div>
+            <div class="pt-4"><button type="submit" id="submit-btn" class="w-full nav-button" disabled>브로슈어 무료 구독</button></div>
+        </form>
+    </div>
+</div>
+
+<section class="sns-section" style="background-color: #ffffff; padding: 80px 0; border-top: 1px solid #dee2e6;">
+    <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 40px;">
+         <h2 class="section-title" style="font-size: 28px; font-weight: 900; margin: 0 0 32px 0; text-align: center;">더 많은 소식 보기</h2>
+         <div class="sns-card-container" style="display: flex; gap: 30px; justify-content: center; flex-wrap: wrap;">
+            <a href="https://www.youtube.com/@%EB%B6%84%EC%96%91%EC%BD%95TV" target="_blank" class="sns-card" style="display: flex; align-items: center; gap: 20px; background-color: #f8f9fa; padding: 24px; border-radius: 12px; width: 320px; transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; color: inherit;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FF0000" style="width: 40px; height: 40px; flex-shrink: 0;"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg>
+                <div><h3 style="font-size: 18px; margin: 0 0 4px 0;">분양콕TV</h3><p style="font-size: 14px; margin: 0; color: #868e96;">생생한 현장 정보는 영상으로!</p></div>
             </a>
+            <a href="https://www.instagram.com/boonyang_cok/" target="_blank" class="sns-card" style="display: flex; align-items: center; gap: 20px; background-color: #f8f9fa; padding: 24px; border-radius: 12px; width: 320px; transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; color: inherit;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#insta-gradient)" style="width: 40px; height: 40px; flex-shrink: 0;"><defs><radialGradient id="insta-gradient" cx="0.3" cy="1" r="1"><stop offset="0" stop-color="#FDCB52"/><stop offset="0.5" stop-color="#FD8D32"/><stop offset="1" stop-color="#D12A7B"/></radialGradient></defs><path d="M12,2.163c3.204,0,3.584,0.012,4.85,0.07,3.252,0.148,4.771,1.691,4.919,4.919,0.058,1.265,0.069,1.645,0.069,4.85s-0.012,3.584-0.069,4.85c-0.149,3.225-1.664,4.771-4.919,4.919-1.266,0.058-1.644,0.069-4.85,0.069s-3.585-0.012-4.85-0.069c-3.252-0.149-4.771-1.664-4.919-4.919-0.058-1.265-0.069-1.645-0.069-4.85,0-3.204,0.012-3.584,0.069-4.85,0.149-3.225,1.664-4.771,4.919-4.919,1.266-0.057,1.645-0.069,4.85-0.069M12,0C8.741,0,8.333,0.014,7.053,0.072c-4.356,0.2-6.784,2.634-6.98,6.98C0.014,8.333,0,8.741,0,12c0,3.259,0.014,3.668,0.072,4.948,0.2,4.356,2.624,6.783,6.98,6.98,1.27,0.058,1.688,0.072,4.948,0.072s3.681-0.014,4.948-0.072c4.354-0.2,6.782-2.624,6.979-6.98,0.058-1.28,0.073-1.689,0.073-4.948s-0.015-3.668-0.073-4.948c-0.197-4.354-2.624-6.782-6.979-6.98C15.668,0.014,15.259,0,12,0L12,0z M12,5.838c-3.403,0-6.162,2.759-6.162,6.162s2.759,6.162,6.162,6.162,6.162-2.759,6.162-6.162S15.403,5.838,12,5.838z M12,16.225c-2.328,0-4.225-1.897-4.225-4.225s1.897-4.225,4.225-4.225,4.225,1.897,4.225,4.225S14.328,16.225,12,16.225z M18.402,4.158c-1.036,0-1.875,0.84-1.875,1.875s0.84,1.875,1.875,1.875,1.875-0.84,1.875-1.875S19.438,4.158,18.402,4.158z"/></svg>
+                <div><h3 style="font-size: 18px; margin: 0 0 4px 0;">공식 인스타그램</h3><p style="font-size: 14px; margin: 0; color: #868e96;">가장 빠른 소식과 이벤트를 만나요!</p></div>
+            </a>
+         </div>
+    </div>
+</section>
+
+<footer class="main-footer" style="background-color: #f8f9fa; padding: 80px 0; border-top: 1px solid #dee2e6; margin-top: 0;">
+    <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 40px;">
+        <h2 class="section-title" style="font-size: 28px; font-weight: 900; margin: 0 0 32px 0; text-align: center; margin-bottom: 24px;">광고 문의</h2>
+        <div class="contact-card" style="background-color: #ffffff; border: 1px solid #dee2e6; border-radius: 16px; max-width: 600px; margin: 0 auto 32px auto; padding: 24px;">
+            <div class="contact-item" style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #dee2e6;">
+                <span class="contact-label" style="font-size: 18px; font-weight: 700; color: #868e96;">대표 번호</span>
+                <a href="tel:1555-1256" class="contact-value" style="font-size: 22px; font-weight: 700; color: #2c3e50; transition: color 0.3s; text-decoration: none;">1555-1256</a>
+            </div>
+             <div class="contact-item" style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0;">
+                <span class="contact-label" style="font-size: 18px; font-weight: 700; color: #868e96;">이메일</span>
+                <a href="mailto:boonyangcok@cok-teck.com" class="contact-value" style="font-size: 22px; font-weight: 700; color: #2c3e50; transition: color 0.3s; text-decoration: none;">boonyangcok@cok-teck.com</a>
+            </div>
         </div>
-    </header>
+        <p class="footer-copyright" style="text-align: center; font-size: 13px; color: #868e96;">Copyright © 2025 분양콕. All rights reserved.</p>
+    </div>
+</footer>
 
-    <main>
-        <section class="hero-section">
-            <div class="container">
-                <h1>어떤 분양 정보를<br>찾고 계세요?</h1>
-                <div class="search-bar">
-                    <input type="text" id="search-input" placeholder="아파트, 오피스텔, 지역명 등으로 검색해보세요.">
-                    <button id="search-button">검색</button>
-                </div>
-                <div class="stats-bar">
-                    <div class="stat-item">
-                        <div class="label">누적 분양 정보</div>
-                        <div class="value">5,120 건</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="label">월 평균 방문자</div>
-                        <div class="value">12만 명</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="label">등록 파트너사</div>
-                        <div class="value">320 곳</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<script>
+const customerForm = document.getElementById('customer-form');
 
-        <section class="content-section">
-            <div class="container">
-                <h2 class="section-title">주요 분양 정보</h2>
-                <div class="property-list">
-                    
-                    <a href="/icheon-bubal-efete/" class="property-item">
-                        <div class="item-info">
-                            <h3>이천 부발역 에피트</h3>
-                            <p>도심 속에서 누리는 여유로운 주거 공간</p>
-                            <div class="item-tags"><span class="tag">아파트</span><span class="tag">경기도 이천</span></div>
-                        </div>
-                        <div class="item-action">
-                            <span class="cta-button">상세보기</span>
-                        </div>
-                    </a>
+function validateForm() {
+    const submitBtn = document.getElementById('submit-btn');
+    const isNameValid = document.getElementById('name').value.trim() !== '';
+    const isPhoneValid = document.getElementById('phone').value.trim() !== '';
+    const isRegionValid = document.getElementById('region').value.trim() !== '';
+    const isPurposeValid = !!customerForm.querySelector('input[name="purpose"]:checked');
+    const isTypeValid = !!customerForm.querySelector('input[name="type"]:checked');
+    const isConsentChecked = document.getElementById('consent').checked;
+    submitBtn.disabled = !(isNameValid && isPhoneValid && isRegionValid && isPurposeValid && isTypeValid && isConsentChecked);
+}
 
-                    <a href="/hillstate-isu-central/" class="property-item">
-                        <div class="item-info">
-                            <h3>힐스테이트 이수역 센트럴</h3>
-                            <p>교통의 중심에서 시작되는 프리미엄 라이프</p>
-                            <div class="item-tags"><span class="tag">아파트</span><span class="tag">서울 동작구</span><span class="tag">초역세권</span></div>
-                        </div>
-                        <div class="item-action">
-                            <span class="cta-button">상세보기</span>
-                        </div>
-                    </a>
+customerForm.querySelectorAll('input').forEach(el => { 
+    el.addEventListener('input', validateForm); 
+    el.addEventListener('change', validateForm); 
+});
 
-                    <a href="/wolgye-s-class/" class="property-item">
-                        <div class="item-info">
-                            <h3>월계 중흥 S-클래스</h3>
-                            <p>자연과 도시가 어우러진 명품 주거단지</p>
-                            <div class="item-tags"><span class="tag">아파트</span><span class="tag">서울 노원구</span><span class="tag">대단지</span></div>
-                        </div>
-                        <div class="item-action">
-                            <span class="cta-button">상세보기</span>
-                        </div>
-                    </a>
-                    
-                    <a href="https://momentintl.com/poongmu-lotte-signature/" class="property-item">
-                        <div class="item-info">
-                            <h3>풍무역 롯데캐슬 시그니처</h3>
-                            <p>김포의 새로운 중심, 프리미엄 브랜드 타운</p>
-                            <div class="item-tags"><span class="tag">아파트</span><span class="tag">경기도 김포</span><span class="tag">대단지</span></div>
-                        </div>
-                        <div class="item-action">
-                            <span class="cta-button">상세보기</span>
-                        </div>
-                    </a>
+customerForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(customerForm);
+    const data = {
+        timestamp: new Date().toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}),
+        site: "분양콕 메인페이지",
+        name: formData.get('name'), 
+        phone: formData.get('phone'), 
+        region: formData.get('region'),
+        purpose: formData.get('purpose'), 
+        type: formData.get('type')
+    };
+    
+    // Google Sheets로 데이터 전송
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzcCvlIlSEo7XFIC1XUdMU-qLLmyrQcl-2_PJQNytD4qyYMveYGBZ_oSylIsPWRopre0A/exec';
+    
+    fetch(scriptURL, { 
+        method: "POST", 
+        body: JSON.stringify(data),
+        mode: 'no-cors'
+    })
+    .then(() => {
+        alert('브로슈어 구독 신청이 완료되었습니다!\n곧 연락드리겠습니다.');
+        customerForm.reset();
+        validateForm(); // 폼 리셋 후 버튼 비활성화
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+    });
+});
 
-                    <a href="#" class="property-item">
-                        <div class="item-info">
-                            <h3>아크로드 서초</h3>
-                            <p>서초의 중심, 비교할 수 없는 프리미엄 라이프</p>
-                            <div class="item-tags"><span class="tag">#하이엔드</span><span class="tag">#강남업무지구</span></div>
-                        </div>
-                        <div class="item-action">
-                            <span class="cta-button">상세보기</span>
-                        </div>
-                    </a>
-
-                </div>
-            </div>
-        </section>
-
-        <section class="sns-section">
-            <div class="container">
-                 <h2 class="section-title" style="text-align: center;">더 많은 소식 보기</h2>
-                 <div class="sns-card-container">
-                    <a href="https://www.youtube.com/@%EB%B6%84%EC%96%91%EC%BD%95TV" target="_blank" class="sns-card">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FF0000"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg>
-                        <div><h3>분양콕TV</h3><p>생생한 현장 정보는 영상으로!</p></div>
-                    </a>
-                    <a href="https://www.instagram.com/boonyang_cok/" target="_blank" class="sns-card">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#insta-gradient)"><defs><radialGradient id="insta-gradient" cx="0.3" cy="1" r="1"><stop offset="0" stop-color="#FDCB52"/><stop offset="0.5" stop-color="#FD8D32"/><stop offset="1" stop-color="#D12A7B"/></radialGradient></defs><path d="M12,2.163c3.204,0,3.584,0.012,4.85,0.07,3.252,0.148,4.771,1.691,4.919,4.919,0.058,1.265,0.069,1.645,0.069,4.85s-0.012,3.584-0.069,4.85c-0.149,3.225-1.664,4.771-4.919,4.919-1.266,0.058-1.644,0.069-4.85,0.069s-3.585-0.012-4.85-0.069c-3.252-0.149-4.771-1.664-4.919-4.919-0.058-1.265-0.069-1.645-0.069-4.85,0-3.204,0.012-3.584,0.069-4.85,0.149-3.225,1.664-4.771,4.919-4.919,1.266-0.057,1.645-0.069,4.85-0.069M12,0C8.741,0,8.333,0.014,7.053,0.072c-4.356,0.2-6.784,2.634-6.98,6.98C0.014,8.333,0,8.741,0,12c0,3.259,0.014,3.668,0.072,4.948,0.2,4.356,2.624,6.783,6.98,6.98,1.27,0.058,1.688,0.072,4.948,0.072s3.681-0.014,4.948-0.072c4.354-0.2,6.782-2.624,6.979-6.98,0.058-1.28,0.073-1.689,0.073-4.948s-0.015-3.668-0.073-4.948c-0.197-4.354-2.624-6.782-6.979-6.98C15.668,0.014,15.259,0,12,0L12,0z M12,5.838c-3.403,0-6.162,2.759-6.162,6.162s2.759,6.162,6.162,6.162,6.162-2.759,6.162-6.162S15.403,5.838,12,5.838z M12,16.225c-2.328,0-4.225-1.897-4.225-4.225s1.897-4.225,4.225-4.225,4.225,1.897,4.225,4.225S14.328,16.225,12,16.225z M18.402,4.158c-1.036,0-1.875,0.84-1.875,1.875s0.84,1.875,1.875,1.875,1.875-0.84,1.875-1.875S19.438,4.158,18.402,4.158z"/></svg>
-                        <div><h3>공식 인스타그램</h3><p>가장 빠른 소식과 이벤트를 만나요!</p></div>
-                    </a>
-                 </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <div class="container">
-            <h2 class="section-title" style="text-align: center; margin-bottom: 24px;">광고 문의</h2>
-            <div class="contact-card">
-                <div class="contact-item">
-                    <span class="contact-label">대표 번호</span>
-                    <a href="tel:1555-1256" class="contact-value">1555-1256</a>
-                </div>
-                 <div class="contact-item">
-                    <span class="contact-label">이메일</span>
-                    <a href="mailto:boonyangcok@cok-teck.com" class="contact-value">boonyangcok@cok-teck.com</a>
-                </div>
-            </div>
-            <p class="footer-copyright">Copyright © 2025 분양콕. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            /**
-             * Function to filter property listings based on search input.
-             */
-            function activateSearch() {
-                const searchInput = document.getElementById('search-input');
-                const searchButton = document.getElementById('search-button');
-                const propertyItems = document.querySelectorAll('.property-list .property-item');
-
-                if (!searchInput || !searchButton || propertyItems.length === 0) return;
-
-                const performSearch = () => {
-                    const query = searchInput.value.toLowerCase().trim();
-                    
-                    propertyItems.forEach(item => {
-                        const itemText = item.textContent.toLowerCase();
-                        if (itemText.includes(query)) {
-                            item.style.display = 'flex';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-                };
-
-                searchButton.addEventListener('click', performSearch);
-                searchInput.addEventListener('keyup', (event) => {
-                    if (event.key === 'Enter') {
-                        performSearch();
-                    }
-                });
-            }
-
-            // Initialize all functionalities
-            activateSearch();
+// 페이지 로드 시 호버 효과 추가
+document.addEventListener('DOMContentLoaded', function() {
+    const snsCards = document.querySelectorAll('.sns-card');
+    snsCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+            this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.05)';
         });
-    </script>
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'none';
+        });
+    });
+    
+    const contactValues = document.querySelectorAll('.contact-value');
+    contactValues.forEach(value => {
+        value.addEventListener('mouseenter', function() {
+            this.style.color = '#00c7ae';
+        });
+        value.addEventListener('mouseleave', function() {
+            this.style.color = '#2c3e50';
+        });
+    });
+});
+</script>
 
 </body>
 </html>

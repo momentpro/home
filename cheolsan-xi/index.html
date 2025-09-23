@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>철산역 자이 | 인터랙티브 브로슈어</title>
+    <meta property="og:title" content="철산역 자이 | 인터랙티브 브로슈어">
+    <meta property="og:description" content="7호선 철산역 역세권, 철산역 자이의 모든 것을 확인해보세요.">
+    <meta property="og:image" content="https://momentintl.com/cheolsan-xi/img_og_banner.png">
+    <link rel="icon" href="img_favicon.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #f0f2f5; font-family: 'Noto Sans KR', sans-serif; }
+        .app-container { display: flex; flex-direction: column; align-items: center; width: 100%; min-height: 100vh; padding: 1rem; }
+        .content-viewer { width: 100%; max-width: 480px; background-color: white; border-radius: 1.5rem; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); margin: auto 0; padding: 2rem; }
+        .section-title { font-weight: 900; font-size: 2rem; text-align: center; margin-bottom: 0.5rem; color: #111827; }
+        .section-subtitle { font-size: 1rem; text-align: center; color: #4b5563; margin-bottom: 2rem; }
+        .contact-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 1rem; margin-top: 2rem; }
+        .contact-info { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+        .contact-number { font-size: 1.5rem; font-weight: bold; }
+        .contact-button { background: rgba(255,255,255,0.2); border: 2px solid white; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer; transition: all 0.3s; }
+        .contact-button:hover { background: white; color: #667eea; }
+        .nav-button { background-color: #4f46e5; color: white; border: none; padding: 1rem 2rem; border-radius: 9999px; cursor: pointer; font-size: 1rem; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="content-viewer">
+            <div class="text-center mb-6">
+                <h1 class="section-title text-gray-800">철산역 자이</h1>
+                <p class="section-subtitle text-gray-600">7호선 철산역 역세권</p>
+                <p class="text-sm text-gray-500 mb-6">광명시 철산동 일원</p>
+            </div>
+
+            <div class="space-y-4 mb-6">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="font-bold text-blue-800 mb-2">🚇 교통 인프라</h3>
+                    <ul class="text-sm text-blue-700 space-y-1">
+                        <li>• 7호선 철산역 도보 5분</li>
+                        <li>• 강남·여의도 직통</li>
+                        <li>• GTX-C 광명역 연결</li>
+                    </ul>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <h3 class="font-bold text-green-800 mb-2">🏢 자이 브랜드</h3>
+                    <ul class="text-sm text-green-700 space-y-1">
+                        <li>• GS건설 프리미엄 브랜드</li>
+                        <li>• 검증된 품질과 A/S</li>
+                        <li>• 최신 설계 시스템</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="contact-section">
+                <div class="text-center mb-4">
+                    <h3 class="text-xl font-bold mb-2">📞 분양 문의</h3>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-phone-alt text-2xl"></i>
+                    <div class="contact-number">1588-2345</div>
+                    <button class="contact-button" onclick="window.open('tel:1588-2345')">전화하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
