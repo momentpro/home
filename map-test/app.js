@@ -27,12 +27,31 @@ class DealharubangMap {
 
     // DOM 준비 완료 시 실행
     onDOMReady() {
+        // 광고 시스템 초기화
+        if (window.AD_SYSTEM) {
+            AD_SYSTEM.init();
+        }
+
         this.renderCategories();
         this.renderHotdeals();
         this.setupEventListeners();
+        
+        // 페이지 로딩 광고 표시
+        this.showLoadingAd();
+        
         this.initMap();
         
         console.log('✅ 딜하르방 지도 페이지가 성공적으로 로드되었습니다!');
+    }
+
+    // 로딩 광고 표시
+    showLoadingAd() {
+        if (window.AD_SYSTEM) {
+            // 페이지 로딩 시 광고 표시
+            setTimeout(() => {
+                AD_SYSTEM.showAd('page_loading');
+            }, 500); // 0.5초 후 광고 표시
+        }
     }
 
     // 카테고리 버튼 렌더링
@@ -148,6 +167,13 @@ class DealharubangMap {
 
     // 지도 초기화
     initMap() {
+        // 지도 로딩 광고 표시 (선택적)
+        if (Math.random() < 0.3 && window.AD_SYSTEM) { // 30% 확률로 지도 로딩 시에도 광고 표시
+            setTimeout(() => {
+                AD_SYSTEM.showAd('map_loading');
+            }, 2000);
+        }
+        
         // 로딩 스피너 표시 시간 시뮬레이션
         setTimeout(() => {
             this.createMap();
