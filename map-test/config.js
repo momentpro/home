@@ -86,11 +86,12 @@ const CONFIG = {
         noResults: '해당 카테고리에 핫딜 매장이 없습니다.'
     },
 
-    // API 설정
+    // API 설정 (새로운 통합 API 버전)
     api: {
         naver: {
-            clientId: 'ynlmdjv2h1', // 실제 네이버 지도 API 키
-            submodules: ['geocoder']
+            keyId: 'ynlmdjv2h1', // 네이버 지도 API 키 (ncpKeyId)
+            submodules: ['geocoder'],
+            baseUrl: 'https://oapi.map.naver.com/openapi/v3/maps.js'
         }
     },
 

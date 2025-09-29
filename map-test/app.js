@@ -626,5 +626,19 @@ setInterval(() => {
     dealharubangMap.updateDDays();
 }, 60000);
 
+// 네이버 지도 API 인증 실패 콜백 (새로운 API 버전 대응)
+window.navermap_authFailure = function() {
+    console.error('❌ 네이버 지도 API 인증 실패!');
+    console.log('🔧 해결 방법:');
+    console.log('1. 네이버 클라우드 플랫폼에서 도메인 확인');
+    console.log('2. ncpKeyId가 올바른지 확인');
+    console.log('3. API 서비스가 활성화되어 있는지 확인');
+    
+    // 대체 지도 표시
+    if (window.dealharubangMap) {
+        dealharubangMap.createFallbackMap();
+    }
+};
+
 // 개발자 도구에서 상태 확인 가능
 console.log('🔧 개발자 도구에서 dealharubangMap.getStatus() 로 상태 확인 가능합니다.');
