@@ -322,18 +322,23 @@ const AD_SYSTEM = {
             this.hideAdAndShowMainPage();
         }, 2500); // 2.5초 후 자동 닫기
 
-        // 추가 안전장치: 5초 후 강제로 메인 페이지 표시
+        // 추가 안전장치: 4초 후 강제로 메인 페이지 표시
         setTimeout(() => {
             const mainApp = document.querySelector('.main-app');
-            if (mainApp && !mainApp.classList.contains('loaded')) {
+            console.log('⚠️ 백업 체크: 메인앱 상태', mainApp ? mainApp.style.opacity : '없음');
+            
+            if (mainApp && (mainApp.style.opacity === '0' || !mainApp.classList.contains('loaded'))) {
                 console.log('⚠️ 백업: 강제로 메인 페이지 표시');
                 mainApp.classList.add('loaded');
                 mainApp.style.opacity = '1';
+                mainApp.style.display = 'block';
+                mainApp.style.visibility = 'visible';
+                
                 if (this.adContainer) {
                     this.adContainer.style.display = 'none';
                 }
             }
-        }, 5000);
+        }, 4000);
 
         // 클릭 이벤트 추가
         this.addPreloadAdEvents(ad);
@@ -476,11 +481,15 @@ const AD_SYSTEM = {
                 if (mainApp) {
                     mainApp.classList.add('loaded');
                     mainApp.style.opacity = '1';
+                    mainApp.style.display = 'block';
+                    mainApp.style.visibility = 'visible';
                     console.log('✅ 메인 페이지 활성화 완료');
                 } else {
                     console.error('❌ .main-app 요소를 찾을 수 없습니다');
                     // 강제로 모든 요소 표시
                     document.body.style.opacity = '1';
+                    const allHidden = document.querySelectorAll('[style*="opacity: 0"]');
+                    allHidden.forEach(el => el.style.opacity = '1');
                 }
             }, 400);
         } else {
