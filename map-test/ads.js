@@ -294,6 +294,177 @@ const AD_SYSTEM = {
         });
     },
 
+    // 프리로드 광고 표시 (페이지 로딩 전)
+    showPreloadAd() {
+        if (!this.ads.length) return;
+
+        const ad = this.ads[0]; // 첫 번째 광고 사용
+        this.currentAd = ad;
+
+        console.log(`🎯 프리로드 광고 표시: ${ad.title}`);
+
+        // 광고 HTML 생성
+        const adHTML = this.createPreloadAdHTML(ad);
+        this.adContainer.innerHTML = adHTML;
+        this.adContainer.style.display = 'flex';
+
+        // 즉시 표시
+        setTimeout(() => {
+            const adContent = this.adContainer.querySelector('.ad-content');
+            if (adContent) {
+                adContent.style.opacity = '1';
+                adContent.style.transform = 'scale(1)';
+            }
+        }, 50);
+
+        // 자동 닫기 및 메인 페이지 표시
+        setTimeout(() => {
+            this.hideAdAndShowMainPage();
+        }, 2500); // 2.5초 후 자동 닫기
+
+        // 클릭 이벤트 추가
+        this.addPreloadAdEvents(ad);
+    },
+
+    // 프리로드 광고 HTML (더 간단하고 빠른 버전)
+    createPreloadAdHTML(ad) {
+        return `
+            <div class="ad-content" style="
+                background: linear-gradient(135deg, ${ad.backgroundColor} 0%, ${this.darkenColor(ad.backgroundColor, 20)} 100%);
+                color: ${ad.textColor};
+                border-radius: 20px;
+                padding: 30px;
+                max-width: 400px;
+                width: 85%;
+                text-align: center;
+                box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+                position: relative;
+                overflow: hidden;
+                opacity: 0;
+                transform: scale(0.95);
+                transition: all 0.4s ease;
+            ">
+                <!-- 배경 패턴 -->
+                <div style="
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+                    pointer-events: none;
+                "></div>
+
+                <!-- 메인 콘텐츠 -->
+                <div style="position: relative; z-index: 2;">
+                    <div style="
+                        width: 60px;
+                        height: 60px;
+                        background: ${ad.accentColor};
+                        border-radius: 50%;
+                        margin: 0 auto 15px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 24px;
+                        box-shadow: 0 6px 20px rgba(247, 200, 82, 0.4);
+                    ">🏨</div>
+
+                    <h2 style="
+                        font-size: 22px;
+                        font-weight: 900;
+                        margin-bottom: 6px;
+                        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+                    ">${ad.title}</h2>
+
+                    <div style="
+                        background: ${ad.accentColor};
+                        color: #333;
+                        padding: 8px 20px;
+                        border-radius: 20px;
+                        font-size: 16px;
+                        font-weight: 900;
+                        margin-bottom: 10px;
+                        display: inline-block;
+                        box-shadow: 0 4px 15px rgba(247, 200, 82, 0.3);
+                    ">${ad.discount}</div>
+
+                    <p style="
+                        font-size: 13px;
+                        opacity: 0.9;
+                        margin-bottom: 15px;
+                    ">${ad.description}</p>
+
+                    <div style="
+                        font-size: 11px;
+                        opacity: 0.7;
+                        margin-top: 10px;
+                    ">클릭하여 자세히 보기 | 2초 후 자동 진입</div>
+                </div>
+
+                <!-- 프로그레스 바 -->
+                <div style="
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    height: 3px;
+                    background: ${ad.accentColor};
+                    animation: preloadProgress 2500ms linear;
+                    border-radius: 0 0 20px 20px;
+                "></div>
+            </div>
+
+            <style>
+                @keyframes preloadProgress {
+                    from { width: 100%; }
+                    to { width: 0%; }
+                }
+            </style>
+        `;
+    },
+
+    // 프리로드 광고 이벤트
+    addPreloadAdEvents(ad) {
+        // 광고 클릭 시 바로 메인 페이지로 + 해당 매장 포커스
+        this.adContainer.addEventListener('click', (e) => {
+            if (e.target !== this.adContainer) {
+                console.log(`🎯 프리로드 광고 클릭: ${ad.title}`);
+                this.hideAdAndShowMainPage();
+                
+                // 메인 페이지 로드 후 해당 매장으로 포커스
+                setTimeout(() => {
+                    if (window.dealharubangMap) {
+                        dealharubangMap.focusStore(ad.storeId);
+                    }
+                }, 1000);
+            }
+        });
+    },
+
+    // 광고 숨기고 메인 페이지 표시
+    hideAdAndShowMainPage() {
+        if (this.adContainer) {
+            const adContent = this.adContainer.querySelector('.ad-content');
+            if (adContent) {
+                adContent.style.opacity = '0';
+                adContent.style.transform = 'scale(0.95)';
+            }
+            
+            setTimeout(() => {
+                this.adContainer.style.display = 'none';
+                this.currentAd = null;
+                
+                // 메인 페이지 표시
+                const mainApp = document.querySelector('.main-app');
+                if (mainApp) {
+                    mainApp.classList.add('loaded');
+                }
+            }, 400);
+        }
+        
+        console.log('🎯 광고 숨김 + 메인 페이지 표시');
+    },
+
     // 광고 숨기기
     hideAd() {
         if (this.adContainer) {
@@ -327,3 +498,27 @@ const AD_SYSTEM = {
 
 // 전역으로 사용할 수 있도록 export
 window.AD_SYSTEM = AD_SYSTEM;
+
+// 페이지 로딩 전 즉시 광고 표시
+(function() {
+    console.log('🎯 광고 시스템 즉시 초기화');
+    
+    // DOM이 준비되면 바로 광고 표시
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', showPreloadAd);
+    } else {
+        showPreloadAd();
+    }
+    
+    function showPreloadAd() {
+        console.log('🎯 프리로드 광고 표시');
+        AD_SYSTEM.init();
+        
+        // 즉시 광고 표시
+        setTimeout(() => {
+            AD_SYSTEM.showPreloadAd();
+        }, 200);
+    }
+})();
+
+console.log('🎯 ads.js 로드 완료, AD_SYSTEM:', AD_SYSTEM);
