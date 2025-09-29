@@ -10,7 +10,7 @@ const AD_SYSTEM = {
             subtitle: '특급 호텔 특별 할인',
             discount: '최대 40% 할인',
             description: '럭셔리한 제주 여행의 시작',
-            image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            image: 'images/grand-hyatt-jeju.jpg',
             backgroundColor: '#1a365d',
             textColor: '#ffffff',
             accentColor: '#F7C852',
@@ -20,6 +20,23 @@ const AD_SYSTEM = {
             storeId: 1,
             duration: 3000, // 3초 표시
             priority: 1
+        },
+        {
+            id: 'yacht_tour_2024',
+            title: '무지개 요트 투어',
+            subtitle: '제주 바다의 낭만',
+            discount: '최대 44% 할인',
+            description: '제주 바다에서 즐기는 특별한 요트 체험',
+            image: 'images/mujigae-yacht.jpg',
+            backgroundColor: '#0c4a6e',
+            textColor: '#ffffff',
+            accentColor: '#06b6d4',
+            dday: 'D-17',
+            urgent: false,
+            cta: '요트 예약하기',
+            storeId: 2,
+            duration: 3000,
+            priority: 2
         }
         // 추후 다른 광고들 추가 가능
     ],
@@ -298,7 +315,9 @@ const AD_SYSTEM = {
     showPreloadAd() {
         if (!this.ads.length) return;
 
-        const ad = this.ads[0]; // 첫 번째 광고 사용
+        // 랜덤 광고 선택 (우선순위 고려)
+        const availableAds = this.ads.sort((a, b) => a.priority - b.priority);
+        const ad = availableAds[Math.floor(Math.random() * Math.min(2, availableAds.length))]; // 상위 2개 중 랜덤
         this.currentAd = ad;
 
         console.log(`🎯 프리로드 광고 표시: ${ad.title}`);
@@ -344,80 +363,125 @@ const AD_SYSTEM = {
         this.addPreloadAdEvents(ad);
     },
 
-    // 프리로드 광고 HTML (더 간단하고 빠른 버전)
+    // 프리로드 광고 HTML (실제 이미지 포함)
     createPreloadAdHTML(ad) {
         return `
             <div class="ad-content" style="
                 background: linear-gradient(135deg, ${ad.backgroundColor} 0%, ${this.darkenColor(ad.backgroundColor, 20)} 100%);
                 color: ${ad.textColor};
-                border-radius: 20px;
-                padding: 30px;
-                max-width: 400px;
-                width: 85%;
+                border-radius: 24px;
+                padding: 0;
+                max-width: 450px;
+                width: 90%;
                 text-align: center;
-                box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
                 position: relative;
                 overflow: hidden;
                 opacity: 0;
                 transform: scale(0.95);
                 transition: all 0.4s ease;
             ">
-                <!-- 배경 패턴 -->
+                <!-- 하얏트 호텔 이미지 -->
                 <div style="
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-                    pointer-events: none;
-                "></div>
-
-                <!-- 메인 콘텐츠 -->
-                <div style="position: relative; z-index: 2;">
+                    width: 100%;
+                    height: 200px;
+                    background: url('${ad.image}') center/cover no-repeat;
+                    position: relative;
+                    border-radius: 24px 24px 0 0;
+                ">
+                    <!-- 이미지 오버레이 -->
                     <div style="
-                        width: 60px;
-                        height: 60px;
-                        background: ${ad.accentColor};
-                        border-radius: 50%;
-                        margin: 0 auto 15px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 24px;
-                        box-shadow: 0 6px 20px rgba(247, 200, 82, 0.4);
-                    ">🏨</div>
-
-                    <h2 style="
-                        font-size: 22px;
-                        font-weight: 900;
-                        margin-bottom: 6px;
-                        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-                    ">${ad.title}</h2>
-
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(26, 54, 93, 0.8) 100%);
+                        border-radius: 24px 24px 0 0;
+                    "></div>
+                    
+                    <!-- D-Day 배지 -->
+                    ${ad.urgent ? `
+                        <div style="
+                            position: absolute;
+                            top: 15px;
+                            right: 15px;
+                            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+                            color: white;
+                            padding: 8px 16px;
+                            border-radius: 20px;
+                            font-size: 12px;
+                            font-weight: 700;
+                            animation: pulse 2s ease-in-out infinite;
+                            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+                        ">${ad.dday}</div>
+                    ` : ''}
+                    
+                    <!-- 할인 배지 -->
                     <div style="
+                        position: absolute;
+                        bottom: 15px;
+                        left: 15px;
                         background: ${ad.accentColor};
                         color: #333;
-                        padding: 8px 20px;
-                        border-radius: 20px;
-                        font-size: 16px;
+                        padding: 10px 20px;
+                        border-radius: 25px;
+                        font-size: 18px;
                         font-weight: 900;
-                        margin-bottom: 10px;
-                        display: inline-block;
-                        box-shadow: 0 4px 15px rgba(247, 200, 82, 0.3);
+                        box-shadow: 0 4px 15px rgba(247, 200, 82, 0.4);
+                        animation: dealGlow 3s ease-in-out infinite;
                     ">${ad.discount}</div>
+                </div>
 
-                    <p style="
-                        font-size: 13px;
-                        opacity: 0.9;
-                        margin-bottom: 15px;
-                    ">${ad.description}</p>
-
+                <!-- 텍스트 콘텐츠 -->
+                <div style="padding: 25px 30px 30px; position: relative;">
+                    <!-- 배경 패턴 -->
                     <div style="
-                        font-size: 11px;
-                        opacity: 0.7;
-                        margin-top: 10px;
-                    ">클릭하여 자세히 보기 | 2초 후 자동 진입</div>
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+                        pointer-events: none;
+                    "></div>
+
+                    <div style="position: relative; z-index: 2;">
+                        <h2 style="
+                            font-size: 24px;
+                            font-weight: 900;
+                            margin-bottom: 8px;
+                            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+                            line-height: 1.2;
+                        ">${ad.title}</h2>
+
+                        <p style="
+                            font-size: 14px;
+                            opacity: 0.9;
+                            margin-bottom: 8px;
+                            font-weight: 600;
+                        ">${ad.subtitle}</p>
+
+                        <p style="
+                            font-size: 13px;
+                            opacity: 0.8;
+                            margin-bottom: 20px;
+                            line-height: 1.4;
+                        ">${ad.description}</p>
+
+                        <div style="
+                            font-size: 11px;
+                            opacity: 0.7;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 8px;
+                        ">
+                            <span>✨ 클릭하여 자세히 보기</span>
+                            <span>|</span>
+                            <span>⏰ 2초 후 자동 진입</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- 프로그레스 바 -->
@@ -425,10 +489,11 @@ const AD_SYSTEM = {
                     position: absolute;
                     bottom: 0;
                     left: 0;
-                    height: 3px;
+                    height: 4px;
                     background: ${ad.accentColor};
                     animation: preloadProgress 2500ms linear;
-                    border-radius: 0 0 20px 20px;
+                    border-radius: 0 0 24px 24px;
+                    box-shadow: 0 -2px 10px rgba(247, 200, 82, 0.3);
                 "></div>
             </div>
 
@@ -436,6 +501,16 @@ const AD_SYSTEM = {
                 @keyframes preloadProgress {
                     from { width: 100%; }
                     to { width: 0%; }
+                }
+                
+                @keyframes pulse {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                }
+                
+                @keyframes dealGlow {
+                    0%, 100% { box-shadow: 0 4px 15px rgba(247, 200, 82, 0.4); }
+                    50% { box-shadow: 0 6px 25px rgba(247, 200, 82, 0.7); }
                 }
             </style>
         `;
