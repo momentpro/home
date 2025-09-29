@@ -237,12 +237,15 @@ class DealharubangMap {
                     <div style="color: #e74c3c; font-weight: 700;">핫딜 매장: ${hotdealCount}개</div>
                 </div>
 
-                <div style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.9); padding: 15px; border-radius: 10px; font-size: 12px; max-width: 250px;">
-                    <div style="font-weight: 700; margin-bottom: 8px; color: #2c3e50;">🔧 API 키 설정 방법</div>
-                    <div style="line-height: 1.4; color: #34495e;">
-                        1. 네이버 클라우드 플랫폼 가입<br>
-                        2. Maps API 신청<br>
-                        3. config.js에 clientId 입력
+                <div style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.95); padding: 15px; border-radius: 10px; font-size: 12px; max-width: 280px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                    <div style="font-weight: 700; margin-bottom: 8px; color: #e74c3c;">⚠️ API 인증 실패</div>
+                    <div style="line-height: 1.4; color: #34495e; margin-bottom: 10px;">
+                        네이버 클라우드에서 도메인 확인:<br>
+                        • <strong>momentintl.com</strong><br>
+                        • <strong>momentintl.com/map-test</strong>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 8px; border-radius: 6px; font-size: 11px; color: #666;">
+                        현재 데모 모드로 모든 기능 작동 중 ✅
                     </div>
                 </div>
                 
