@@ -161,8 +161,10 @@ class DealharubangMap {
 
         // 네이버 지도 API 사용 가능한지 확인
         if (typeof naver !== 'undefined' && naver.maps) {
+            console.log('🗺️ 네이버 지도 API 감지됨');
             this.createNaverMap();
         } else {
+            console.log('⚠️ 네이버 지도 API 없음 - 대체 지도 표시');
             this.createFallbackMap();
         }
     }
@@ -250,18 +252,24 @@ class DealharubangMap {
                     API 키 설정 후 실제 제주도 지도가 표시됩니다
                 </div>
 
-                <!-- 가상 매장 위치 표시 -->
-                <div style="position: absolute; top: 30%; left: 25%; background: rgba(231, 76, 60, 0.9); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;">
-                    🔥 그랜드 하얏트
+                <!-- 인터랙티브 매장 마커들 -->
+                <div onclick="dealharubangMap.focusStore(1)" style="position: absolute; top: 30%; left: 25%; background: rgba(231, 76, 60, 0.9); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; animation: bounce 2s ease-in-out infinite; box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    🔥 그랜드 하얏트 <span style="background: white; color: #e74c3c; padding: 2px 6px; border-radius: 8px; font-size: 10px; margin-left: 4px;">D-2</span>
                 </div>
-                <div style="position: absolute; top: 45%; left: 35%; background: rgba(52, 152, 219, 0.9); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;">
-                    🍽️ 흑돼지 맛집
+                <div onclick="dealharubangMap.focusStore(3)" style="position: absolute; top: 45%; left: 35%; background: rgba(231, 76, 60, 0.9); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; animation: bounce 2s ease-in-out infinite 0.5s; box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    🔥 흑돼지 맛집 <span style="background: white; color: #e74c3c; padding: 2px 6px; border-radius: 8px; font-size: 10px; margin-left: 4px;">D-33</span>
                 </div>
-                <div style="position: absolute; top: 55%; right: 30%; background: rgba(46, 204, 113, 0.9); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;">
-                    🎯 무지개 요트
+                <div onclick="dealharubangMap.focusStore(2)" style="position: absolute; top: 55%; right: 30%; background: rgba(231, 76, 60, 0.9); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; animation: bounce 2s ease-in-out infinite 1s; box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    🔥 무지개 요트 <span style="background: white; color: #e74c3c; padding: 2px 6px; border-radius: 8px; font-size: 10px; margin-left: 4px;">D-17</span>
                 </div>
-                <div style="position: absolute; bottom: 35%; left: 40%; background: rgba(155, 89, 182, 0.9); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;">
+                <div onclick="dealharubangMap.focusStore(4)" style="position: absolute; bottom: 35%; left: 40%; background: rgba(231, 76, 60, 0.9); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; animation: bounce 2s ease-in-out infinite 1.5s; box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    🔥 감귤밭 체험 <span style="background: white; color: #e74c3c; padding: 2px 6px; border-radius: 8px; font-size: 10px; margin-left: 4px;">D-63</span>
+                </div>
+                <div onclick="dealharubangMap.focusStore(5)" style="position: absolute; top: 60%; left: 50%; background: rgba(139, 69, 19, 0.9); color: white; padding: 6px 10px; border-radius: 15px; font-size: 11px; font-weight: 600; cursor: pointer;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                     ☕ 전통차 카페
+                </div>
+                <div onclick="dealharubangMap.focusStore(6)" style="position: absolute; bottom: 45%; right: 25%; background: rgba(155, 89, 182, 0.9); color: white; padding: 6px 10px; border-radius: 15px; font-size: 11px; font-weight: 600; cursor: pointer;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    🛍️ 기념품샵
                 </div>
                 
                 <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
