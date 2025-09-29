@@ -322,6 +322,19 @@ const AD_SYSTEM = {
             this.hideAdAndShowMainPage();
         }, 2500); // 2.5초 후 자동 닫기
 
+        // 추가 안전장치: 5초 후 강제로 메인 페이지 표시
+        setTimeout(() => {
+            const mainApp = document.querySelector('.main-app');
+            if (mainApp && !mainApp.classList.contains('loaded')) {
+                console.log('⚠️ 백업: 강제로 메인 페이지 표시');
+                mainApp.classList.add('loaded');
+                mainApp.style.opacity = '1';
+                if (this.adContainer) {
+                    this.adContainer.style.display = 'none';
+                }
+            }
+        }, 5000);
+
         // 클릭 이벤트 추가
         this.addPreloadAdEvents(ad);
     },
@@ -443,6 +456,8 @@ const AD_SYSTEM = {
 
     // 광고 숨기고 메인 페이지 표시
     hideAdAndShowMainPage() {
+        console.log('🎯 광고 숨김 + 메인 페이지 표시 시작');
+        
         if (this.adContainer) {
             const adContent = this.adContainer.querySelector('.ad-content');
             if (adContent) {
@@ -454,15 +469,30 @@ const AD_SYSTEM = {
                 this.adContainer.style.display = 'none';
                 this.currentAd = null;
                 
-                // 메인 페이지 표시
+                // 메인 페이지 표시 - 더 확실하게
                 const mainApp = document.querySelector('.main-app');
+                console.log('🎯 메인앱 요소:', mainApp);
+                
                 if (mainApp) {
                     mainApp.classList.add('loaded');
+                    mainApp.style.opacity = '1';
+                    console.log('✅ 메인 페이지 활성화 완료');
+                } else {
+                    console.error('❌ .main-app 요소를 찾을 수 없습니다');
+                    // 강제로 모든 요소 표시
+                    document.body.style.opacity = '1';
                 }
             }, 400);
+        } else {
+            // 광고 컨테이너가 없어도 메인 페이지 표시
+            const mainApp = document.querySelector('.main-app');
+            if (mainApp) {
+                mainApp.classList.add('loaded');
+                mainApp.style.opacity = '1';
+            }
         }
         
-        console.log('🎯 광고 숨김 + 메인 페이지 표시');
+        console.log('🎯 광고 숨김 + 메인 페이지 표시 완료');
     },
 
     // 광고 숨기기

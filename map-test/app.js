@@ -148,10 +148,10 @@ class DealharubangMap {
 
     // 지도 초기화
     initMap() {
-        // 로딩 스피너 표시 시간 시뮬레이션
+        // 로딩 스피너 표시 시간 단축
         setTimeout(() => {
             this.createMap();
-        }, 1500);
+        }, 800); // 1.5초 → 0.8초로 단축
     }
 
     // 지도 생성
@@ -201,6 +201,11 @@ class DealharubangMap {
                 this.addMarkers();
                 this.hideLoadingSpinner();
             });
+
+            // 추가 안전장치: 3초 후 강제로 로딩 스피너 숨김
+            setTimeout(() => {
+                this.hideLoadingSpinner();
+            }, 3000);
 
         } catch (error) {
             console.error('❌ 네이버 지도 생성 오류:', error);
@@ -299,8 +304,14 @@ class DealharubangMap {
     // 로딩 스피너 숨기기
     hideLoadingSpinner() {
         const loadingSpinner = document.getElementById('loadingSpinner');
-        if (loadingSpinner) {
-            loadingSpinner.style.display = 'none';
+        if (loadingSpinner && loadingSpinner.style.display !== 'none') {
+            console.log('🔄 로딩 스피너 숨김');
+            loadingSpinner.style.opacity = '0';
+            loadingSpinner.style.transition = 'opacity 0.3s ease';
+            
+            setTimeout(() => {
+                loadingSpinner.style.display = 'none';
+            }, 300);
         }
     }
 
